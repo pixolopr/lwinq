@@ -1,0 +1,36 @@
+<div class="container">
+
+    <!--LOADING DIV-->
+    <div ng-show="loadingdiv" class="loadingdiv">
+        <img src="img/booksFallingLoading.gif">
+    </div>
+
+    <!--DIV AFTER LOADING-->
+    <div ng-hide="loadingdiv">
+        <div ng-if="errormsg!=''">
+            {{errormsg}}
+            <button ng-click="reloadpage()">Retry</button>
+        </div>
+        <div ng-if="errormsg==''">
+            <div class="standbox" ng-if="standards.length>0">
+                <div class="row " style="text-align:center;">
+
+                    <div class="col s12 m6 l4 xl4 subbox" ng-repeat='s in standards' ng-click="gotosubjects($index)" ng-if="standards.length >0">
+                        <div class="standardbox z-depth-2">
+                            <div class="standardtext">{{s.name.substring(0,s.name.length-2)}}<span style="font-size:xx-large;">th</span></div>
+                        </div>
+                    </div>
+
+                    <div ng-if="standards.length==0">
+                        <h4>No standards retrived</h4>
+                    </div>
+
+                </div>
+
+            </div>
+            <div ng-if="standards.length==0">
+                No standards fetched
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<!--LOADING DIV-->
+<div ng-show="loadingdiv" class="loadingdiv">
+    <img src="img/booksFallingLoading.gif">
+</div>
+
+<!--DIV AFTER LOADING PAGE-->
+<div ng-hide="loadingdiv">
+    <div ng-if="errormsg!=''">
+        {{errormsg}}
+        <button ng-click="reloadpage()">Retry</button>
+    </div>
+    <div class="subbox3" ng-if="errormsg==''">
+        <div class="row animated fadeInLeft margin0 chaprow" style="text-align:center;" ng-repeat="c in chapters" ng-click="gotoconcepts(c.id)" ng-style="{animationDelay:$index*0.2+'s'}" ng-if="chapters.length>0">
+            <div class="col s12 m2 l2 margin0"></div>
+
+
+            <div class="grid-example col s12 m8 l8 chapbox">
+                <div class="chapterlist grid-example row">
+                    <div class="col s12">
+                        <div class="chaptext">{{c.name}}</div>
+                        <div class="divider chapdivider"></div>
+                        <div class="row chapheight margin0">
+                            <div class="col s4 m4 l6 xl6 chapconcept">{{c.conceptscount}} Concepts</div>
+
+                            <div class="col s4 m4 l3 xl3 chapbuttons">Doubts <i class="material-icons chapicon">forum</i>
+                            </div>
+                            <div class="col s4 m4 l3 xl3 chapbuttons">Test <i class="material-icons chapicon">local_library</i>
+                                <ul id='dropdown1' class='dropdown-content'>
+                                    <li><a href="#!">one</a>
+                                    </li>
+                                    <li><a href="#!">two</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m2 l2 margin0"></div>
+        </div>
+        <div ng-if="chapters.length==0">
+            No chapters fetched
+        </div>
+
+
+    </div>
+</div>

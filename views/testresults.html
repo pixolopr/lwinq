@@ -1,0 +1,64 @@
+<div>
+    <div class="inqbgtop">
+
+        <div class="row testtext">
+            <div class="col s4 l4">
+                <img src="img/astro.png">
+            </div>
+            <div class="col s8 l4">
+                <div class="congratstext animated fadeIn">Better Luck Next Time!
+                    <!--satisfactory,you are amazing, better luck next time-->
+                </div>
+                <div class="scoretext">You scored
+                </div>
+                <div class="score animated zoomIn "><b>9/20</b>
+                </div>
+            </div>
+            <div class="col  l4 hidediv">
+                <img src="img/astro2.png">
+            </div>
+        </div>
+    </div>
+    <div class="inqbgbottom">
+        <div class="container">
+
+
+            <div class="row textcenter resulttext">
+                <div class="col s4 l4">
+                    <div class="sortedbox">
+                        <i class="material-icons faceicon animated jello">tag_faces</i><span class="resulthead">Correct</span>
+                        <br><span class="resultscore">8</span> </div>
+                </div>
+                <div class="col s4 l4">
+                    <div class="sortedbox">
+                        <i class="material-icons faceicon animated jello">tag_faces</i><span class="resulthead">Incorrect</span>
+                        <br><span class="resultscore">8</span></div>
+                </div>
+                <div class="col s4 l4">
+                    <div class="sortedbox">
+                        <i class="material-icons faceicon animated jello">tag_faces</i><span class="resulthead">Unanswered</span>
+                        <br><span class="resultscore">8</span></div>
+                </div>
+            </div>
+
+            <div class="testconcept ">Your Report is ready! Concepts Tested : </div>
+
+            <div class="row" ng-repeat='s in [1,2,3,4]'>
+                <div class="testconcepthead">Optics</div>
+                <div class="col s12 m12 margin0 padding0 conceptstestedline" ng-style="{width:conceptwidth+'%'}"></div>
+            </div>
+
+
+            <div class="row">
+                <div class="col l4 m4 s4">
+                    <button class="waves-effect waves-dark btn whitebutton">Review Test</button>
+                </div>
+                <div class="col l4 m4 s4">
+                    <button class="waves-effect waves-light btn bluebotton">Go Back to Chapter</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

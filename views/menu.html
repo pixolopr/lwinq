@@ -1,0 +1,128 @@
+<div ng-controller="menuCtrl">
+
+    <ul id="slide-out" class="side-nav fixed menubg">
+
+
+        <li>
+            <div class=" logobox">
+                <div class="row">
+                    <div class="col s4"></div>
+                    <div class="col s2 m2 l2"> <img src="img/logo.png" style="width:100%;padding-top:5px;"></div>
+                    <div class="col s2 m2 l2 margin0" style="font-size:20px;"> INQ</div>
+                    <div class="col s4"></div>
+                </div>
+
+            </div>
+        </li>
+
+        <li>
+            <div class="user-view textcenter" style="padding: 0px 32px 0;">
+                <img class="circle menuprofilepic" src="img/boy_1_profile.jpg">
+                <span class="name primarycolor cerafont menuprofilename">Aegon Targaryen</span>
+            </div>
+        </li>
+
+
+        <!--<li class="searchbox">
+
+                <input type="text">
+                <i class="material-icons">search</i>
+
+            </li>-->
+
+        <!--  <li class="search">
+                <div class="search-wrapper card">
+                    <input id="search"><i class="material-icons searchicon">search</i>
+                </div>
+            </li>
+-->
+        <li ng-if="user.access_id == 3">
+
+            <a class="waves-effect menutext standardnumber" href="#/standards">
+                <p class="menulist" style="color:white;margin-left:32px;">{{user.standard_name}} Standard </p>
+            </a>
+        </li>
+        <li><a class="subheader">STUDY</a></li>
+        <li>
+            <div class="divider dividerline"></div>
+        </li>
+
+
+
+        <li>
+
+            <a class="waves-effect menutext" href="#/subjects">
+                <i class="material-icons menuicons">import_contacts</i>
+                <p class="menulist">Subjects</p>
+            </a>
+        </li>
+        <li>
+
+            <a class="waves-effect menutext" href="">
+                <i class="material-icons menuicons">chat_bubble_outline</i>
+                <p class="menulist">Doubts</p>
+            </a>
+        </li>
+
+        <li><a class="subheader">USER</a></li>
+
+        <li>
+            <div class="divider dividerline"></div>
+        </li>
+        <li>
+            <a class="waves-effect menutext" href="">
+                <i class="material-icons menuicons">person_outline</i>
+                <p class="menulist">Profile</p>
+            </a>
+        </li>
+
+        <li>
+            <a class="waves-effect menutext" href="">
+                <i class="material-icons menuicons">dashboard</i>
+                <p class="menulist">Dashboard</p>
+            </a>
+        </li>
+
+        <li>
+            <a class="waves-effect menutext" href="">
+                <i class="material-icons menuicons">bookmark_border</i>
+                <p class="menulist">Bookmark</p>
+            </a>
+        </li>
+
+        <li>
+            <a class="waves-effect menutext" href="">
+                <i class="material-icons menuicons">star_border</i>
+                <p class="menulist">Starred</p>
+            </a>
+        </li>
+
+        <li>
+            <a class="waves-effect menutext" href="">
+                <i class="material-icons menuicons">equalizer</i>
+                <p class="menulist">Leaderboard</p>
+            </a>
+        </li>
+
+
+
+
+
+        <li>
+            <div class="divider"></div>
+        </li>
+
+        <li>
+            <a class="waves-effect menutext" href="">
+                <i class="material-icons menuicons">important_devices</i>
+                <p class="menulist">Go to website</p>
+            </a>
+        </li>
+
+
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons menuicon">apps</i></a>
+
+
+
+</div>

@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="loginbox">
+        <div class="row">
+            <div class="col s12 m4 l4 loginlogo">
+                <div class="row">
+                   <div class="col s12 loginimg"> <img src="img/logo.png" class="loginimg2"></div>        
+                    <div class="col s12 textcenter" style="font-size:30px;color:white;">INQ</div>        
+                </div>
+            </div>
+            <div class="col s12 m8 l8 logintext">
+                <div class="row">
+                    <h2 class="textcenter">Login</h2>
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="phone" type="number" class="validate" ng-model="logindata.contact" ng-enter="dologin()">
+                                <label for="phone">Phone Number</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="password" type="password" class="validate" ng-model="logindata.password" ng-enter="dologin()">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div ng-if="error">
+                    Invalid credentials. Please enter valid credentials.
+                </div>
+                <div class="textcenter">
+                    <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="dologin()">Login
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

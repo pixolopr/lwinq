@@ -1,0 +1,13 @@
+<div class="navigation-div">
+    <div ng-repeat="nav in navigation" style="display:inline">
+        <div class="navtitle" style="background-color:#00BCD4" ng-click="gotonav(nav.clickable, nav.location)">{{nav.title}}</div>
+        <div class="navtitlearrow"></div>
+    </div>
+
+    
+
+    <div class="inlinedisplay" style="margin-left:30px">
+        <h6 class="navyou">YOU</h6>
+        <h6 class="navarehere">ARE HERE</h6>
+    </div>
+</div>

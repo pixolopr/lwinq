@@ -1,0 +1,49 @@
+<div class="wrapper">
+    <!--USER SCORES-->
+    <div class="row leaderboard-user-scores">
+        <div class="col l5 m5 s5 textcenter leaderboard-asked-div">
+            <h4 class="leaderboard-asked-title">ASKED</h4>
+            <h4 class="leaderboard-asked-number">34</h4>
+        </div>
+        <div class="col l2 m2 s2 textcenter leaderboard-user-image-div">
+            <img src="img/boy_1_profile.jpg" class="leaderboard-user-image" />
+            <h4 class="leaderboard-user-you">YOU</h4>
+        </div>
+        <div class="col l5 m5 s5 textcenter leaderboard-answered-div">
+            <h4 class="leaderboard-asked-title">ANSWERED</h4>
+            <h4 class="leaderboard-asked-number">23</h4>
+        </div>
+    </div>
+
+    <!--TAB BUTTONS-->
+    <div class="row leaderboard-tab-buttons-div">
+        <div class="col l6 m6 s6 leaderboard-asked-tab-div">
+            <button class="btn rounded-button whitebutton right tab-button">ASKED</button>
+        </div>
+        <div class="col l6 m6 s6 leaderboard-asnwered-tab-div">
+            <button class="btn rounded-button bluebutton left tab-button">ANSWERED</button>
+        </div>
+    </div>
+
+    <!--LEADERBOARD LIST-->
+
+    <div class="row leaderboard-list-div">
+        <div class="col l12 m12 s12 leaderboard-list-item-div" ng-repeat="a in [1,2,3,4,5,6,7,8,9,10]">
+            <div class="row z-depth-1 leaderboard-list-item">
+                <div class="col l1 m1 s2 leaderboard-list-sr-div">
+                    <p class="leaderboard-list-sr">{{ $index+1 }}</p>
+                </div>
+                <div class="col leaderboard-list-image-div">
+                    <img src="img/boy_1_profile.jpg" class="leaderboard-list-img" />
+                </div>
+                <div class="col l7 m7 s6 leaderboard-list-name-div">
+                    <p class="leaderboard-list-name">Ruchik Gandhi</p>
+                </div>
+                <div class="col l2 m2 s2 leaderboard-list-asked-div right textcenter">
+                    <p class="leaderboard-list-asked-number">{{ (10-$index)*13 }}</p>
+                    <p class="leaderboard-list-asked">ASKED</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
