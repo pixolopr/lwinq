@@ -3,7 +3,7 @@
         <div class="col s12 m2 l2"></div>
         <div class="col  s12 m8 l8 ">
 
-            <div class="baraja-demo">
+           <!-- <div class="baraja-demo">
                 <ul id="baraja-el" class="baraja-container cardbox">
                     <li ng-repeat="card in conceptcards">
                         <div class="">
@@ -27,11 +27,8 @@
                                             
                                              <i class="material-icons concepticon right" ng-click="deletecustomusercard($index)" ng-show="!card.editmode && card.user_id != 0">delete</i>
 
-                                            <!--IF CARD IS NOT STARRED SHOW BELOW ICON-->
                                             <i class="material-icons concepticon right" ng-show="card.user_id == 0">star_border</i>
-                                            <!--IF CARD STARRED SHOW BELOW ICON-->
-                                            <!--<i class="material-icons concepticon right" ng-show="card.user_id == 0">star_border</i>-->
-
+                                        
                                         </div>
 
                                     </div>
@@ -47,17 +44,14 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div>-->
 
-            <!--<div class="cardbox">
-                <div class="cardspage">
+            <div class="cardbox" style="position: relative">
+                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" style="position: absolute; z-index:{{conceptcards.length-$index}};transition:0.4s all;left:0px;"> 
                     <div class="concepthead">
                         <div class="row conceptheadcentralize">
-
-                            <div class="col s3">{{cardindex+1}}/{{conceptcards.length}}</div>
-
+                            <div class="col s3">{{$index+1}}/{{conceptcards.length}}</div>
                             <div class="col s6 truncate textcenter">{{conceptdata.name}}</div>
-
                             <div class="col s3">
                                 <i class="material-icons concepticon">lock_outline</i>
                                 <i class="material-icons concepticon" ng-click="addcustomusercard()" ng-hide="conceptcards[cardindex].editmode">add</i>
@@ -65,20 +59,18 @@
                                 <i class="material-icons concepticon" ng-click="editcustomusercard()" ng-show="!conceptcards[cardindex].editmode && conceptcards[cardindex].user_id == user.id">edit</i>
                                 <i class="material-icons concepticon" ng-click="deletecustomusercard()" ng-show="!conceptcards[cardindex].editmode && conceptcards[cardindex].user_id == user.id">delete</i>
                                 <i class="material-icons concepticon">star_border</i>
-
                             </div>
-
                         </div>
                     </div>
-                    <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="conceptcards[cardindex].conceptdata" ng-if="!conceptcards[cardindex].editmode && conceptcards[cardindex].user_id==0">
+                    <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-if="!card.editmode && card.user_id==0">
                     </div>
-                    <div class="scrollbar conceptcontent" id="carddata" ng-bind="conceptcards[cardindex].conceptdata" ng-if="!conceptcards[cardindex].editmode && conceptcards[cardindex].user_id!=0">
+                    <div class="scrollbar conceptcontent" id="carddata" ng-bind="card.conceptdata" ng-if="!card.editmode && card.user_id!=0">
                     </div>
                     <div ng-if="conceptcards[cardindex].editmode">
-                        <input type="textarea" ng-model="conceptcards[cardindex].conceptdata">
+                        <input type="textarea" ng-model="card.conceptdata">
                     </div>
                 </div>
-            </div>-->
+            </div>
 
         </div>
         <div class="col s12 m2 l2"></div>
@@ -89,9 +81,6 @@
             <div class="row">
 
                 <div class="col s3 m3 offset-s1 offset-m1">
-                    <!--<a class="btn-floating btn-large  waves-light cardbut">
-                        <i class="material-icons cardicon">navigate_before</i>
-                    </a>-->
                     <div class="featured-image">
                         <div class="round-button">
                             <div class="round-button-circle" ng-click="changecardindex(-1)" id="nav-prev">
@@ -108,9 +97,6 @@
                     </div>
                 </div>
                 <div class="col s3 m3">
-                    <!--<a class="btn-floating btn-large waves-effect waves-light cardbut">
-                        <i class="material-icons cardicon">navigate_next</i>
-                    </a>-->
                     <div class="featured-image">
                         <div class="round-button">
                             <div class="round-button-circle" ng-click="changecardindex(1)" id="nav-next">

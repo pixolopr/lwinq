@@ -158,30 +158,6 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         $rootScope.fullpageview = true;
         $scope.conceptid = $routeParams.conceptid;
 
-        var cw = $('.cardbut').width();
-        $('.cardbut').css({
-            'height': cw + 'px'
-        });
-
-        $interval(function () {
-
-            console.log("BAARAJA");
-
-            var $el = $('#baraja-el'),
-                baraja = $el.baraja();
-
-            // navigation
-            $('#nav-prev').on('click', function (event) {
-                baraja.previous();
-            });
-
-            $('#nav-next').on('click', function (event) {
-                console.log("NEXT");
-                baraja.next();
-
-            });
-
-        }, 2000, 1);
 
         $rootScope.$watch(function () {
             var math = document.getElementById("carddata");
@@ -216,13 +192,14 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         NavigationService.getdatabyid('concepts', $scope.conceptid).then(getdatabyidsuccess, getdatabyiderror);
         /*SET NAVIGATION END*/
 
+        /* Get cards Data */
         var getcardsuccess = function (response) {
 
             console.log(response.data);
-
             $scope.conceptcards = response.data;
             if (response.data.length > 0) { // if there is atleast 1 conceptcard then set cardindex to 0
                 $scope.cardindex = 0;
+                readcardbyuserid(0);
             }
 
             _.forEach($scope.conceptcards, function (value) {
@@ -230,13 +207,10 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                     value.conceptdata = $sce.trustAsHtml(value.conceptdata);
                 }
             });
-
-            if (response.data.length > 0) {
-                readcardbyuserid(0);
-            }
         };
 
         var getcarderror = function (response) {
+            /*INTERNET ERROR*/
             console.log(response.data);
         };
 
@@ -272,7 +246,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
         // routing
         $scope.changecardindex = function (index) {
-            if ($scope.conceptcards[$scope.cardindex].user_id == $scope.user.id && $scope.conceptcards[$scope.cardindex].editmode == true) {
+            /*if ($scope.conceptcards[$scope.cardindex].user_id == $scope.user.id && $scope.conceptcards[$scope.cardindex].editmode == true) {
                 alert("Card not saved");
             } else if ($scope.cardindex == 0 && index == -1) {
 
@@ -281,11 +255,69 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             } else if ($scope.cardindex >= 0 && $scope.cardindex < $scope.conceptcards.length) {
                 $scope.cardindex += index; // keep changing the index, +1 for next and -1 for previous
                 readcardbyuserid($scope.cardindex);
-            }
+            }*/
+
+
+            if (index == '1') {
+                var left = '600px';
+                var rotateVal = '6deg';
+                var cardid = $scope.cardindex;
+            } else {
+                var left = '-600px';
+                var rotateVal = '6deg';
+                if($scope.cardindex==0){
+                    var cardid = $scope.conceptcards.length-1;
+                }else{
+                    var cardid = $scope.cardindex-1;  
+                };
+            };
+
+            $('#card' + cardid).css({
+                'left': left,
+                'transform': 'rotate(' + rotateVal + ')'
+            });
+
+
+
+
+            setTimeout(function () {
+                _.forEach($scope.conceptcards, function (value, key) {
+                    if (index == '1') {
+                        if (key == $scope.cardindex) {
+                            $('#card' + key).css('z-index', '1');
+                        } else {
+                            $('#card' + key).css('z-index', ($("#card" + key).zIndex() + 1));
+                        };
+                    } else {
+                        if ($("#card" + key).zIndex() == '1') {
+                            $('#card' + key).css('z-index', $scope.conceptcards.length);
+                        } else {
+                            $('#card' + key).css('z-index', ($("#card" + key).zIndex() - 1));
+                        };
+                    };
+                });
+
+                $('#card' + cardid).css({
+                    'left': '0px',
+                    'transform': 'rotate(0deg)'
+                });
+
+                if ($scope.cardindex == ($scope.conceptcards.length - 1) && index == '1') {
+                    $scope.cardindex = 0;
+                } else {
+                    if ($scope.cardindex == 0 && index == '-1') {
+                        $scope.cardindex = $scope.conceptcards.length - 1;
+                    } else {
+                        $scope.cardindex = $scope.cardindex + index;
+                    };
+                };
+            }, 300);
+
+
         };
 
-        $scope.addcustomusercard = function () {
 
+        $scope.addcustomusercard = function () {
             $scope.conceptcards.splice($scope.cardindex + 1, 0, { // add the card such that when we click on + the new card is added next to the current card and the index is same as current card's index
                 user_id: $.jStorage.get("user").id,
                 cardnumber: $scope.conceptcards[$scope.cardindex].cardnumber,
@@ -299,10 +331,6 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
             /*CHANGE CARD INDEX TO +1 */
             $scope.changecardindex(1);
-            /*CHANGE CARD*/
-            var $el = $('#baraja-el'),
-                baraja = $el.baraja();
-            baraja.updateStack()
         };
 
         var savecustomcardssuccess = function (response) {
@@ -340,7 +368,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
   }]);
 
-inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q','$location',
+inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
 
         $scope.title = "Tests";
@@ -380,7 +408,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             //CHECK IF BOOKMARKED OR TO REMOVE BOOKMARK
             //SET TEXT ACCORDINGLY
             var bookmarktoasttext = "This Question has been Bookmarked !"
-                /*ON SUCCESS OF BOOKMARKING*/
+            /*ON SUCCESS OF BOOKMARKING*/
             var $toastContent = $('<span>' + bookmarktoasttext + '</span>').add($('<button class="btn-flat toast-action" ng-click="bookmarkquestion()">Undo</button>'));
             Materialize.toast($toastContent, 3000);
         };
@@ -549,7 +577,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
                     function (response) {
                         /*ERROR IN CREATING VALUE ARRAY*/
                     });
-            }else{
+            } else {
                 alert("Not enough Concepts in this chapter");
             };
         };
@@ -612,7 +640,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
         $scope.submittest = function () {
             var store_test_detailssuccess = function (response) {
                 console.log(response.data);
-                if(response.data == "true"){
+                if (response.data == "true") {
                     $('#end-modal').modal('close');
                     $location.path("/testresults");
                 };
