@@ -11,21 +11,14 @@
     <title>INQ </title>
     <link rel="shortcut icon" href="img/favicon.ico" />
 
-
-
-
-
     <!--     Fonts and icons     -->
-    <link href="lib/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-
-
     <!--FONTASTIC ICONS-->
     <link href="https://file.myfontastic.com/9MfkmQiXUFGEV8qNcxPVce/icons.css" rel="stylesheet">
 
 
 
-
+    <!-- Fully Compiled CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -61,24 +54,18 @@
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-
-
-
     <script src="assets/js/material.min.js" type="text/javascript"></script>
-
-
 
     <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
     <script src="node_modules/angular-file-upload/dist/angular-file-upload.js"></script>
-
 
     <!--ANGULAR LOADING-->
     <link rel='stylesheet' href='www/lib/angular-loading/loading-bar.min.css' type='text/css' media='all' />
     <script type='text/javascript' src='www/lib/angular-loading/loading-bar.min.js'></script>
 
 
+    <!--TO DETECT DEVICES, REMOVE IF NOT NEEDED-->
     <script src="assets/js/modernizr.custom.79639.js"></script>
-    <script src="assets/js/jquery.baraja.js"></script>
 
 
 
@@ -101,55 +88,34 @@
     <!--Timer JS-->
     <script src="lib/js/angular-timer.min.js"></script>
 
-
-
-
-
 </head>
 
 <body>
     <div ng-controller="appCtrl">
+
+        <!--DESKTOP VERSION-->
         <div class="wrapper row margin0" ng-if="showmenu">
             <div ng-include="'views/menu.html'">
-
+                <!-- MENU DIV-->
             </div>
             <div class="contentdiv" ng-include="'views/navigation.html'">
-
+                <!-- NAVIGATION DIV WITH PADDING TO LEFT -->
             </div>
             <div class="contentdiv" ng-include="'views/background.html'">
-
+                <!-- CONTENT DIV WITH PADDING TO LEFT -->
             </div>
-
-
-
         </div>
 
+        <!--MOBILE VERSION-->
         <div class="wrapper row margin0" ng-if="!showmenu">
             <div class="repeated-item" ng-view>
-
-
+                <!-- CONTENT DIV -->
             </div>
         </div>
+
     </div>
 
-
-
-
-
 </body>
-
-<script type="text/javascript">
-    console.log("INITIALIZE");
-    $('.button-collapse').sideNav({
-        menuWidth: 300, // Default is 300
-        edge: 'right', // Choose the horizontal origin
-        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-        draggable: true // Choose whether you can drag to open on touch screens,
-
-    });
-
-</script>
-
 
 <script>
     var user = $.jStorage.get("user");
