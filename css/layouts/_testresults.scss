@@ -1,0 +1,106 @@
+/*TEST RESULTS*/
+
+.testresultsbottom {
+    height: 59vh;
+}
+
+.testresultconcepts {
+    height: 49vh;
+    overflow-y: scroll;
+}
+
+.sortedbox {
+    background-color: white;
+    box-shadow: 2px 2px 25px rgba(0, 0, 0, 0.28);
+    color: $grey-text;
+}
+
+
+/*testsresutls*/
+
+.testbg {
+    background-color: $primary-color;
+    height: auto;
+    margin-top: -90px;
+}
+
+.testtext {
+    padding-top: 6vh;
+    text-align: center;
+    @extend .cerafont;
+    color: white;
+}
+
+.congratstext {
+    color: #f9ff00;
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 20px;
+    font-family: congrats;
+}
+
+.scoretext {
+    font-size: 15px;
+    margin-top: 8px;
+    @media screen and (max-width: $break-small) {
+        font-size: 15px;
+    }
+}
+
+.score {
+    font-size: 40px;
+    border: 1px solid;
+    font-family: monospace;
+    margin-top: 10px;
+    -webkit-box-shadow: 0px 0px 9px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 9px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 9px -4px rgba(0, 0, 0, 0.75);
+}
+
+.resulttext {
+    height: 10vh;
+    color: white;
+    text-indent: 7px;
+}
+
+.faceicon {
+    display: block;
+    margin-right: 10px;
+}
+
+.resultscore {
+    font-size: 40px;
+    font-weight: 500;
+    font-family: monospace;
+}
+
+.resulthead {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.testconcept {
+    font-size: 17px;
+    color: #abaaaa;
+    @extend .cerafont;
+}
+
+.testconcepthead {
+    margin-top: 35px;
+    ;
+    font-size: 19px;
+    color: $grey-text;
+}
+
+.conceptstestedline {
+    background-color: $primary-color;
+    height: 21px;
+    float: left;
+    border-radius: 2px;
+}
+
+.hidediv {
+    @media screen and (max-width: $break-medium) {
+        display: none;
+    }
+}

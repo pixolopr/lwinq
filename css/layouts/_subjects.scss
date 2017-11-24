@@ -1,0 +1,48 @@
+.subbox {
+    text-align: -webkit-center;
+    margin-bottom: 25px;
+}
+
+.subbox2 {
+    background-color: white;
+    height: 15vw;
+    width: 15vw;
+    padding: 3vw;
+    i {
+        font-size: 9vw;
+    }
+    @media screen and (max-width: $break-medium) {
+        height: 30vw;
+        width: 30vw;
+        i {
+            font-size: 21vw;
+        }
+    }
+    @media screen and (max-width: $break-small) {
+        height: 80vw;
+        width: 80vw;
+        i {
+            font-size: 64vw;
+        }
+    }
+}
+
+.subbox3 {
+    text-align: center;
+    cursor: pointer;
+}
+
+.subicons {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.sublist {
+    padding-top: 5px;
+    font-family: ceraM;
+    font-size: 18px;
+}
+
+.subbox4 {
+    text-align: center;
+}

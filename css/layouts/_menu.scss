@@ -1,0 +1,146 @@
+.searchbox {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 120px;
+    margin-top: 1px;
+    padding: 1px 0 0 0;
+    z-index: 2;
+}
+
+li.search .search-wrapper {
+    margin: 0 0px;
+    transition: margin .25s ease;
+}
+
+li.search {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 120px;
+    margin-top: 1px;
+    padding: 1px 0 0 0;
+    z-index: 2;
+}
+
+#search:focus {
+    width: 100%;
+}
+
+#search:focus+searchicon {
+    right: 2px;
+}
+
+#search {
+    width: 80% !important;
+    background-color: white !important;
+    height: 40px !important;
+    box-shadow: 0px 0px 5px -1px black !important;
+    border-radius: 3px !important;
+    margin: 0 0 0px 0 !important;
+    padding: 0 45px 0 15px !important;
+}
+
+.searchicon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.logobox {
+    background-color: $secondary-color !important;
+}
+
+.loginimg {
+    text-align: center;
+}
+
+.loginimg2 {
+    width: 40%;
+    padding-top: 50%;
+    @media screen and (max-width: $break-small) {
+        width: 11%;
+        padding-top: 2%;
+    }
+}
+
+.menubg {
+    background-color: $secondary-light !important;
+    @media screen and (max-width: $break-medium) {
+        width: 350px !important;
+    }
+    @media screen and (min-width: $break-medium) {
+        width: 25% !important;
+    }
+}
+
+
+.standardnumber {
+    background-color: $primary-color;
+    margin: 10px;
+    padding-left: 25% !important;
+    font-size: 16px !important;
+    font-weight: 700;
+    color: white !important;
+}
+
+.menuprofilepic {
+    border: 1.5px solid $primary-color;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 30% !important;
+    height: 30% !important;
+}
+
+.menuprofilename {
+    margin-top: 4px !important;
+    font-size: 1.1em !important;
+}
+
+.hamburger-button {
+    @media screen and (min-width: $break-medium) {
+        display: none;
+    }
+    .menuicon {
+        color: white;
+        font-size: 30px !important;
+        margin-left: 10px;
+    }
+}
+
+
+.side-nav li>a {
+    font-size: 16px !important;
+    color: $grey-text !important;
+    .menuicons {
+        color: grey;
+    }
+    &:hover {
+        color: white !important;
+        margin: 3px;
+        background-color: $primary-color !important;
+        .menuicons {
+            color: white !important;
+        }
+    }
+}
+
+.side-nav .subheader {
+    color: $light-text !important;
+    font-size: 12px !important;
+}
+
+.menulist {
+    display: inline;
+}
+
+.menutext {
+    top: 4px;
+}
+
+.dividerline {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    margin-top: -10px !important;
+}

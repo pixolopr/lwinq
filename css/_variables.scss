@@ -1,0 +1,49 @@
+/*COLOUR VARIABLES*/
+$primary-color: #00BCD4;
+$primary-dark:#0a9dc7;
+$secondary-color:#ebebeb;
+$secondary-light:#f8f8f8;
+$pink-color: #E91E63;
+$pink-dark: #C2185B;
+$grey-text:#636363;
+$light-text:#d3d1d1;
+$dark-border: #a5a5a5;
+
+/*BREAKS*/
+$break-tiny: 300px;
+$break-small: 601px;
+$break-medium: 992px;
+$break-large: 1200px;
+
+
+/*font*/
+
+@font-face {
+    font-family: ceraL;
+    src: url("../fonts/Cera GR Light.otf")format("opentype");
+}
+
+@font-face {
+    font-family: ceraM;
+    src: url("../fonts/Cera GR Medium.otf")format("opentype");
+}
+
+@font-face {
+    font-family: ceraB;
+    src: url("../fonts/Cera GR.otf")format("opentype");
+}
+
+@font-face {
+    font-family: congrats;
+    src: url("../fonts/congrats.otf")format("opentype");
+}
+
+@font-face {
+    font-family: numberfont;
+    src: url("../fonts/MathJax_Main-Regular.woff")format("woff");
+    unicode-range: U+30-39;
+}
+
+.cerafont {
+    font-family: numberfont, ceraB !important;
+}

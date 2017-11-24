@@ -1,0 +1,33 @@
+/*BACKGROUND*/
+
+.inqbg {
+    background: url(../img/inq_bg_image.png) center top no-repeat;
+    height: 94vh;
+    background-size: cover;
+}
+
+.inqbgtop {
+    /*background-image: url(../img/top_bg.png);*/
+    height: 35vh;
+    background-size: 100%;
+}
+
+.inqbgfull {
+    position: relative;
+    height: 94vh;
+    overflow-y: scroll;
+}
+
+.inqbgbottom {
+    height: 59vh;
+    overflow-y: scroll;
+}
+
+.contentdiv {
+    width: 100%;
+    padding-left: 25%;
+    @media screen and (max-width: $break-medium) {
+        padding-left: 0px;
+    }
+    @media screen and (min-width: $break-large) {}
+}

@@ -1,0 +1,62 @@
+
+.navigation-div {
+    width: 100%;
+    top: 0;
+    background: white;
+    padding: 3px 0px;
+    @media screen and (max-width: $break-medium) {
+        display: none;
+    }
+}
+
+.navtitle {
+    max-width: 160px;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    background-color: #00BCD4;
+    color: white;
+    padding-left: 5%;
+    padding-top: 10px;
+    padding-right: 4%;
+    font-size: 15px;
+    z-index: -3;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    text-overflow: inherit;
+}
+
+.navtitlearrow {
+    content: "";
+    width: 29px;
+    height: 28px;
+    background-color: #00bcd4;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    display: inline-block;
+    position: absolute;
+    margin-top: 6px;
+    margin-left: -18px;
+    /* position: absolute; */
+    /* top: 5px; */
+    /* left: -14px; */
+    z-index: 2;
+    /* outline: thick solid #fff; */
+    box-shadow: 2px -2px 0px 1px white;
+}
+
+.navyou {
+    display: inline;
+    font-size: 20px;
+    color: $primary-color;
+}
+
+.navarehere {
+    display: inline;
+    font-size: 11px;
+    color: $primary-color;
+    position: absolute;
+    /* left: 55px; */
+    margin-left: -6px;
+    margin-top: 0px;
+}

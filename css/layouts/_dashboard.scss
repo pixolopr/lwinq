@@ -1,0 +1,76 @@
+/*DASHBOARD*/
+
+.dashboard-div {
+    width: 95%;
+    margin: 2% auto;
+}
+
+.dashboard-tabs-div {
+    li {
+        a {
+            color: $grey-text !important;
+            &.active {
+                color: $primary-color !important;
+            }
+        }
+    }
+}
+
+
+/*Materialize Class*/
+
+.tabs-content {
+    height: auto !important;
+    .carousel-item {
+        height: auto !important;
+    }
+}
+
+.dashboard-data-div {
+    background: white !important;
+    .dashboard-data-chapters-div {
+        .dashboard-data-chapters-list {
+            .dashboard-chapter-title-icons {
+                transform: rotateZ(0deg);
+                transition: 0.3s all cubic-bezier(0.15, 0.76, 1, 1);
+            }
+            .dashboard-chapter-title-icons-rotate {
+                transform: rotateZ(180deg);
+            }
+            .dashboard-data-chapter-div {
+                border-radius: 2px;
+                border: 1px solid $primary-color;
+                color: $primary-color;
+                .chapter-header {
+                    padding: 0 15px;
+                    .chapter-title {}
+                    .chapter-percent {}
+                }
+                .chapter-footer {
+                    padding: 0 15px;
+                    height: 2.5em;
+                    background: $primary-color;
+                    color: white;
+                    font-size: 0.8em;
+                    line-height: 2.5em;
+                    a {
+                        color: white;
+                        text-decoration: underline;
+                    }
+                    col {
+                        height: 2.5em;
+                    }
+                    p {
+                        height: 2.5em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dashboard-chapters-title {
+    font-weight: bolder;
+    font-size: 1.2em;
+    text-align: center;
+}

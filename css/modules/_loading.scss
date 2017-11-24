@@ -1,0 +1,14 @@
+.loadingdiv {
+    height: 300px;
+    text-align: center;
+    img {
+        width: 25%;
+        margin-top: 15%;
+        @media screen and (max-width: $break-small) {
+            width: 30%;
+        }
+        @media screen and (max-width: $break-tiny) {
+            width: 62%;
+        }
+    }
+}

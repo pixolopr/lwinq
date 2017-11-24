@@ -1,0 +1,418 @@
+/*NEW TEST PAGE*/
+
+.testbox {
+    background-color: blue;
+    height: 70vh;
+    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0px 1px 6px 0px rgba(79, 77, 79, 1);
+    -moz-box-shadow: 0px 1px 6px 0px rgba(79, 77, 79, 1);
+    box-shadow: 0px 1px 6px 0px rgba(79, 77, 79, 1);
+    margin-top: -26vh;
+    @media screen and (max-width: $break-small) {
+        width: 120%;
+        margin-left: -10%;
+    }
+}
+
+.test-card-div {
+    margin: 30px 7.5%;
+    width: 85%;
+    max-height: 70vh;
+    border-radius: 6px;
+    background: white;
+    /*Temporary Height*/
+    @media screen and (min-width: $break-large) {
+        width: 55%;
+        margin: 30px 22.5%;
+    }
+}
+
+.test-card-header {
+    border-bottom: 1px solid $secondary-light;
+    .text-card-header-number {
+        font-size: 20px;
+        margin: 10px 0;
+        font-weight: initial;
+        color: $light-text;
+        display: inline-block;
+    }
+    .test-card-time {
+        font-size: 20px;
+        margin: 10px 0;
+        font-weight: initial;
+    }
+    .test-card-name {
+        font-size: 14px;
+        margin: 10px 0;
+        font-weight: initial;
+        display: inline-block;
+        &:before {
+            content: "- Questions on";
+            padding: 0 5px 0 10px;
+        }
+    }
+    .test-card-header-icons-div {
+        color: $light-text;
+        margin: 18px 0 14px 0;
+        .test-card-icons {
+            font-size: 18px;
+            color: $light-text;
+            padding: 0 8px;
+            float: right;
+            cursor: pointer;
+            &:before {}
+        }
+    }
+}
+
+.test-time-div {
+    display: inline-block;
+    width: 70%;
+    text-align: center;
+    border: 4px solid #00bcd4;
+    color: #00bcd4;
+    background: white;
+    margin-top: 9%;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    .test-time-icon {
+        display: inline-block;
+        margin: 6% 3% 6% 3%;
+        font-size: 28px;
+        -webkit-animation: ld-spin 3s infinite;
+        animation: ld-spin 3s infinite;
+    }
+    .test-time-text {
+        display: inline-block;
+        margin: 0;
+        font-weight: bolder;
+        font-size: 40px;
+        padding: 4px;
+        /*&:before {
+            background-image: url(../img/watch.jpg);
+            width: 16px;
+            content: " ";
+            position: absolute;
+            left: -16px;
+            top: -6px;
+            height: 20px;
+        }*/
+    }
+}
+
+
+/*HOURGLASS ANIMATION*/
+
+@keyframes ld-spin {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(.55, .055, .675, .19)
+    }
+    20% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        animation-timing-function: cubic-bezier(.215, .61, .355, 1)
+    }
+    40%,
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+@-webkit-keyframes ld-spin {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(.55, .055, .675, .19)
+    }
+    10% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        animation-timing-function: cubic-bezier(.215, .61, .355, 1)
+    }
+    20%,
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+.test-card-content {
+    overflow-y: scroll;
+    max-height: 60vh;
+    border-radius: 5px;
+    .test-card-question-div {
+        border-bottom: 1px solid $dark-border;
+        .test-card-question {
+            @extend .cerafont;
+            font-size: 17px;
+            padding: 10px;
+            margin: 24px 2px;
+        }
+    }
+    .test-card-content-answers-div {
+        padding: 0 0 !important;
+        .optiondiv {
+            padding: 0 0.75rem;
+            &:hover {
+                background-color: whitesmoke;
+            }
+        }
+    }
+}
+
+.test-bottom-buttons-div {
+    position: absolute;
+    width: 98%;
+    bottom: 0%;
+    button {
+        @extend .rounded-button;
+        width: 70%;
+        i {
+            margin-top: 8px;
+        }
+    }
+}
+
+.report-modal {
+    .report-modal-header {
+        width: 100%;
+        height: 55px;
+        border-bottom: 1px solid $light-text;
+        .report-modal-header-title {
+            margin-top: 0px;
+            padding: 18px;
+            font-size: 19px;
+        }
+    }
+    .modal-content {
+        padding-bottom: 0px !important;
+        .error-report-modal-labels {
+            font-weight: 600;
+            font-size: 13px;
+            color: $light-text;
+            text-transform: uppercase;
+        }
+        .error-report-description-input {
+            min-height: 150px;
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+    .report-modal-submit-button {
+        width: 70%;
+        margin: 0px 0px !important;
+    }
+}
+
+
+/*ASK A DOUBT MODAL*/
+
+.doubt-modal {
+    max-height: 80% !important;
+    .doubt-modal-header {
+        width: 100%;
+        height: 55px;
+        border-bottom: 1px solid $light-text;
+        .doubt-modal-header-title {
+            margin-top: 0px;
+            padding: 18px;
+            font-size: 19px;
+        }
+    }
+    .modal-content {
+        .modal-content-row {
+            border-bottom: 1px solid $dark-border;
+        }
+        .doubts-modal-doubts {
+            max-height: 50vh;
+            overflow-y: scroll;
+            .other-doubts-title {
+                text-align: center;
+                font-size: 11px;
+                /* font-weight: bold; */
+                color: grey;
+            }
+            .doubts-modal-doubt-div {
+                border-bottom: 1px solid $dark-border;
+                padding-top: 6px;
+                .doubts-modal-profile-img {
+                    width: 80%;
+                    border-radius: 100%;
+                    border: 2px solid $primary-color;
+                }
+                .doubts-modal-user-name {
+                    margin: 0;
+                    font-weight: 600;
+                    font-size: 14px;
+                }
+                .doubts-modal-doubt-question {
+                    font-size: 13.5px;
+                    line-height: 1.7;
+                }
+                .doubts-modal-doubt-image-div {
+                    max-height: 10vh;
+                    overflow: hidden;
+                    .doubts-modal-doubt-image {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .doubts-modal-post-doubt-section {
+            margin: 0% 5%;
+            .doubts-modal-labels {
+                font-weight: 600;
+                font-size: 13px;
+                color: $light-text;
+                text-transform: uppercase;
+            }
+            .doubts-description-input {
+                min-height: 25px;
+                min-width: 100%;
+                max-height: 150px;
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+
+/*END MODAL*/
+
+.attempted-text {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.score-text {
+    font-size: 50px;
+    font-weight: bold;
+    color: $primary-color;
+}
+
+.questions-text {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.question-box {
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    background: $primary-color;
+    color: white;
+    padding: 0.6% 1.2%;
+    &:hover {
+        background: $primary-dark;
+    }
+}
+
+.end-modal-submit-button {
+    width: 100%;
+    background-color: $primary-color !important;
+    &:hover {
+        background-color: $primary-dark !important;
+    }
+    &:active {
+        background-color: $primary-dark !important;
+    }
+    &:focus {
+        background-color: $primary-dark !important;
+    }
+}
+
+.resume-button {
+    background-color: $pink-color !important;
+    &:hover {
+        background-color: $pink-dark !important;
+    }
+    &:active {
+        background-color: $pink-dark !important;
+    }
+    &:focus {
+        background-color: $pink-dark !important;
+    }
+}
+
+.sure-text {
+    font-size: 15px;
+}
+
+.counted-text {
+    font-size: 12px;
+    color: $light-text;
+}
+
+
+/*TEST CARD SCROLLBAR DESIGN*/
+
+#test-card-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+#test-card-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    background: white;
+    border-bottom-right-radius: 5px;
+}
+
+#test-card-content::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-bottom-right-radius: 5px;
+    &:hover {
+        background: $primary-dark;
+    }
+}
+
+
+/*DOUBTS MODAL SCROLLBAR DESIGN*/
+
+#doubt-modal-doubts::-webkit-scrollbar {
+    width: 6px;
+}
+
+#doubt-modal-doubts::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    background: white;
+}
+
+#doubt-modal-doubts::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    &:hover {
+        background: $primary-dark;
+    }
+}
+
+
+/*TOOLTIP BOTTOM ARROW DESIGN*/
+
+.material-tooltip {
+    padding: 5px 20px 20px;
+    border-radius: 10px;
+    background: rgba(37, 36, 36, 0.9) !important;
+    overflow: visible !important;
+    .backdrop {
+        display: none !important;
+    }
+    &:after {
+        position: absolute;
+        content: " ";
+        top: 92%;
+        left: 50%;
+        margin-left: -8px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 8px 0 8px;
+        border-color: rgba(37, 36, 36, 0.9) transparent transparent transparent;
+    }
+}
+
+

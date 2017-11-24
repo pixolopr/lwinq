@@ -1,0 +1,14 @@
+/*Login box*/
+
+.logintext {
+    background-color: $secondary-color;
+    height: 480px;
+}
+
+.loginlogo {
+    background-color: $primary-color;
+    height: 480px;
+    @media screen and (max-width: $break-small) {
+        height: 17vh;
+    }
+}

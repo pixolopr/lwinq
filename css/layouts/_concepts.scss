@@ -1,0 +1,129 @@
+/*CONCEPTS TIMELINE*/
+
+.commonbox {
+    height: 75px;
+    padding: 15px 10px;
+}
+
+.testline {
+    width: 3px;
+    height: 50px;
+    background: $primary-color;
+    margin-top: -20px;
+}
+
+.testcircle {
+    width: 80px;
+    height: 80px;
+    background: $primary-color;
+    border-radius: 100%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.64);
+    cursor: pointer;
+}
+
+.conceptpercentouterdiv {
+    padding: 2% !important;
+    padding-bottom: 0px !important;
+}
+
+.conceptpercentbg {
+    text-align: center;
+    background-image: url(../img/circle_percent_holder.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    padding-top: 31% !important;
+    font-size: 1.1em !important;
+    padding-bottom: 31% !important;
+    @media screen and (max-width: $break-small) {
+        padding-top: 27% !important;
+        font-size: 0.8em !important;
+    }
+    @media screen and (max-width: $break-tiny) {
+        padding-top: 27% !important;
+        font-size: 0.8em !important;
+        margin-top: 30%;
+    }
+}
+
+.conceptdiv {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    border-radius: 2px;
+    @media screen and (max-width: $break-small) {}
+    @media screen and (max-width: $break-tiny) {
+        width: initial;
+    }
+}
+
+.conceptdotdiv {
+    position: absolute;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.concepttitle {
+    color: $grey-text;
+    text-align: left;
+    font-size: 1.8em;
+    padding-bottom: 1% !important;
+    padding-top: 1% !important;
+    @media screen and (max-width: $break-small) {
+        font-size: 1.2em;
+    }
+}
+
+.conceptbuttons {
+    font-size: 1.2em;
+    font-weight: 300;
+    @media screen and (max-width: $break-small) {
+        font-size: 1.1em;
+    }
+    @media screen and (max-width: $break-tiny) {
+        font-size: 1em;
+    }
+}
+
+.conceptcompletionline {
+    background-color: $primary-color;
+    height: 3px;
+    float: left;
+    margin-top: 6px !important;
+    border-radius: 2px;
+}
+
+.conceptdot {
+    width: 20px !important;
+    height: 20px !important;
+    background-color: $primary-color !important;
+    @media screen and (max-width: $break-small) {
+        height: 8px !important;
+        width: 8px !important;
+    }
+    @media screen and (max-width: $break-tiny) {
+        height: 6px !important;
+        width: 6px !important;
+    }
+}
+
+.circledotanimation {
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+    -moz-animation: neon2 1.5s ease-in-out infinite alternate;
+    animation: neon2 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes neon2 {
+    from {
+        box-shadow: 0 0 2px $primary-color, 0 0 4px $primary-color, 0 0 6px $primary-color, 0 0 8px $primary-color, 0 0 10px $primary-color, 0 0 12px $primary-color, 0 0 14px $primary-color, 0 0 16px $primary-color;
+    }
+    to {
+        box-shadow: 0 0 2px $primary-color, 0 0 2px $primary-color, 0 0 2px $primary-color, 0 0 2px $primary-color, 0 0 2px $primary-color, 0 0 2px $primary-color, 0 0 2px $primary-color, 0 0 2px $primary-color;
+    }
+}

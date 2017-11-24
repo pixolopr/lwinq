@@ -1,0 +1,59 @@
+/*Reusables*/
+
+.primarybg {
+    background-color: $primary-color !important;
+}
+
+.primarycolor {
+    color: $primary-color !important;
+}
+
+.margin0 {
+    margin: 0px 0px 0px 0px !important;
+}
+
+.padding0 {
+    padding: 0px 0px 0px 0px !important;
+}
+
+.textleft {
+    text-align: left !important;
+}
+
+.textcenter {
+    text-align: center !important;
+}
+
+.textright {
+    text-align: right !important;
+}
+
+.white {
+    color: white !important;
+}
+
+.noborder {
+    border: 0px !important;
+}
+
+.noshadow {
+    box-shadow: 0 0 0 black !important;
+}
+
+.MJXc-display {
+    text-align: left !important;
+}
+
+.bluehover:hover {
+    color: $primary-color !important;
+}
+
+
+
+.relativediv {
+    position: relative;
+}
+
+.inlinedisplay {
+    display: inline-block;
+}

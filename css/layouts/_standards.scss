@@ -1,0 +1,30 @@
+/*STandard */
+
+.standardtext {
+    text-align: center;
+}
+
+.standbox {
+    text-align: center;
+    cursor: pointer;
+}
+
+.standardbox {
+    background-color: white;
+    height: 15vw;
+    width: 15vw;
+    font-size: 8vw;
+    padding: 14px;
+    color: $primary-color;
+    text-align: center;
+    @media screen and (max-width: $break-medium) {
+        height: 35vw;
+        width: 35vw;
+        font-size: 20vw;
+    }
+    @media screen and (max-width: $break-small) {
+        height: 80vw;
+        width: 80vw;
+        font-size: 50vw;
+    }
+}
