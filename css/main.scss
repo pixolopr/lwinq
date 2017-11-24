@@ -98,6 +98,10 @@ $break-large: 1200px;
     }
 }
 
+pre {
+    display: none;
+}
+
 
 /*BUTTON USED IN TEST AND OTHER PLACES*/
 
@@ -154,7 +158,6 @@ $break-large: 1200px;
 }
 
 .navigation-div {
-    position: absolute;
     width: 100%;
     top: 0;
     background: white;
@@ -304,6 +307,12 @@ li.search {
 
 .menubg {
     background-color: $secondary-light !important;
+    @media screen and (max-width: $break-medium) {
+        width: 350px !important;
+    }
+    @media screen and (min-width: $break-medium) {
+        width: 25% !important;
+    }
 }
 
 .standardnumber {
@@ -488,17 +497,23 @@ li.search {
 }
 
 .contentdiv {
-    padding-left: 350px;
+    width: 100%;
+    padding-left: 25%;
     @media screen and (max-width: $break-medium) {
         padding-left: 0px;
     }
     @media screen and (min-width: $break-large) {}
 }
 
-.menuicon {
-    color: white;
-    font-size: 30px !important;
-    margin-left: 10px;
+.hamburger-button {
+    @media screen and (min-width: $break-medium) {
+        display: none;
+    }
+    .menuicon {
+        color: white;
+        font-size: 30px !important;
+        margin-left: 10px;
+    }
 }
 
 .chapterlist {
@@ -631,21 +646,20 @@ li.search {
 
 /*card*/
 
+.card-row {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
 .cardbox {
-    /* background-color: white;
-    height: 70vh;
-    width: 90%;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    -webkit-box-shadow: 0px 1px 6px 0px rgba(79, 77, 79, 1);
-    -moz-box-shadow: 0px 1px 6px 0px rgba(79, 77, 79, 1);
-    box-shadow: 0px 1px 6px 0px rgba(79, 77, 79, 1);*/
-    background-image: url(../img/cards_UI.png);
+    /*background-image: url(../img/cards_UI.png);
     background-repeat: no-repeat;
-    background-size: 100% 73vh;
+    background-size: 100% 73vh;*/
+    position: relative;
     height: 71vh !important;
-    padding-top: 6%;
     @media screen and (max-width: $break-small) {
         padding-top: 7%;
         width: 112%;
@@ -656,21 +670,62 @@ li.search {
 .cardspage {
     height: 69vh;
     width: 84%;
-    /* margin-top: -11px;*/
-    margin-top: 2vh;
-    margin-left: 5vh;
+    margin: 0 8%;
     border-radius: 6px;
     background-color: rgb(255, 255, 255);
-    box-shadow: 0px 1px 6px 0px rgba(55, 45, 59, 0.16);
+    box-shadow: 0px 0px 5px 0px rgba(55, 45, 59, 0.04);
+    position: absolute;
+    transition: 0.3s all;
+    left: 0px;
     @media screen and (max-width: $break-small) {
         margin-left: 3vh;
+    }
+}
+
+.custom-card-wrapper {
+    height: 63.7vh;
+}
+
+.custom-card {
+    textarea {
+        width: 100%;
+        height: 56vh !important;
+        outline: white !important;
+        border: 1px solid white !important;
+        padding: 12px !important;
+    }
+}
+
+.edit-buttons-row {
+    margin: 0 !important;
+    height: 5.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00BCD4;
+    color: white;
+    text-align: center;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    .save-edit-button {
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+    }
+}
+
+.card-arrow-desktop {
+    i {
+        border-radius: 100%;
+        background: white;
+        box-shadow: 0px 0px 2px #00000045;
+        color: $primary-color;
+        font-size: 85px !important;
     }
 }
 
 .concepthead {
     border-bottom: 2px solid rgba(183, 196, 197, 0.33);
     height: 7.5vh;
-    padding-top: 2% !important;
     font-size: 18px !important;
     @extend .cerafont;
     @media screen and (max-width: $break-small) {
@@ -683,6 +738,11 @@ li.search {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    margin: 0 !important;
+    .card-number {
+        font-size: 1.3em;
+    }
 }
 
 .cardbut {
@@ -722,7 +782,7 @@ li.search {
 /*scroll bar*/
 
 .scrollbar {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .force-overflow {
@@ -750,6 +810,15 @@ li.search {
     margin-top: 2vh;
     @media screen and (max-width: $break-small) {
         font-size: 14px;
+    }
+}
+
+.concept-name {
+    h1 {
+        font-size: 2em;
+        color: white;
+        width: 90%;
+        margin: 25px auto;
     }
 }
 
@@ -817,9 +886,10 @@ li.search {
 }
 
 .concepticon {
-    font-size: 19px;
+    font-size: 1.6em;
     padding-top: 4px;
-    float: inherit;
+    float: right;
+    margin-right: 10px;
 }
 
 

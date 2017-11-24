@@ -114,6 +114,7 @@ inqcontroller.controller('standardsCtrl', ['$scope', 'TemplateService', 'Navigat
         };
         $rootScope.navigation = $.jStorage.get("navigation");
         $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
+            console.log(n);
             return n.position < nav.position;
         });
         $rootScope.navigation[nav.position] = nav;
@@ -265,10 +266,10 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             } else {
                 var left = '-600px';
                 var rotateVal = '6deg';
-                if($scope.cardindex==0){
-                    var cardid = $scope.conceptcards.length-1;
-                }else{
-                    var cardid = $scope.cardindex-1;  
+                if ($scope.cardindex == 0) {
+                    var cardid = $scope.conceptcards.length - 1;
+                } else {
+                    var cardid = $scope.cardindex - 1;
                 };
             };
 
@@ -321,7 +322,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             $scope.conceptcards.splice($scope.cardindex + 1, 0, { // add the card such that when we click on + the new card is added next to the current card and the index is same as current card's index
                 user_id: $.jStorage.get("user").id,
                 cardnumber: $scope.conceptcards[$scope.cardindex].cardnumber,
-                conceptdata: "",
+                conceptdata: "You Can Create You Own Notes Here",
                 editmode: true,
                 concept_id: $scope.conceptid,
                 id: 0
@@ -333,37 +334,40 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             $scope.changecardindex(1);
         };
 
-        var savecustomcardssuccess = function (response) {
-            console.log(response.data);
-            console.log($scope.conceptcards[$scope.cardindex]);
-            if (response.data != "false") {
-                $scope.conceptcards[$scope.cardindex].editmode = false;
 
-                if (response.data != "true") {
-                    $scope.conceptcards[$scope.cardindex].id = response.data;
-                }
-            }
-
-        };
         var savecustomcardserror = function (response) {
             console.log(response.data);
         };
 
         /* SAVE CUSTOM CARD */
-        $scope.savecustomusercard = function (ind) {
-            console.log($scope.conceptcards[ind]);
-            NavigationService.savecustomcards($scope.conceptcards[ind]).then(savecustomcardssuccess, savecustomcardserror);
+        $scope.savecustomusercard = function () {
+            var index = $scope.cardindex;
+            console.log($scope.conceptcards[index]);
+            NavigationService.savecustomcards($scope.conceptcards[index]).then(function (response) {
+                console.log(response.data);
+                console.log($scope.conceptcards[index]);
+                if (response.data != "false") {
+                    $scope.conceptcards[$scope.cardindex].editmode = false;
+
+                    if ($scope.conceptcards[index].id == 0) {
+                        $scope.conceptcards[index].id = response.data;
+                    }
+                };
+            }, function (response) {
+                /*INTERNET ERROR*/
+                console.log(response.data);
+            });
         };
 
         /* EDIT CUSTOMER CARD MODE */
-        $scope.editcustomusercard = function (ind) {
-            $scope.conceptcards[ind].editmode = true;
+        $scope.editcustomusercard = function () {
+            $scope.conceptcards[$scope.cardindex].editmode = true;
         };
 
 
         $scope.deletecustomusercard = function (ind) {
             /*ASK FOR CONFIRMATION*/
-            $scope.conceptcards[ind].editmode = false;
+            $scope.conceptcards[$scope.cardindex].editmode = false;
         };
 
   }]);
@@ -777,6 +781,7 @@ inqcontroller.controller('subjectsCtrl', ['$scope', 'TemplateService', 'Navigati
                 clickable: true
             };
             $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
+                console.log(n);
                 return n.position < nav.position;
             });
             $rootScope.navigation[nav.position] = nav;
@@ -1013,7 +1018,6 @@ inqcontroller.controller('menuCtrl', ['$scope', 'TemplateService', '$location', 
 
 
         $('.button-collapse').sideNav({
-            menuWidth: 350, // Default is 300
             edge: 'left', // Choose the horizontal origin
             closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
             draggable: true // Choose whether you can drag to open on touch screens,
