@@ -196,14 +196,20 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         NavigationService.getdatabyid('concepts', $scope.conceptid).then(getdatabyidsuccess, getdatabyiderror);
         /*SET NAVIGATION END*/
 
+
+
+
         /* Get cards Data */
         var getcardsuccess = function (response) {
 
             console.log(response.data);
             $scope.conceptcards = response.data;
+
+
             if (response.data.length > 0) { // if there is atleast 1 conceptcard then set cardindex to 0
                 $scope.cardindex = 0;
                 readcardbyuserid(0);
+                //$scope.changecardindex(1);
             }
 
             _.forEach($scope.conceptcards, function (value, key) {
@@ -211,8 +217,10 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                     value.conceptdata = $sce.trustAsHtml(value.conceptdata);
                 }
                 $scope.zindexarray.push($scope.conceptcards.length - key);
+                styleCards(key);
             });
-            console.log($scope.zindexarray);
+
+
         };
 
         var getcarderror = function (response) {
@@ -255,17 +263,25 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         NavigationService.getconceptname($scope.conceptid).then(getconceptnamesuccess, getconceptnameerror);
 
         // routing
+
+
+        /* Style cards by rotating*/
+        var styleCards = function (key) {
+            if ($scope.zindexarray[key] == $scope.conceptcards.length) {
+                var deg = '0deg';
+            } else {
+                if ($scope.zindexarray[key] % 2 == 0) {
+                    //var deg = '-' + $scope.zindexarray[key] % 6 + 'deg';
+                    var deg = '-3deg';
+                } else {
+                    //var deg = $scope.zindexarray[key] % 6 + 'deg';
+                    var deg = '3deg';
+                }
+            };
+            $('#card' + key).css('transform', 'rotate(' + deg + ')');
+        };
+        /*Change Card*/
         $scope.changecardindex = function (index) {
-            /*if ($scope.conceptcards[$scope.cardindex].user_id == $scope.user.id && $scope.conceptcards[$scope.cardindex].editmode == true) {
-                alert("Card not saved");
-            } else if ($scope.cardindex == 0 && index == -1) {
-
-            } else if ($scope.cardindex == $scope.conceptcards.length - 1 && index == 1) {
-
-            } else if ($scope.cardindex >= 0 && $scope.cardindex < $scope.conceptcards.length) {
-                $scope.cardindex += index; // keep changing the index, +1 for next and -1 for previous
-                readcardbyuserid($scope.cardindex);
-            }*/
 
             var cardid, left, rotateVal;
             if (index == '1') {
@@ -307,40 +323,18 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                             $scope.zindexarray[key] += 1;
                         };
 
-                        if ($scope.zindexarray[key] == $scope.conceptcards.length) {
-                            var deg = '0deg';
-                        } else {
-                            if ($scope.zindexarray[key] % 2 == 0) {
-                                //var deg = '-' + $scope.zindexarray[key] % 6 + 'deg';
-                                var deg = '-3deg';
-                            } else {
-                                //var deg = $scope.zindexarray[key] % 6 + 'deg';
-                                var deg = '3deg';
-                            }
-                        };
-                        $('#card' + key).css('transform', 'rotate(' + deg + ')');
-                        
+                        styleCards(key);
+
                     } else {
 
-                        if ($("#card" + key).zIndex() == '1') {
+                        if ($scope.zindexarray[key] == '1') {
                             $scope.zindexarray[key] = $scope.conceptcards.length;
                         } else {
                             $scope.zindexarray[key] -= 1;
                         };
 
-                        console.log($scope.zindexarray[key] % 6);
-                        if ($scope.zindexarray[key] == $scope.conceptcards.length) {
-                            var deg = '0deg';
-                        } else {
-                            if ($scope.zindexarray[key] % 2 == 0) {
-                                //var deg = '-' + $scope.zindexarray[key] % 6 + 'deg';
-                                var deg = '-3deg';
-                            } else {
-                                //var deg = $scope.zindexarray[key] % 6 + 'deg';
-                                var deg = '3deg';
-                            }
-                        };
-                        $('#card' + key).css('transform', 'rotate(' + deg + ')');
+                        styleCards(key);
+
                     };
 
 
