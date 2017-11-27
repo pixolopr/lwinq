@@ -16,7 +16,7 @@
         <div class="col  s12 m8 l8 ">
 
             <div class="cardbox">
-                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards track by $index" style="z-index:{{zindexarray[$index]}};">
+                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" ng-style="{ 'z-index':zindexarray[$index] }">
                     <div class="concepthead">
                         <div class="row conceptheadcentralize">
                             <div class="col s4"></div>
@@ -40,7 +40,7 @@
                         <div class="custom-card textcenter" ng-if="card.editmode">
                             <textarea ng-model="card.conceptdata"></textarea>
                         </div>
-                        <div class="row edit-buttons-row" ng-if="card.user_id==user.id">
+                        <div class="row edit-buttons-row" ng-class="{'edit-mode': card.editmode, 'save-mode': !card.editmode}" ng-if="card.user_id==user.id">
                             <div class="col s4 m4">CANCEL</div>
                             <!-- <div class="col s4 m4">SHARE</div>-->
                             <div class="col s4 m4 save-edit-button" ng-click="savecustomusercard()" ng-if="card.editmode">SAVE</div>

@@ -34,7 +34,8 @@
     margin: 0 8%;
     border-radius: 6px;
     background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 5px 0px rgba(55, 45, 59, 0.04);
+    box-shadow: 0px 0px 7px 0px rgba(55, 45, 59, 0.16);
+    border: 1px solid #0000002b;
     position: absolute;
     transition: 0.3s all;
     left: 0px;
@@ -63,8 +64,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #00BCD4;
-    color: white;
     text-align: center;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
@@ -73,6 +72,15 @@
         border-right: 1px solid white;
     }
 }
+
+.save-mode {
+        background: #f4f4f5;
+        color: #7b7878;
+    }
+    .edit-mode {
+        background: $primary-color;
+        color: white;
+    }
 
 .card-arrow-desktop {
     i {
