@@ -152,14 +152,17 @@ inqcontroller.controller('standardsCtrl', ['$scope', 'TemplateService', 'Navigat
 
 inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location) {
-
+        console.log('conceptcardsCtrl');
         $scope.title = "ConceptCards";
-        $scope.template = TemplateService;
-        TemplateService.content = "views/conceptcards.html";
         $rootScope.fullpageview = true;
+        $scope.template = TemplateService;
+       TemplateService.content = "views/conceptcards.html";
         $scope.conceptid = $routeParams.conceptid;
-
-
+        $scope.zindexarray=[];
+        
+       
+       
+     
         $rootScope.$watch(function () {
             var math = document.getElementById("carddata");
             MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
@@ -203,11 +206,13 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                 readcardbyuserid(0);
             }
 
-            _.forEach($scope.conceptcards, function (value) {
+            _.forEach($scope.conceptcards, function (value,key) {
                 if (value.user_id == 0) {
                     value.conceptdata = $sce.trustAsHtml(value.conceptdata);
                 }
+                $scope.zindexarray.push($scope.conceptcards.length-key);
             });
+            console.log($scope.zindexarray);
         };
 
         var getcarderror = function (response) {
@@ -217,10 +222,12 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
         var readcardsuccess = function (response) {
             console.log(response.data);
-            $scope.conceptcards[$scope.cardindex].cardread = 1;
+            
         };
 
         var readcarderror = function (response) {
+            console.log(cid);
+            $scope.conceptcards[$scope.cardindex].cardread = 0;
             console.log(response.data);
         };
 
@@ -228,7 +235,9 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id).then(getcardsuccess, getcarderror);
 
         var readcardbyuserid = function (cid) {
+            console.log('i m in readcard function');
             if ($scope.conceptcards[cid].cardread == 0) {
+                $scope.conceptcards[cid].cardread = 1;
                 NavigationService.readcardbyuserid($.jStorage.get("user").id, $scope.conceptcards[cid].id).then(readcardsuccess, readcarderror);
                 console.log("CALLING STATEMENT");
             }
@@ -257,52 +266,75 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                 $scope.cardindex += index; // keep changing the index, +1 for next and -1 for previous
                 readcardbyuserid($scope.cardindex);
             }*/
-
-
+           
+            var cardid,left,rotateVal;
             if (index == '1') {
-                var left = '600px';
-                var rotateVal = '6deg';
-                var cardid = $scope.cardindex;
+               
+                 left =$('.cardspage').width()+'px';
+                 rotateVal = '6deg';
+                 cardid = $scope.cardindex;
             } else {
-                var left = '-600px';
-                var rotateVal = '6deg';
+                 left = $('.cardspage').width()+'px';
+                 rotateVal = '6deg';
                 if ($scope.cardindex == 0) {
-                    var cardid = $scope.conceptcards.length - 1;
+                     cardid = $scope.conceptcards.length - 1;
                 } else {
-                    var cardid = $scope.cardindex - 1;
+                     cardid = $scope.cardindex - 1;
                 };
             };
-
+            console.log(cardid);
+            readcardbyuserid(cardid);
+            console.log(left+" :left  rotatevalue: "+rotateVal);
             $('#card' + cardid).css({
                 'left': left,
-                'transform': 'rotate(' + rotateVal + ')'
+                'transform': 'rotate(' + rotateVal + ')',
+                
+
             });
 
 
 
 
             setTimeout(function () {
+                
                 _.forEach($scope.conceptcards, function (value, key) {
+                   
                     if (index == '1') {
-                        if (key == $scope.cardindex) {
-                            $('#card' + key).css('z-index', '1');
-                        } else {
-                            $('#card' + key).css('z-index', ($("#card" + key).zIndex() + 1));
+                       
+                        if (key == $scope.cardindex) {     
+                            $scope.zindexarray[key]=1;                         
+                            $('#card' + key).css('z-index', '1');  
+                                                  
+                        } else {                
+                            $scope.zindexarray[key]=$scope.zindexarray[key]+1;             
+                            $('#card' + key).css('z-index', ($("#card" + key).zIndex() + 1)); 
+                                                      
                         };
                     } else {
+                     
                         if ($("#card" + key).zIndex() == '1') {
+                            $scope.zindexarray[key]=$scope.conceptcards.length;
                             $('#card' + key).css('z-index', $scope.conceptcards.length);
+                           
                         } else {
+                            $scope.zindexarray[key]=$scope.zindexarray[key]-1;  
                             $('#card' + key).css('z-index', ($("#card" + key).zIndex() - 1));
+                            
                         };
                     };
-                });
+                    console.log(key+" :Key   indexvalue:"+ $scope.zindexarray[key]);
+                   // $scope.zindexarray[key]=$("#card" + key).zIndex();
+                  
+                  
 
+                });
+               
                 $('#card' + cardid).css({
                     'left': '0px',
                     'transform': 'rotate(0deg)'
                 });
-
+              //  $scope.useindexarray=false;
+               // console.log(cardid);
                 if ($scope.cardindex == ($scope.conceptcards.length - 1) && index == '1') {
                     $scope.cardindex = 0;
                 } else {
@@ -312,6 +344,8 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                         $scope.cardindex = $scope.cardindex + index;
                     };
                 };
+                console.log($scope.zindexarray);
+                console.log('index changed ' +$scope.cardindex);
             }, 300);
 
 
@@ -319,6 +353,8 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
 
         $scope.addcustomusercard = function () {
+            console.log($scope.cardindex);
+            console.log($scope.conceptcards);
             $scope.conceptcards.splice($scope.cardindex + 1, 0, { // add the card such that when we click on + the new card is added next to the current card and the index is same as current card's index
                 user_id: $.jStorage.get("user").id,
                 cardnumber: $scope.conceptcards[$scope.cardindex].cardnumber,
@@ -327,11 +363,14 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                 concept_id: $scope.conceptid,
                 id: 0
             });
-
-            console.log($scope.conceptcards);
-
+           
+           $scope.zindexarray.splice($scope.cardindex + 1,0,$("#card" + $scope.cardindex).zIndex());
+           $scope.zindexarray[$scope.cardindex]=$scope.conceptcards.length;
+            
+            console.log($("#card" + $scope.cardindex).zIndex()+" "+$("#card" + ($scope.cardindex+1)).zIndex())
             /*CHANGE CARD INDEX TO +1 */
             $scope.changecardindex(1);
+            console.log($scope.cardindex);
         };
 
 
@@ -667,7 +706,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
 
 inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
   function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
-
+        console.log('conceptsCtrl');
         $scope.title = "Concepts";
         $scope.template = TemplateService;
         $rootScope.fullpageview = false;
@@ -734,7 +773,9 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
 
         // routing
         $scope.gotoconceptcards = function (id) {
-            $location.path('/conceptcards/' + id);
+           
+          $location.path('/conceptcards/' + id);
+         
         };
         $scope.gototest = function () {
             $rootScope.chaptersarray = $scope.chapterid;
@@ -994,7 +1035,7 @@ inqcontroller.controller('menuCtrl', ['$scope', 'TemplateService', '$location', 
         $scope.user = $.jStorage.get("user");
 
         /*ROOTSCOPE VALUES*/
-        $rootScope.fullpageview = false;
+        $rootScope.fullpageview = true;
 
         console.log($.jStorage.get("navigation"));
         if ($.jStorage.get("navigation")) {

@@ -16,7 +16,7 @@
         <div class="col  s12 m8 l8 ">
 
             <div class="cardbox">
-                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" style="z-index:{{conceptcards.length-$index}};">
+                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards track by $index" style="z-index:{{zindexarray[$index]}};">
                     <div class="concepthead">
                         <div class="row conceptheadcentralize">
                             <div class="col s4"></div>
@@ -27,7 +27,7 @@
                             </div>
                             <div class="col s4">
                                 <i class="icon-star-o concepticon"></i>
-                                <i class="material-icons concepticon" ng-click="addcustomusercard()" ng-hide="conceptcards[cardindex].editmode">add</i>
+                                <i class="material-icons concepticon" ng-click="addcustomusercard()" ng-hide="conceptcards[$index].editmode">add</i>
 
                             </div>
                         </div>
