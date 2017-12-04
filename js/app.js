@@ -136,3 +136,38 @@ inq.filter('letterFromCode', function () {
         return String.fromCharCode(65 + code);
     };
 });
+//directive for file value
+inq.directive('fileModel',['$parse',function($parse){
+    return{
+    restrict:'A',
+    link:function(scope, element, attrs){
+        var model=$parse(attrs.fileModel);
+        var modelsetter=model.assign;
+        element.bind('change',function(){
+            scope.$apply(function(){
+                modelsetter(scope,element[0].files[0]);
+            });
+        });
+    }
+
+    };
+}]);
+
+inq.directive('onChangeEvent', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        onChangeEvent: '&'
+      },
+      link: function(scope, elem, attr, ctrl) {
+        scope.$watch(attr.fileModel, function (v) {
+        elem.bind('change', function(e) {
+          scope.$apply(function() {
+            scope.onChangeEvent();
+          });
+        });
+    })
+      }
+    };
+  });
+
