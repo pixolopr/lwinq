@@ -187,25 +187,25 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
        });
      };*/
     $scope.uploadimg = {};
-    var uniquename;
+    $scope.uniquename;
     $scope.uploadfile = function () {
 
-      console.log($scope.uploadimg.img);
+      console.log($scope.conceptcards[$scope.cardindex].img.name);
       var formdata = new FormData();
-      formdata.append('file', $scope.uploadimg.img);
+      formdata.append('file', $scope.conceptcards[$scope.cardindex].img);
       NavigationService.getimagename(formdata).success(function (response) {
         console.log(response);
         //path in response for preview $scope.path=response
-        uniquename = response;//to change image property
-       
+        $scope.conceptcards[$scope.cardindex].img.name = response; //to change image property
+        $("#image"+$scope.cardindex).attr("src", imageurl+ response);
 
       });
     }
-    $scope.checklength=function(){
-      var content=$scope.conceptcards[$scope.cardindex].conceptdata;
-      if(content.length>500)
-      $scope.conceptcards[$scope.cardindex].conceptdata=content.replace( content.charAt( content.length-1),"");
-     
+    $scope.checklength = function () {
+      var content = $scope.conceptcards[$scope.cardindex].conceptdata;
+      if (content.length > 500)
+        $scope.conceptcards[$scope.cardindex].conceptdata = content.replace(content.charAt(content.length - 1), "");
+
     }
 
     $rootScope.$watch(function () {
