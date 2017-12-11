@@ -840,6 +840,7 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
     // routing
     $scope.gotoconceptcards = function (id) {
 
+        $rootScope.fullpageview = true;
       $location.path('/conceptcards/' + id);
 
     };
