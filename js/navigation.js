@@ -7,7 +7,7 @@ var navigationservice = angular.module('navigationservice', [])
     //PC
     //var adminurl = "http://localhost/inqrest/rest/index.php/";
     //SERVER
-    var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+     var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
     //HOME LAPTOP
 
     var navigation = [{
@@ -132,6 +132,7 @@ var navigationservice = angular.module('navigationservice', [])
             cardnumber: card.cardnumber,
             concept_id: card.concept_id,
             conceptdata: card.conceptdata,
+            image :card.image,
             id: card.id
           }
         })

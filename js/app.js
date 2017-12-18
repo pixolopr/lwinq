@@ -137,6 +137,14 @@ inq.filter('letterFromCode', function () {
         return String.fromCharCode(65 + code);
     };
 });
+inq.filter('roundoff', function () {
+    return function (value,decimals) {
+        if(value)
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+        else
+        return 0;
+    };
+});
 //directive for file value
 inq.directive('fileModel',['$parse',function($parse){
     return{

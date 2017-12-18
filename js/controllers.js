@@ -1,8 +1,8 @@
 var inqcontroller = angular.module('inqcontroller', ['templateservicemod', 'navigationservice']);
 
-var adminurl = "http://localhost/rest/rest/index.php/";
+// var adminurl = "http://localhost/rest/rest/index.php/";
 var imageurl = "http://localhost/rest/rest/uploads/";
-//var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
 //var imageurl = "http://learnwithinq.com/adminpanel/rest/uploads/";
 
 var usertypes = [{
@@ -155,6 +155,7 @@ inqcontroller.controller('standardsCtrl', ['$scope', 'TemplateService', 'Navigat
 inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location', 'FileUploader', '$injector',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
     console.log('conceptcardsCtrl');
+
     $scope.title = "ConceptCards";
     $rootScope.fullpageview = true;
     $scope.template = TemplateService;
@@ -190,14 +191,15 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
     $scope.uniquename;
     $scope.uploadfile = function () {
 
-      console.log($scope.conceptcards[$scope.cardindex].img.name);
+
       var formdata = new FormData();
-      formdata.append('file', $scope.conceptcards[$scope.cardindex].img);
+      formdata.append('file', $scope.conceptcards[$scope.cardindex].image);
       NavigationService.getimagename(formdata).success(function (response) {
         console.log(response);
         //path in response for preview $scope.path=response
-        $scope.conceptcards[$scope.cardindex].img.name = response; //to change image property
-        $("#image"+$scope.cardindex).attr("src", imageurl+ response);
+        $scope.conceptcards[$scope.cardindex].image = response; //to change image property
+        $("#image" + $scope.cardindex).attr("src", imageurl + response);
+        console.log($scope.conceptcards[$scope.cardindex].image);
 
       });
     }
@@ -445,17 +447,18 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
     /* SAVE CUSTOM CARD */
     $scope.savecustomusercard = function () {
       var index = $scope.cardindex;
+      //CALLING FUNCTION TO ADD CUSTOM CARD IN DATABASE
       console.log($scope.conceptcards[index]);
       NavigationService.savecustomcards($scope.conceptcards[index]).then(function (response) {
         console.log(response.data);
         console.log($scope.conceptcards[index]);
         if (response.data != "false") {
           $scope.conceptcards[$scope.cardindex].editmode = false;
-
           if ($scope.conceptcards[index].id == 0) {
             $scope.conceptcards[index].id = response.data;
+
           }
-        };
+        }
       }, function (response) {
         /*INTERNET ERROR*/
         console.log(response.data);
@@ -778,7 +781,7 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
     $rootScope.fullpageview = false;
     TemplateService.content = "views/concepts.html";
     $scope.chapterid = $routeParams.chapterid;
-
+    $scope.math = window.Math;
     //INITIALIZATIONS
 
     /*NAVIGATION SET*/
@@ -840,7 +843,7 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
     // routing
     $scope.gotoconceptcards = function (id) {
 
-        $rootScope.fullpageview = true;
+      $rootScope.fullpageview = true;
       $location.path('/conceptcards/' + id);
 
     };
@@ -881,6 +884,7 @@ inqcontroller.controller('subjectsCtrl', ['$scope', 'TemplateService', 'Navigati
     //INITIALIZATIONS
 
     /*NAVIGATION SET*/
+    console.log($.jStorage.get("navigation"));
     $rootScope.navigation = $.jStorage.get("navigation");
     var getdatabyidsuccess = function (response) {
       console.log(response.data);
@@ -891,7 +895,7 @@ inqcontroller.controller('subjectsCtrl', ['$scope', 'TemplateService', 'Navigati
         clickable: true
       };
       $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
-        console.log(n);
+        //  console.log(n);
         return n.position < nav.position;
       });
       $rootScope.navigation[nav.position] = nav;

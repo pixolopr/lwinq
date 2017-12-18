@@ -1,74 +1,80 @@
 <div class="">
 
-    <div class="textcenter concept-name">
-        <h1 class="truncate">{{conceptdata.name}}</h1>
+  <div class="textcenter concept-name">
+    <h1 class="truncate">{{conceptdata.name}}</h1>
+  </div>
+  <div class="row card-row">
+    <div class="col s12 m2 l2 textcenter">
+
+      <div class="card-arrow-desktop">
+        <div class="" ng-click="changecardindex(-1)" id="nav-prev">
+          <i class="material-icons card-arrow-desktop">navigate_before</i>
+        </div>
+      </div>
+
     </div>
-    <div class="row card-row">
-        <div class="col s12 m2 l2 textcenter">
+    <div class="col  s12 m8 l8 ">
 
-            <div class="card-arrow-desktop">
-                <div class="" ng-click="changecardindex(-1)" id="nav-prev">
-                    <i class="material-icons card-arrow-desktop">navigate_before</i>
-                </div>
+      <div class="cardbox">
+        <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" ng-style="{ 'z-index':zindexarray[$index] }">
+          <div class="concepthead">
+            <div class="row conceptheadcentralize">
+              <div class="col s4"></div>
+              <div class="col s4 truncate textcenter">
+                <h5 class="card-number">
+                  {{$index+1}}/{{conceptcards.length}}
+                </h5>
+              </div>
+              <div class="col s4">
+                <i class="icon-star-o concepticon"></i>
+                <i class="material-icons concepticon" ng-click="addcustomusercard()" ng-hide="conceptcards[$index].editmode">add</i>
+                <i class="material-icons concepticon" ng-if="conceptcards[$index].editmode">add_a_photo</i>
+              </div>
+            </div>
+          </div>
+          <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-if="!card.editmode && card.user_id==0">
+          </div>
+          <div class="custom-card-wrapper" ng-if="card.user_id!=0">
+              <div class="textcenter" ng-if="card.image&&!card.editmode">
+                    <img class="img" height="50%" width="100%"  ng-src="http://localhost/rest/rest/uploads/{{card.image}}">
+              </div>
+           
+            <div class="scrollbar conceptcontent" id="carddata" ng-bind="card.conceptdata" ng-if="!card.editmode">
             </div>
 
-        </div>
-        <div class="col  s12 m8 l8 ">
 
-            <div class="cardbox">
-                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" ng-style="{ 'z-index':zindexarray[$index] }">
-                    <div class="concepthead">
-                        <div class="row conceptheadcentralize">
-                            <div class="col s4"></div>
-                            <div class="col s4 truncate textcenter">
-                                <h5 class="card-number">
-                                    {{$index+1}}/{{conceptcards.length}}
-                                </h5>
-                            </div>
-                            <div class="col s4">
-                                <i class="icon-star-o concepticon"></i>
-                                <i class="material-icons concepticon" ng-click="addcustomusercard()" ng-hide="conceptcards[$index].editmode">add</i>
-                                <i class="material-icons concepticon" ng-if="conceptcards[$index].editmode" ng-click="uploadfile()">add_a_photo</i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-if="!card.editmode && card.user_id==0">
-                    </div>
-                    <div class="custom-card-wrapper" ng-if="card.user_id!=0">
-                        <div class="scrollbar conceptcontent" id="carddata" ng-bind="card.conceptdata" ng-if="!card.editmode">
-                        </div>
-                        <div class="custom-card textcenter scrollbar conceptcontent" ng-if="card.editmode">
-                            {{card.conceptdata.length}} out of 500 letters
-                                <input type='file' file-model="card.img" ng-if="!card.img"   id="uploadimg{{$index}}"  on-change-event="uploadfile()"/>
-                                <img  class="img"  id="image{{$index}}"/>
-                                <!-- <div ng-if="uploader.queue.length==0" style="height:300px" nv-file-drop="" uploader="uploader"    accept="image/*">  </div>-->
-                               
-                              
-                            <textarea  ng-model="card.conceptdata" ng-change="checklength()" ></textarea>
-                        </div>
-                        <div class="row edit-buttons-row" ng-class="{'edit-mode': card.editmode, 'save-mode': !card.editmode}" ng-if="card.user_id==user.id">
-                            <div class="col s4 m4">CANCEL</div>
-                            <!-- <div class="col s4 m4">SHARE</div>-->
-                            <div class="col s4 m4 save-edit-button" ng-click="savecustomusercard()" ng-if="card.editmode">SAVE</div>
-                            <div class="col s4 m4 save-edit-button" ng-click="editcustomusercard()" ng-if="!card.editmode">EDIT</div>
-                            <div class="col s4 m4" ng-click="deletecustomusercard">DELETE</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="custom-card textcenter scrollbar conceptcontent" ng-if="card.editmode">
+              {{card.conceptdata.length}} out of 500 letters
+              <input type='file' file-model="card.image" ng-if="!card.image" id="uploadimg{{$index}}" on-change-event="uploadfile()" />
+              <img class="img" id="image{{$index}}" />
+              <!-- <div ng-if="uploader.queue.length==0" style="height:300px" nv-file-drop="" uploader="uploader"    accept="image/*">  </div>-->
+
+
+              <textarea ng-model="card.conceptdata" ng-change="checklength()"></textarea>
             </div>
-
-        </div>
-        <div class="col s12 m2 l2 textcenter">
-
-            <div class="card-arrow-desktop">
-                <div class="" ng-click="changecardindex(1)" id="nav-next">
-                    <i class="material-icons">navigate_next</i>
-                </div>
+            <div class="row edit-buttons-row" ng-class="{'edit-mode': card.editmode, 'save-mode': !card.editmode}" ng-if="card.user_id==user.id">
+              <div class="col s4 m4">CANCEL</div>
+              <!-- <div class="col s4 m4">SHARE</div>-->
+              <div class="col s4 m4 save-edit-button" ng-click="savecustomusercard()" ng-if="card.editmode">SAVE</div>
+              <div class="col s4 m4 save-edit-button" ng-click="editcustomusercard()" ng-if="!card.editmode">EDIT</div>
+              <div class="col s4 m4" ng-click="deletecustomusercard">DELETE</div>
             </div>
-
+          </div>
         </div>
+      </div>
+
     </div>
-    <!--<div class="row"> 
+    <div class="col s12 m2 l2 textcenter">
+
+      <div class="card-arrow-desktop">
+        <div class="" ng-click="changecardindex(1)" id="nav-next">
+          <i class="material-icons">navigate_next</i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--<div class="row"> 
         <div class="col s12 m3 l2 xl3"></div>
         <div class="col s12 m6 l8 xl6 textcenter iconrow">
             <div class="row">
