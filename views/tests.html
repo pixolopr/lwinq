@@ -41,7 +41,7 @@
 
                 <!--ANSWER DIVISION-->
                 <div class="col l12 m12 s12 test-card-content-answers-div">
-                    <div class="row optiondiv" ng-repeat="option in test_questions[test_question_number].options" style="position: relative;" ng-class="{'noborder':$index==3}">
+                    <div class="row optiondiv" ng-repeat="option in test_questions[test_question_number].options" style="position: relative;" ng-class="{'noborder':$index==3, 'selected-option':test_questions_array[test_question_number].optionsorder.indexOf(test_questions_array[test_question_number].answergiven) == ($index)}">
 
                         <div class="col optionsr optioninnerpadding l1 m1 s1 " style="height: 100%;
     position: absolute;line-height: 100%;">
@@ -66,7 +66,7 @@
                 <button class="waves-effect waves-light btn test-bottom-button" ng-click="openmodal('#end-modal')">Pause/End</button>
             </div>
             <div class="col l4 m4 s4 textcenter">
-                <button class="waves-effect waves-light btn test-bottom-button" ng-click="change_question(1)" ng-disabled="test_question_number == (total_questions-1)"><i class="icon-right-open-big right"></i>Next</button>
+                <button class="waves-effect waves-light btn test-bottom-button" ng-click="change_question(1)" ng-disabled="test_question_number =='19'"><i class="icon-right-open-big right"></i>Next</button>
             </div>
         </div>
     </div>
@@ -141,12 +141,12 @@
             </div>
             <div class="col l4 m4 s4">
                 <h6 class="textcenter attempted-text">YOU HAVE ATTEMPTED</h6>
-                <h6 class="textcenter score-text">6/20</h6>
+                <h6 class="textcenter score-text">{{attempted_count}}/{{test_questions.length}}</h6>
                 <h6 class="textcenter questions-text">QUESTIONS</h6>
             </div>
             <div class="col l4 m4 s4">
                 <h6 class="textcenter attempted-text">PAUSES REMAINING</h6>
-                <h6 class="textcenter score-text" style="font-size: 30px;">1</h6>
+                <h6 class="textcenter score-text" style="font-size: 30px;">{{number_of_pauses}}</h6>
             </div>
 
         </div>
@@ -161,7 +161,7 @@
             <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
         </div>
         <div class="row textcenter">
-            <button class="btn rounded-button waves-effect waves-light report-modal-submit-button resume-button">RESUME TEST</button>
+            <button class="btn rounded-button waves-effect waves-light report-modal-submit-button resume-button" href="#!">RESUME TEST</button>
         </div>
         <div class="row">
             <h6 class="textcenter sure-text">Are you sure you wan to submit your test ?</h6>

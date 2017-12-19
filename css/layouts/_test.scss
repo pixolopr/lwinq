@@ -164,6 +164,15 @@
                 background-color: whitesmoke;
             }
         }
+        .selected-option{
+            background: $primary-color;
+            .optionsr{
+                color: white !important;
+            }
+            .test-options-answer-div{
+                color: white !important;
+            }
+        }
     }
 }
 

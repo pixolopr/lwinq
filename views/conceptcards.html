@@ -28,7 +28,6 @@
               <div class="col s4">
                 <i class="icon-star-o concepticon"></i>
                 <i class="material-icons concepticon" ng-click="addcustomusercard()" ng-hide="conceptcards[$index].editmode">add</i>
-                <i class="material-icons concepticon" ng-if="conceptcards[$index].editmode">add_a_photo</i>
               </div>
             </div>
           </div>
@@ -36,7 +35,7 @@
           </div>
           <div class="custom-card-wrapper" ng-if="card.user_id!=0">
               <div class="textcenter" ng-if="card.image&&!card.editmode">
-                    <img class="img" height="50%" width="100%"  ng-src="http://localhost/rest/rest/uploads/{{card.image}}">
+                    <img class="img" height="50%" width="100%"  ng-src="{{card.image | imagepath}}">
               </div>
            
             <div class="scrollbar conceptcontent" id="carddata" ng-bind="card.conceptdata" ng-if="!card.editmode">
@@ -46,8 +45,8 @@
             <div class="custom-card textcenter scrollbar conceptcontent" ng-if="card.editmode">
               {{card.conceptdata.length}} out of 500 letters
               <input type='file' file-model="card.image" ng-if="!card.image" id="uploadimg{{$index}}" on-change-event="uploadfile()" />
+              
               <img class="img" id="image{{$index}}" />
-              <!-- <div ng-if="uploader.queue.length==0" style="height:300px" nv-file-drop="" uploader="uploader"    accept="image/*">  </div>-->
 
 
               <textarea ng-model="card.conceptdata" ng-change="checklength()"></textarea>

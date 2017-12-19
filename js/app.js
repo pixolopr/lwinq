@@ -38,7 +38,7 @@ inq.config(['$routeProvider',
   function ($routeProvider) {
         $routeProvider.
         when('/home', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/halfPageTemplate.html',
             controller: 'home'
         }).
         when('/login', {
@@ -46,51 +46,51 @@ inq.config(['$routeProvider',
             controller: 'loginCtrl'
         }).
         when('/subjects', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/halfPageTemplate.html',
             controller: 'subjectsCtrl'
         }).
         when('/standards', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/halfPageTemplate.html',
             controller: 'standardsCtrl'
         }).
         when('/tests', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/fullPageTemplate.html',
             controller: 'testsCtrl'
         }).
         when('/concepts/:chapterid', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/halfPageTemplate.html',
             controller: 'conceptsCtrl'
         }).
         when('/testresults', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/fullPageTemplate.html',
             controller: 'testresultsCtrl'
         }).
         when('/chapters/:subjectid', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/halfPageTemplate.html',
             controller: 'chaptersCtrl'
         }).
         when('/conceptcards/:conceptid', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/fullPageTemplate.html',
             controller: 'conceptcardsCtrl'
         }).
         when('/practice', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/fullPageTemplate.html',
             controller: 'practiceCtrl'
         }).
         when('/profile', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/fullPageTemplate.html',
             controller: 'profileCtrl'
         }).
         when('/dashboard', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/fullPageTemplate.html',
             controller: 'dashboardCtrl'
         }).
         when('/starred', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/fullPageTemplate.html',
             controller: 'starredCtrl'
         }).
         when('/leaderboard', {
-            templateUrl: 'views/template.html',
+            templateUrl: 'views/fullPageTemplate.html',
             controller: 'leaderboardCtrl'
         }).
 
@@ -109,8 +109,8 @@ inq.filter('capitalize', function () {
 inq.filter('imagepath', function () {
     return function (input) {
        
-        return "http://localhost/rest/rest/uploads/" + input;
-        //return "http://learnwithinq.com/adminpanel/rest/uploads/" + input;
+        //return "http://localhost/rest/rest/uploads/" + input;
+        return "http://learnwithinq.com/adminpanel/rest/uploads/" + input;
 
     };
 
@@ -179,4 +179,24 @@ inq.directive('onChangeEvent', function() {
       }
     };
   });
+
+/*Return count of a particular value from array*/
+inq.filter('countOfValueInArray', function () {
+  return function (items, value) {
+    angular.forEach(items, function(item){
+        count += item==value ? 1 : 0;
+    });
+    return count;
+  };
+});
+
+
+inq.filter('getCountOfAttempts', function () {
+  return function (items) {
+    angular.forEach(items, function(item){
+        count += item.answergiven!=0 ? 1 : 0;
+    });
+    return count;
+  };
+});
 
