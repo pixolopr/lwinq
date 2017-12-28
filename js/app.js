@@ -109,8 +109,8 @@ inq.filter('capitalize', function () {
 inq.filter('imagepath', function () {
     return function (input) {
        
-        //return "http://localhost/rest/rest/uploads/" + input;
-        return "http://learnwithinq.com/adminpanel/rest/uploads/" + input;
+        return "http://localhost/rest/rest/uploads/" + input;
+      //  return "http://learnwithinq.com/adminpanel/rest/uploads/" + input;
 
     };
 
@@ -130,7 +130,23 @@ inq.directive('ngEnter', function () {
         });
     };
 });
+inq.filter('percenttograde', function () {
+    return function (percent) {
+        if(percent){
+            if(percent>=75)
+            return 'O';
+            else if(percent>=60)
+            return 'A';
+            else if(percent>=49)
+            return 'B';
+            else if(percent>=39)
+            return 'C';
+            else
+            return 'D';
 
+        }
+    };
+});
 inq.filter('letterFromCode', function () {
     return function (input) {
         var code = input % 26;

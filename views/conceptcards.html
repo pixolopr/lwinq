@@ -1,4 +1,4 @@
-<div class="">
+<div class="" >
 
   <div class="textcenter concept-name">
     <h1 class="truncate">{{conceptdata.name}}</h1>
@@ -34,10 +34,10 @@
           <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-if="!card.editmode && card.user_id==0">
           </div>
           <div class="custom-card-wrapper" ng-if="card.user_id!=0">
-              <div class="textcenter" ng-if="card.image&&!card.editmode">
-                    <img class="img" height="50%" width="100%"  ng-src="{{card.image | imagepath}}">
-              </div>
-           
+            <div class="textcenter" ng-if="card.image&&!card.editmode">
+              <img class="img" height="50%" width="100%" ng-src="{{card.image | imagepath}}">
+            </div>
+
             <div class="scrollbar conceptcontent" id="carddata" ng-bind="card.conceptdata" ng-if="!card.editmode">
             </div>
 
@@ -45,14 +45,15 @@
             <div class="custom-card textcenter scrollbar conceptcontent" ng-if="card.editmode">
               {{card.conceptdata.length}} out of 500 letters
               <input type='file' file-model="card.image" ng-if="!card.image" id="uploadimg{{$index}}" on-change-event="uploadfile()" />
-              
-              <img class="img" id="image{{$index}}" />
-
+             <div ng-if="card.image">
+              <i class="material-icons right" style="color:#f44336" ng-click="removeimage($index)">cancel</i>
+              <img class="img" id="image{{$index}}" ng-src="{{card.image|imagepath}}" />
+            </div>
 
               <textarea ng-model="card.conceptdata" ng-change="checklength()"></textarea>
             </div>
             <div class="row edit-buttons-row" ng-class="{'edit-mode': card.editmode, 'save-mode': !card.editmode}" ng-if="card.user_id==user.id">
-              <div class="col s4 m4">CANCEL</div>
+              <div class="col s4 m4" ng-click="cancelcustomcard($index)">CANCEL</div>
               <!-- <div class="col s4 m4">SHARE</div>-->
               <div class="col s4 m4 save-edit-button" ng-click="savecustomusercard()" ng-if="card.editmode">SAVE</div>
               <div class="col s4 m4 save-edit-button" ng-click="editcustomusercard()" ng-if="!card.editmode">EDIT</div>

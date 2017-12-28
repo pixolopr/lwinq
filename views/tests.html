@@ -161,7 +161,7 @@
             <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
         </div>
         <div class="row textcenter">
-            <button class="btn rounded-button waves-effect waves-light report-modal-submit-button resume-button" href="#!">RESUME TEST</button>
+            <button class="btn rounded-button waves-effect waves-light report-modal-submit-button resume-button" ng-click="resumetimer('#end-modal')" href="#!">RESUME TEST</button>
         </div>
         <div class="row">
             <h6 class="textcenter sure-text">Are you sure you wan to submit your test ?</h6>
