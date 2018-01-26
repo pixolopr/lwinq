@@ -164,10 +164,9 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
     TemplateService.content = "views/conceptcards.html";
     $scope.conceptid = $routeParams.conceptid;
     $scope.zindexarray = [];
-    var nextconcept;
+    $scope.glossary = [];
+    $scope.otheruserscard = false;
     $scope.uploadfile = function () {
-
-
       var formdata = new FormData();
 
       formdata.append('file', $scope.conceptcards[$scope.cardindex].image);
@@ -181,12 +180,48 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
     };
 
     $(document).keyup(function (e) {
-      if (e.keyCode == 39) 
+      if (e.keyCode == 39 && $scope.zindexarray[$scope.conceptcards.length - 1] != $scope.conceptcards.length)
         $scope.changecardindex(1);
-      else if (e.keyCode == 37) 
+      else if (e.keyCode == 37 && $scope.zindexarray[0] != $scope.conceptcards.length)
         $scope.changecardindex(-1);
-      
+
     });
+
+    // CHANGE STAR STATUS OF CARDS
+    changestarstatussuccess = function (response) {
+      $scope.conceptcards[$scope.cardindex].starred = $scope.conceptcards[$scope.cardindex].starred == 1 ? 0 : 1;
+    };
+    changestarstatuserror = function (response) {
+      console.log('Can not change status !');
+    };
+    $scope.changestarstatus = function () {
+      console.log($scope.cardindex);
+      console.log($scope.conceptcards[$scope.cardindex]);
+      if ($scope.conceptcards[$scope.cardindex].id) {
+        if ($scope.conceptcards[$scope.cardindex].starred == 1)
+          NavigationService.removestar($scope.conceptcards[$scope.cardindex].id, $.jStorage.get("user").id).then(changestarstatussuccess, changestarstatuserror);
+        else
+          NavigationService.addstar($scope.conceptcards[$scope.cardindex].id, $.jStorage.get("user").id).then(changestarstatussuccess, changestarstatuserror);
+      }
+    };
+    //GET OTHER USERS CARD
+    getotheruserscards = function () {
+      $scope.otheruserscard = true;
+      NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "others").then(getcardsuccess, getcarderror);
+    };
+
+    //CHANGE SHARE STATUS OF CARDS
+    $scope.changesharestatus = function (cardid) {
+      if (cardid)
+        NavigationService.changesharestatus(cardid).success(function (response) {
+          if (response)
+            $scope.conceptcards[$scope.cardindex].shared = $scope.conceptcards[$scope.cardindex].shared == 1 ? 0 : 1;
+          console.log(response);
+        });
+      else
+        $scope.conceptcards[$scope.cardindex].shared = $scope.conceptcards[$scope.cardindex].shared == 1 ? 0 : 1;
+
+    };
 
     $scope.removeimage = function (index) {
       NavigationService.removeimage($scope.conceptcards[index].image).success(function (response) {
@@ -237,23 +272,28 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
     /*SET NAVIGATION END*/
 
 
-
-
     /* Get cards Data */
     var getcardsuccess = function (response) {
 
       console.log(response.data);
       $scope.conceptcards = response.data.cards;
-      var nextconcept=response.data.next_concept[0];
+      $scope.nextconcept = response.data.next_concept[0];
 
 
-      if (response.data.cards.length > 0) { // if there is atleast 1 conceptcard then set cardindex to 0
+      if (response.data.cards.length > 0 || $scope.otheruserscard) { // if there is atleast 1 conceptcard then set cardindex to 0
+        console.log('pushing card');
+
+        $scope.conceptcards.push({
+          user_id: 0,
+          conceptdata: '<div style="text-align: center;"><img src="http://localhost/rest/rest/uploads/completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%">' + (!$scope.otheruserscard ? '<button onclick="getotheruserscards()" class="row btn waves-effect waves-light cyan">Other Users Cards</button>' : '') + '<button ng-click="gotopractisepage()" class="row btn waves-effect waves-light cyan">Practise Cards</button>' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '</div>'
+        });
         $scope.cardindex = 0;
         readcardbyuserid(0);
         //$scope.changecardindex(1);
       }
 
       _.forEach($scope.conceptcards, function (value, key) {
+        console.log($scope.conceptcards.length);
         if (value.user_id == 0) {
           value.conceptdata = $sce.trustAsHtml(value.conceptdata);
         }
@@ -281,7 +321,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
     };
 
     /*function*/
-    NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id,"inq").then(getcardsuccess, getcarderror);
+    NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "inq").then(getcardsuccess, getcarderror);
 
     var readcardbyuserid = function (cid) {
       console.log('i m in readcard function');
@@ -410,7 +450,17 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
 
     };
+    var getindex = function (glossary) {
+      return glossary.word == text;
+    }
+    var text = "";
+    $scope.getselectedtext = function () {
 
+      if (window.getSelection) {
+        text = window.getSelection().toString();
+        var index = $scope.glossary.findIndex(getindex);
+      }
+    };
 
     $scope.addcustomusercard = function () {
       console.log($scope.cardindex);
@@ -421,7 +471,8 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         conceptdata: "You Can Create You Own Notes Here",
         editmode: true,
         concept_id: $scope.conceptid,
-        id: 0
+        id: 0,
+        shared: 0
       });
 
       $scope.zindexarray.splice($scope.cardindex + 1, 0, $("#card" + $scope.cardindex).zIndex());
@@ -432,14 +483,11 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
       $scope.changecardindex(1);
       console.log($scope.cardindex);
     };
-    $scope.cancelcustomcard=function(index){
-        $scope.conceptcards.splice(index, 1);
-        $scope.zindexarray.splice(index , 1);
-        $scope.zindexarray[index] = $scope.conceptcards.length;
-        $scope.changecardindex(-1);
-      
-       
-      
+    $scope.cancelcustomcard = function (index) {
+      $scope.conceptcards.splice(index, 1);
+      $scope.zindexarray.splice(index, 1);
+      $scope.zindexarray[index] = $scope.conceptcards.length;
+      $scope.changecardindex(-1);
     }
 
     var savecustomcardserror = function (response) {
@@ -494,6 +542,11 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
     $scope.number_of_pauses = 3;
     $scope.attempted_count = 0;
 
+
+    $(document).on("click", ".modal-overlay", function () {
+      $scope.resumetimer('#end-modal');
+    });
+
     //STYLING
     $interval(function () {
 
@@ -514,14 +567,16 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
 
     /*Open Modal - ERROR REPORT OR DOUBT*/
     $scope.openmodal = function (modalname) {
+      $scope.starttimer=false;
       if (modalname == "#end-modal") {
+        $(modalname).modal('open');
         if ($scope.number_of_pauses > 0) {
-        $interval.cancel(timer_interval);
+          $interval.cancel(timer_interval);
           $scope.get_count_of_attempted_questions();
-          $(modalname).modal('open');
+          $scope.starttimer=true;
           $scope.number_of_pauses--;
-        };
-      };
+        }
+      }
       if (modalname == "#doubt-modal") {
         $(modalname).modal('open');
       };
@@ -530,6 +585,8 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
       };
 
     };
+
+
 
     $scope.get_count_of_attempted_questions = function () {
       $scope.attempted_count = 0;
@@ -732,25 +789,25 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
       minutes: 20,
       seconds: 0
     };
-    var timer=function () {
-        if( $scope.countdown.minutes==20){
+    var timer = function () {
+      if ($scope.countdown.minutes == 20) {
         $scope.countdown.minutes--;
         $scope.countdown.seconds = 59;
-        }
-           timer_interval = $interval(function () {
-          if ($scope.countdown.seconds > 0) {
-            $scope.countdown.seconds--;
-            if ($scope.countdown.seconds == 0) {
-              $scope.countdown.minutes--;
-              if ($scope.countdown.minutes == 0) {
-                $interval.cancel(timer_interval);
-              }
-            }
-          } else {
-            $scope.countdown.seconds = 59;
-          };
-        }, 1000);
       }
+      timer_interval = $interval(function () {
+        if ($scope.countdown.seconds > 0) {
+          $scope.countdown.seconds--;
+          if ($scope.countdown.seconds == 0) {
+            $scope.countdown.minutes--;
+            if ($scope.countdown.minutes == 0) {
+              $interval.cancel(timer_interval);
+            }
+          }
+        } else {
+          $scope.countdown.seconds = 59;
+        };
+      }, 1000);
+    }
     var timer_interval;
     $interval(timer, 1000, 1);
 
@@ -779,11 +836,11 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
       };
     };
     /* Resume timer on button clicked */
-    $scope.resumetimer=function(modalname){
-      
-        $interval(timer,10,1);
-        $(modalname).modal('close');
-       
+    $scope.resumetimer = function (modalname) {
+      if($scope.starttimer)
+      $interval(timer, 10, 1);
+      $(modalname).modal('close');
+
     }
 
     /*STORE TEST ON SUBMIT*/

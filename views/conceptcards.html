@@ -1,4 +1,4 @@
-<div class="" >
+<div class="">
 
   <div class="textcenter concept-name">
     <h1 class="truncate">{{conceptdata.name}}</h1>
@@ -6,7 +6,7 @@
   <div class="row card-row">
     <div class="col s12 m2 l2 textcenter">
 
-      <div class="card-arrow-desktop">
+      <div class="card-arrow-desktop" ng-hide="(zindexarray[0]==conceptcards.length || conceptcards.length==1)">
         <div class="" ng-click="changecardindex(-1)" id="nav-prev">
           <i class="material-icons card-arrow-desktop">navigate_before</i>
         </div>
@@ -17,21 +17,22 @@
 
       <div class="cardbox">
         <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" ng-style="{ 'z-index':zindexarray[$index] }">
-          <div class="concepthead">
+          <div class="concepthead" ng-if="$index!=conceptcards.length-1">
             <div class="row conceptheadcentralize">
               <div class="col s4"></div>
               <div class="col s4 truncate textcenter">
                 <h5 class="card-number">
-                  {{$index+1}}/{{conceptcards.length}}
+                  {{$index+1}}/{{conceptcards.length-1}}
                 </h5>
               </div>
-              <div class="col s4">
-                <i class="icon-star-o concepticon"></i>
+              <div class="col s5">
+                <i class="material-icons concepticon" ng-if="card.user_id!=0 && !otheruserscard" ng-click="changesharestatus(card.id)">{{card.shared==1?'lock_open':'lock_outline'}}</i>
+                <i class="material-icons concepticon" ng-click="changestarstatus(card.id)" ng-style="{color:(card.starred==1)?'#ffeb3b ':''}">{{card.starred==1?'star':'star_border'}}</i>
                 <i class="material-icons concepticon" ng-click="addcustomusercard()" ng-hide="conceptcards[$index].editmode">add</i>
               </div>
             </div>
           </div>
-          <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-if="!card.editmode && card.user_id==0">
+          <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-dblclick="getselectedtext()" ng-if="!card.editmode && card.user_id==0">
           </div>
           <div class="custom-card-wrapper" ng-if="card.user_id!=0">
             <div class="textcenter" ng-if="card.image&&!card.editmode">
@@ -42,13 +43,15 @@
             </div>
 
 
+
+
             <div class="custom-card textcenter scrollbar conceptcontent" ng-if="card.editmode">
               {{card.conceptdata.length}} out of 500 letters
               <input type='file' file-model="card.image" ng-if="!card.image" id="uploadimg{{$index}}" on-change-event="uploadfile()" />
-             <div ng-if="card.image">
-              <i class="material-icons right" style="color:#f44336" ng-click="removeimage($index)">cancel</i>
-              <img class="img" id="image{{$index}}" ng-src="{{card.image|imagepath}}" />
-            </div>
+              <div ng-if="card.image">
+                <i class="material-icons right" style="color:#f44336" ng-click="removeimage($index)">cancel</i>
+                <img class="img" id="image{{$index}}" ng-src="{{card.image|imagepath}}" />
+              </div>
 
               <textarea ng-model="card.conceptdata" ng-change="checklength()"></textarea>
             </div>
@@ -60,13 +63,14 @@
               <div class="col s4 m4" ng-click="deletecustomusercard">DELETE</div>
             </div>
           </div>
+          <!-- <div  ></div> -->
         </div>
       </div>
 
     </div>
     <div class="col s12 m2 l2 textcenter">
 
-      <div class="card-arrow-desktop">
+      <div class="card-arrow-desktop" ng-hide="(zindexarray[conceptcards.length-1]==conceptcards.length || conceptcards.length==1)">
         <div class="" ng-click="changecardindex(1)" id="nav-next">
           <i class="material-icons">navigate_next</i>
         </div>
