@@ -1,11 +1,13 @@
 <div class="wrapper">
+   
     <div class="row dashboard-outer-div">
         <div class="dashboard-div">
-
+            
             <div>
                 <!--SUBJECT TABS-->
                 <ul id="tabs-swipe-demo" class="tabs dashboard-tabs-div">
-                    <li class="tab col s3" ng-repeat="subject in dashboardData"><a ng-class="{active: !$index}" href="#subject-swipe-{{$index+1}}">{{subject.name}}</a></li>
+                    <li class="tab col s3" ng-repeat="subject in dashboardData"><a ng-class="{active: !$index}" href="#subject-swipe-{{$index+1}}">{{subject.name}}</a>
+                    </li>
                 </ul>
             </div>
             <div id="{{'subject-swipe-'+($index+1)}}" class="col s12 dashboard-data-div" ng-repeat="subject in dashboardData">
@@ -33,7 +35,8 @@
                                                 </div>
                                                 <div class="row margin0 chapter-footer">
                                                     <div class="col l4 m4 s4">
-                                                        <p class="margin0 left"><a>Test Results</a></p>
+                                                        <p class="margin0 left"><a>Test Results</a>
+                                                        </p>
                                                     </div>
                                                     <div class="col l4 m4 s4 textcenter">
                                                         <p class="margin0">Test Score: 84%</p>
@@ -51,10 +54,12 @@
                                                         <p class="left">{{concept.name}}</p>
                                                     </div>
                                                     <div class="col l4 m4 s4 textcenter concept-stars">
-                                                        <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i></p>
+                                                        <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i>
+                                                        </p>
                                                     </div>
                                                     <div class="col l4 m4 s4 concept-cards-read">
-                                                        <p class="right">{{concept.readcards}}/{{concept.totalcards}} <i class="material-icons">sd_card</i></p>
+                                                        <p class="right">{{concept.readcards}}/{{concept.totalcards}} <i class="material-icons">sd_card</i>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +86,8 @@
                                                 </div>
                                                 <div class="row margin0 chapter-footer">
                                                     <div class="col l4 m4 s4">
-                                                        <p class="margin0 left"><a>Test Results</a></p>
+                                                        <p class="margin0 left"><a>Test Results</a>
+                                                        </p>
                                                     </div>
                                                     <div class="col l4 m4 s4 textcenter">
                                                         <p class="margin0">Test Score: 84%</p>
@@ -97,10 +103,12 @@
                                                         <p class="left">Optics and properties</p>
                                                     </div>
                                                     <div class="col l4 m4 s4 textcenter concept-stars">
-                                                        <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i></p>
+                                                        <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i>
+                                                        </p>
                                                     </div>
                                                     <div class="col l4 m4 s4 concept-cards-read">
-                                                        <p class="right">33/35 <i class="material-icons">sd_card</i></p>
+                                                        <p class="right">33/35 <i class="material-icons">sd_card</i>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,7 +136,8 @@
                                                 </div>
                                                 <div class="row margin0 chapter-footer">
                                                     <div class="col l4 m4 s4">
-                                                        <p class="margin0 left"><a>Test Results</a></p>
+                                                        <p class="margin0 left"><a>Test Results</a>
+                                                        </p>
                                                     </div>
                                                     <div class="col l4 m4 s4 textcenter">
                                                         <p class="margin0">Test Score: 84%</p>
@@ -144,10 +153,12 @@
                                                         <p class="left">Optics and properties</p>
                                                     </div>
                                                     <div class="col l4 m4 s4 textcenter concept-stars">
-                                                        <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i></p>
+                                                        <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i>
+                                                        </p>
                                                     </div>
                                                     <div class="col l4 m4 s4 concept-cards-read">
-                                                        <p class="right">33/35 <i class="material-icons">sd_card</i></p>
+                                                        <p class="right">33/35 <i class="material-icons">sd_card</i>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>

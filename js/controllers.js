@@ -1,9 +1,9 @@
 var inqcontroller = angular.module('inqcontroller', ['templateservicemod', 'navigationservice']);
 
 // var adminurl = "http://localhost/rest/rest/index.php/";
-var imageurl = "http://localhost/rest/rest/uploads/";
+// var imageurl = "http://localhost/rest/rest/uploads/";
 var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
-//var imageurl = "http://learnwithinq.com/adminpanel/rest/uploads/";
+var imageurl = "http://learnwithinq.com/adminpanel/rest/uploads/";
 
 var usertypes = [{
     id: 1,
@@ -285,7 +285,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
         $scope.conceptcards.push({
           user_id: 0,
-          conceptdata: '<div style="text-align: center;"><img src="http://localhost/rest/rest/uploads/completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%">' + (!$scope.otheruserscard ? '<button onclick="getotheruserscards()" class="row btn waves-effect waves-light cyan">Other Users Cards</button>' : '') + '<button ng-click="gotopractisepage()" class="row btn waves-effect waves-light cyan">Practise Cards</button>' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '</div>'
+          conceptdata: '<div style="text-align: center;"><img src="'+imageurl+'completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%">' + (!$scope.otheruserscard ? '<button onclick="getotheruserscards()" class="row btn waves-effect waves-light cyan">Other Users Cards</button>' : '') + '<button ng-click="gotopractisepage()" class="row btn waves-effect waves-light cyan">Practise Cards</button>' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '</div>'
         });
         $scope.cardindex = 0;
         readcardbyuserid(0);
@@ -831,9 +831,9 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
     $scope.optionselected = function (ind) {
       $scope.test_questions_array[$scope.test_question_number].answergiven = $scope.test_questions_array[$scope.test_question_number].optionsorder[ind];
       console.log($scope.test_questions_array);
-      if ($scope.test_question_number < 20) {
+     /* if ($scope.test_question_number < 20) {
         $scope.change_question(1);
-      };
+      };*/
     };
     /* Resume timer on button clicked */
     $scope.resumetimer = function (modalname) {

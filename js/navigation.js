@@ -3,11 +3,11 @@ var navigationservice = angular.module('navigationservice', [])
   .factory('NavigationService', function ($http) {
 
     //MACBOOK AND HOME LAPTOP
-    var adminurl = "http://localhost/rest/rest/index.php/";
+     var adminurl = "http://localhost/rest/rest/index.php/";
     //PC
     //var adminurl = "http://localhost/inqrest/rest/index.php/";
     //SERVER
-    // var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+//    var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
     //HOME LAPTOP
 
     var navigation = [{
@@ -167,7 +167,7 @@ var navigationservice = angular.module('navigationservice', [])
       },
       getimagename: function (file) {
         return $http({
-          url: 'http://localhost/rest/rest/index.php/images/returnimagename',
+          url: adminurl+'images/returnimagename',
           method: "POST",
           headers: {
             'Content-Type': undefined,
@@ -186,7 +186,7 @@ var navigationservice = angular.module('navigationservice', [])
       },
       removeimage: function (imagename) {
         return $http({
-          url: 'http://localhost/rest/rest/index.php/images/removeimage',
+          url: adminurl+'images/removeimage',
           method: "GET",
           params: {
             'imagename': imagename
