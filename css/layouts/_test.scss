@@ -164,12 +164,12 @@
                 background-color: whitesmoke;
             }
         }
-        .selected-option{
+        .selected-option {
             background: $primary-color;
-            .optionsr{
+            .optionsr {
                 color: white !important;
             }
-            .test-options-answer-div{
+            .test-options-answer-div {
                 color: white !important;
             }
         }
@@ -334,6 +334,7 @@
     }
     &:focus {
         background-color: $primary-dark !important;
+
     }
 }
 
@@ -423,5 +424,3 @@
         border-color: rgba(37, 36, 36, 0.9) transparent transparent transparent;
     }
 }
-
-

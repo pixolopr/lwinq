@@ -528,21 +528,60 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
   }
 ]);
-
-inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
-  function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
-
+inqcontroller.controller('commontestsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location', '$routeParams', '$controller',
+  function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location, $routeParams, $controller) {
+        
+       
+       $routeParams.controllername=='tests'?$controller('testsCtrl', {
+            $scope: $scope
+        }):$controller('reviewsCtrl', {
+            $scope: $scope
+        });
         $scope.title = "Tests";
         $scope.template = TemplateService;
         $rootScope.fullpageview = true;
         TemplateService.content = "views/tests.html";
+console.log('common ctrl');
+//      common functions
+      $scope.change_question = function (ind) {
+            if (ind == 1 || ind == -1) {
+                $scope.test_question_number += ind;
+            } else {
+                $scope.test_question_number = ind;
+            };
+        };
+        
+  }]);
+inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
+  function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
+      $scope.test_question_number=0;
+      gettestdatabyidsuccess=function(response){
+         
+          $rootScope.test_questions_array=response.data.giventestdata;
+          $rootScope.test_questions=response.data.questions;
+          console.log($rootScope.test_questions_array);
+          console.log($rootScope.test_questions);
+      };
+      gettestdatabyiderror=function(error){
+          console.log(error);
+      }
+     NavigationService.gettestdatabyid().then(gettestdatabyidsuccess,gettestdatabyiderror);
+  }]);
+
+inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
+  function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
+
+        /*$scope.title = "Tests";
+        $scope.template = TemplateService;
+        $rootScope.fullpageview = true;
+        TemplateService.content = "views/tests.html";*/
 
         //INITIALIZATIONS
         $rootScope.test_questions_array = []; //USED to store data of test answers and options order
         $scope.number_of_pauses = 3;
         $scope.attempted_count = 0;
 
-
+        console.log('tests ctrl called');
         $(document).on("click", ".modal-overlay", function () {
             $scope.resumetimer('#end-modal');
         });
@@ -821,13 +860,13 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
         /* DISPLAY TEST FUNCTIONALITIES */
         $scope.test_question_number = 0;
 
-        $scope.change_question = function (ind) {
+        /*$scope.change_question = function (ind) {
             if (ind == 1 || ind == -1) {
                 $scope.test_question_number += ind;
             } else {
                 $scope.test_question_number = ind;
             };
-        };
+        };*/
 
         /*SCORING*/
         $scope.optionselected = function (ind) {
@@ -847,6 +886,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
 
         /*STORE TEST ON SUBMIT*/
         $scope.submittest = function () {
+            $('#end-modal').modal('close');
             var store_test_detailssuccess = function (response) {
                 console.log(response.data);
                 if (response.data == "true") {
@@ -865,11 +905,11 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
 
             $rootScope.navigationfunction = NavigationService.store_test_details($.jStorage.get("user").id, $rootScope.chaptersarray, "chapter", $rootScope.test_questions_array);
             $location.path("/testresults");
-            console.log($rootScope.navigationfunction);
+            //            console.log($rootScope.navigationfunction);
         };
 
-        //.then(store_test_detailssuccess, store_test_detailserror);
-        // routing
+        //        .then(store_test_detailssuccess, store_test_detailserror);
+        //         routing
 
   }
 ]);
@@ -950,15 +990,15 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
         };
         $scope.gototest = function () {
             $rootScope.chaptersarray = $scope.chapterid;
-            $location.path('/tests');
+            $location.path('/tests/tests');
         };
 
   }
 ]);
 
-inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope',
-  function ($scope, TemplateService, NavigationService, $rootScope) {
-
+inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope','$location',
+  function ($scope, TemplateService, NavigationService, $rootScope,$location) {
+        //INITIALIZATIONS
         $scope.title = "testresults";
         $scope.template = TemplateService;
         TemplateService.content = "views/testresults.html";
@@ -967,12 +1007,10 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
         $scope.testresult = {};
         $scope.testresult.score = 0;
         $scope.testresult.unanswered = 0;
-        $scope.testresult.totalmarks = $rootScope.test_questions_array.length;
-
         console.log($rootScope.test_questions_array);
 
         for (var index in $rootScope.test_questions_array) {
-            console.log($rootScope.test_questions_array[index]);
+            console.log($rootScope.test_questions_array[index].answergiven);
             if ($rootScope.test_questions_array[index].answergiven == 1) {
                 $scope.testresult.score += 1;
             }
@@ -980,13 +1018,25 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
                 $scope.testresult.unanswered += 1;
             }
         }
+        if ($rootScope.navigationfunction) {
 
-        $rootScope.navigationfunction.success(function (response) {
-            console.log('storetestdetails success');
-        });
-        //INITIALIZATIONS
+            $scope.testresult.totalmarks = $rootScope.test_questions_array.length;
+
+            $rootScope.navigationfunction.success(function (response) {
+                console.log('storetestdetails success');
+            });
+        } else {
+            window.history.go(-2)
+        }
+
+
+
+
 
         /*function*/
+        $scope.gettestreview = function () {
+            $location.path('/tests/review');
+        }
 
         // routing
 

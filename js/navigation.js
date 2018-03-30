@@ -226,7 +226,16 @@ var navigationservice = angular.module('navigationservice', [])
             }
           });
 
-      }
+      },
+        gettestdatabyid:function(){
+            return $http({
+            url: adminurl+'tests/gettestreviewdata',
+            method: "GET",
+            params: {
+              test_id:92
+            }
+          });
+        },
 
 
     }

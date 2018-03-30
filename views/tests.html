@@ -1,10 +1,13 @@
+
+<div class="row">
+
 <div class="row" >
     <div class="col l12 m12 s12">
         <div class="row margin0">
             <div class="col l4 m4 s4">
             </div>
             <div class="col l4 m12 s12 textcenter">
-                <div class="test-time-div">
+                <div class="test-time-div" ng-show="countdown">
                     <i class="icon-hourglass test-time-icon"></i>
                     <h3 class="test-time-text textcenter">{{countdown.minutes}}:{{countdown.seconds}}</h3>
                 </div>
@@ -63,7 +66,7 @@
                 <button class="waves-effect waves-light btn test-bottom-button" ng-click="change_question(-1)" ng-disabled="test_question_number == 0"><i class="icon-left-open-big left"></i>Previous</button>
             </div>
             <div class="col l4 m4 s4 textcenter">
-                <button class="waves-effect waves-light btn test-bottom-button" ng-click="openmodal('#end-modal')">Pause/End</button>
+                <button class="waves-effect waves-light btn test-bottom-button" ng-click="openmodal('#end-modal')" ng-show="countdown">Pause/End</button>
             </div>
             <div class="col l4 m4 s4 textcenter">
                 <button class="waves-effect waves-light btn test-bottom-button" ng-click="change_question(1)" ng-disabled="test_question_number =='19'"><i class="icon-right-open-big right"></i>Next</button>
