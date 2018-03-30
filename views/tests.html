@@ -41,7 +41,7 @@
 
                 <!--ANSWER DIVISION-->
                 <div class="col l12 m12 s12 test-card-content-answers-div">
-                    <div class="row optiondiv" ng-repeat="option in test_questions[test_question_number].options" style="position: relative;" ng-class="{'noborder':$index==3, 'selected-option':test_questions_array[test_question_number].optionsorder.indexOf(test_questions_array[test_question_number].answergiven) == ($index)}">
+                    <div class="row optiondiv" ng-repeat="option in test_questions[test_question_number].options" style="position: relative;" ng-class="{'noborder':$index==3, 'selected-option':$root.test_questions_array[test_question_number].optionsorder.indexOf($root.test_questions_array[test_question_number].answergiven) == ($index)}">
 
                         <div class="col optionsr optioninnerpadding l1 m1 s1 " style="height: 100%;
     position: absolute;line-height: 100%;">

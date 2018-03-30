@@ -11,7 +11,7 @@
                 </div>
                 <div class="scoretext">You scored
                 </div>
-                <div class="score animated zoomIn "><b>9/20</b>
+                <div class="score animated zoomIn "><b>{{testresult.score}}/{{testresult.totalmarks}}</b>
                 </div>
             </div>
             <div class="col  l4 hidediv">
@@ -27,17 +27,17 @@
                 <div class="col s4 l4">
                     <div class="sortedbox">
                         <i class="material-icons faceicon animated jello">tag_faces</i><span class="resulthead">Correct</span>
-                        <br><span class="resultscore">8</span> </div>
+                        <br><span class="resultscore">{{testresult.score}}</span> </div>
                 </div>
                 <div class="col s4 l4">
                     <div class="sortedbox">
                         <i class="material-icons faceicon animated jello">tag_faces</i><span class="resulthead">Incorrect</span>
-                        <br><span class="resultscore">8</span></div>
+                        <br><span class="resultscore">{{testresult.totalmarks-testresult.score-testresult.unanswered}}</span></div>
                 </div>
                 <div class="col s4 l4">
                     <div class="sortedbox">
                         <i class="material-icons faceicon animated jello">tag_faces</i><span class="resulthead">Unanswered</span>
-                        <br><span class="resultscore">8</span></div>
+                        <br><span class="resultscore">{{testresult.unanswered}}</span></div>
                 </div>
             </div>
 

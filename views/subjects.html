@@ -16,7 +16,7 @@
 
                 <div class="col s12 m6 l4 xl4 subbox" ng-repeat='s in subjects' ng-click='gotochapters(s.id)'>
                     <div class="subbox2 z-depth-2">
-                        <img src="{{s.image | imagepath}}" class="subicons">
+                        <!-- <span ng-bind-html="s.image"></span>-->
                         <div class="sublist">{{ s.name | uppercase}}
                         </div>
 

@@ -155,7 +155,7 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       store_test_details: function (userid, chaptersarray, type, testdetails) {
-        console.log(testdetails);
+        console.log(chaptersarray);
         return $http.get(adminurl + 'tests/storetestdetails', {
           params: {
             testtype: type,
