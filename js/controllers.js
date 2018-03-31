@@ -530,42 +530,55 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 ]);
 inqcontroller.controller('commontestsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location', '$routeParams', '$controller',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location, $routeParams, $controller) {
-        
-       
-       $routeParams.controllername=='tests'?$controller('testsCtrl', {
+
+
+        $routeParams.controllername == 'tests' ? $controller('testsCtrl', {
             $scope: $scope
-        }):$controller('reviewsCtrl', {
+        }) : $controller('reviewsCtrl', {
             $scope: $scope
         });
         $scope.title = "Tests";
         $scope.template = TemplateService;
         $rootScope.fullpageview = true;
         TemplateService.content = "views/tests.html";
-console.log('common ctrl');
-//      common functions
-      $scope.change_question = function (ind) {
+        console.log('common ctrl');
+        //      common functions
+        $scope.change_question = function (ind) {
             if (ind == 1 || ind == -1) {
                 $scope.test_question_number += ind;
             } else {
                 $scope.test_question_number = ind;
             };
         };
-        
+
   }]);
 inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
-      $scope.test_question_number=0;
-      gettestdatabyidsuccess=function(response){
-         
-          $rootScope.test_questions_array=response.data.giventestdata;
-          $rootScope.test_questions=response.data.questions;
-          console.log($rootScope.test_questions_array);
-          console.log($rootScope.test_questions);
-      };
-      gettestdatabyiderror=function(error){
-          console.log(error);
-      }
-     NavigationService.gettestdatabyid().then(gettestdatabyidsuccess,gettestdatabyiderror);
+        //      INTIALIZATION
+
+        $scope.test_question_number = 0;
+        $scope.showcorrectanswertouser = true;
+
+
+        //      COLLAPSIBLE INITIALIZATION
+        $('.collapsible').collapsible();
+      
+      
+        gettestdatabyidsuccess = function (response) {
+
+            $rootScope.test_questions_array = response.data.giventestdata;
+            $rootScope.test_questions = response.data.questions;
+            for (var index in $rootScope.test_questions_array) {
+                $rootScope.test_questions_array[index].optionsorder = $rootScope.test_questions_array[index].optionsorder.split(',')
+            }
+            console.log($rootScope.test_questions_array);
+            console.log($rootScope.test_questions);
+            console.log($rootScope.test_questions_array[$scope.test_question_number].answergiven);
+        };
+        gettestdatabyiderror = function (error) {
+            console.log(error);
+        }
+        NavigationService.gettestdatabyid().then(gettestdatabyidsuccess, gettestdatabyiderror);
   }]);
 
 inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
@@ -996,8 +1009,8 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
   }
 ]);
 
-inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope','$location',
-  function ($scope, TemplateService, NavigationService, $rootScope,$location) {
+inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$location',
+  function ($scope, TemplateService, NavigationService, $rootScope, $location) {
         //INITIALIZATIONS
         $scope.title = "testresults";
         $scope.template = TemplateService;
@@ -1023,7 +1036,8 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
             $scope.testresult.totalmarks = $rootScope.test_questions_array.length;
 
             $rootScope.navigationfunction.success(function (response) {
-                console.log('storetestdetails success');
+                console.log(response);
+                $.jStorage.set('testid',response);
             });
         } else {
             window.history.go(-2)

@@ -232,7 +232,7 @@ var navigationservice = angular.module('navigationservice', [])
             url: adminurl+'tests/gettestreviewdata',
             method: "GET",
             params: {
-              test_id:92
+              test_id: $.jStorage.get('testid')
             }
           });
         },

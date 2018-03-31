@@ -1,177 +1,179 @@
-
 <div class="row">
 
-<div class="row" >
-    <div class="col l12 m12 s12">
-        <div class="row margin0">
-            <div class="col l4 m4 s4">
-            </div>
-            <div class="col l4 m12 s12 textcenter">
-                <div class="test-time-div" ng-show="countdown">
-                    <i class="icon-hourglass test-time-icon"></i>
-                    <h3 class="test-time-text textcenter">{{countdown.minutes}}:{{countdown.seconds}}</h3>
+    <div class="row">
+        <div class="col l12 m12 s12">
+            <div class="row margin0">
+                <div class="col l4 m4 s4">
+                </div>
+                <div class="col l4 m12 s12 textcenter">
+                    <div class="test-time-div" ng-show="countdown">
+                        <i class="icon-hourglass test-time-icon"></i>
+                        <h3 class="test-time-text textcenter">{{countdown.minutes}}:{{countdown.seconds}}</h3>
+                    </div>
+
+                </div>
+                <div class="col l4 m4 s4">
                 </div>
 
             </div>
-            <div class="col l4 m4 s4">
-            </div>
+            <div class="z-depth-2 test-card-div">
+                <div class="row test-card-header margin0">
 
-        </div>
-        <div class="z-depth-2 test-card-div">
-            <div class="row test-card-header margin0">
+                    <!--CARD HEADER LEFT PART-->
+                    <div class="col l6 m6 s6">
+                        <p class="text-card-header-number">#{{test_question_number+1}}</p>
+                        <p class="textcenter test-card-name">Light</p>
+                    </div>
 
-                <!--CARD HEADER LEFT PART-->
-                <div class="col l6 m6 s6">
-                    <p class="text-card-header-number">#{{test_question_number+1}}</p>
-                    <p class="textcenter test-card-name">Light</p>
+                    <!--RIGHT SIDE ICONS ON CARD-->
+                    <div class="col l6 m6 s6 test-card-header-icons-div">
+                        <i class="icon-bookmark-o test-card-icons tooltipped" data-position="top" data-delay="10" data-tooltip="Bookmark" ng-click="bookmarkquestion()"></i>
+                        <i class="icon-drawer-ask-a-questn test-card-icons tooltipped" data-position="top" data-delay="10" data-tooltip="Ask Doubt" ng-click="openmodal('#doubt-modal')"></i>
+                        <i class="icon-exclamation-triangle test-card-icons tooltipped" data-position="top" data-delay="10" data-tooltip="Report An Error" ng-click="openmodal('#report-modal')"></i>
+
+                    </div>
                 </div>
+                <div id="test-card-content" class="row test-card-content">
+                    <!--QUESTION DIVISON-->
+                    <div class="col l12 m12 s12 test-card-question-div">
+                        <h6 class="test-card-question">
+                            {{test_questions[test_question_number].question}}
+                        </h6>
+                    </div>
 
-                <!--RIGHT SIDE ICONS ON CARD-->
-                <div class="col l6 m6 s6 test-card-header-icons-div">
-                    <i class="icon-bookmark-o test-card-icons tooltipped" data-position="top" data-delay="10" data-tooltip="Bookmark" ng-click="bookmarkquestion()"></i>
-                    <i class="icon-drawer-ask-a-questn test-card-icons tooltipped" data-position="top" data-delay="10" data-tooltip="Ask Doubt" ng-click="openmodal('#doubt-modal')"></i>
-                    <i class="icon-exclamation-triangle test-card-icons tooltipped" data-position="top" data-delay="10" data-tooltip="Report An Error" ng-click="openmodal('#report-modal')"></i>
+                    <!--ANSWER DIVISION-->
+                    <div class="col l12 m12 s12 test-card-content-answers-div">
+                        <div class="row optiondiv" ng-repeat="option in test_questions[test_question_number].options" ng-click="showdetailedanswer=!showdetailedanswer" style="position: relative;" ng-class="{'noborder':$index==3, 'selected-option':($root.test_questions_array[test_question_number].optionsorder.indexOf($root.test_questions_array[test_question_number].answergiven) == ($index))&& !showcorrectanswertouser,'wrong-selection':showcorrectanswertouser && ($root.test_questions_array[test_question_number].optionsorder.indexOf($root.test_questions_array[test_question_number].answergiven) == ($index)) && ($root.test_questions_array[test_question_number].answergiven) !=1,'correct-answer detailed-answer':showcorrectanswertouser && test_questions[test_question_number].optionsorder[$index]==1}">
 
-                </div>
-            </div>
-            <div id="test-card-content" class="row test-card-content">
-                <!--QUESTION DIVISON-->
-                <div class="col l12 m12 s12 test-card-question-div">
-                    <h6 class="test-card-question">
-                        {{test_questions[test_question_number].question}}
-                    </h6>
-                </div>
-
-                <!--ANSWER DIVISION-->
-                <div class="col l12 m12 s12 test-card-content-answers-div">
-                    <div class="row optiondiv" ng-repeat="option in test_questions[test_question_number].options" style="position: relative;" ng-class="{'noborder':$index==3, 'selected-option':$root.test_questions_array[test_question_number].optionsorder.indexOf($root.test_questions_array[test_question_number].answergiven) == ($index)}">
-
-                        <div class="col optionsr optioninnerpadding l1 m1 s1 " style="height: 100%;
+                            <div class="col optionsr optioninnerpadding l1 m1 s1 " style="height: 100%;
     position: absolute;line-height: 100%;">
-                            {{$index | letterFromCode}}
+                                {{$index | letterFromCode}}
+                            </div>
+
+                            <div class="col optioninnerpadding l11 m11 s11 test-options-answer-div" style="margin-left: 8.333333%;" ng-click="optionselected($index)">
+                                {{option}}
+                            </div> 
+                            <div ng-if="showcorrectanswertouser && test_questions[test_question_number].optionsorder[$index]==1" class="hidden" ng-class="{'open':showdetailedanswer}">{{test_questions[test_question_number].answer}}</div>
                         </div>
 
-                        <div class="col optioninnerpadding l11 m11 s11 test-options-answer-div" style="margin-left: 8.333333%;" ng-click="optionselected($index)">
-                             {{option}}
-                        </div>
+
                     </div>
+
                 </div>
-
             </div>
-        </div>
 
-        <!--BOTTOM BUTTONS-->
-        <div class="row test-bottom-buttons-div">
-            <div class="col l4 m4 s4 textcenter">
-                <button class="waves-effect waves-light btn test-bottom-button" ng-click="change_question(-1)" ng-disabled="test_question_number == 0"><i class="icon-left-open-big left"></i>Previous</button>
-            </div>
-            <div class="col l4 m4 s4 textcenter">
-                <button class="waves-effect waves-light btn test-bottom-button" ng-click="openmodal('#end-modal')" ng-show="countdown">Pause/End</button>
-            </div>
-            <div class="col l4 m4 s4 textcenter">
-                <button class="waves-effect waves-light btn test-bottom-button" ng-click="change_question(1)" ng-disabled="test_question_number =='19'"><i class="icon-right-open-big right"></i>Next</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Report Error Modal Structure -->
-<div id="report-modal" class="modal report-modal">
-    <div class="report-modal-header">
-        <h5 class="report-modal-header-title">Report an Error on this Question</h5>
-    </div>
-    <div class="modal-content">
-        <div class="row">
-            <h6 class="error-report-modal-labels">YOUR EMAIL ADDRESS</h6>
-            <input type="email" class="error-report-email-input">
-            <h6 class="error-report-modal-labels">Describe the error</h6>
-            <textarea class="error-report-description-input"></textarea>
-        </div>
-    </div>
-    <div class="modal-footer textcenter">
-        <button class="btn rounded-button waves-effect waves-light report-modal-submit-button">Submit Report</button>
-    </div>
-</div>
-
-<!-- Ask A Doubt Modal Structure -->
-<div id="doubt-modal" class="modal doubt-modal">
-    <div class="doubt-modal-header">
-        <h5 class="doubt-modal-header-title">Doubts Ache Hai !</h5>
-    </div>
-    <div class="modal-content padding0">
-        <div class="row modal-content-row">
-
-            <div id="doubt-modal-doubts" class="doubts-modal-doubts">
-                <p class="other-doubts-title">Few others had doubts on this question, see if you can find your answer.</p>
-                <div ng-repeat="doubt in [1,2,3,4,5,6]" class="doubts-modal-doubt-div">
-                    <div class="row">
-                        <div class="col l2 m2 s2 textcenter">
-                            <img src="img/boy_1_profile.jpg" class="doubts-modal-profile-img">
-                        </div>
-                        <div class="col l10 m10 s10">
-                            <div class="row margin0">
-                                <p class="doubts-modal-user-name">Aegon Targaryen</p>
-                            </div>
-                            <div class="row margin0">
-                                <p class="doubts-modal-doubt-question margin0">Why this Kolaveri Di ? Why this Kolaveri Di ? Why this Kolaveri Di ? Why this Kolaveri Di ? Why this Kolaveri Di ?</p>
-                            </div>
-                            <div class="row margin0 doubts-modal-doubt-image-div">
-                                <img src="img/concept.png" class="doubts-modal-doubt-image" />
-                            </div>
-                        </div>
-                    </div>
+            <!--BOTTOM BUTTONS-->
+            <div class="row test-bottom-buttons-div">
+                <div class="col l4 m4 s4 textcenter">
+                    <button class="waves-effect waves-light btn test-bottom-button" ng-click="change_question(-1)" ng-disabled="test_question_number == 0"><i class="icon-left-open-big left"></i>Previous</button>
+                </div>
+                <div class="col l4 m4 s4 textcenter">
+                    <button class="waves-effect waves-light btn test-bottom-button" ng-click="openmodal('#end-modal')" ng-show="countdown">Pause/End</button>
+                </div>
+                <div class="col l4 m4 s4 textcenter">
+                    <button class="waves-effect waves-light btn test-bottom-button" ng-click="change_question(1)" ng-disabled="test_question_number =='19'"><i class="icon-right-open-big right"></i>Next</button>
                 </div>
             </div>
         </div>
-        <div class="row doubts-modal-post-doubt-section">
-            <h6 class="doubts-modal-labels">YOUR DOUBT</h6>
-            <textarea class="doubts-description-input"></textarea>
-        </div>
     </div>
-    <div class="modal-footer textcenter">
-        <button class="btn rounded-button waves-effect waves-light report-modal-submit-button">ASK DOUBT</button>
-    </div>
-</div>
 
-<!-- End Test Modal Structure -->
-<div id="end-modal" class="modal end-modal">
-    <div class="modal-content padding0">
-        <div class="row">
-            <div class="col l4 m4 s4">
-                <h6 class="textcenter attempted-text">TIME REMAINING</h6>
-                <h6 class="textcenter score-text" style="font-size: 30px;">{{countdown.minutes}}:{{countdown.seconds}}</h6>
-            </div>
-            <div class="col l4 m4 s4">
-                <h6 class="textcenter attempted-text">YOU HAVE ATTEMPTED</h6>
-                <h6 class="textcenter score-text">{{attempted_count}}/{{test_questions.length}}</h6>
-                <h6 class="textcenter questions-text">QUESTIONS</h6>
-            </div>
-            <div class="col l4 m4 s4">
-                <h6 class="textcenter attempted-text">PAUSES REMAINING</h6>
-                <h6 class="textcenter score-text" style="font-size: 30px;">{{number_of_pauses}}</h6>
-            </div>
 
+    <!-- Report Error Modal Structure -->
+    <div id="report-modal" class="modal report-modal">
+        <div class="report-modal-header">
+            <h5 class="report-modal-header-title">Report an Error on this Question</h5>
         </div>
-        <div class="row">
-            <div class="col offset-l1 offset-m1 offset-s1"></div>
-            <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
-            <div class="col offset-l1 offset-m1 offset-s1"></div>
-            <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
-            <div class="col offset-l1 offset-m1 offset-s1"></div>
-            <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
-            <div class="col offset-l1 offset-m1 offset-s1"></div>
-            <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+        <div class="modal-content">
+            <div class="row">
+                <h6 class="error-report-modal-labels">YOUR EMAIL ADDRESS</h6>
+                <input type="email" class="error-report-email-input">
+                <h6 class="error-report-modal-labels">Describe the error</h6>
+                <textarea class="error-report-description-input"></textarea>
+            </div>
         </div>
-        <div class="row textcenter">
-            <button class="btn rounded-button waves-effect waves-light report-modal-submit-button resume-button" ng-click="resumetimer('#end-modal')" href="#!">RESUME TEST</button>
-        </div>
-        <div class="row">
-            <h6 class="textcenter sure-text">Are you sure you wan to submit your test ?</h6>
-            <h6 class="textcenter counted-text">The marks in this test will be counted in your overall scores</h6>
+        <div class="modal-footer textcenter">
+            <button class="btn rounded-button waves-effect waves-light report-modal-submit-button">Submit Report</button>
         </div>
     </div>
-    <div class="modal-footer textcenter">
-        <button class="btn waves-effect waves-light end-modal-submit-button" ng-click="submittest()">SUBMIT TEST</button>
+
+    <!-- Ask A Doubt Modal Structure -->
+    <div id="doubt-modal" class="modal doubt-modal">
+        <div class="doubt-modal-header">
+            <h5 class="doubt-modal-header-title">Doubts Ache Hai !</h5>
+        </div>
+        <div class="modal-content padding0">
+            <div class="row modal-content-row">
+
+                <div id="doubt-modal-doubts" class="doubts-modal-doubts">
+                    <p class="other-doubts-title">Few others had doubts on this question, see if you can find your answer.</p>
+                    <div ng-repeat="doubt in [1,2,3,4,5,6]" class="doubts-modal-doubt-div">
+                        <div class="row">
+                            <div class="col l2 m2 s2 textcenter">
+                                <img src="img/boy_1_profile.jpg" class="doubts-modal-profile-img">
+                            </div>
+                            <div class="col l10 m10 s10">
+                                <div class="row margin0">
+                                    <p class="doubts-modal-user-name">Aegon Targaryen</p>
+                                </div>
+                                <div class="row margin0">
+                                    <p class="doubts-modal-doubt-question margin0">Why this Kolaveri Di ? Why this Kolaveri Di ? Why this Kolaveri Di ? Why this Kolaveri Di ? Why this Kolaveri Di ?</p>
+                                </div>
+                                <div class="row margin0 doubts-modal-doubt-image-div">
+                                    <img src="img/concept.png" class="doubts-modal-doubt-image" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row doubts-modal-post-doubt-section">
+                <h6 class="doubts-modal-labels">YOUR DOUBT</h6>
+                <textarea class="doubts-description-input"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer textcenter">
+            <button class="btn rounded-button waves-effect waves-light report-modal-submit-button">ASK DOUBT</button>
+        </div>
     </div>
-</div>
+
+    <!-- End Test Modal Structure -->
+    <div id="end-modal" class="modal end-modal">
+        <div class="modal-content padding0">
+            <div class="row">
+                <div class="col l4 m4 s4">
+                    <h6 class="textcenter attempted-text">TIME REMAINING</h6>
+                    <h6 class="textcenter score-text" style="font-size: 30px;">{{countdown.minutes}}:{{countdown.seconds}}</h6>
+                </div>
+                <div class="col l4 m4 s4">
+                    <h6 class="textcenter attempted-text">YOU HAVE ATTEMPTED</h6>
+                    <h6 class="textcenter score-text">{{attempted_count}}/{{test_questions.length}}</h6>
+                    <h6 class="textcenter questions-text">QUESTIONS</h6>
+                </div>
+                <div class="col l4 m4 s4">
+                    <h6 class="textcenter attempted-text">PAUSES REMAINING</h6>
+                    <h6 class="textcenter score-text" style="font-size: 30px;">{{number_of_pauses}}</h6>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col offset-l1 offset-m1 offset-s1"></div>
+                <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+                <div class="col offset-l1 offset-m1 offset-s1"></div>
+                <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+                <div class="col offset-l1 offset-m1 offset-s1"></div>
+                <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+                <div class="col offset-l1 offset-m1 offset-s1"></div>
+                <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+            </div>
+            <div class="row textcenter">
+                <button class="btn rounded-button waves-effect waves-light report-modal-submit-button resume-button" ng-click="resumetimer('#end-modal')" href="#!">RESUME TEST</button>
+            </div>
+            <div class="row">
+                <h6 class="textcenter sure-text">Are you sure you wan to submit your test ?</h6>
+                <h6 class="textcenter counted-text">The marks in this test will be counted in your overall scores</h6>
+            </div>
+        </div>
+        <div class="modal-footer textcenter">
+            <button class="btn waves-effect waves-light end-modal-submit-button" ng-click="submittest()">SUBMIT TEST</button>
+        </div>
+    </div>
