@@ -34,26 +34,31 @@
                     </div>
                 </div>
                 <div id="test-card-content" class="row test-card-content">
+                <div id="test-card-content" class="row test-card-content">
                     <!--QUESTION DIVISON-->
                     <div class="col l12 m12 s12 test-card-question-div">
                         <h6 class="test-card-question">
                             {{test_questions[test_question_number].question}}
                         </h6>
+                        <p>{{statusofgivenanswer}}</p>
                     </div>
 
                     <!--ANSWER DIVISION-->
                     <div class="col l12 m12 s12 test-card-content-answers-div">
-                        <div class="row optiondiv" ng-repeat="option in test_questions[test_question_number].options" ng-click="showdetailedanswer=!showdetailedanswer" style="position: relative;" ng-class="{'noborder':$index==3, 'selected-option':($root.test_questions_array[test_question_number].optionsorder.indexOf($root.test_questions_array[test_question_number].answergiven) == ($index))&& !showcorrectanswertouser,'wrong-selection':showcorrectanswertouser && ($root.test_questions_array[test_question_number].optionsorder.indexOf($root.test_questions_array[test_question_number].answergiven) == ($index)) && ($root.test_questions_array[test_question_number].answergiven) !=1,'correct-answer detailed-answer':showcorrectanswertouser && test_questions[test_question_number].optionsorder[$index]==1}">
+                        <div ng-repeat="option in test_questions[test_question_number].options">
+                            <div class="row optiondiv" ng-click="showdetailedanswer=!showdetailedanswer" style="position: relative;" ng-class="{'noborder':$index==3, 'selected-option':($root.test_questions_array[test_question_number].optionsorder.indexOf($root.test_questions_array[test_question_number].answergiven) == ($index))&& !showcorrectanswertouser,'wrong-selection':showcorrectanswertouser && ($root.test_questions_array[test_question_number].optionsorder.indexOf($root.test_questions_array[test_question_number].answergiven) == ($index)) && ($root.test_questions_array[test_question_number].answergiven) !=1,'correct-answer':showcorrectanswertouser && test_questions[test_question_number].optionsorder[$index]==1}">
 
-                            <div class="col optionsr optioninnerpadding l1 m1 s1 " style="height: 100%;
+                                <div class="col optionsr optioninnerpadding l1 m1 s1 " style="height: 100%;
     position: absolute;line-height: 100%;">
-                                {{$index | letterFromCode}}
-                            </div>
+                                    {{$index | letterFromCode}}
+                                </div>
 
-                            <div class="col optioninnerpadding l11 m11 s11 test-options-answer-div" style="margin-left: 8.333333%;" ng-click="optionselected($index)">
-                                {{option}}
-                            </div> 
-                            <div ng-if="showcorrectanswertouser && test_questions[test_question_number].optionsorder[$index]==1" class="hidden" ng-class="{'open':showdetailedanswer}">{{test_questions[test_question_number].answer}}</div>
+                                <div class="col optioninnerpadding l11 m11 s11 test-options-answer-div" style="margin-left: 8.333333%;" ng-click="optionselected($index)">
+                                    {{option}}
+                                </div>
+
+                            </div>
+                            <div ng-if="showcorrectanswertouser && test_questions[test_question_number].optionsorder[$index]==1" class="detailed-answer hidden" ng-class="{'open':showdetailedanswer}">{{test_questions[test_question_number].answer}}</div>
                         </div>
 
 

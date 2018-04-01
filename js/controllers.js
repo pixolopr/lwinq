@@ -544,6 +544,10 @@ inqcontroller.controller('commontestsCtrl', ['$scope', 'TemplateService', 'Navig
         console.log('common ctrl');
         //      common functions
         $scope.change_question = function (ind) {
+            if($scope.showcorrectanswertouser)
+                {
+                     $scope.statusofgivenanswer=$rootScope.test_questions_array[$scope.test_question_number].answergiven == 1 ? 'You have given correct answer' : 'wrong';
+                }
             if (ind == 1 || ind == -1) {
                 $scope.test_question_number += ind;
             } else {
@@ -560,14 +564,17 @@ inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'Navigatio
         $scope.showcorrectanswertouser = true;
 
 
+
         //      COLLAPSIBLE INITIALIZATION
         $('.collapsible').collapsible();
-      
-      
+
+
         gettestdatabyidsuccess = function (response) {
 
             $rootScope.test_questions_array = response.data.giventestdata;
             $rootScope.test_questions = response.data.questions;
+            $scope.showcorrectanswertouser=$rootScope.test_questions_array[$scope.test_question_number+1].answergiven == 1 ? 'You have given correct answer' : 'wrong';
+
             for (var index in $rootScope.test_questions_array) {
                 $rootScope.test_questions_array[index].optionsorder = $rootScope.test_questions_array[index].optionsorder.split(',')
             }
@@ -707,7 +714,9 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
 
 
                 while ($scope.questions_array.length < question_set) {
-
+                    console.log(data_start);
+                    console.log(data_end);
+                    
                     for (var cd = data_start; cd < data_end; cd++) {
 
                         var answerval = $scope.values_array[$scope.questions_array.length].answerval == 0 ? 'questions' : 'answeredquestions';
@@ -817,6 +826,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
                         var find_questions_promise = find_questions();
                         find_questions_promise.then(
                             function (response) {
+                                console.log(response);
                                 /*QUESTIONS ARRAY RADY*/
                                 NavigationService.gettestquestions(response).then(gettestquestionssuccess, gettestquestionserror);
                             },
@@ -834,6 +844,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
         var getscoresfromchapterserror = function (response) {
             console.log(response.data);
         };
+      
 
         //      Data To generate Smart Test
         NavigationService.getscorefromchapterids($.jStorage.get('user').id, $rootScope.chaptersarray).then(getscoresfromchapterssuccess, getscoresfromchapterserror);
@@ -1037,7 +1048,7 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
 
             $rootScope.navigationfunction.success(function (response) {
                 console.log(response);
-                $.jStorage.set('testid',response);
+                $.jStorage.set('testid', response);
             });
         } else {
             window.history.go(-2)

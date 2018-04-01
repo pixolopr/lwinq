@@ -166,7 +166,7 @@
             }
         }
         .selected-option {
-            background: $primary-color;
+            background: $primary-color !important;
             .optionsr {
                 color: white !important;
             }
@@ -176,20 +176,29 @@
         }
         .wrong-selection {
             @extend .selected-option;
-            background: $red-color;
-            
+            background: $red-color !important;
+
         }
         .correct-answer {
-            background: $green-color;
+            background: $green-color !important;
+        }
+        .detailed-answer {
+            transition: 0.7s ease-out !important;
+            padding: 10px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            font-size: 0.9em;
+            color: $grey-text;
+            border: 0.05px #bfbebe solid;
         }
         .hidden {
-            height: 0px;
-            transition: height 0.5s ease-out;
+            max-height: 0px;
         }
         .hidden.open {
-            height: auto;
-            transition: height 0.7s ease-out;
-            text-align: center;
+            transition: 0.7s ease-out !important;
+            max-height: 1000px;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
     }
