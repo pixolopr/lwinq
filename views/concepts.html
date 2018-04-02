@@ -40,8 +40,8 @@
 
 
             </div>
-            <div class="col s12 m12 margin0 padding0 conceptcompletionline" ng-style="{width:(((s.totalreadcards+s.totalreadquestions)/(s.totalcards+s.totalquestions))*100)+'%'}">
-                <span class="material-icons concepticon">adjust</span>
+            <div class="col s12 m12 margin0 padding0 conceptcompletionline" style="position: relative" ng-style="{width:(((s.totalreadcards+s.totalreadquestions)/(s.totalcards+s.totalquestions))*100)+'%'}">
+               <i class="material-icons progressbar-icon " ng-if="(((s.totalreadcards+s.totalreadquestions)/(s.totalcards+s.totalquestions))*100)>0">adjust</i>
             </div> 
           </div>
         </div>

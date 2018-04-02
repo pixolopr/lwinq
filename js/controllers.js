@@ -285,7 +285,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
                 $scope.conceptcards.push({
                     user_id: 0,
-                    conceptdata: '<div style="text-align: center;"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%">' + (!$scope.otheruserscard ? '<button onclick="getotheruserscards()" class="row btn waves-effect waves-light cyan">Other Users Cards</button>' : '') + '<button ng-click="gotopractisepage()" class="row btn waves-effect waves-light cyan">Practise Cards</button>' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '</div>'
+                    conceptdata: '<div style="text-align: center;"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%"><button ng-click="gotopractisepage()" class="row btn waves-effect waves-light cyan">Practise Cards</button>' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '</div>'
                 });
                 $scope.cardindex = 0;
                 readcardbyuserid(0);
@@ -544,15 +544,17 @@ inqcontroller.controller('commontestsCtrl', ['$scope', 'TemplateService', 'Navig
         console.log('common ctrl');
         //      common functions
         $scope.change_question = function (ind) {
-            if($scope.showcorrectanswertouser)
-                {
-                     $scope.statusofgivenanswer=$rootScope.test_questions_array[$scope.test_question_number].answergiven == 1 ? 'You have given correct answer' : 'wrong';
-                }
+           
             if (ind == 1 || ind == -1) {
                 $scope.test_question_number += ind;
             } else {
                 $scope.test_question_number = ind;
             };
+             if($scope.showcorrectanswertouser)
+                {
+                    console.log($scope.test_question_number+" "+$rootScope.test_questions_array[$scope.test_question_number].answergiven)
+                     $scope.statusofgivenanswer=$rootScope.test_questions_array[$scope.test_question_number].answergiven == "1" ? 'You have given correct answer' :($rootScope.test_questions_array[$scope.test_question_number].answergiven == "0"?"You didn't answer this ":'You have given wrong answer') ;
+                }
         };
 
   }]);
@@ -573,7 +575,7 @@ inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'Navigatio
 
             $rootScope.test_questions_array = response.data.giventestdata;
             $rootScope.test_questions = response.data.questions;
-            $scope.showcorrectanswertouser=$rootScope.test_questions_array[$scope.test_question_number+1].answergiven == 1 ? 'You have given correct answer' : 'wrong';
+           $scope.statusofgivenanswer=$rootScope.test_questions_array[$scope.test_question_number].answergiven == "1" ? 'You have given correct answer' :($rootScope.test_questions_array[$scope.test_question_number].answergiven == "0"?"You didn't answer this ":'You have given wrong answer') ;
 
             for (var index in $rootScope.test_questions_array) {
                 $rootScope.test_questions_array[index].optionsorder = $rootScope.test_questions_array[index].optionsorder.split(',')
@@ -677,8 +679,18 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             var question_set = 0;
             var data_start = 0;
             var data_end = 0;
+            var answeredquestions_length=0;
             $scope.total_questions = 20;
-
+            
+            
+            
+            /*Check if answeredquestions length is greater than 20*/
+            for(var index in response.data){
+                for(var property in response.data[index].answeredquestions){
+                    answeredquestions_length+=response.data[index].answeredquestions[property].length;
+                }
+            }
+            
             if (remaining_number_od_concepts > 1) {
                 var number_of_concepts_group2 = remaining_number_od_concepts / 2;
                 var number_of_concepts_group3 = number_of_concepts_group2;
@@ -711,11 +723,11 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             var find_questions = function () {
 
                 var find_questions_deferred = $q.defer();
+                console.log(answeredquestions_length);
 
-
-                while ($scope.questions_array.length < question_set) {
-                    console.log(data_start);
-                    console.log(data_end);
+                while ($scope.questions_array.length < question_set && answeredquestions_length>=20) {
+                    console.log($scope.questions_data_response);
+                  
                     
                     for (var cd = data_start; cd < data_end; cd++) {
 
@@ -727,6 +739,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
                         console.log(cd, answerval, levelval);
                         var length_of_set = $scope.questions_data_response[cd][answerval][levelval].length;
                         if (length_of_set != 0) {
+                            console.log('i am in random question generator');
                             /*QUESTIONS ARE THERE*/
                             /*FIND RANDOM QUESTION*/
                             var random_number = Math.floor(Math.random() * (length_of_set - 1));
@@ -828,7 +841,12 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
                             function (response) {
                                 console.log(response);
                                 /*QUESTIONS ARRAY RADY*/
+                                if(response.length==20){
                                 NavigationService.gettestquestions(response).then(gettestquestionssuccess, gettestquestionserror);
+                                }else{
+                                    alert("This chapter doesn't have enough test questions !");
+                                    window.history.go(-1);
+                                }
                             },
                             function (response) {
                                 /*QUESTIONS ARRAY ERROR*/
@@ -912,8 +930,11 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
         $scope.submittest = function () {
             $('#end-modal').modal('close');
             var store_test_detailssuccess = function (response) {
-                console.log(response.data);
-                if (response.data == "true") {
+                 $.jStorage.set('testid', response.data);
+                
+                console.log($rootScope.navigationfunction);
+                if (response.data) {
+                    $rootScope.navigationfunction=NavigationService.getpercentofconceptsbytestid();
                     $('#end-modal').modal('close');
                     $location.path("/testresults");
                 };
@@ -927,7 +948,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
                 value.optionsorder = JSON.stringify(value.optionsorder);
             });
 
-            $rootScope.navigationfunction = NavigationService.store_test_details($.jStorage.get("user").id, $rootScope.chaptersarray, "chapter", $rootScope.test_questions_array);
+           NavigationService.store_test_details($.jStorage.get("user").id, $rootScope.chaptersarray, "chapter", $rootScope.test_questions_array).then(store_test_detailssuccess,store_test_detailserror);
             $location.path("/testresults");
             //            console.log($rootScope.navigationfunction);
         };
@@ -1031,8 +1052,9 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
         $scope.testresult = {};
         $scope.testresult.score = 0;
         $scope.testresult.unanswered = 0;
+      $scope.testconceptprogress=[];
         console.log($rootScope.test_questions_array);
-
+      
         for (var index in $rootScope.test_questions_array) {
             console.log($rootScope.test_questions_array[index].answergiven);
             if ($rootScope.test_questions_array[index].answergiven == 1) {
@@ -1042,13 +1064,15 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
                 $scope.testresult.unanswered += 1;
             }
         }
+      console.log($rootScope.navigationfunction);
         if ($rootScope.navigationfunction) {
-
+                
             $scope.testresult.totalmarks = $rootScope.test_questions_array.length;
 
             $rootScope.navigationfunction.success(function (response) {
+                $scope.testconceptprogress=response;
                 console.log(response);
-                $.jStorage.set('testid', response);
+               
             });
         } else {
             window.history.go(-2)

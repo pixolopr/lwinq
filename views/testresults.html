@@ -43,9 +43,9 @@
 
             <div class="testconcept ">Your Report is ready! Concepts Tested : </div>
 
-            <div class="row" ng-repeat='s in [1,2,3,4]'>
-                <div class="testconcepthead">Optics</div>
-                <div class="col s12 m12 margin0 padding0 conceptstestedline" ng-style="{width:conceptwidth+'%'}"></div>
+            <div class="row" ng-repeat='test in testconceptprogress'>
+                <div class="testconcepthead">{{test.concept_name}}</div>
+                <div class="col s12 m12 margin0 padding0 conceptstestedline" ng-style="{width:test.percent+'%'}"></div>
             </div>
 
 
