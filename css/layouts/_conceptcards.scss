@@ -223,3 +223,11 @@
     display: inline-block;
     background-position: right;
 }
+
+.codetype-questions {
+    div,
+    p,
+    span {
+        display: inline !important;
+    }
+}

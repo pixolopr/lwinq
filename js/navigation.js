@@ -245,12 +245,12 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 });
             },
-            getpractisecards: function () {
+            getpractisecards: function (conceptid) {
                 return $http({
-                    url: adminurl + 'tests/getpercentofconceptsbytestid',
+                    url: adminurl + 'questions/getpractisequestions',
                     method: "GET",
                     params: {
-                        test_id: $.jStorage.get('testid')
+                        conceptid:conceptid
                     }
                 });
             },

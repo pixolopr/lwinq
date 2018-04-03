@@ -153,6 +153,18 @@ inqcontroller.controller('standardsCtrl', ['$scope', 'TemplateService', 'Navigat
 
   }
 ]);
+inqcontroller.controller('practisecardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
+  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
+        $scope.showanswers = {};
+        gotoconceptcards = function () {
+            window.history.go(-1);
+        };
+        $scope.showanswer = function (index) {
+            console.log($scope.showanswers[index]);
+            $scope.showanswers[index] = !$scope.showanswers[index];
+        }
+
+  }]);
 
 inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location', 'FileUploader', '$injector',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
@@ -166,6 +178,10 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         $scope.zindexarray = [];
         $scope.glossary = [];
         $scope.otheruserscard = false;
+
+        $scope.showpractisecards = false;
+
+        console.log('conceptCtrl called');
         $scope.uploadfile = function () {
             var formdata = new FormData();
 
@@ -178,7 +194,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
             });
         };
-
+        /*Card change using navigation buttons*/
         $(document).keyup(function (e) {
             if (e.keyCode == 39 && $scope.zindexarray[$scope.conceptcards.length - 1] != $scope.conceptcards.length)
                 $scope.changecardindex(1);
@@ -186,6 +202,43 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                 $scope.changecardindex(-1);
 
         });
+        //      GET PRACTISE CARDS SUCCESS AND ERROR
+
+
+
+
+        getpractisecardsucess = function (response) {
+            console.log($scope.conceptid);
+            $scope.cardindex = 0;
+            $scope.conceptcards = response.data;
+            $scope.conceptcards.push({
+                format: 2,
+                question: '<div class="carddata" style="text-align: center;"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%">' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '<a onclick="gotoconceptcards()" class="row btn waves-effect waves-light cyan">Go to concepts</a></div>'
+            });
+            console.log($scope.conceptcards);
+
+            $scope.zindexarray = [];
+            _.forEach($scope.conceptcards, function (value, key) {
+                console.log(value);
+                if (value.format == 2) {
+                    value.question = $sce.trustAsHtml(value.question);
+                }
+                if (value.answerformat == 2) {
+                    value.answer = $sce.trustAsHtml(value.answer);
+                }
+                $scope.zindexarray.push($scope.conceptcards.length - key);
+                $scope.styleCards(key);
+            });
+
+            $scope.showpractisecards = $scope.conceptcards.length > 1;
+
+
+
+
+        }
+        getpractisecarderror = function (error) {
+            console.log('Internet Error');
+        }
 
         // CHANGE STAR STATUS OF CARDS
         changestarstatussuccess = function (response) {
@@ -209,6 +262,11 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             $scope.otheruserscard = true;
             NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "others").then(getcardsuccess, getcarderror);
         };
+        //      GET PRACTISE CARDS
+        getpractisecards = function () {
+
+            NavigationService.getpractisecards($scope.conceptid).then(getpractisecardsucess, getpractisecarderror);
+        }
 
         //CHANGE SHARE STATUS OF CARDS
         $scope.changesharestatus = function (cardid) {
@@ -285,7 +343,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
                 $scope.conceptcards.push({
                     user_id: 0,
-                    conceptdata: '<div style="text-align: center;"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%"><button ng-click="gotopractisepage()" class="row btn waves-effect waves-light cyan">Practise Cards</button>' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '</div>'
+                    conceptdata: '<div style="text-align: center;"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%"><button onclick="getpractisecards()" class="row btn waves-effect waves-light cyan">Practise Cards</button>' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '</div>'
                 });
                 $scope.cardindex = 0;
                 readcardbyuserid(0);
@@ -298,7 +356,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                     value.conceptdata = $sce.trustAsHtml(value.conceptdata);
                 }
                 $scope.zindexarray.push($scope.conceptcards.length - key);
-                styleCards(key);
+                $scope.styleCards(key);
             });
 
 
@@ -347,7 +405,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
 
         /* Style cards by rotating*/
-        var styleCards = function (key) {
+        $scope.styleCards = function (key) {
             if ($scope.zindexarray[key] == $scope.conceptcards.length) {
                 var deg = '0deg';
             } else {
@@ -363,7 +421,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         };
         /*Change Card*/
         $scope.changecardindex = function (index) {
-
+            console.log($scope.zindexarray);
             var cardid, left, rotateVal;
             if (index == '1') {
                 left = $('.cardspage').width() + 'px';
@@ -404,7 +462,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                             $scope.zindexarray[key] += 1;
                         };
 
-                        styleCards(key);
+                        $scope.styleCards(key);
 
                     } else {
 
@@ -414,7 +472,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                             $scope.zindexarray[key] -= 1;
                         };
 
-                        styleCards(key);
+                        $scope.styleCards(key);
 
                     };
 
@@ -544,17 +602,16 @@ inqcontroller.controller('commontestsCtrl', ['$scope', 'TemplateService', 'Navig
         console.log('common ctrl');
         //      common functions
         $scope.change_question = function (ind) {
-           
+
             if (ind == 1 || ind == -1) {
                 $scope.test_question_number += ind;
             } else {
                 $scope.test_question_number = ind;
             };
-             if($scope.showcorrectanswertouser)
-                {
-                    console.log($scope.test_question_number+" "+$rootScope.test_questions_array[$scope.test_question_number].answergiven)
-                     $scope.statusofgivenanswer=$rootScope.test_questions_array[$scope.test_question_number].answergiven == "1" ? 'You have given correct answer' :($rootScope.test_questions_array[$scope.test_question_number].answergiven == "0"?"You didn't answer this ":'You have given wrong answer') ;
-                }
+            if ($scope.showcorrectanswertouser) {
+                console.log($scope.test_question_number + " " + $rootScope.test_questions_array[$scope.test_question_number].answergiven)
+                $scope.statusofgivenanswer = $rootScope.test_questions_array[$scope.test_question_number].answergiven == "1" ? 'You have given correct answer' : ($rootScope.test_questions_array[$scope.test_question_number].answergiven == "0" ? "You didn't answer this " : 'You have given wrong answer');
+            }
         };
 
   }]);
@@ -575,7 +632,7 @@ inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'Navigatio
 
             $rootScope.test_questions_array = response.data.giventestdata;
             $rootScope.test_questions = response.data.questions;
-           $scope.statusofgivenanswer=$rootScope.test_questions_array[$scope.test_question_number].answergiven == "1" ? 'You have given correct answer' :($rootScope.test_questions_array[$scope.test_question_number].answergiven == "0"?"You didn't answer this ":'You have given wrong answer') ;
+            $scope.statusofgivenanswer = $rootScope.test_questions_array[$scope.test_question_number].answergiven == "1" ? 'You have given correct answer' : ($rootScope.test_questions_array[$scope.test_question_number].answergiven == "0" ? "You didn't answer this " : 'You have given wrong answer');
 
             for (var index in $rootScope.test_questions_array) {
                 $rootScope.test_questions_array[index].optionsorder = $rootScope.test_questions_array[index].optionsorder.split(',')
@@ -679,18 +736,18 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             var question_set = 0;
             var data_start = 0;
             var data_end = 0;
-            var answeredquestions_length=0;
+            var answeredquestions_length = 0;
             $scope.total_questions = 20;
-            
-            
-            
+
+
+
             /*Check if answeredquestions length is greater than 20*/
-            for(var index in response.data){
-                for(var property in response.data[index].answeredquestions){
-                    answeredquestions_length+=response.data[index].answeredquestions[property].length;
+            for (var index in response.data) {
+                for (var property in response.data[index].answeredquestions) {
+                    answeredquestions_length += response.data[index].answeredquestions[property].length;
                 }
             }
-            
+
             if (remaining_number_od_concepts > 1) {
                 var number_of_concepts_group2 = remaining_number_od_concepts / 2;
                 var number_of_concepts_group3 = number_of_concepts_group2;
@@ -725,10 +782,10 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
                 var find_questions_deferred = $q.defer();
                 console.log(answeredquestions_length);
 
-                while ($scope.questions_array.length < question_set && answeredquestions_length>=20) {
+                while ($scope.questions_array.length < question_set && answeredquestions_length >= 20) {
                     console.log($scope.questions_data_response);
-                  
-                    
+
+
                     for (var cd = data_start; cd < data_end; cd++) {
 
                         var answerval = $scope.values_array[$scope.questions_array.length].answerval == 0 ? 'questions' : 'answeredquestions';
@@ -841,9 +898,9 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
                             function (response) {
                                 console.log(response);
                                 /*QUESTIONS ARRAY RADY*/
-                                if(response.length==20){
-                                NavigationService.gettestquestions(response).then(gettestquestionssuccess, gettestquestionserror);
-                                }else{
+                                if (response.length == 20) {
+                                    NavigationService.gettestquestions(response).then(gettestquestionssuccess, gettestquestionserror);
+                                } else {
                                     alert("This chapter doesn't have enough test questions !");
                                     window.history.go(-1);
                                 }
@@ -862,7 +919,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
         var getscoresfromchapterserror = function (response) {
             console.log(response.data);
         };
-      
+
 
         //      Data To generate Smart Test
         NavigationService.getscorefromchapterids($.jStorage.get('user').id, $rootScope.chaptersarray).then(getscoresfromchapterssuccess, getscoresfromchapterserror);
@@ -930,11 +987,11 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
         $scope.submittest = function () {
             $('#end-modal').modal('close');
             var store_test_detailssuccess = function (response) {
-                 $.jStorage.set('testid', response.data);
-                
+                $.jStorage.set('testid', response.data);
+
                 console.log($rootScope.navigationfunction);
                 if (response.data) {
-                    $rootScope.navigationfunction=NavigationService.getpercentofconceptsbytestid();
+                    $rootScope.navigationfunction = NavigationService.getpercentofconceptsbytestid();
                     $('#end-modal').modal('close');
                     $location.path("/testresults");
                 };
@@ -948,7 +1005,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
                 value.optionsorder = JSON.stringify(value.optionsorder);
             });
 
-           NavigationService.store_test_details($.jStorage.get("user").id, $rootScope.chaptersarray, "chapter", $rootScope.test_questions_array).then(store_test_detailssuccess,store_test_detailserror);
+            NavigationService.store_test_details($.jStorage.get("user").id, $rootScope.chaptersarray, "chapter", $rootScope.test_questions_array).then(store_test_detailssuccess, store_test_detailserror);
             $location.path("/testresults");
             //            console.log($rootScope.navigationfunction);
         };
@@ -1052,9 +1109,9 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
         $scope.testresult = {};
         $scope.testresult.score = 0;
         $scope.testresult.unanswered = 0;
-      $scope.testconceptprogress=[];
+        $scope.testconceptprogress = [];
         console.log($rootScope.test_questions_array);
-      
+
         for (var index in $rootScope.test_questions_array) {
             console.log($rootScope.test_questions_array[index].answergiven);
             if ($rootScope.test_questions_array[index].answergiven == 1) {
@@ -1064,15 +1121,15 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
                 $scope.testresult.unanswered += 1;
             }
         }
-      console.log($rootScope.navigationfunction);
+        console.log($rootScope.navigationfunction);
         if ($rootScope.navigationfunction) {
-                
+
             $scope.testresult.totalmarks = $rootScope.test_questions_array.length;
 
             $rootScope.navigationfunction.success(function (response) {
-                $scope.testconceptprogress=response;
+                $scope.testconceptprogress = response;
                 console.log(response);
-               
+
             });
         } else {
             window.history.go(-2)
@@ -1236,6 +1293,10 @@ inqcontroller.controller('chaptersCtrl', ['$scope', 'TemplateService', 'Navigati
             $location.path("/concepts/" + id);
         };
 
+        $scope.redirecttodoubts = function () {
+            window.open("http://sunalisclasses.com/doubts/");
+        }
+
   }
 ]);
 
@@ -1249,6 +1310,9 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
 
   }
 ]);
+
+
+
 
 inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
   function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
