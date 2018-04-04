@@ -3,11 +3,11 @@ var navigationservice = angular.module('navigationservice', [])
     .factory('NavigationService', function ($http) {
 
         //MACBOOK AND HOME LAPTOP
-        var adminurl = "http://localhost/rest/rest/index.php/";
+//        var adminurl = "http://localhost/rest/rest/index.php/";
         //PC
         //var adminurl = "http://localhost/inqrest/rest/index.php/";
         //SERVER
-        //    var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+            var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
         //HOME LAPTOP
 
         var navigation = [{
@@ -179,12 +179,13 @@ var navigationservice = angular.module('navigationservice', [])
             getuserdashboard: function (userid, standardid) {
                 return $http.get(adminurl + 'users/getuserdashboard', {
                     params: {
-                        user: userid,
-                        standard: standardid
+                        user: $.jStorage.get('user').id,
+                        standard: $.jStorage.get('user').standard_id
                     }
                 });
             },
             removeimage: function (imagename) {
+                console.log(imagename);
                 return $http({
                     url: adminurl + 'images/removeimage',
                     method: "GET",

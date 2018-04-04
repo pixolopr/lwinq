@@ -1,8 +1,8 @@
 <div class="wrapper">
-   
+
     <div class="row dashboard-outer-div">
         <div class="dashboard-div">
-            
+
             <div>
                 <!--SUBJECT TABS-->
                 <ul id="tabs-swipe-demo" class="tabs dashboard-tabs-div">
@@ -13,7 +13,7 @@
             <div id="{{'subject-swipe-'+($index+1)}}" class="col s12 dashboard-data-div" ng-repeat="subject in dashboardData">
                 <div class="row">
                     <div class="col l12 m12 s12 dashboard-data-graph-div">
-                        <canvas id="timeline-graph" width="100" height="40"></canvas>
+                        <canvas class="timeline-graph" width="100" height="40"></canvas>
                     </div>
                     <div class="col l12 m12 s12 dashboard-data-chapters-div">
                         <ul class="collapsible dashboard-data-chapters-list" data-collapsible="expandable">
@@ -23,14 +23,14 @@
                                     <ul class="collapsible noborder noshadow" data-collapsible="accordion">
 
                                         <!-- Repeat Key Chapters -->
-                                        <li ng-repeat="chapter in subject.chapters" class="noborder noshadow">
+                                        <li ng-repeat="chapter in subject.chapters|orderBy:chapter.totalpercent" ng-if="$index<=2" class="noborder noshadow">
                                             <div class="collapsible-header padding0 dashboard-data-chapter-div">
                                                 <div class="row margin0 chapter-header">
                                                     <div class="col l10 m10 s10 chapter-title-div">
                                                         <h5 class="chapter-title">{{chapter.name}}</h5>
                                                     </div>
                                                     <div class="col l2 m2 s2 chapter-percent-div">
-                                                        <h5 class="right chapter-percent">84%</h5>
+                                                        <h5 class="right chapter-percent">{{chapter.totalpercent+'%'}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row margin0 chapter-footer">
@@ -42,7 +42,60 @@
                                                         <p class="margin0">Test Score: 84%</p>
                                                     </div>
                                                     <div class="col l4 m4 s4">
-                                                        <p class="margin0 right">Cards Read: 12/22</p>
+                                                        <p class="margin0 right">Cards Read: {{chapter.totalreadcards}}/{{chapter.totalcards}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="collapsible-body padding0 concepts-list-div">
+
+                                                <!--Repeat Concepts of Key Chapters-->
+                                                <div class="row margin0 concept-div" ng-repeat="concept in chapter.concepts|orderBy:'chapter.totalpercent.percent'">
+                                                    <div class="col l4 m4 s4 concept-title">
+                                                        <p class="left">{{concept.name}}</p>
+                                                    </div>
+                                                    <div class="col l4 m4 s4 textcenter concept-stars">
+                                                        <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col l4 m4 s4 concept-cards-read">
+                                                        <p class="right">{{concept.readcards}}/{{concept.totalcards}} <i class="material-icons">sd_card</i>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="middlediv"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li>
+                                <div id="key1" class="collapsible-header dashboard-chapters-title" ng-click="openchaptertitle('key1')"><i class="material-icons right dashboard-chapter-title-icons key1">&#xE313;</i>Weakness</div>
+                                <div class="collapsible-body">
+                                    <ul class="collapsible noborder noshadow" data-collapsible="accordion">
+
+                                        <!-- Repeat Key Chapters -->
+                                        <li ng-repeat="chapter in subject.chapters|orderBy:chapter.totalpercent" ng-if="$index>=subject.chapters.length-3" class="noborder noshadow">
+                                            <div class="collapsible-header padding0 dashboard-data-chapter-div">
+                                                <div class="row margin0 chapter-header">
+                                                    <div class="col l10 m10 s10 chapter-title-div">
+                                                        <h5 class="chapter-title">{{chapter.name}}</h5>
+                                                    </div>
+                                                    <div class="col l2 m2 s2 chapter-percent-div">
+                                                        <h5 class="right chapter-percent">{{chapter.totalpercent+'%'}}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row margin0 chapter-footer">
+                                                    <div class="col l4 m4 s4">
+                                                        <p class="margin0 left"><a>Test Results</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col l4 m4 s4 textcenter">
+                                                        <p class="margin0">Test Score: 84%</p>
+                                                    </div>
+                                                    <div class="col l4 m4 s4">
+                                                        <p class="margin0 right">Cards Read: {{chapter.totalreadcards}}/{{chapter.totalcards}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,68 +123,21 @@
                             </li>
 
 
-                            <li>
-                                <div id="key1" class="collapsible-header dashboard-chapters-title" ng-click="openchaptertitle('key1')"><i class="material-icons right dashboard-chapter-title-icons key1">&#xE313;</i>Weakness</div>
-                                <div class="collapsible-body">
-                                    <ul class="collapsible noborder noshadow" data-collapsible="accordion">
-                                        <li ng-repeat="chapter in [1,2,3]" class="noborder noshadow">
-                                            <div class="collapsible-header padding0 dashboard-data-chapter-div">
-                                                <div class="row margin0 chapter-header">
-                                                    <div class="col l10 m10 s10 chapter-title-div">
-                                                        <h5 class="chapter-title">Light & Sound</h5>
-                                                    </div>
-                                                    <div class="col l2 m2 s2 chapter-percent-div">
-                                                        <h5 class="right chapter-percent">84%</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="row margin0 chapter-footer">
-                                                    <div class="col l4 m4 s4">
-                                                        <p class="margin0 left"><a>Test Results</a>
-                                                        </p>
-                                                    </div>
-                                                    <div class="col l4 m4 s4 textcenter">
-                                                        <p class="margin0">Test Score: 84%</p>
-                                                    </div>
-                                                    <div class="col l4 m4 s4">
-                                                        <p class="margin0 right">Cards Read: 12/22</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="collapsible-body padding0 concepts-list-div">
-                                                <div class="row margin0 concept-div" ng-repeat="n in [1,2,3,4]">
-                                                    <div class="col l4 m4 s4 concept-title">
-                                                        <p class="left">Optics and properties</p>
-                                                    </div>
-                                                    <div class="col l4 m4 s4 textcenter concept-stars">
-                                                        <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i>
-                                                        </p>
-                                                    </div>
-                                                    <div class="col l4 m4 s4 concept-cards-read">
-                                                        <p class="right">33/35 <i class="material-icons">sd_card</i>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="middlediv"></div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-
 
                             <li>
                                 <div id="key1" class="collapsible-header dashboard-chapters-title" ng-click="openchaptertitle('key1')"><i class="material-icons right dashboard-chapter-title-icons key1">&#xE313;</i>Other Chapters</div>
                                 <div class="collapsible-body">
                                     <ul class="collapsible noborder noshadow" data-collapsible="accordion">
-                                        <li ng-repeat="chapter in [1,2,3]" class="noborder noshadow">
+
+                                        <!-- Repeat Key Chapters -->
+                                        <li ng-repeat="chapter in subject.chapters|orderBy:chapter.totalpercent" ng-if="$index>2&&$index<subject.chapters.length-3" class="noborder noshadow">
                                             <div class="collapsible-header padding0 dashboard-data-chapter-div">
                                                 <div class="row margin0 chapter-header">
                                                     <div class="col l10 m10 s10 chapter-title-div">
-                                                        <h5 class="chapter-title">Light & Sound</h5>
+                                                        <h5 class="chapter-title">{{chapter.name}}</h5>
                                                     </div>
                                                     <div class="col l2 m2 s2 chapter-percent-div">
-                                                        <h5 class="right chapter-percent">84%</h5>
+                                                        <h5 class="right chapter-percent">{{chapter.totalpercent+'%'}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row margin0 chapter-footer">
@@ -143,21 +149,23 @@
                                                         <p class="margin0">Test Score: 84%</p>
                                                     </div>
                                                     <div class="col l4 m4 s4">
-                                                        <p class="margin0 right">Cards Read: 12/22</p>
+                                                        <p class="margin0 right">Cards Read: {{chapter.totalreadcards}}/{{chapter.totalcards}}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="collapsible-body padding0 concepts-list-div">
-                                                <div class="row margin0 concept-div" ng-repeat="n in [1,2,3,4]">
+
+                                                <!--Repeat Concepts of Key Chapters-->
+                                                <div class="row margin0 concept-div" ng-repeat="concept in chapter.concepts">
                                                     <div class="col l4 m4 s4 concept-title">
-                                                        <p class="left">Optics and properties</p>
+                                                        <p class="left">{{concept.name}}</p>
                                                     </div>
                                                     <div class="col l4 m4 s4 textcenter concept-stars">
                                                         <p><i class="material-icons" ng-repeat="star in [1,2,3]">star_border</i>
                                                         </p>
                                                     </div>
                                                     <div class="col l4 m4 s4 concept-cards-read">
-                                                        <p class="right">33/35 <i class="material-icons">sd_card</i>
+                                                        <p class="right">{{concept.readcards}}/{{concept.totalcards}} <i class="material-icons">sd_card</i>
                                                         </p>
                                                     </div>
                                                 </div>

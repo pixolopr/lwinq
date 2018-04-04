@@ -204,7 +204,10 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         });
         //      GET PRACTISE CARDS SUCCESS AND ERROR
 
-
+        /*Modal Initialization*/
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
 
 
         getpractisecardsucess = function (response) {
@@ -213,7 +216,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             $scope.conceptcards = response.data;
             $scope.conceptcards.push({
                 format: 2,
-                question: '<div class="carddata" style="text-align: center;"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%">' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '<a onclick="gotoconceptcards()" class="row btn waves-effect waves-light cyan">Go to concepts</a></div>'
+                question: '<div class="carddata" style="text-align: center"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:50%">' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '<a onclick="gotoconceptcards()" class="row btn waves-effect waves-light cyan">Go to concepts</a></div>'
             });
             console.log($scope.conceptcards);
 
@@ -343,7 +346,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
                 $scope.conceptcards.push({
                     user_id: 0,
-                    conceptdata: '<div style="text-align: center;"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:75%;heigth:50%"><button onclick="getpractisecards()" class="row btn waves-effect waves-light cyan">Practise Cards</button>' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '</div>'
+                    conceptdata: '<div style="text-align: center"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:50%"><div class="row"><button onclick="getpractisecards()" class="row btn waves-effect waves-light cyan">Practise Cards</button></div>' + ($scope.nextconcept ? '<div class="row"><a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a><div>' : '') + '</div>'
                 });
                 $scope.cardindex = 0;
                 readcardbyuserid(0);
@@ -1329,6 +1332,9 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
         var getuserdashboardsuccess = function (response) {
             console.log(response.data);
             $scope.dashboardData = response.data;
+            $interval(getcharts, 1000, 1);
+
+
         };
         var getuserdashboarderror = function (response) {
             console.log(response.data);
@@ -1339,52 +1345,55 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
 
 
         /* INitialize Table */
-        $interval(function () {
-            $('ul.tabs').tabs({
-                'swipeable': true
-            });
+        var getcharts = function () {
+
 
             $(document).ready(function () {
 
-
-
-                var ctx = document.getElementById("timeline-graph").getContext('2d');
-
-
-                var mixedChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        datasets: [{
-                            label: 'Test Marks',
-                            data: [10, 20, 30, 40, 10, 30, 40, 20]
-            }, {
-                            label: 'Time Spent',
-                            data: [10, 30, 40, 20, 10, 30, 40, 20],
-                            "fill": false,
-                            "borderColor": "rgb(75, 192, 192)",
-
-                            // Changes this dataset to become a line
-                            type: 'line'
-            }],
-                        labels: ['21-09', '22-09', '23-09', '24-09', '25-09', '26-09', '27-09', '28-09']
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-              }]
-                        },
-                        fill: 'rgba(1,0,0,1)'
-                    }
+                $('ul.tabs').tabs({
+                    'swipeable': true
                 });
+
+
 
                 /*CHAPTERS COLLASIBLE*/
                 $('.collapsible').collapsible();
+                var ctx = document.getElementsByClassName('timeline-graph');
+                console.log(ctx);
+                for (var canvas in ctx) {
+                    var mixedChart = new Chart(ctx[canvas], {
+                        type: 'bar',
+                        data: {
+                            datasets: [{
+                                label: 'Test Marks',
+                                data: [10, 20, 30, 40, 10, 30, 40, 20]
+            }, {
+                                label: 'Time Spent',
+                                data: [10, 30, 40, 20, 10, 30, 40, 20],
+                                "fill": false,
+                                "borderColor": "rgb(75, 192, 192)",
+
+                                // Changes this dataset to become a line
+                                type: 'line'
+            }],
+                            labels: ['21-09', '22-09', '23-09', '24-09', '25-09', '26-09', '27-09', '28-09']
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+              }]
+                            },
+                            fill: 'rgba(1,0,0,1)'
+                        }
+                    });
+                }
 
             })
-        }, 2000, 1);
+        }
+
 
 
 
