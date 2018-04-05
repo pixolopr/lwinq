@@ -30,7 +30,7 @@
                                                         <h5 class="chapter-title">{{chapter.name}}</h5>
                                                     </div>
                                                     <div class="col l2 m2 s2 chapter-percent-div">
-                                                        <h5 class="right chapter-percent">{{chapter.totalpercent+'%'}}</h5>
+                                                        <h5 class="right chapter-percent">{{chapter.total.percent?chapter.total.percent:0+'%'}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row margin0 chapter-footer">
@@ -39,7 +39,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="col l4 m4 s4 textcenter">
-                                                        <p class="margin0">Test Score: 84%</p>
+                                                        <p class="margin0">Test Score: {{chapter.averagescore|roundoff:2}}</p>
                                                     </div>
                                                     <div class="col l4 m4 s4">
                                                         <p class="margin0 right">Cards Read: {{chapter.totalreadcards}}/{{chapter.totalcards}}</p>
