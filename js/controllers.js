@@ -148,6 +148,7 @@ inqcontroller.controller('standardsCtrl', ['$scope', 'TemplateService', 'Navigat
             $.jStorage.get('user').standard_id = $scope.standards[index].id;
             var name = $scope.standards[index].name;
             $.jStorage.get('user').standard_name = name;
+            $rootScope.user.standard_name=name;
             $location.path('/subjects');
         };
 
@@ -744,7 +745,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
 
 
 
-            /*Check if answeredquestions length is greater than 20*/
+            /*Check if questions length is greater than 20*/
             for (var index in response.data) {
                 for (var property in response.data[index].questions) {
                     questions_length += response.data[index].questions[property].length;
@@ -1135,8 +1136,9 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
 
             });
         } else {
-            window.history.go(-2)
+            window.history.go(-2);
         }
+      
 
 
 
@@ -1146,6 +1148,9 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
         $scope.gettestreview = function () {
             $location.path('/tests/review');
         }
+        $scope.gotochapters=function(){
+           window.history.go(-2);
+      }
 
         // routing
 
