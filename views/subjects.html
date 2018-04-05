@@ -14,9 +14,9 @@
         <div class="standbox" ng-if="errormsg==''">
             <div class="row subbox3 " style="text-align:center;" ng-if="subjects.length>0">
 
-                <div class="col s12 m6 l4 xl4 subbox" ng-repeat='s in subjects' ng-click='gotochapters(s.id)'>
+                <div class="col s12 m6 l4 xl4 subbox" ng-repeat='s in subjects' ng-click='gotochapters(s.id)' >
                     <div class="subbox2 z-depth-2">
-                        <!-- <span ng-bind-html="s.image"></span>-->
+                         <span class="subject-icons" ng-bind-html="s.image"></span>
                         <div class="sublist">{{ s.name | uppercase}}
                         </div>
 

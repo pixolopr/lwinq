@@ -162,13 +162,13 @@
             </div>
             <div class="row">
                 <div class="col offset-l1 offset-m1 offset-s1"></div>
-                <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+                <div class="col l2 m2 s2 question-box" ng-class="{grey:$root.test_questions_array[ques-1].answergiven==0}" ng-repeat="ques in [1,2,3,4,5]">{{ques}}</div>
                 <div class="col offset-l1 offset-m1 offset-s1"></div>
-                <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+                <div class="col l2 m2 s2 question-box" ng-class="{grey:$root.test_questions_array[ques-1].answergiven==0}" ng-repeat="ques in [6,7,8,9,10]">{{ques}}</div>
                 <div class="col offset-l1 offset-m1 offset-s1"></div>
-                <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+                <div class="col l2 m2 s2 question-box" ng-class="{grey:$root.test_questions_array[ques-1].answergiven==0}" ng-repeat="ques in [11,12,13,14,15]">{{ques}}</div>
                 <div class="col offset-l1 offset-m1 offset-s1"></div>
-                <div class="col l2 m2 s2 question-box" ng-repeat="ques in [1,2,3,4,5]">{{$index+1}}</div>
+                <div class="col l2 m2 s2 question-box" ng-class="{grey:$root.test_questions_array[ques-1].answergiven==0}" ng-repeat="ques in [16,17,18,19,20]">{{ques}}</div>
             </div>
             <div class="row textcenter">
                 <button class="btn rounded-button waves-effect waves-light report-modal-submit-button resume-button" ng-click="resumetimer('#end-modal')" href="#!">RESUME TEST</button>
