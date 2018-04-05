@@ -216,7 +216,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             $scope.conceptcards = response.data;
             $scope.conceptcards.push({
                 format: 2,
-                question: '<div class="carddata" style="text-align: center"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:50%">' + ($scope.nextconcept ? '<a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a>' : '') + '<a onclick="gotoconceptcards()" class="row btn waves-effect waves-light cyan">Go to concepts</a></div>'
+                question: '<div class="carddata" style="text-align: center; display: block !important"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:50%">' + ($scope.nextconcept ? '<div class="row" style="display: block !important;"><a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a><div>' : '') + '<div class="row"  style="display: block !important;"><a onclick="gotoconceptcards()" class="row btn waves-effect waves-light cyan">Go to concepts</a></div></div>'
             });
             console.log($scope.conceptcards);
 
@@ -739,15 +739,15 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             var question_set = 0;
             var data_start = 0;
             var data_end = 0;
-            var answeredquestions_length = 0;
+            var questions_length = 0;
             $scope.total_questions = 20;
 
 
 
             /*Check if answeredquestions length is greater than 20*/
             for (var index in response.data) {
-                for (var property in response.data[index].answeredquestions) {
-                    answeredquestions_length += response.data[index].answeredquestions[property].length;
+                for (var property in response.data[index].questions) {
+                    questions_length += response.data[index].questions[property].length;
                 }
             }
 
@@ -783,9 +783,9 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             var find_questions = function () {
 
                 var find_questions_deferred = $q.defer();
-                console.log(answeredquestions_length);
+                console.log(questions_length);
 
-                while ($scope.questions_array.length < question_set && answeredquestions_length >= 20) {
+                while ($scope.questions_array.length < question_set && questions_length >= 20) {
                     console.log($scope.questions_data_response);
 
 
@@ -1332,7 +1332,16 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
         var getuserdashboardsuccess = function (response) {
             console.log(response.data);
             $scope.dashboardData = response.data;
+
             $interval(getcharts, 1000, 1);
+            for (var index in response.data) {
+                for (var chapterindex in response.data[index].chapters) {
+                    var totaltest = parseInt(response.data[index].chapters[chapterindex].totaltest);
+                    var totalscore = response.data[index].chapters[chapterindex].total.totalscore ? parseInt(response.data[index].chapters[chapterindex].total.totalscore) : 0
+                    $scope.dashboardData[index].chapters[chapterindex].averagescore = totaltest != 0 ? totalscore / totaltest : 0;
+
+                }
+            };
 
 
         };

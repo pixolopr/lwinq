@@ -135,21 +135,21 @@ inq.filter('percenttograde', function () {
     return function (percent) {
 
         if (percent >= 0) {
-            if (percent >= 75) {
-
-                return 'O';
-            } else if (percent >= 60) {
+            if (percent >= 91) {
 
                 return 'A';
-            } else if (percent >= 49) {
+            } else if (percent >=75) {
+
                 return 'B';
-
-            } else if (percent >= 39) {
-
+            } else if (percent >= 60) {
                 return 'C';
-            } else {
+
+            } else if (percent >= 45) {
 
                 return 'D';
+            } else {
+
+                return 'E';
             }
 
         }
