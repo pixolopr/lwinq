@@ -3,11 +3,11 @@ var navigationservice = angular.module('navigationservice', [])
     .factory('NavigationService', function ($http) {
 
         //MACBOOK AND HOME LAPTOP
-        var adminurl = "http://localhost/rest/rest/index.php/";
+        //var adminurl = "http://localhost/rest/rest/index.php/";
         //PC
         //var adminurl = "http://localhost/inqrest/rest/index.php/";
         //SERVER
-//            var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+                    var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
         //HOME LAPTOP
 
         var navigation = [{
@@ -251,7 +251,7 @@ var navigationservice = angular.module('navigationservice', [])
                     url: adminurl + 'questions/getpractisequestions',
                     method: "GET",
                     params: {
-                        conceptid:conceptid
+                        conceptid: conceptid
                     }
                 });
             },

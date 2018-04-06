@@ -148,7 +148,7 @@ inqcontroller.controller('standardsCtrl', ['$scope', 'TemplateService', 'Navigat
             $.jStorage.get('user').standard_id = $scope.standards[index].id;
             var name = $scope.standards[index].name;
             $.jStorage.get('user').standard_name = name;
-            $rootScope.user.standard_name=name;
+            $rootScope.user.standard_name = name;
             $location.path('/subjects');
         };
 
@@ -211,6 +211,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         });
 
 
+        /*FETCHING PRACTICE QUESTIONS*/
         getpractisecardsucess = function (response) {
             console.log($scope.conceptid);
             $scope.cardindex = 0;
@@ -236,13 +237,10 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
             $scope.showpractisecards = $scope.conceptcards.length > 1;
 
-
-
-
-        }
+        };
         getpractisecarderror = function (error) {
             console.log('Internet Error');
-        }
+        };
 
         // CHANGE STAR STATUS OF CARDS
         changestarstatussuccess = function (response) {
@@ -261,6 +259,8 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
                     NavigationService.addstar($scope.conceptcards[$scope.cardindex].id, $.jStorage.get("user").id).then(changestarstatussuccess, changestarstatuserror);
             }
         };
+
+
         //GET OTHER USERS CARD
         getotheruserscards = function () {
             $scope.otheruserscard = true;
@@ -268,7 +268,6 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         };
         //      GET PRACTISE CARDS
         getpractisecards = function () {
-
             NavigationService.getpractisecards($scope.conceptid).then(getpractisecardsucess, getpractisecarderror);
         }
 
@@ -330,7 +329,21 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         var getdatabyiderror = function (response) {
             console.log(response.data);
         };
-        NavigationService.getdatabyid('concepts', $scope.conceptid).then(getdatabyidsuccess, getdatabyiderror);
+        if ($scope.conceptid != 'practice') {
+            NavigationService.getdatabyid('concepts', $scope.conceptid).then(getdatabyidsuccess, getdatabyiderror);
+        }else{
+            var nav = {
+                location: $location.path(),
+                title: "Practice",
+                position: 4,
+                clickable: false
+            };
+            $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
+                return n.position < nav.position;
+            });
+            $rootScope.navigation[nav.position] = nav;
+            $.jStorage.set("navigation", $rootScope.navigation);
+        };
         /*SET NAVIGATION END*/
 
 
@@ -383,7 +396,13 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         };
 
         /*function*/
-        NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "inq").then(getcardsuccess, getcarderror);
+        if ($scope.conceptid != 'practice') {
+            NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "inq").then(getcardsuccess, getcarderror);
+        } else {
+            /* Get Aray of Concepts and convert into usable string for MySQL IN() - Later add Local Storage for Refresh Option */
+            $rootScope.practiceConceptIds = JSON.stringify($rootScope.practiceConceptIds).substring(1, JSON.stringify($rootScope.practiceConceptIds).length - 1);
+            NavigationService.getpractisecards($rootScope.practiceConceptIds).then(getpractisecardsucess, getpractisecarderror);
+        };
 
         var readcardbyuserid = function (cid) {
             console.log('i m in readcard function');
@@ -1089,10 +1108,16 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
 
         // routing
         $scope.gotoconceptcards = function (id) {
-
             $rootScope.fullpageview = true;
             $location.path('/conceptcards/' + id);
-
+        };
+        $scope.goToPracticeCards = function () {
+            $rootScope.practiceConceptIds = [];
+            /* Storing all concept ID's in array */
+            _.forEach($scope.concepts, function (value, key) {
+                $rootScope.practiceConceptIds.push(value.id);
+            });
+            $location.path('/conceptcards/practice');
         };
         $scope.gototest = function () {
             $rootScope.chaptersarray = $scope.chapterid;
@@ -1138,7 +1163,7 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
         } else {
             window.history.go(-2);
         }
-      
+
 
 
 
@@ -1148,9 +1173,9 @@ inqcontroller.controller('testresultsCtrl', ['$scope', 'TemplateService', 'Navig
         $scope.gettestreview = function () {
             $location.path('/tests/review');
         }
-        $scope.gotochapters=function(){
-           window.history.go(-2);
-      }
+        $scope.gotochapters = function () {
+            window.history.go(-2);
+        }
 
         // routing
 

@@ -225,9 +225,12 @@
 }
 
 .codetype-questions {
-    div,
-    p,
-    span {
+    span{
         display: inline !important;
+    }
+    p {
+        span {
+            display: inline-block !important;
+        }
     }
 }

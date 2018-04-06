@@ -93,10 +93,16 @@
 }
 
 .conceptstestedline {
-    background-color: $primary-color;
+    background-color: #ccc;
     height: 21px;
     float: left;
     border-radius: 2px;
+    width: 100%;
+    position: relative;
+    .conceptstested-inner-line{
+        background-color: $primary-color;
+        height: 100%;
+    }
 }
 
 .hidediv {

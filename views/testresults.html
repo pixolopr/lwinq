@@ -45,7 +45,9 @@
 
             <div class="row" ng-repeat='test in testconceptprogress'>
                 <div class="testconcepthead">{{test.concept_name}}</div>
-                <div class="col s12 m12 margin0 padding0 conceptstestedline" ng-style="{width:test.percent+'%'}"></div>
+                <div class="col s12 m12 margin0 padding0 conceptstestedline">
+                    <div class="conceptstested-inner-line" ng-style="{width:test.percent+'%'}"></div>
+                </div>
             </div>
 
 
