@@ -1,2 +1,3 @@
 
 *.zip
+node_modules/node-sass/vendor/win32-x64-57/binding.node
