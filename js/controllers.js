@@ -250,8 +250,6 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             console.log('Can not change status !');
         };
         $scope.changestarstatus = function () {
-            console.log($scope.cardindex);
-            console.log($scope.conceptcards[$scope.cardindex]);
             if ($scope.conceptcards[$scope.cardindex].id) {
                 if ($scope.conceptcards[$scope.cardindex].starred == 1)
                     NavigationService.removestar($scope.conceptcards[$scope.cardindex].id, $.jStorage.get("user").id).then(changestarstatussuccess, changestarstatuserror);
