@@ -1505,7 +1505,7 @@ inqcontroller.controller('menuCtrl', ['$scope', 'TemplateService', '$location', 
             };
         };
 
-
+        console.log('menu Ctrl');
         $('.button-collapse').sideNav({
             edge: 'left', // Choose the horizontal origin
             closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
@@ -1531,5 +1531,6 @@ inqcontroller.controller('appCtrl', ['$scope', 'TemplateService', '$location', '
 
         $rootScope.showmenu = true;
 
+        console.log('App Ctrl');
   }
 ]);

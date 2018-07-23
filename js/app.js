@@ -11,6 +11,7 @@ inq.run(function ($rootScope, $location, $route, $interval) {
 
         //show loading gif
         //$rootScope.loadingdiv = true;
+        $rootScope.progressstatus = $location.path().includes('concepts');
         console.log("APP MADE TRUE");
         $rootScope.errormsg = '';
 
