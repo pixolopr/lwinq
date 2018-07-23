@@ -1,0 +1,143 @@
+    .linqbgtop {
+        margin-top: 80px;
+    }
+    
+    .edit-icon {
+        margin-top: 3px;
+        float: right;
+        cursor: pointer;
+    }
+    
+    .profile-wrapper {
+        margin-top: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .userprofile-pic {
+            border: 1.5px solid $primary-color;
+            height: auto !important;
+            width: 33% !important;
+        }
+        .username {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            font-size: 18px !important;
+            color: white;
+        }
+        .profile-name {
+            color: white;
+            font-size: 12px;
+            margin-bottom: 9px;
+            margin-top: -10px;
+        }
+        /*.batch-id {
+            color: white;
+            font-size: 12px;
+            margin-top: -14px;
+        }*/
+        
+    }
+    
+    .profile {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        margin-top: 20px;
+        background-color: $primary-color !important;
+        .email-wrap {
+            margin-top: 62px;
+            .email {
+                margin-top: 6px;
+                font-size: 16px;
+                margin-bottom: 28px;
+                color: white !important;
+            }
+        }
+        .school-name-wrap {
+            margin-top: 30px;
+            margin-bottom: 14px;
+            .school-name {
+                margin-top: 6px;
+                margin-bottom: 28px;
+                font-size: 16px;
+                color: white !important;
+            }
+        }
+        .phone-wrap {
+            .phone-no {
+                font-size: 16px;
+                margin-top: 6px;
+                color: white !important;
+            }
+        }
+        .standard-wrap {
+            .standard {
+                font-size: 16px;
+                margin-top: 6px;
+                color: white !important;
+            }
+        }
+    }
+    
+    .questions-box {
+        .question-icon {
+            background: white;
+            .question-asked {
+                margin-top: 20px;
+            }
+            .question-text {
+                color: $primary-color;
+                display: inline-block;
+            }
+            .text {
+                .sub-title {}
+            }
+            .leaderboard-wrapper {
+                .leader-btn {}
+            }
+        }
+    }
+    
+    .asked-questions {
+        .question-no {
+            margin-top: 12px;
+            margin-bottom: -5px;
+            font-weight: 600;
+            font-size: 42px;
+            color: $primary-color !important;
+        }
+        .asked-text {
+            margin: auto;
+            color: $primary-color !important;
+        }
+    }
+    
+    .question-answer {
+        .ans-no {
+            margin-top: 12px;
+            margin-bottom: -5px;
+            font-weight: 600;
+            font-size: 42px;
+            color: $primary-color !important;
+        }
+        .ans-text {
+            margin: auto;
+            color: $primary-color!important;
+        }
+    }
+    
+    .leaderboard-wrapper {
+        height: 50px;
+        .leader-btn {
+            box-shadow: 2px 5px 5px rgba(7, 117, 132, 0.84);
+            font-size: 16px!important;
+            padding: 10px;
+            border-radius: 11px;
+            color: white;
+            background: $primary-color;
+        }
+    }
+    
+    .prop-wrapper {
+        width: 79%;
+    }
