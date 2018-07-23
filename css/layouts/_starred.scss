@@ -1,0 +1,32 @@
+.starred-subject {
+    color: white;
+    font-size: 25px;
+    margin-left: 18px;
+}
+
+.starred-chapter-wrapper {
+    display: flex;
+    color: white;
+    .starred{
+    margin: 10px;
+    box-shadow: 2px 2px 5px #3d3f40b8;
+    padding: 10px;
+    color: #3c3939;
+    border-radius: 13px;
+    font-size: 22px !important;
+    line-height: 0px;
+        }
+    .starred-chapter-name {
+        background-color: white;
+        .chpt-name {
+            
+            
+        }
+        .none-star-chpt{
+            margin-top: 20px;
+        }
+    }
+    .none-starred {
+        background-color: rgba(140, 173, 179, .45) !important;
+    }
+}
