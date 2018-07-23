@@ -55,7 +55,7 @@ inq.config(['$routeProvider',
         }).
         when('/tests/:controllername', {
             templateUrl: 'views/fullPageTemplate.html',
-          controller:'commontestsCtrl'
+            controller: 'commontestsCtrl'
         }).
         when('/concepts/:chapterid', {
             templateUrl: 'views/halfPageTemplate.html',
@@ -95,7 +95,7 @@ inq.config(['$routeProvider',
         }).
 
         otherwise({
-            redirectTo: '/home'
+            redirectTo: '/login'
         });
   }
 ]);
@@ -138,7 +138,7 @@ inq.filter('percenttograde', function () {
             if (percent >= 91) {
 
                 return 'A';
-            } else if (percent >=75) {
+            } else if (percent >= 75) {
 
                 return 'B';
             } else if (percent >= 60) {

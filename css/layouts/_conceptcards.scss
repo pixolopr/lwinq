@@ -200,10 +200,15 @@
     background-position: left;
     background-repeat: no-repeat;
     background-size: 2900%;
-    height: 160px;
-    width: 160px;
-    -ms-transform: translate(-50%, -47.5%);
-    transform: translate(-21%, -28%);
+    height: 45px;
+    width: 45px;
+    -webkit-transform: translate(-21%,-28%);
+    transform: translate(-21%,-28%);
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    position: relative;
+    top: 9px;
+    right: -9px;
 }
 
 @keyframes heart-burst {
@@ -215,7 +220,7 @@
     }
 }
 
-.HeartAnimation:hover {
+.star-animation {
     animation-timing-function: steps(28);
     animation-name: heart-burst;
     animation-duration: .8s;
