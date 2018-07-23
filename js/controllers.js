@@ -169,8 +169,10 @@ inqcontroller.controller('practisecardsCtrl', ['$scope', 'TemplateService', 'Nav
 
 inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location', 'FileUploader', '$injector',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
+      
+      
+        console.log('Hello World!');
         console.log('conceptcardsCtrl');
-
         $scope.title = "ConceptCards";
         $rootScope.fullpageview = true;
         $scope.template = TemplateService;
