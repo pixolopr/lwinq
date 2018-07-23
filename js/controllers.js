@@ -329,7 +329,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
         };
         if ($scope.conceptid != 'practice') {
             NavigationService.getdatabyid('concepts', $scope.conceptid).then(getdatabyidsuccess, getdatabyiderror);
-        }else{
+        } else {
             var nav = {
                 location: $location.path(),
                 title: "Practice",
@@ -1338,6 +1338,17 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
         $rootScope.fullpageview = true;
         TemplateService.content = "views/profile.html";
         $scope.navigation = NavigationService.getnav();
+
+
+
+        $scope.user = $.jStorage.get('user');
+        $scope.user.type = usertypes[parseInt($scope.user.access_id) - 3].type;
+
+
+
+
+
+
 
   }
 ]);

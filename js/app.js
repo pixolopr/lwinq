@@ -37,7 +37,7 @@ inq.run(function ($rootScope, $location, $route, $interval) {
 inq.config(['$routeProvider','$locationProvider',
   function ($routeProvider,$locationProvider) {
     console.log($locationProvider);
-    $locationProvider.html5Mode(true);
+   
         $routeProvider.
         when('/home', {
             templateUrl: 'views/halfPageTemplate.html',
