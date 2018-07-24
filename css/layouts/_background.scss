@@ -40,17 +40,48 @@
 .ast-floating {
     height: 100px;
     transform: translatey(0px);
-	animation: float 6s ease-in-out infinite;
+	animation: float 30s ease-in-out infinite;
 }
 
+//@keyframes float {
+//	0% {
+//		transform: translatey(0px);
+//	}
+//	50% {
+//		transform: translatey(-20px);
+//	}
+//	100% {
+//		transform: translatey(0px);
+//	}   
+//    
+//}
+
+//@keyframes float {
+//        0% { transform: translate(50px, 0px);}
+//        10% { transform: translate(150px, -20px); }
+//        20% { transform: translate(250px, 0px); }
+//        30% { transform: translate(350px, -20px); }
+//        40% { transform: translate(450px, 0px); }
+//        50% { transform: translate(550px, -20px);}
+//        60% { transform: translate(650px, 0px); }
+//        70% { transform: translate(750px, -20px); }
+//        80% { transform: translate(850px, 0px);}
+//        90% { transform: translate(950px, -20px); }
+//        100% { transform: translate(1050px, 0px); }
+//}
+
+
 @keyframes float {
-	0% {
-		transform: translatey(0px);
-	}
-	50% {
-		transform: translatey(-20px);
-	}
-	100% {
-		transform: translatey(0px);
-	}
+        0% { transform: translate(50px, 0px);}
+        5% { transform: translate(800px, -20px); }
+        10% { transform: translate(300px, -20px); }
+        20% { transform: translate(550px, 0px); }
+        30% { transform: translate(800px, -20px); }
+        40% { transform: translate(1000px, 0px); }
+        50% { transform: translate(1150px, -20px);}
+        60% { transform: translate(1000px, 0px) scaleX(-1); }
+        70% { transform: translate(800px, -20px) scaleX(-1); }
+        80% { transform: translate(550px, 0px) scaleX(-1);}
+        90% { transform: translate(300px, -20px) scaleX(-1); }
+        100% { transform: translate(50px, 0px) scaleX(-1); }
 }
