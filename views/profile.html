@@ -99,13 +99,13 @@
 
                 <p class="standard title" ng-if="!editmode" style="color:white;">{{user.standard_name}} Standard</p>
 
-<<<<<<< HEAD
+
                 <select class="standard title" ng-model="$scope.user.standard" ng-if="editmode"><option ng-repeat="standard in standards" value="{{$index}}">{{standard.name}}</option></select>
 
                 <p class="standard title" style="color:white;">8th Standard</p>
-=======
+
                 <select class="standard-dropdown" ng-model="user.standard_id" ng-if="editmode"><option ng-repeat="standard in standards" value="{{standard.id}}">{{standard.name}}</option></select>
->>>>>>> c7d8ecd4b1a861b1eaa32fd6b16d13e5e2bd880b
+
 
             </div>
         </div>

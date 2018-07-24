@@ -743,7 +743,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             //CHECK IF BOOKMARKED OR TO REMOVE BOOKMARK
             //SET TEXT ACCORDINGLY
             var bookmarktoasttext = "This Question has been Bookmarked !"
-            /*ON SUCCESS OF BOOKMARKING*/
+                /*ON SUCCESS OF BOOKMARKING*/
             var $toastContent = $('<span>' + bookmarktoasttext + '</span>').add($('<button class="btn-flat toast-action" ng-click="bookmarkquestion()">Undo</button>'));
             Materialize.toast($toastContent, 3000);
         };
@@ -1522,9 +1522,14 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
         $rootScope.fullpageview = true;
         TemplateService.content = "views/starred.html";
         $scope.navigation = NavigationService.getnav();
+        $(document).ready(function () {
+            $('.modal').modal();
+//            $('.modal').open();
 
-  }
-]);
+        })
+                                  }
+
+                    ]);
 
 inqcontroller.controller('leaderboardCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
   function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
