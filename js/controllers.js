@@ -1113,6 +1113,15 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
                 });
 
                 $rootScope.conceptsprogress = Math.floor(((totalreadcards + totalreadquestions) / (totalquestions + totalcards)) * 100);
+                if ($rootScope.conceptsprogress >= 100) {
+                    setTimeout(function () {
+                        $(".rocket").attr("class", "moon-landing");
+                        $('.moon-hidden').addClass('moon-flag');
+
+                    }, 2100);
+
+
+                }
                 console.log($rootScope.conceptsprogress);
             }, 200, 1);
 

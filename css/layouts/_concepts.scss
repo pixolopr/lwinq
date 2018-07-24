@@ -1,4 +1,25 @@
-////Rocket Animations 
+
+//Rocket Animations
+.moon-landing {
+    animation: moonlanding 3s;
+    animation-fill-mode: forwards;
+    height: 100px;
+    position: absolute;
+    top: 105px;
+    z-index: 1;
+    left: 77% !important;
+    @media only screen and (min-width: 1600px) {
+        left: 78% !important;
+    }
+    @media only screen and (min-width:1700px) {
+        left: 79% !important;
+    }
+
+    @media only screen and (min-width:1700px) {
+        left: 79.5% !important;
+    }
+
+////Rocket Animations
 //.moon-landing {
 //    display: block !important;
 //    animation: moonlanding 3s;
@@ -14,7 +35,7 @@
 //      @media only screen and (min-width:1700px) {
 //       left: 79% !important;
 //    }
-//    
+//
 //    @media only screen and (min-width:1700px) {
 //       left: 79.5% !important;
 //    }
@@ -39,6 +60,7 @@
 
 .rocket-hidden {
     display: none;
+
 }
 
 
@@ -108,11 +130,15 @@
     z-index: 1;
     top: 102px;
     left: 87%;
-   
+
 }
 
 .moon-hidden {
     display: none;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3d1eaca4cda712e102af6a0c5424e84f70f1bf63
 }
 
 .moon-flag {
@@ -126,10 +152,10 @@
     animation-delay: 2s;
     @media only screen and (min-width: 1500px) {
         right: 4%;
-	}
-   
-     @media only screen and (min-width:1700px) {
-       right: 5%;
+    }
+
+    @media only screen and (min-width:1700px) {
+        right: 5%;
     }
 }
 
@@ -155,6 +181,7 @@
 .rocketloading {
     position: relative;
     hr {
+<<<<<<< HEAD
     border: none;
     border-top: 2px dashed #ffffff;
     color: #fff;
@@ -168,6 +195,22 @@
 }
     }
     //
+=======
+
+
+
+
+        border: none;
+        border-top: 2px dashed #ffffff;
+        color: #fff;
+        height: 1px;
+        width: 79%;
+        left: 12%;
+        top: 143px;
+        z-index: 0;
+        position: absolute;
+    } //
+>>>>>>> 3d1eaca4cda712e102af6a0c5424e84f70f1bf63
     //        border: none;
     //        border-top: 2px dotted #27626c;
     //        color: #fff;
@@ -181,7 +224,7 @@
 }
 
 
-//Rocket Animations Ends 
+//Rocket Animations Ends
 /*CONCEPTS TIMELINE*/
 
 .commonbox {
