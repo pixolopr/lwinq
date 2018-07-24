@@ -1,32 +1,56 @@
 .starred-subject {
-    color: white;
+    color: rgba(18, 18, 19, 0.85);
     font-size: 25px;
     margin-left: 18px;
 }
 
 .starred-chapter-wrapper {
+    text-align: center;
     display: flex;
     color: white;
-    .starred{
-    margin: 10px;
-    box-shadow: 2px 2px 5px #3d3f40b8;
-    padding: 10px;
-    color: #3c3939;
-    border-radius: 13px;
-    font-size: 22px !important;
-    line-height: 0px;
+    .starred {
+        margin-left: 25px;
+        height: 132px;
+        width: 126px;
+        margin: 10px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 10px;
+        color: #3c3939;
+        border-radius: 13px;
+        font-size: 18px !important;
+        .chapter-no {
+            margin: 0px
         }
-    .starred-chapter-name {
-        background-color: white;
-        .chpt-name {
-            
-            
+        .chapter-name {
+            word-spacing: normal;
+            text-transform: capitalize;
+            margin-top: 49px !important;
+            text-align: left !important;
+            color: #000;
+            line-height: 15px!important;
+            font-size: 13px!important;
         }
-        .none-star-chpt{
-            margin-top: 20px;
+        .nonestar-chapter-name {
+            word-spacing: normal;
+            text-transform: capitalize;
+            margin-top: 0!important;
+            text-align: left!important;
+            color: #000;
+            line-height: 15px!important;
+            font-size: 13px!important;
         }
     }
-    .none-starred {
-        background-color: rgba(140, 173, 179, .45) !important;
-    }
+}
+
+.chapter-name-wrapper {
+    margin-left: 25px;
+    background-color: white;
+}
+
+.none-starred {
+    margin-left: 25px;
+    height: 132px;
+    width: 126px;
+    background-color: rgba(255, 255, 255, 0.42);
+    /*background-color: rgba(140, 173, 179, .45) !important;*/
 }
