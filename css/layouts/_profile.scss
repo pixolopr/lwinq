@@ -147,8 +147,13 @@
         text-align: center;
     }
 
-//    input[type] {
-//        text-align: center;
-//
-//
-//    }
+    .title {
+        text-align: center !important;
+    }
+
+    .standard-dropdown {
+        display: block;
+        height: 10pox;
+        height: 30px;
+        margin-top: 10px;
+    }

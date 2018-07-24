@@ -169,8 +169,8 @@ inqcontroller.controller('practisecardsCtrl', ['$scope', 'TemplateService', 'Nav
 
 inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location', 'FileUploader', '$injector',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
-      
-      
+
+
         console.log('Hello World!');
         console.log('conceptcardsCtrl');
         $scope.title = "ConceptCards";
@@ -1347,6 +1347,7 @@ inqcontroller.controller('chaptersCtrl', ['$scope', 'TemplateService', 'Navigati
 
         // routing
         $scope.gotoconcepts = function (id) {
+            $rootScope.conceptsprogress = 0;
             $location.path("/concepts/" + id);
         };
 
