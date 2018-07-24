@@ -743,7 +743,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             //CHECK IF BOOKMARKED OR TO REMOVE BOOKMARK
             //SET TEXT ACCORDINGLY
             var bookmarktoasttext = "This Question has been Bookmarked !"
-                /*ON SUCCESS OF BOOKMARKING*/
+            /*ON SUCCESS OF BOOKMARKING*/
             var $toastContent = $('<span>' + bookmarktoasttext + '</span>').add($('<button class="btn-flat toast-action" ng-click="bookmarkquestion()">Undo</button>'));
             Materialize.toast($toastContent, 3000);
         };
@@ -1524,12 +1524,35 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
         $scope.navigation = NavigationService.getnav();
         $(document).ready(function () {
             $('.modal').modal();
-//            $('.modal').open();
+            //            $('.modal').open();
 
         })
-                                  }
 
-                    ]);
+
+        /*CALLBACK*/
+        getstarredcardssuccess = function (response) {
+            console.log(response);
+            $scope.starredcards = response.data;
+            $scope.starredcards.forEach(function (subjects) {
+                subjects.chapters.forEach(function (chapters) {
+                    chapters.cardscount = 0;
+                    chapters.concepts.forEach(function (concepts) {
+                        chapters.cardscount += concepts.concards.length;
+                    })
+                    console.log(chapters.cardscount);
+                })
+
+            });
+        };
+        getstarredcardserror = function (error) {
+            console.log(error);
+        };
+
+        NavigationService.getstarredcards().then(getstarredcardssuccess, getstarredcardserror);
+
+
+}
+]);
 
 inqcontroller.controller('leaderboardCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
   function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {

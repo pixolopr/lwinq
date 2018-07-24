@@ -18,45 +18,46 @@
     @media only screen and (min-width:1700px) {
         left: 79.5% !important;
     }
+}
 
 ////Rocket Animations
-//.moon-landing {
-//    display: block !important;
-//    animation: moonlanding 3s;
-//    animation-fill-mode: forwards;
-//    height: 100px;
-//    position: absolute;
-//    top: 105px;
-//    z-index: 1;
-//    left: 77% !important;
-//    @media only screen and (min-width:1600px) {
-//       left: 78% !important;
-//    }
-//      @media only screen and (min-width:1700px) {
-//       left: 79% !important;
-//    }
-//
-//    @media only screen and (min-width:1700px) {
-//       left: 79.5% !important;
-//    }
-//}
-//
-//@keyframes moonlanding {
-//    0% {
-//        transform: translate(40px, -40px) rotate(-45deg);
-//    }
-//    50% {
-//        transform: translate(127px, -90px) rotate(-45deg);
-//    }
-//    80% {
-//        transform: translate(127px, -70px) rotate(-90deg);
-//        height: 60px;
-//    }
-//    100% {
-//        transform: translate(127px, -45px) rotate(-90deg);
-//        height: 60px;
-//    }
-//}
+.moon-landing {
+    display: block !important;
+    animation: moonlanding 3s;
+    animation-fill-mode: forwards;
+    height: 100px;
+    position: absolute;
+    top: 105px;
+    z-index: 1;
+    left: 77% !important;
+    @media only screen and (min-width:1600px) {
+       left: 78% !important;
+    }
+      @media only screen and (min-width:1700px) {
+       left: 79% !important;
+    }
+
+    @media only screen and (min-width:1700px) {
+       left: 79.5% !important;
+    }
+}
+
+@keyframes moonlanding {
+    0% {
+        transform: translate(40px, -40px) rotate(-45deg);
+    }
+    50% {
+        transform: translate(127px, -90px) rotate(-45deg);
+    }
+    80% {
+        transform: translate(127px, -70px) rotate(-90deg);
+        height: 60px;
+    }
+    100% {
+        transform: translate(127px, -45px) rotate(-90deg);
+        height: 60px;
+    }
+}
 
 .rocket-hidden {
     display: none;
@@ -374,5 +375,4 @@
     border-style: solid;
     border-color: transparent transparent #00bcd4 transparent;
 
-}
 }
