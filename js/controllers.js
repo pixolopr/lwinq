@@ -1096,6 +1096,30 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
                     $interval.cancel(style);
                 };
             }, 50, 0);
+
+
+
+            var getscoreprogress = $interval(function () {
+                var totalcards = 0,
+                    totalreadcards = 0,
+                    totalquestions = 0,
+                    totalreadquestions = 0;
+                $scope.concepts.forEach(function (element) {
+                    totalcards += parseInt(element.totalcards);
+                    totalreadcards += parseInt(element.totalreadcards);
+                    totalquestions += parseInt(element.totalquestions);
+                    totalreadquestions += parseInt(element.totalreadquestions);
+
+                });
+
+                $rootScope.conceptsprogress = Math.floor(((totalreadcards + totalreadquestions) / (totalquestions + totalcards)) * 100);
+                console.log($rootScope.conceptsprogress);
+            }, 200, 1);
+
+
+
+
+
         };
 
         var getconceptsbychapteriderror = function (response) {
@@ -1341,6 +1365,47 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
         TemplateService.content = "views/profile.html";
         $scope.navigation = NavigationService.getnav();
 
+        $scope.editmode = false;
+        var originaluserdata = {};
+        $scope.user = $.jStorage.get('user');
+        $scope.user.type = usertypes[parseInt($scope.user.access_id) - 3].type;
+
+        getstandardsuccess = function (response) {
+            console.log(response.data);
+            $scope.standards = response.data;
+        };
+        getstandarderror = function (error) {
+            console.log(error.data);
+        };
+
+
+        $scope.editprofile = function () {
+            $scope.editmode = true;
+            originaluserdata = angular.copy($scope.user);
+            NavigationService.getstandardsbyboardid($.jStorage.get('user').board_id).then(getstandardsuccess, getstandarderror);
+        };
+
+
+        $scope.cancelupdate = function () {
+            for (var key in originaluserdata) {
+                $scope.user[key] = originaluserdata[key];
+            }
+            $scope.editmode = false;
+            console.log($scope.user);
+        }
+
+        //UPDATE PROFILE
+        $scope.updateprofile = function () {
+
+
+
+        }
+
+
+
+
+
+
   }
 ]);
 
@@ -1521,6 +1586,7 @@ inqcontroller.controller('appCtrl', ['$scope', 'TemplateService', '$location', '
   function ($scope, TemplateService, $location, $rootScope, NavigationService, $route) {
 
         $rootScope.showmenu = true;
+        $rootScope.conceptsprogress = 0;
 
         console.log('App Ctrl');
   }

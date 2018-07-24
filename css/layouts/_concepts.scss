@@ -1,49 +1,79 @@
 //Rocket Animations 
-
 .moon-landing {
     animation: moonlanding 3s;
     animation-fill-mode: forwards;
-     height: 100px;
-        position: absolute;
-        top: 105px;        
-        z-index: 1;
+    height: 100px;
+    position: absolute;
+    top: 105px;
+    z-index: 1;
 }
 
 @keyframes moonlanding {
-    0% { transform: translate(40px, -40px) rotate(-45deg);}
-    50% { transform: translate(127px, -90px) rotate(-45deg);}
-    80% { transform: translate(127px, -70px) rotate(-90deg);
-          height: 60px;}
-    100% { transform: translate(127px, -45px) rotate(-90deg);
-           height: 60px;}
+    0% {
+        transform: translate(40px, -40px) rotate(-45deg);
+    }
+    50% {
+        transform: translate(127px, -90px) rotate(-45deg);
+    }
+    80% {
+        transform: translate(127px, -70px) rotate(-90deg);
+        height: 60px;
+    }
+    100% {
+        transform: translate(127px, -45px) rotate(-90deg);
+        height: 60px;
+    }
 }
 
 
 
 
 
-//.rocket-img {
-//        height: 100px;
-//        position: absolute;
-//        top: 103px;        
-//        z-index: 1;
-//        animation: shake 2s infinite; 
-//          left: 17%;
-//}
-//
-//@keyframes shake {
-//    0% { transform: rotate(0deg); }
-//    10% { transform: rotate(-1deg); }
-//    20% { transform: rotate(1deg); }
-//    30% { transform: rotate(0deg); }
-//    40% { transform: rotate(1deg); }
-//    50% { transform: rotate(-1deg); }
-//    60% { transform: rotate(0deg); }
-//    70% { transform: rotate(-1deg); }
-//    80% { transform: rotate(1deg); }
-//    90% { transform: rotate(0deg); }
-//    100% { transform:rotate(-1deg); }
-//}
+.rocket-img {
+    height: 100px;
+    position: absolute;
+    top: 103px;
+    z-index: 1;
+    animation: shake 2s infinite;
+    left: 0%;
+    transition: left 2s ease-in;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(-1deg);
+    }
+    20% {
+        transform: rotate(1deg);
+    }
+    30% {
+        transform: rotate(0deg);
+    }
+    40% {
+        transform: rotate(1deg);
+    }
+    50% {
+        transform: rotate(-1deg);
+    }
+    60% {
+        transform: rotate(0deg);
+    }
+    70% {
+        transform: rotate(-1deg);
+    }
+    80% {
+        transform: rotate(1deg);
+    }
+    90% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-1deg);
+    }
+}
 
 
 
@@ -52,7 +82,7 @@
     height: 160px;
     position: absolute;
     top: 68px;
-    left: 30px;
+    left: 3%;
     z-index: 1;
 }
 
@@ -63,7 +93,8 @@
     z-index: 1;
     top: 102px;
     left: 87%;
-    
+    right: 6%;
+    left: 950px;
 }
 
 .moon-flag {
@@ -71,24 +102,26 @@
     position: absolute;
     right: 3%;
     top: 112px;
-  
+
     animation: moonflag 3s;
     animation-fill-mode: forwards;
-   }
+}
 
 @keyframes moonflag {
-//    0% { transform: translate(40px, -40px);}
-////    10% { transform: translate(40px, -40px) rotate(-45deg); }
-////    20% { transform: translate(50px, -50px) rotate(-35deg); }
-////    30% { transform: translate(60px, -60px) rotate(-25deg); }
-////    40% { transform: translate(70px, -70px) rotate(-15deg); }
-//    50% { transform: translate(127px, -90px);}
-////          height: 60px;}
-////    60% { transform: translate(110px, -70px) rotate(-90deg); }
-////    70% { transform: translate(110px, -10px) rotate(-90deg); }
-//    80% { transform: translate(127px, -70px);}
-////    90% { transform: translate(110px, -70px) rotate(-90deg); }
-    100% { transform: translate(25px, -40px) rotate(35deg);}
+    //    0% { transform: translate(40px, -40px);}
+    ////    10% { transform: translate(40px, -40px) rotate(-45deg); }
+    ////    20% { transform: translate(50px, -50px) rotate(-35deg); }
+    ////    30% { transform: translate(60px, -60px) rotate(-25deg); }
+    ////    40% { transform: translate(70px, -70px) rotate(-15deg); }
+    //    50% { transform: translate(127px, -90px);}
+    ////          height: 60px;}
+    ////    60% { transform: translate(110px, -70px) rotate(-90deg); }
+    ////    70% { transform: translate(110px, -10px) rotate(-90deg); }
+    //    80% { transform: translate(127px, -70px);}
+    ////    90% { transform: translate(110px, -70px) rotate(-90deg); }
+    100% {
+        transform: translate(25px, -40px) rotate(35deg);
+    }
 }
 
 
@@ -97,9 +130,8 @@
     position: relative;
     hr {
     border: none;
-    border-top: 2px dotted #27626c;
+    border-top: 2px dashed #ffffff;
     color: #fff;
-    background-color: #fff;
     height: 1px;
     width: 79%;
     left: 12%;
@@ -107,11 +139,21 @@
     z-index: 0;
     position: absolute;
 }
-}
+
+        border: none;
+        border-top: 2px dotted #27626c;
+        color: #fff;
+        background-color: #fff;
+        height: 1px;
+        width: 79%;
+        left: 12%;
+        top: 143px;
+        z-index: 0;
+        position: absolute;
+    }
+
+
 //Rocket Animations Ends 
-
-
-
 /*CONCEPTS TIMELINE*/
 
 .commonbox {
