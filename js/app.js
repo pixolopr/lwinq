@@ -35,8 +35,10 @@ inq.run(function ($rootScope, $location, $route, $interval) {
 });
 
 
-inq.config(['$routeProvider',
-  function ($routeProvider) {
+inq.config(['$routeProvider','$locationProvider',
+  function ($routeProvider,$locationProvider) {
+    console.log($locationProvider);
+   
         $routeProvider.
         when('/home', {
             templateUrl: 'views/halfPageTemplate.html',
@@ -98,6 +100,9 @@ inq.config(['$routeProvider',
         otherwise({
             redirectTo: '/login'
         });
+          // $routeProvider.html5Mode(true);
+
+
   }
 ]);
 

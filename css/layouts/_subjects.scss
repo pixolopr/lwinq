@@ -46,10 +46,13 @@
 .subbox4 {
     text-align: center;
 }
-.subject-icons{
-    svg{
-        path{
-            fill:grey !important;
+
+.subject-icons {
+    svg {
+        height: 100%;
+        width: 100%;
+        path {
+            fill: grey !important;
         }
     }
 }
