@@ -52,7 +52,7 @@
     height: 160px;
     position: absolute;
     top: 68px;
-    left: 30px;
+    left: 3%;
     z-index: 1;
 }
 
@@ -62,7 +62,7 @@
     top: 100px;
     z-index: 1;
     top: 102px;
-    left: 950px;
+    right: 6%;
     
 }
 
@@ -97,9 +97,9 @@
     position: relative;
     hr {
     border: none;
-    border-top: 2px dotted #27626c;
+    border-top: 2px dashed #ffffff;
     color: #fff;
-    background-color: #fff;
+    
     height: 1px;
     width: 79%;
     left: 12%;
