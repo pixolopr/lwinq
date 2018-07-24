@@ -1114,6 +1114,12 @@ inqcontroller.controller('conceptsCtrl', ['$scope', 'TemplateService', 'Navigati
 
                 $rootScope.conceptsprogress = Math.floor(((totalreadcards + totalreadquestions) / (totalquestions + totalcards)) * 100);
                 console.log($rootScope.conceptsprogress);
+                if ($rootScope.conceptsprogress >= 100) {
+                    console.log($('.rocket').removeClass('.rocket-img'));
+                    $('.rocket').removeClass('.rocket-img');
+                    $('.rocket').addClass('.moon-landing');
+                    $scope.$apply();
+                }
             }, 200, 1);
 
 
