@@ -7,15 +7,15 @@
     top: 105px;
     z-index: 1;
     left: 77% !important;
-    @media only screen and (min-width:1600px) {
-       left: 78% !important;
+    @media only screen and (min-width: 1600px) {
+        left: 78% !important;
     }
-      @media only screen and (min-width:1700px) {
-       left: 79% !important;
-    }
-    
     @media only screen and (min-width:1700px) {
-       left: 79.5% !important;
+        left: 79% !important;
+    }
+
+    @media only screen and (min-width:1700px) {
+        left: 79.5% !important;
     }
 }
 
@@ -99,22 +99,13 @@
     top: 100px;
     z-index: 1;
     top: 102px;
-<<<<<<< HEAD
-
-    right: 6%;
-    
-
-    left: 950px;
-
-
-=======
     left: 87%;
-   
+
 }
 
 .moon-hidden {
     display: none;
->>>>>>> c7d8ecd4b1a861b1eaa32fd6b16d13e5e2bd880b
+
 }
 
 .moon-flag {
@@ -127,10 +118,10 @@
     animation-fill-mode: forwards;
     @media only screen and (min-width: 1500px) {
         right: 4%;
-	}
-   
-     @media only screen and (min-width:1700px) {
-       right: 5%;
+    }
+
+    @media only screen and (min-width:1700px) {
+        right: 5%;
     }
 }
 
@@ -156,23 +147,10 @@
 .rocketloading {
     position: relative;
     hr {
-<<<<<<< HEAD
 
-    border: none;
-    border-top: 2px dashed #ffffff;
-    color: #fff;
-    
-    height: 1px;
-    width: 79%;
-    left: 12%;
-    top: 143px;
-    z-index: 0;
-    position: absolute;
-}
 
-        
 
-=======
+
         border: none;
         border-top: 2px dashed #ffffff;
         color: #fff;
@@ -182,8 +160,7 @@
         top: 143px;
         z-index: 0;
         position: absolute;
-    }
-    //
+    } //
     //        border: none;
     //        border-top: 2px dotted #27626c;
     //        color: #fff;
@@ -194,7 +171,6 @@
     //        top: 143px;
     //        z-index: 0;
     //        position: absolute;
->>>>>>> c7d8ecd4b1a861b1eaa32fd6b16d13e5e2bd880b
 }
 
 
