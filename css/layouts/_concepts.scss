@@ -6,6 +6,17 @@
     position: absolute;
     top: 105px;
     z-index: 1;
+    left: 77% !important;
+    @media only screen and (min-width:1600px) {
+       left: 78% !important;
+    }
+      @media only screen and (min-width:1700px) {
+       left: 79% !important;
+    }
+    
+    @media only screen and (min-width:1700px) {
+       left: 79.5% !important;
+    }
 }
 
 @keyframes moonlanding {
@@ -24,10 +35,6 @@
         height: 60px;
     }
 }
-
-
-
-
 
 .rocket-img {
     height: 100px;
@@ -93,18 +100,28 @@
     z-index: 1;
     top: 102px;
     left: 87%;
-    right: 6%;
-    left: 950px;
+   
+}
+
+.moon-hidden {
+    display: none;
 }
 
 .moon-flag {
+    display: block;
     height: 50px;
     position: absolute;
     right: 3%;
     top: 112px;
-
     animation: moonflag 3s;
     animation-fill-mode: forwards;
+    @media only screen and (min-width: 1500px) {
+        right: 4%;
+	}
+   
+     @media only screen and (min-width:1700px) {
+       right: 5%;
+    }
 }
 
 @keyframes moonflag {
