@@ -43,20 +43,10 @@
     height: 100px;
     transform: translatey(0px);
 	animation: float 100s ease-in-out infinite;
+        z-index: 10;
 }
 
-//@keyframes float {
-//	0% {
-//		transform: translatey(0px);
-//	}
-//	50% {
-//		transform: translatey(-20px);
-//	}
-//	100% {
-//		transform: translatey(0px);
-//	}   
-//    
-//}
+
 
 @keyframes float {
         0% { transform: translate(50px, 0px);}
@@ -80,4 +70,72 @@
         90% { transform: translate(250px,  0px)scaleX(-1); }
         95% { transform: translate(150px, -30px)scaleX(-1); }
         100% { transform: translate(50px, 0px)scaleX(-1); }
+}
+
+
+.mars {
+    height: 30px;
+    position: relative;
+    top: 50px;
+    animation: marsfloat 3s ease-in-out infinite;
+}
+
+@keyframes marsfloat {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}   
+    
+}
+
+.jupiter {
+    height: 70px;
+    position: relative;
+    left: 75%;
+    top: 70px;
+    animation: jupiterfloat 3.5s ease-in-out infinite;
+}
+
+@keyframes jupiterfloat {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-5px);
+	}
+	100% {
+		transform: translatey(0px);
+	}   
+    
+}
+
+
+
+.saturn {
+    height: 50px;
+    position: relative;
+    left: 50%;
+    bottom: 30px;
+    animation: jupiterfloat 3s ease-in-out infinite;
+
+}
+
+
+
+@keyframes saturnfloat {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-7px);
+	}
+	100% {
+		transform: translatey(0px);
+	}   
+    
 }
