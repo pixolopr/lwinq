@@ -2,6 +2,7 @@ var navigationservice = angular.module('navigationservice', [])
 
 .factory('NavigationService', function ($http) {
 
+<<<<<<< HEAD
     //MACBOOK AND HOME LAPTOP
     //        var adminurl = "http://localhost/rest/rest/index.php/";
     //PC
@@ -9,6 +10,15 @@ var navigationservice = angular.module('navigationservice', [])
     //SERVER
     var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
     //HOME LAPTOP
+=======
+        //MACBOOK AND HOME LAPTOP
+//        var adminurl = "http://localhost/rest/rest/index.php/";
+        //PC
+        //var adminurl = "http://localhost/inqrest/rest/index.php/";
+        //SERVER
+                var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+        //HOME LAPTOP
+>>>>>>> 9dc7e112659fb756c240f3d91f1fb73a047a3e91
 
     var navigation = [{
         name: "Home",

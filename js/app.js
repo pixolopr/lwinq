@@ -96,6 +96,11 @@ inq.config(['$routeProvider','$locationProvider',
             templateUrl: 'views/fullPageTemplate.html',
             controller: 'leaderboardCtrl'
         }).
+           when('/starredcards', {
+            templateUrl: 'views/starredcards.html',
+            controller: 'starredcardsCtrl'
+        }).
+
 
         otherwise({
             redirectTo: '/login'
