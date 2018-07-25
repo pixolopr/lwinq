@@ -1634,3 +1634,12 @@ inqcontroller.controller('appCtrl', ['$scope', 'TemplateService', '$location', '
         console.log('App Ctrl');
   }
 ]);
+
+
+inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', '$location', '$rootScope', 'NavigationService', '$route',
+  function ($scope, TemplateService, $location, $rootScope, NavigationService, $route) {
+
+       
+  }
+]);
+
