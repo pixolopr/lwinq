@@ -8,7 +8,7 @@
     <h4 class="starred-subject">{{starcarddata.name}}</h4>
     <div class="starred-chapter-wrapper">
 
-        <div class=" starred "  ng-class="{'none-starred':chapter.cardscount==0,'chapter-name-wrapper':chapter.cardscount>0}"  ng-repeat="chapter in starcarddata.chapters">
+        <div class=" starred " ng-class="{'none-starred':chapter.cardscount==0,'chapter-name-wrapper':chapter.cardscount>0}" ng-repeat="chapter in starcarddata.chapters">
             <p class="chapter-no">{{$index+1}}</p>
             <svg enable-background="new 0 0 612 792" width="50px" height="50px" version="1.1" viewBox="0 0 612 792" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" ng-if="chapter.cardscount==0">
             <path d="m317 132c-137 0-248 111-248 248s111 248 248 248 248-111 248-248-111-248-248-248zm0 406.3c-19.4 0-32.7-14.9-32.7-34.3 0-19.9 13.8-34.3 32.7-34.3 19.9 0 32.7 14.4 32.7 34.3 0 19.4-12.8 34.3-32.7 34.3zm12.9-131c-4.9 16.8-20.5 17.1-25.7 0-6-19.8-27.2-94.8-27.2-143.5 0-64.3 80.4-64.6 80.4 0 0 49-22.4 126-27.5 143.5z" fill="white" />
@@ -32,18 +32,17 @@
 
 <!--End Biology Subject wrapper-->
 
-<!-- Modal Trigger -->
-<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<div id="concept-modal" class="modal">
     <div class="modal-content">
         <h4>Modal Header</h4>
         <p>A bunch of text</p>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a class="modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
 </div>
 <!-- Modal Trigger -->
-<button data-target="#modal1" class="btn modal-trigger">Modal</button>
+<button data-target="#modal1" class="btn modal-trigger" ng-click="openconcepts()">Modal</button>

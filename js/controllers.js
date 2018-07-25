@@ -1524,10 +1524,15 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
         $scope.navigation = NavigationService.getnav();
         $(document).ready(function () {
             $('.modal').modal();
-            //            $('.modal').open();
+
 
         })
 
+
+        $scope.openconcepts = function () {
+            console.log('Called');
+            $('#concept-modal').modal('open');
+        };
 
         /*CALLBACK*/
         getstarredcardssuccess = function (response) {
