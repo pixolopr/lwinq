@@ -4,7 +4,7 @@ var navigationservice = angular.module('navigationservice', [])
 
 
     //MACBOOK AND HOME LAPTOP
-    var adminurl = "http://localhost/rest/index.php/";
+    var adminurl = "http://localhost/rest/rest/index.php/";
     //PC
     //var adminurl = "http://localhost/inqrest/rest/index.php/";
     //SERVER
