@@ -2,23 +2,16 @@ var navigationservice = angular.module('navigationservice', [])
 
 .factory('NavigationService', function ($http) {
 
-<<<<<<< HEAD
+
     //MACBOOK AND HOME LAPTOP
-    //        var adminurl = "http://localhost/rest/rest/index.php/";
+    var adminurl = "http://localhost/rest/rest/index.php/";
     //PC
     //var adminurl = "http://localhost/inqrest/rest/index.php/";
     //SERVER
-    var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+    //    var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+    //    SERVER TEST
+    //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
     //HOME LAPTOP
-=======
-        //MACBOOK AND HOME LAPTOP
-//        var adminurl = "http://localhost/rest/rest/index.php/";
-        //PC
-        //var adminurl = "http://localhost/inqrest/rest/index.php/";
-        //SERVER
-                var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
-        //HOME LAPTOP
->>>>>>> 9dc7e112659fb756c240f3d91f1fb73a047a3e91
 
     var navigation = [{
         name: "Home",
@@ -265,9 +258,9 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             });
         },
-        getstarredcards: function (conceptid) {
+        getchaptersgroupbysubject: function (conceptid) {
             return $http({
-                url: adminurl + 'User_conceptcards_starred/starredcards',
+                url: adminurl + 'User_conceptcards_starred/getchaptersgroupbysubjects',
                 method: "GET",
                 params: {
                     user_id: $.jStorage.get('user').id,

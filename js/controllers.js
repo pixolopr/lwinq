@@ -743,7 +743,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             //CHECK IF BOOKMARKED OR TO REMOVE BOOKMARK
             //SET TEXT ACCORDINGLY
             var bookmarktoasttext = "This Question has been Bookmarked !"
-            /*ON SUCCESS OF BOOKMARKING*/
+                /*ON SUCCESS OF BOOKMARKING*/
             var $toastContent = $('<span>' + bookmarktoasttext + '</span>').add($('<button class="btn-flat toast-action" ng-click="bookmarkquestion()">Undo</button>'));
             Materialize.toast($toastContent, 3000);
         };
@@ -1529,10 +1529,15 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
         })
 
 
-        $scope.openconcepts = function () {
+        $scope.getconcepts = function (subjectindex, chapterindex) {
             console.log('Called');
+            $scope.subjectindex = subjectindex;
+            $scope.chapterindex = chapterindex;
             $('#concept-modal').modal('open');
         };
+        $scope.getstarredcards = function (conceptid) {
+            $location.path("/starredcards/" + conceptid);
+        }
 
         /*CALLBACK*/
         getstarredcardssuccess = function (response) {
@@ -1542,7 +1547,7 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
                 subjects.chapters.forEach(function (chapters) {
                     chapters.cardscount = 0;
                     chapters.concepts.forEach(function (concepts) {
-                        chapters.cardscount += concepts.concards.length;
+                        chapters.cardscount += parseInt(concepts.starredcardcount);
                     })
                     console.log(chapters.cardscount);
                 })
@@ -1553,7 +1558,7 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
             console.log(error);
         };
 
-        NavigationService.getstarredcards().then(getstarredcardssuccess, getstarredcardserror);
+        NavigationService.getchaptersgroupbysubject().then(getstarredcardssuccess, getstarredcardserror);
 
 
 }
@@ -1639,7 +1644,6 @@ inqcontroller.controller('appCtrl', ['$scope', 'TemplateService', '$location', '
 inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', '$location', '$rootScope', 'NavigationService', '$route',
   function ($scope, TemplateService, $location, $rootScope, NavigationService, $route) {
 
-       
+
   }
 ]);
-
