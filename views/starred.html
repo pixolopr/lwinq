@@ -6,7 +6,7 @@
 <!-- Subject wrapper-->
 <div ng-repeat="starcarddata in starredcards">
     <h4 class="starred-subject">{{starcarddata.name}}</h4>
-    <div class="starred-chapter-wrapper">
+    <div class="starred-chapter-wrapper row">
 
         <div class=" starred " ng-class="{'none-starred':chapter.cardscount==0,'chapter-name-wrapper':chapter.cardscount>0}" ng-repeat="chapter in starcarddata.chapters" ng-click="getconcepts($parent.$index,$index)">
             <p class="chapter-no">{{$index+1}}</p>
@@ -16,6 +16,7 @@
                 <path d="m317 469.7c-18.8 0-32.7 14.4-32.7 34.3 0 19.4 13.3 34.3 32.7 34.3 19.9 0 32.7-14.9 32.7-34.3 0-19.9-12.8-34.3-32.7-34.3z" fill="#060507" />
             </svg>
             <p ng-class="{'nonestar-chapter-name':chapter.cardscount==0,'chapter-name':chapter.cardscount>0}">{{chapter.name}} </p>
+            
         </div>
 
 
@@ -24,16 +25,12 @@
             <p class="chapter-no">{{$index+1}}</p>
             <p class="chapter-name">{{chapter.name}} </p>
         </div>
--->
+        -->
 
     </div>
 </div>
 
-
-
-
-<!--End Biology Subject wrapper-->
-
+<!--End Subject wrapper-->
 
 
 <!-- Modal Structure -->
@@ -43,7 +40,7 @@
 
         <!--Card-->
         <div class=" row">
-            <div class="col s12 m4" ng-repeat="concept in starredcards[subjectindex].chapters[chapterindex].concepts" ng-click="getstarredcards(concept.id)">
+            <div class="col s12 m4 concept-card-wrapper" ng-repeat="concept in starredcards[subjectindex].chapters[chapterindex].concepts" ng-click="getstarredcards(concept.id)">
 
                 <div class="cards concept-card-selector">
                     <div class="concept-card-selector-content">
@@ -51,19 +48,13 @@
                             {{concept.starredcardcount}} Cards
                         </p>
                     </div>
-                    <p>{{concept.name}}</p>
+                    <p class="concept-name">{{concept.name}}</p>
                 </div>
             </div>
 
         </div>
-
-
-
-
-
     </div>
 </div>
 <!-- <div class="modal-footer">
         <a class="modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>-->
-</div>

@@ -1,13 +1,19 @@
 .starred-subject {
     color: rgba(18, 18, 19, 0.85);
     font-size: 25px;
-    margin-left: 18px;
+    margin-left: 54px;
+    margin-top: 31px;
+    margin-bottom: 3px;
+    
 }
 
 .starred-chapter-wrapper {
     text-align: center;
     display: flex;
     color: white;
+    margin-left: 43px;
+    flex-wrap: wrap;
+    
     .starred {
         margin-left: 25px;
         height: 132px;
@@ -24,20 +30,22 @@
         .chapter-name {
             word-spacing: normal;
             text-transform: capitalize;
-            margin-top: 49px !important;
-            text-align: left !important;
+            margin-top: 49px;
+            text-align: center;
             color: #000;
-            line-height: 15px!important;
-            font-size: 14px!important;
+            font-family: ceraB;
+            line-height: 15px;
+            font-size: 14px;
         }
         .nonestar-chapter-name {
             word-spacing: normal;
+            font-family: ceraB;
             text-transform: capitalize;
             margin-top: 0!important;
-            text-align: left!important;
+            text-align: center;
             color: #000;
-            line-height: 15px!important;
-            font-size: 14px!important;
+            line-height: 15px;
+            font-size: 14px;
         }
     }
 }
@@ -59,11 +67,12 @@
     width: 58%;
     height: 100%;
     border-radius: 8px;
-    .concept-chapter-name {
+    /* .concept-chapter-name {
         border-bottom: 2px solid #00bcd4;
         margin-bottom: 24px !important;
         margin: 0px;
         color: $primary-color !important;
+        font-size: 27px;
         font-size: 27px;
     }
     .cards-wrapper {
@@ -84,12 +93,23 @@
             position: absolute;
             z-index: 1;
             bottom: -230px;
-            text-align: center;
-            font-size: 20px;
-            color: black;
-            text-transform: capitalize;
-        }
-    }
+            
+        }*/
+}
+
+.concept-chapter-name {
+    font-family: ceraB;
+    font-size: 25px;
+    margin: 0px;
+    padding: 5px;
+    color: black;
+    border-bottom: 3px solid #00bcd4;
+    margin-bottom: 24px !important;
+    
+}
+
+.concept-card-wrapper {
+    margin-bottom: 62px;
     .concept-card-selector {
         &-content {
             display: flex;
@@ -101,14 +121,13 @@
             z-index: 1;
             border-radius: 10px;
             width: 100%;
+            box-shadow: 0 0 9px rgba(0, 0, 0, 0.1);
             height: 100%;
             padding: 10px;
-            
         }
         height: 150px;
         width: 150px;
         margin: auto;
-        
         position: relative;
         &:before {
             transform: rotateZ(5deg);
@@ -116,7 +135,7 @@
             border: 2px solid $primary-color !important;
             border-radius: 10px;
             position: absolute;
-            box-shadow: 0 0 8px rgba(234, 231, 231, 0.2);
+            box-shadow: 0 0 9px rgba(0, 0, 0, 0.47);
             background: rgba(230, 225, 225, 0.97);
             top: 0px;
             z-index: -1;
@@ -129,7 +148,7 @@
             transform: rotateZ(-5deg);
             content: "";
             background: rgba(230, 225, 225, 0.97);
-            box-shadow: 0 0 2px rgba(162, 155, 155, 0.86);
+            box-shadow: 0 0 9px rgba(0, 0, 0, 0.59);
             border: 2px solid $primary-color !important;
             border-radius: 10px;
             position: absolute;
@@ -145,6 +164,15 @@
             color: $primary-color;
             font-family: ceraM;
             .card-title {}
+        }
+        .concept-name {
+            font-family: ceraM;
+            text-align: center;
+            font-size: 15px;
+            line-height: 15px;
+            margin: 9px;
+            color: black;
+            text-transform: capitalize;
         }
     }
 }
