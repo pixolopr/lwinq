@@ -4,11 +4,11 @@ var navigationservice = angular.module('navigationservice', [])
 
 
     //MACBOOK AND HOME LAPTOP
-    var adminurl = "http://localhost/rest/rest/index.php/";
+    var adminurl = "http://localhost/rest/index.php/";
     //PC
     //var adminurl = "http://localhost/inqrest/rest/index.php/";
     //SERVER
-    //    var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+//        var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
     //    SERVER TEST
     //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
     //HOME LAPTOP
@@ -258,13 +258,24 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             });
         },
-        getchaptersgroupbysubject: function (conceptid) {
+        getchaptersgroupbysubject: function () {
             return $http({
                 url: adminurl + 'User_conceptcards_starred/getchaptersgroupbysubjects',
                 method: "GET",
                 params: {
                     user_id: $.jStorage.get('user').id,
                     standard_id: $.jStorage.get('user').standard_id
+                }
+            });
+        },
+        
+        getstarredcards: function (user_id, concept_id) {
+            return $http({
+                url: adminurl + 'User_conceptcards_starred/getstarredcardsbyconceptanduserid',
+                method: "GET",
+                params: {
+                    user_id: $.jStorage.get('user').id,
+                    concept_id: $.jStorage.get('user').concept_id
                 }
             });
         },
