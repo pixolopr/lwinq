@@ -1,76 +1,71 @@
 <div class="">
 
     <div class="textcenter concept-name">
-        <h1 class="truncate">Starred Cards</h1>
+        <h1 class="truncate">{{conceptdata.name}}</h1>
     </div>
     <div class="row card-row">
         <div class="col s12 m2 l2 textcenter">
 
-            <div class="card-arrow-desktop">
+            <div class="card-arrow-desktop" ng-hide="(zindexarray[0]==conceptcards.length || conceptcards.length==1)">
                 <div class="" ng-click="changecardindex(-1)" id="nav-prev">
                     <i class="material-icons card-arrow-desktop">navigate_before</i>
                 </div>
             </div>
 
         </div>
-        <div class="col  s12 m8 l8 ">
+        <div class="col  s12 m8 l8 " ng-if="!showpractisecards">
 
             <div class="cardbox">
-                <div id="card1" class="cardspage">
-                    <div class="concepthead" >
+                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" ng-style="{ 'z-index':zindexarray[$index] }">
+                    <div class="concepthead" ng-if="$index!=conceptcards.length-1">
                         <div class="row conceptheadcentralize">
                             <div class="col s4"></div>
                             <div class="col s4 truncate textcenter">
                                 <h5 class="card-number">
-                                    1/12
+                                    {{$index+1}}/{{conceptcards.length-1}}
                                 </h5>
                             </div>
                             <div class="col s5">
-                                <i class="material-icons concepticon"></i>
-                                <i class="material-icons concepticon HeartAnimation"></i>
-                                <i class="material-icons concepticon">add</i>
+                                <i class="material-icons concepticon" ng-if="card.user_id!=0 && !otheruserscard" ng-click="changesharestatus(card.id)">{{card.shared==1?'lock_open':'lock_outline'}}</i>
+                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
+                                <i class="material-icons concepticon" ng-click="addcustomusercard()" ng-hide="conceptcards[$index].editmode">add</i>
                                 
                             </div>
                         </div>
                     </div>
-<!--
-                    <div class="scrollbar conceptcontent" id="carddata">
+                    <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-if="!card.editmode && card.user_id==0">
                     </div>
--->
-<!--
-                    <div class="custom-card-wrapper">
+                    <div class="custom-card-wrapper  " ng-if="card.user_id!=0">
                         <div class="scrollbar conceptcontent">
                             <div class="textcenter">
-                                <img class="img custom-image">
+                                <img ng-if="card.image&&!card.editmode" class="img custom-image" ng-src="{{card.image | imagepath}}">
                             </div>
 
-                            <div id="carddata">
+                            <div id="carddata" ng-bind="card.conceptdata" ng-if="!card.editmode">
                             </div>
 
 
 
 
-                            <div class="custom-card textcenter ">
-                              <input type='file' file-model="card.image" on-change-event="uploadfile()" />
-                                <div>
-                                    <i class="material-icons right" style="color:#f44336">cancel</i>
-                                    <img class="img " id="image{{$index}}"/>
+                            <div class="custom-card textcenter " ng-if="card.editmode">
+                                {{card.conceptdata.length}} out of 500 letters
+                                <input type='file' file-model="card.image" ng-if="!card.image" id="uploadimg{{$index}}" on-change-event="uploadfile()" />
+                                <div ng-if="card.image">
+                                    <i class="material-icons right" style="color:#f44336" ng-click="removeimage($index)">cancel</i>
+                                    <img class="img " id="image{{$index}}" ng-src="{{card.image|imagepath}}" />
                                 </div>
 
-                                <textarea></textarea>
+                                <textarea ng-model="card.conceptdata" ng-change="checklength()"></textarea>
                             </div>
                         </div>
-                        
-                        <div class="row edit-buttons-row">
-                            <div class="col s4 m4">CANCEL</div>
-                             <div class="col s4 m4">SHARE</div>
-                            <div class="col s4 m4 save-edit-button" >SAVE</div>
-                            <div class="col s4 m4 save-edit-button" >EDIT</div>
-                            <div class="col s4 m4 modal-trigger">DELETE</div>
+                        <div class="row edit-buttons-row" ng-class="{'edit-mode': card.editmode, 'save-mode': !card.editmode}" ng-if="card.user_id==user.id">
+                            <div class="col s4 m4" ng-click="cancelcustomcard($index)">CANCEL</div>
+                            <!-- <div class="col s4 m4">SHARE</div>-->
+                            <div class="col s4 m4 save-edit-button" ng-click="savecustomusercard()" ng-if="card.editmode">SAVE</div>
+                            <div class="col s4 m4 save-edit-button" ng-click="editcustomusercard()" ng-if="!card.editmode">EDIT</div>
+                            <div class="col s4 m4 modal-trigger" ng-click="deletecustomusercard()">DELETE</div>
                         </div>
                     </div>
--->
-                    <!-- <div  > ng-click="deletecustomusercard()"</div> -->
                 </div>
 
 
@@ -78,8 +73,34 @@
             </div>
 
         </div>
+        <div class="col  s12 m8 l8" ng-controller="practisecardsCtrl" ng-if="showpractisecards">
+
+            <div class="cardbox">
+                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" ng-style="{ 'z-index':zindexarray[$index] }">
+                    <div class="concepthead">
+                        <div class="row conceptheadcentralize">
+                            <div class="col s4"></div>
+                            <div class="col s4 truncate textcenter">
+                                <h5 class="card-number">
+                                    {{$index+1}}/{{conceptcards.length}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scrollbar conceptcontent">
+                        <div id="carddata" ng-bind="card.question" ng-if="card.format==1"></div>
+                        <div id="carddata" class="codetype-questions" ng-bind-html="card.question" ng-if="card.format==2"></div>
+                        <a class="waves-effect waves-light btn cyan" ng-click="showanswers[$index]=!showanswers[$index]" ng-if="$index!=(conceptcards.length-1)">View Answer</a>
+                        <div id="carddata" ng-bind="card.answer" ng-if="card.answerformat==1 && showanswers[$index]"></div>
+                        <div id="carddata" class="codetype-questions" ng-bind-html="card.answer" ng-if="card.answerformat==2 && showanswers[$index]"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div class="col s12 m2 l2 textcenter">
-            <div class="card-arrow-desktop">
+
+            <div class="card-arrow-desktop" ng-hide="(zindexarray[conceptcards.length-1]==conceptcards.length || conceptcards.length==1)">
                 <div class="" ng-click="changecardindex(1)" id="nav-next">
                     <i class="material-icons">navigate_next</i>
                 </div>
@@ -87,9 +108,6 @@
 
         </div>
     </div>
-
-    
-
 </div>
 <div id="delete-confirmation" class="modal">
     <div class="modal-content">

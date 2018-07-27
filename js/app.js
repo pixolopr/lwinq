@@ -96,7 +96,7 @@ inq.config(['$routeProvider','$locationProvider',
             templateUrl: 'views/fullPageTemplate.html',
             controller: 'leaderboardCtrl'
         }).
-           when('/starredcards', {
+           when('/starredcards/:conceptid', {
             templateUrl: 'views/starredcards.html',
             controller: 'starredcardsCtrl'
         }).
