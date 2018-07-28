@@ -4,7 +4,6 @@
     margin-left: 54px;
     margin-top: 31px;
     margin-bottom: 3px;
-    
 }
 
 .starred-chapter-wrapper {
@@ -13,7 +12,6 @@
     color: white;
     margin-left: 43px;
     flex-wrap: wrap;
-    
     .starred {
         margin-left: 25px;
         height: 132px;
@@ -63,16 +61,12 @@
     /*background-color: rgba(140, 173, 179, .45) !important;*/
 }
 
-.modal-overlay{
-    z-index: 0 !important;
-    display: none !important; 
-    opacity: 0!important;
-}
 
 .modal-wrapper {
     width: 58%;
     height: 100%;
     border-radius: 8px;
+    margin-right: 145px;
     /* .concept-chapter-name {
         border-bottom: 2px solid #00bcd4;
         margin-bottom: 24px !important;
@@ -111,7 +105,6 @@
     color: black;
     border-bottom: 3px solid #00bcd4;
     margin-bottom: 24px !important;
-    
 }
 
 .concept-card-wrapper {
@@ -176,7 +169,7 @@
             text-align: center;
             font-size: 15px;
             line-height: 15px;
-            margin: 9px;
+            margin: 9px 0px;
             color: black;
             text-transform: capitalize;
         }

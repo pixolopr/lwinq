@@ -16,7 +16,7 @@
                 <path d="m317 469.7c-18.8 0-32.7 14.4-32.7 34.3 0 19.4 13.3 34.3 32.7 34.3 19.9 0 32.7-14.9 32.7-34.3 0-19.9-12.8-34.3-32.7-34.3z" fill="#060507" />
             </svg>
             <p ng-class="{'nonestar-chapter-name':chapter.cardscount==0,'chapter-name':chapter.cardscount>0}">{{chapter.name}} </p>
-            
+
         </div>
 
 
@@ -44,11 +44,13 @@
 
                 <div class="cards concept-card-selector">
                     <div class="concept-card-selector-content">
+
+                        <p class="concept-name">{{concept.name}}</p>
                         <p class="card-selector-no">
                             {{concept.starredcardcount}} Cards
                         </p>
                     </div>
-                    <p class="concept-name">{{concept.name}}</p>
+
                 </div>
             </div>
 
