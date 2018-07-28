@@ -743,7 +743,7 @@ inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationS
             //CHECK IF BOOKMARKED OR TO REMOVE BOOKMARK
             //SET TEXT ACCORDINGLY
             var bookmarktoasttext = "This Question has been Bookmarked !"
-                /*ON SUCCESS OF BOOKMARKING*/
+            /*ON SUCCESS OF BOOKMARKING*/
             var $toastContent = $('<span>' + bookmarktoasttext + '</span>').add($('<button class="btn-flat toast-action" ng-click="bookmarkquestion()">Undo</button>'));
             Materialize.toast($toastContent, 3000);
         };
@@ -1651,6 +1651,7 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
         $scope.conceptid = $routeParams.conceptid;
         $scope.zindexarray = [];
         $scope.conceptcards = [];
+        $cardindex = -1;
 
         //      SCOPE FUNCTIONS
 
@@ -1675,6 +1676,18 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
             };
 
             console.log(cardid);
+
+            /*Card change using navigation buttons*/
+            $(document).keyup(function (e) {
+                if (e.keyCode == 39 && $scope.zindexarray[$scope.conceptcards.length - 1] != $scope.conceptcards.length)
+                    $scope.changecardindex(1);
+                else if (e.keyCode == 37 && $scope.zindexarray[0] != $scope.conceptcards.length)
+                    $scope.changecardindex(-1);
+
+            });
+            /*Card change using navigation buttons*/
+
+
 
 
 
@@ -1756,7 +1769,9 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
             console.log(response);
             $scope.conceptcards = response.data;
 
-
+            if ($scope.conceptcards.length > 0) {
+                $scope.cardindex = 0;
+            }
             _.forEach($scope.conceptcards, function (value, key) {
                 console.log($scope.conceptcards.length);
                 if (value.user_id == 0) {
@@ -1779,7 +1794,13 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
         NavigationService.getstarredcards($scope.conceptid).then(getstarredcardssuccess, getstarredcardserror);
 
-
+      
+       /* MATH JAX*/
+         $rootScope.$watch(function () {
+                    var math = document.getElementById("carddata");
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
+                    return true;
+                });
 
 
 
@@ -1899,225 +1920,221 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
         //            };
         //        };
         //
-        //        $rootScope.$watch(function () {
-        //            var math = document.getElementById("carddata");
-        //            MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
-        //            return true;
-        //        });
+               
         //
-        //        //INITIALIZATIONS
-        //        $scope.cardindex = -1; // Initially set the cardindex to -1 so if there are no cards it appeards 0/0 cards
-        //        $scope.user = $.jStorage.get("user");
-        //
-        //
-        //        /*NAVIGATION SET*/
-        //        $rootScope.navigation = $.jStorage.get("navigation");
-        //        var getdatabyidsuccess = function (response) {
-        //            console.log(response.data);
-        //            var nav = {
-        //                location: $location.path(),
-        //                title: response.data.name,
-        //                position: 4,
-        //                clickable: false
-        //            };
-        //            $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
-        //                return n.position < nav.position;
-        //            });
-        //            $rootScope.navigation[nav.position] = nav;
-        //            $.jStorage.set("navigation", $rootScope.navigation);
-        //        };
-        //        var getdatabyiderror = function (response) {
-        //            console.log(response.data);
-        //        };
-        //        if ($scope.conceptid != 'practice') {
-        //            NavigationService.getdatabyid('concepts', $scope.conceptid).then(getdatabyidsuccess, getdatabyiderror);
-        //        } else {
-        //            var nav = {
-        //                location: $location.path(),
-        //                title: "Practice",
-        //                position: 4,
-        //                clickable: false
-        //            };
-        //            $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
-        //                return n.position < nav.position;
-        //            });
-        //            $rootScope.navigation[nav.position] = nav;
-        //            $.jStorage.set("navigation", $rootScope.navigation);
-        //        };
-        //        /*SET NAVIGATION END*/
-        //
-        //
-        //        /* Get cards Data */
-        //        var getcardsuccess = function (response) {
-        //
-        //            console.log(response.data);
-        //            $scope.conceptcards = response.data.cards;
-        //            $scope.nextconcept = response.data.next_concept[0];
-        //
-        //
-        //            if (response.data.cards.length > 0 || $scope.otheruserscard) { // if there is atleast 1 conceptcard then set cardindex to 0
-        //                console.log('pushing card');
-        //
-        //                $scope.conceptcards.push({
-        //                    user_id: 0,
-        //                    conceptdata: '<div style="text-align: center"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:50%"><div class="row"><button onclick="getpractisecards()" class="row btn waves-effect waves-light cyan">Practise Cards</button></div>' + ($scope.nextconcept ? '<div class="row"><a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a><div>' : '') + '</div>'
-        //                });
-        //                $scope.cardindex = 0;
-        //                readcardbyuserid(0);
-        //                //$scope.changecardindex(1);
-        //            }
-        //
-        //            _.forEach($scope.conceptcards, function (value, key) {
-        //                console.log($scope.conceptcards.length);
-        //                if (value.user_id == 0) {
-        //                    value.conceptdata = $sce.trustAsHtml(value.conceptdata);
-        //                }
-        //                $scope.zindexarray.push($scope.conceptcards.length - key);
-        //                $scope.styleCards(key);
-        //            });
-        //
-        //
-        //        };
-        //
-        //        var getcarderror = function (response) {
-        //            /*INTERNET ERROR*/
-        //            console.log(response.data);
-        //        };
-        //
-        //        var readcardsuccess = function (response) {
-        //            console.log(response.data);
-        //
-        //        };
-        //
-        //        var readcarderror = function (response) {
-        //            console.log(cid);
-        //            $scope.conceptcards[$scope.cardindex].cardread = 0;
-        //            console.log(response.data);
-        //        };
-        //
-        //        /*function*/
-        //        if ($scope.conceptid != 'practice') {
-        //            NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "inq").then(getcardsuccess, getcarderror);
-        //        } else {
-        //            /* Get Aray of Concepts and convert into usable string for MySQL IN() - Later add Local Storage for Refresh Option */
-        //            $rootScope.practiceConceptIds = JSON.stringify($rootScope.practiceConceptIds).substring(1, JSON.stringify($rootScope.practiceConceptIds).length - 1);
-        //            NavigationService.getpractisecards($rootScope.practiceConceptIds).then(getpractisecardsucess, getpractisecarderror);
-        //        };
-        //
-        //        var readcardbyuserid = function (cid) {
-        //            console.log('i m in readcard function');
-        //            if ($scope.conceptcards[cid].cardread == 0) {
-        //                $scope.conceptcards[cid].cardread = 1;
-        //                NavigationService.readcardbyuserid($.jStorage.get("user").id, $scope.conceptcards[cid].id).then(readcardsuccess, readcarderror);
-        //                console.log("CALLING STATEMENT");
-        //            }
-        //        };
-        //
-        //        var getconceptnamesuccess = function (response) {
-        //            console.log(response.data);
-        //            $scope.conceptdata = response.data;
-        //        };
-        //
-        //        var getconceptnameerror = function (response) {
-        //            console.log(response.data);
-        //        };
-        //
-        //        NavigationService.getconceptname($scope.conceptid).then(getconceptnamesuccess, getconceptnameerror);
-        //
-        //        // routing
-        //
-        //
-        //        /* Style cards by rotating*/
-        //        $scope.styleCards = function (key) {
-        //            if ($scope.zindexarray[key] == $scope.conceptcards.length) {
-        //                var deg = '0deg';
-        //            } else {
-        //                if ($scope.zindexarray[key] % 2 == 0) {
-        //                    //var deg = '-' + $scope.zindexarray[key] % 6 + 'deg';
-        //                    var deg = '-3deg';
-        //                } else {
-        //                    //var deg = $scope.zindexarray[key] % 6 + 'deg';
-        //                    var deg = '3deg';
-        //                }
-        //            };
-        //            $('#card' + key).css('transform', 'rotate(' + deg + ')');
-        //        };
-
-        //        var getindex = function (glossary) {
-        //            return glossary.word == text;
-        //        }
-        //        var text = "";
-        //        $scope.getselectedtext = function () {
-        //
-        //            if (window.getSelection) {
-        //                text = window.getSelection().toString();
-        //                var index = $scope.glossary.findIndex(getindex);
-        //            }
-        //        };
-        //
-        //        $scope.addcustomusercard = function () {
-        //            console.log($scope.cardindex);
-        //            console.log($scope.conceptcards);
-        //            $scope.conceptcards.splice($scope.cardindex + 1, 0, { // add the card such that when we click on + the new card is added next to the current card and the index is same as current card's index
-        //                user_id: $.jStorage.get("user").id,
-        //                cardnumber: $scope.conceptcards[$scope.cardindex].cardnumber,
-        //                conceptdata: "You Can Create You Own Notes Here",
-        //                editmode: true,
-        //                concept_id: $scope.conceptid,
-        //                id: 0,
-        //                shared: 0
-        //            });
-        //
-        //            $scope.zindexarray.splice($scope.cardindex + 1, 0, $("#card" + $scope.cardindex).zIndex());
-        //            $scope.zindexarray[$scope.cardindex] = $scope.conceptcards.length;
-        //
-        //            console.log($("#card" + $scope.cardindex).zIndex() + " " + $("#card" + ($scope.cardindex + 1)).zIndex());
-        //            /*CHANGE CARD INDEX TO +1 */
-        //            $scope.changecardindex(1);
-        //            console.log($scope.cardindex);
-        //        };
-        //        $scope.cancelcustomcard = function (index) {
-        //            $scope.conceptcards.splice(index, 1);
-        //            $scope.zindexarray.splice(index, 1);
-        //            $scope.zindexarray[index] = $scope.conceptcards.length;
-        //            $scope.changecardindex(-1);
-        //        }
-        //
-        //        var savecustomcardserror = function (response) {
-        //            console.log(response.data);
-        //        };
-        //
-        //        /* SAVE CUSTOM CARD */
-        //        $scope.savecustomusercard = function () {
-        //            var index = $scope.cardindex;
-        //            //CALLING FUNCTION TO ADD CUSTOM CARD IN DATABASE
-        //            console.log($scope.conceptcards[index]);
-        //            NavigationService.savecustomcards($scope.conceptcards[index]).then(function (response) {
-        //                console.log(response.data);
-        //                console.log($scope.conceptcards[index]);
-        //                if (response.data != "false") {
-        //                    $scope.conceptcards[$scope.cardindex].editmode = false;
-        //                    if ($scope.conceptcards[index].id == 0) {
-        //                        $scope.conceptcards[index].id = response.data;
-        //
-        //                    }
-        //                }
-        //            }, function (response) {
-        //                /*INTERNET ERROR*/
-        //                console.log(response.data);
-        //            });
-        //        };
-        //
-        //        /* EDIT CUSTOMER CARD MODE */
-        //        $scope.editcustomusercard = function () {
-        //            $scope.conceptcards[$scope.cardindex].editmode = true;
-        //        };
-        //
-        //
-        //        $scope.deletecustomusercard = function (ind) {
-        //            /*ASK FOR CONFIRMATION*/
-        //            $scope.conceptcards[$scope.cardindex].editmode = false;
-        //        };
-
-                }
-                ]);
+                //INITIALIZATIONS
+//                $scope.cardindex = -1; // Initially set the cardindex to -1 so if there are no cards it appeards 0/0 cards
+//                $scope.user = $.jStorage.get("user");
+//        
+//        
+//                /*NAVIGATION SET*/
+//                $rootScope.navigation = $.jStorage.get("navigation");
+//                var getdatabyidsuccess = function (response) {
+//                    console.log(response.data);
+//                    var nav = {
+//                        location: $location.path(),
+//                        title: response.data.name,
+//                        position: 4,
+//                        clickable: false
+//                    };
+//                    $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
+//                        return n.position < nav.position;
+//                    });
+//                    $rootScope.navigation[nav.position] = nav;
+//                    $.jStorage.set("navigation", $rootScope.navigation);
+//                };
+//                var getdatabyiderror = function (response) {
+//                    console.log(response.data);
+//                };
+//                if ($scope.conceptid != 'practice') {
+//                    NavigationService.getdatabyid('concepts', $scope.conceptid).then(getdatabyidsuccess, getdatabyiderror);
+//                } else {
+//                    var nav = {
+//                        location: $location.path(),
+//                        title: "Practice",
+//                        position: 4,
+//                        clickable: false
+//                    };
+//                    $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
+//                        return n.position < nav.position;
+//                    });
+//                    $rootScope.navigation[nav.position] = nav;
+//                    $.jStorage.set("navigation", $rootScope.navigation);
+//                };
+                /*SET NAVIGATION END*/
+        
+        
+//                /* Get cards Data */
+//                var getcardsuccess = function (response) {
+//        
+//                    console.log(response.data);
+//                    $scope.conceptcards = response.data.cards;
+//                    $scope.nextconcept = response.data.next_concept[0];
+//        
+//        
+//                    if (response.data.cards.length > 0 || $scope.otheruserscard) { // if there is atleast 1 conceptcard then set cardindex to 0
+//                        console.log('pushing card');
+//        
+//                        $scope.conceptcards.push({
+//                            user_id: 0,
+//                            conceptdata: '<div style="text-align: center"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:50%"><div class="row"><button onclick="getpractisecards()" class="row btn waves-effect waves-light cyan">Practise Cards</button></div>' + ($scope.nextconcept ? '<div class="row"><a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a><div>' : '') + '</div>'
+//                        });
+//                        $scope.cardindex = 0;
+//                        readcardbyuserid(0);
+//                        //$scope.changecardindex(1);
+//                    }
+//        
+//                    _.forEach($scope.conceptcards, function (value, key) {
+//                        console.log($scope.conceptcards.length);
+//                        if (value.user_id == 0) {
+//                            value.conceptdata = $sce.trustAsHtml(value.conceptdata);
+//                        }
+//                        $scope.zindexarray.push($scope.conceptcards.length - key);
+//                        $scope.styleCards(key);
+//                    });
+//        
+//        
+//                };
+//        
+//                var getcarderror = function (response) {
+//                    /*INTERNET ERROR*/
+//                    console.log(response.data);
+//                };
+//        
+//                var readcardsuccess = function (response) {
+//                    console.log(response.data);
+//        
+//                };
+//        
+//                var readcarderror = function (response) {
+//                    console.log(cid);
+//                    $scope.conceptcards[$scope.cardindex].cardread = 0;
+//                    console.log(response.data);
+//                };
+//        
+//                /*function*/
+//                if ($scope.conceptid != 'practice') {
+//                    NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "inq").then(getcardsuccess, getcarderror);
+//                } else {
+//                    /* Get Aray of Concepts and convert into usable string for MySQL IN() - Later add Local Storage for Refresh Option */
+//                    $rootScope.practiceConceptIds = JSON.stringify($rootScope.practiceConceptIds).substring(1, JSON.stringify($rootScope.practiceConceptIds).length - 1);
+//                    NavigationService.getpractisecards($rootScope.practiceConceptIds).then(getpractisecardsucess, getpractisecarderror);
+//                };
+//        
+//                var readcardbyuserid = function (cid) {
+//                    console.log('i m in readcard function');
+//                    if ($scope.conceptcards[cid].cardread == 0) {
+//                        $scope.conceptcards[cid].cardread = 1;
+//                        NavigationService.readcardbyuserid($.jStorage.get("user").id, $scope.conceptcards[cid].id).then(readcardsuccess, readcarderror);
+//                        console.log("CALLING STATEMENT");
+//                    }
+//                };
+//        
+//                var getconceptnamesuccess = function (response) {
+//                    console.log(response.data);
+//                    $scope.conceptdata = response.data;
+//                };
+//        
+//                var getconceptnameerror = function (response) {
+//                    console.log(response.data);
+//                };
+//        
+//                NavigationService.getconceptname($scope.conceptid).then(getconceptnamesuccess, getconceptnameerror);
+//        
+//                // routing
+//        
+//        
+//                /* Style cards by rotating*/
+//                $scope.styleCards = function (key) {
+//                    if ($scope.zindexarray[key] == $scope.conceptcards.length) {
+//                        var deg = '0deg';
+//                    } else {
+//                        if ($scope.zindexarray[key] % 2 == 0) {
+//                            //var deg = '-' + $scope.zindexarray[key] % 6 + 'deg';
+//                            var deg = '-3deg';
+//                        } else {
+//                            //var deg = $scope.zindexarray[key] % 6 + 'deg';
+//                            var deg = '3deg';
+//                        }
+//                    };
+//                    $('#card' + key).css('transform', 'rotate(' + deg + ')');
+//                };
+//
+//                var getindex = function (glossary) {
+//                    return glossary.word == text;
+//                }
+//                var text = "";
+//                $scope.getselectedtext = function () {
+//        
+//                    if (window.getSelection) {
+//                        text = window.getSelection().toString();
+//                        var index = $scope.glossary.findIndex(getindex);
+//                    }
+//                };
+//        
+//                $scope.addcustomusercard = function () {
+//                    console.log($scope.cardindex);
+//                    console.log($scope.conceptcards);
+//                    $scope.conceptcards.splice($scope.cardindex + 1, 0, { // add the card such that when we click on + the new card is added next to the current card and the index is same as current card's index
+//                        user_id: $.jStorage.get("user").id,
+//                        cardnumber: $scope.conceptcards[$scope.cardindex].cardnumber,
+//                        conceptdata: "You Can Create You Own Notes Here",
+//                        editmode: true,
+//                        concept_id: $scope.conceptid,
+//                        id: 0,
+//                        shared: 0
+//                    });
+//        
+//                    $scope.zindexarray.splice($scope.cardindex + 1, 0, $("#card" + $scope.cardindex).zIndex());
+//                    $scope.zindexarray[$scope.cardindex] = $scope.conceptcards.length;
+//        
+//                    console.log($("#card" + $scope.cardindex).zIndex() + " " + $("#card" + ($scope.cardindex + 1)).zIndex());
+//                    /*CHANGE CARD INDEX TO +1 */
+//                    $scope.changecardindex(1);
+//                    console.log($scope.cardindex);
+//                };
+//                $scope.cancelcustomcard = function (index) {
+//                    $scope.conceptcards.splice(index, 1);
+//                    $scope.zindexarray.splice(index, 1);
+//                    $scope.zindexarray[index] = $scope.conceptcards.length;
+//                    $scope.changecardindex(-1);
+//                }
+//        
+//                var savecustomcardserror = function (response) {
+//                    console.log(response.data);
+//                };
+//        
+//                /* SAVE CUSTOM CARD */
+//                $scope.savecustomusercard = function () {
+//                    var index = $scope.cardindex;
+//                    //CALLING FUNCTION TO ADD CUSTOM CARD IN DATABASE
+//                    console.log($scope.conceptcards[index]);
+//                    NavigationService.savecustomcards($scope.conceptcards[index]).then(function (response) {
+//                        console.log(response.data);
+//                        console.log($scope.conceptcards[index]);
+//                        if (response.data != "false") {
+//                            $scope.conceptcards[$scope.cardindex].editmode = false;
+//                            if ($scope.conceptcards[index].id == 0) {
+//                                $scope.conceptcards[index].id = response.data;
+//        
+//                            }
+//                        }
+//                    }, function (response) {
+//                        /*INTERNET ERROR*/
+//                        console.log(response.data);
+//                    });
+//                };
+//        
+//                /* EDIT CUSTOMER CARD MODE */
+//                $scope.editcustomusercard = function () {
+//                    $scope.conceptcards[$scope.cardindex].editmode = true;
+//                };
+//        
+//        
+//                $scope.deletecustomusercard = function (ind) {
+//                    /*ASK FOR CONFIRMATION*/
+//                    $scope.conceptcards[$scope.cardindex].editmode = false;
+//                };
+//
+//                }
+//                ]);
