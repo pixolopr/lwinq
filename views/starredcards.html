@@ -1,22 +1,23 @@
 <div class="">
 
     <div class="textcenter concept-name">
-        <h1 class="truncate">{{conceptdata.name}}</h1>
+        <h1 class="truncate">Starred Cards</h1>
     </div>
     <div class="row card-row">
         <div class="col s12 m2 l2 textcenter">
 
-            <div class="card-arrow-desktop" ng-hide="(zindexarray[0]==conceptcards.length || conceptcards.length==1)">
-                <div class="" ng-click="changecardindex(-1)" id="nav-prev">
+            <div class="starredcard-arrow-desktop">
+                <div class="" ng-click="changecard(-1)" id="nav-prev">
                     <i class="material-icons card-arrow-desktop">navigate_before</i>
                 </div>
             </div>
 
         </div>
-        <div class="col  s12 m8 l8 ">
+        <div class="col  s12 m8 l8 " style="    top: -160px;
+    position: relative;">
 
-            <div class="cardbox">
-                    <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" ng-style="{ 'z-index':zindexarray[$index] }">                    
+            <div class="starcardbox card{{$index}} animated" ng-repeat="card in starredcards" style='z-index: {{1000-$index}}; top: {{($index*40)+"px"}};transform: scale({{1-($index*0.1)}}); opacity:{{1-($index*0.1)}} '>
+                    <div id="card{{$index}}" class="cardspage" >                    
                        <div class="concepthead">
                         <div class="row conceptheadcentralize">
                             <div class="col s4"></div>
@@ -26,38 +27,16 @@
                                 </h5>
                             </div>
                             <div class="col s5">
-                                <!--                               <i class="material-icons concepticon" ng-if="card.user_id!=0" ng-click="changesharestatus(card.id)">{{card.shared==1?'lock_open':'lock_outline'}}</i>-->
                                 <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-if=" card.user_id==0">
-                    </div>
-                    <div class="custom-card-wrapper" ng-if="card.user_id!=0">
-                        <div class="scrollbar conceptcontent">
-                            <div class="textcenter">
-                                <img ng-if="card.image&&!card.editmode" class="img custom-image" ng-src="{{card.image | imagepath}}">
-                            </div>
-
-                            <div id="carddata" ng-bind="card.conceptdata" ng-if="!card.editmode">
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-
-        </div>
-        
-         <div class="col  s12 m8 l8" ng-controller="practisecardsCtrl" ng-if="showpractisecards">
-
-            <div class="cardbox">
-                <div id="card{{$index}}" class="cardspage" ng-repeat="card in conceptcards" ng-style="{ 'z-index':zindexarray[$index] }">
-                    <div class="concepthead">
+            
+            <!--<div class="starcardbox card2 animated">
+                    <div id="card{{$index}}" class="cardspage" >                    
+                       <div class="concepthead">
                         <div class="row conceptheadcentralize">
                             <div class="col s4"></div>
                             <div class="col s4 truncate textcenter">
@@ -65,24 +44,73 @@
                                     {{cardindex+1}}/{{conceptcards.length}}
                                 </h5>
                             </div>
+                            <div class="col s5">
+                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="scrollbar conceptcontent">
-                        <div id="carddata" ng-bind="card.question" ng-if="card.format==1"></div>
-                        <div id="carddata" class="codetype-questions" ng-bind-html="card.question" ng-if="card.format==2"></div>
-                        <a class="waves-effect waves-light btn cyan" ng-click="showanswers[$index]=!showanswers[$index]" ng-if="$index!=(conceptcards.length-1)">View Answer</a>
-                        <div id="carddata" ng-bind="card.answer" ng-if="card.answerformat==1 && showanswers[$index]"></div>
-                        <div id="carddata" class="codetype-questions" ng-bind-html="card.answer" ng-if="card.answerformat==2 && showanswers[$index]"></div>
-                    </div>
-
                 </div>
             </div>
+            
+              <div class="starcardbox card3 animated">
+                    <div id="card{{$index}}" class="cardspage" >                    
+                       <div class="concepthead">
+                        <div class="row conceptheadcentralize">
+                            <div class="col s4"></div>
+                            <div class="col s4 truncate textcenter">
+                                <h5 class="card-number">
+                                    {{cardindex+1}}/{{conceptcards.length}}
+                                </h5>
+                            </div>
+                            <div class="col s5">
+                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="starcardbox card4 animated">
+                    <div id="card{{$index}}" class="cardspage" >                    
+                       <div class="concepthead">
+                        <div class="row conceptheadcentralize">
+                            <div class="col s4"></div>
+                            <div class="col s4 truncate textcenter">
+                                <h5 class="card-number">
+                                    {{cardindex+1}}/{{conceptcards.length}}
+                                </h5>
+                            </div>
+                            <div class="col s5">
+                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                 <div class="starcardbox card5 animated">
+                    <div id="card{{$index}}" class="cardspage" >                    
+                       <div class="concepthead">
+                        <div class="row conceptheadcentralize">
+                            <div class="col s4"></div>
+                            <div class="col s4 truncate textcenter">
+                                <h5 class="card-number">
+                                    {{cardindex+1}}/{{conceptcards.length}}
+                                </h5>
+                            </div>
+                            <div class="col s5">
+                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
         </div>
-
+        
         <div class="col s12 m2 l2 textcenter">
 
-            <div class="card-arrow-desktop" ng-hide="(zindexarray[conceptcards.length-1]==conceptcards.length || conceptcards.length==1)">
-                <div class="" ng-click="changecardindex(1)" id="nav-next">
+            <div class="starredcard-arrow-desktop" >
+                <div class="" ng-click="changecard(1)" id="nav-next">
                     <i class="material-icons">navigate_next</i>
                 </div>
             </div>
