@@ -1652,36 +1652,24 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
         $scope.changecard = function (nextprev) {
 
-            console.log($scope.currentcard);
-            console.log($scope.currentcard.length);
+            
+//            console.log($scope.currentcard.length);
 
-            console.log(".card" + $scope.currentcard);
+//            console.log(".card" + $scope.currentcard);
 
             $(".card" + $scope.currentcard).addClass("rotateoutanimation");
 
-            //          setTimeout(function(){
-            //              $(".card"+$scope.currentcard).hide();
-            //              
-            //              
-            //              
-            //          }, 1000);
-
-
-
-
-
-
-
-
             var dofurther = true;
+            console.log($scope.starredcards.length);
+            console.log($scope.currentcard);
             
             for (var c = 0; c < $scope.starredcards.length; c++) {
                 if (c > $scope.currentcard) {
                     element = $('.card' + c);
                     var postitiontop = element.css("top");
-                    console.log(postitiontop);
+//                    console.log(postitiontop);
                     var newpositiontop = parseInt(postitiontop);
-                    console.log(newpositiontop);
+//                    console.log(newpositiontop);
                     newpositiontop -= 40;
                     element.css("top", newpositiontop + "px");
 
@@ -1701,9 +1689,51 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
                     };
 
 
+                };
+            };
+
+            $scope.currentcard += nextprev;
+
+        };
+      
+      
+       $scope.changecard = function (nextprev) {
+
+            
+//            console.log($scope.currentcard.length);
+
+//            console.log(".card" + $scope.currentcard);
+
+            $(".card" + $scope.currentcard).addClass("rotateoutanimation");
+
+            var dofurther = true;
+            console.log($scope.starredcards.length);
+            console.log($scope.currentcard);
+            
+            for (var c = 0; c < $scope.starredcards.length; c++) {
+                if (c > $scope.currentcard) {
+                    element = $('.card' + c);
+                    var postitiontop = element.css("top");
+//                    console.log(postitiontop);
+                    var newpositiontop = parseInt(postitiontop);
+//                    console.log(newpositiontop);
+                    newpositiontop -= 40;
+                    element.css("top", newpositiontop + "px");
 
 
+                    var scaleX = parseFloat(element.css("opacity"));
 
+                    if (dofurther) {
+                        scaleX += 0.1;
+
+                        element.css("transform", "scale(" + scaleX + ")");
+                        element.css("opacity", scaleX);
+                    };
+
+                    if (scaleX == 0.1) {
+                        $('.card' + (c + 1)).css('opacity', '0');
+                        dofurther = false;
+                    };
 
 
                 };
@@ -1711,20 +1741,12 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
             $scope.currentcard += nextprev;
 
-
-
-
-
-
-
-
         };
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
   }
 ]);
