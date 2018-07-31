@@ -7,7 +7,7 @@
         <div class="col s12 m2 l2 textcenter">
 
             <div class="starredcard-arrow-desktop">
-                <div class="" ng-click="changecardreturn(-1)" id="nav-prev">
+                <div class="" ng-click="changecardreturn(-1)" id="nav-prev" ng-if="(currentcard>=1)">
                     <i class="material-icons card-arrow-desktop">navigate_before</i>
                 </div>
             </div>
@@ -23,11 +23,11 @@
                             <div class="col s4"></div>
                             <div class="col s4 truncate textcenter">
                                 <h5 class="card-number">
-                                    {{currentcard+1}}/{{starredcards.length}}
+                                    {{$index+1}}/{{starredcards.length}}
                                 </h5>
                             </div>
                             <div class="col s5">
-                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
+<!--                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>-->
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
         <div class="col s12 m2 l2 textcenter">
 
             <div class="starredcard-arrow-desktop" >
-                <div class="" ng-click="changecard(1)" id="nav-next">
+                <div class="" ng-click="changecard(1)" id="nav-next" ng-if="(currentcard<starredcards.length-1)">
                     <i class="material-icons">navigate_next</i>
                 </div>
             </div>

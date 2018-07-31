@@ -1718,8 +1718,32 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
         //INITIAL SERVICE CALLS
         //        $scope.starredcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
+//
+//        $(window).keydown(function (e) {
+//            
+//            console.log($scope.currentcard)
+//            if (e.keyCode == 37) { // left
+//
+//                $scope.changecardreturn(-1);
+//            } else if (e.keyCode == 39) { // right
+//                $scope.changecard(1);
+//            }
+//            $scope.$apply();
+//        });
 
         $scope.currentcard = 0;
+        
+        $(window).keydown(function (e) {
+            
+            console.log($scope.currentcard)
+            if (e.keyCode == 37 && $scope.currentcard>=1) { // left
+
+                $scope.changecardreturn(-1);
+            } else if (e.keyCode == 39 && $scope.currentcard<$scope.starredcards.length-1) { // right
+                $scope.changecard(1);
+            }
+            $scope.$apply();
+        });
 
         $scope.changecard = function (nextprev) {
 
