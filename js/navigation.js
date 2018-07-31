@@ -14,11 +14,13 @@ var navigationservice = angular.module('navigationservice', [])
         //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
         //HOME LAPTOP
 
+
         var navigation = [{
             name: "Home",
             classis: "active",
             link: "#/home",
             subnav: []
+
     }, {
             name: "About",
             active: "",
@@ -287,6 +289,17 @@ var navigationservice = angular.module('navigationservice', [])
                     method: "GET",
                     params: {
                         userid: $.jStorage.get('user').id
+
+                    }
+                });
+            },
+            updateprofile: function (userdata) {
+                //            getprofiledata
+                return $http({
+                    url: adminurl + 'Users/updateprofile',
+                    method: "GET",
+                    params: {
+                        userdata: angular.toJson(userdata)
 
                     }
                 });

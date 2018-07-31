@@ -1386,13 +1386,24 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         getprofiledatasuccess = function (response) {
             console.log(response);
-
+            $scope.user = response.data;
+            $scope.user.type = usertypes[parseInt($scope.user.access_id) - 3].type;
 
         }
         getprofiledataerror = function (error) {
 
             console.log(error);
 
+        }
+        updateprofilesuccess = function (response) {
+            console.log(response);
+            if (response.data == "true") {
+                $scope.user.standard_name = $scope.standards[$scope.standards.findIndex((standard) => standard.id == $scope.user.standard_id)].name;
+                $scope.editmode = false;
+            };
+        }
+        updateprofileerror = function (error) {
+            console.log(error);
         }
 
 
@@ -1402,7 +1413,7 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         NavigationService.getprofiledata().then(getprofiledatasuccess, getprofiledataerror);
 
-        $scope.user.type = usertypes[parseInt($scope.user.access_id) - 3].type;
+
 
         getstandardsuccess = function (response) {
             console.log(response.data);
@@ -1430,7 +1441,9 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         //UPDATE PROFILE
         $scope.updateprofile = function () {
-
+            if ($scope.user.name != "" && $scope.user.contact != "" && $scope.user.email != "") {
+                NavigationService.updateprofile($scope.user).then(updateprofilesuccess, updateprofileerror);
+            }
 
 
         }
