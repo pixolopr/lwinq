@@ -198,7 +198,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             });
         };
         /*Card change using navigation buttons*/
-        $(document).keyup(function (e) {
+        $(document).keyup(function (e)  {
             if (e.keyCode == 39 && $scope.zindexarray[$scope.conceptcards.length - 1] != $scope.conceptcards.length)
                 $scope.changecardindex(1);
             else if (e.keyCode == 37 && $scope.zindexarray[0] != $scope.conceptcards.length)
@@ -1541,6 +1541,7 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
             $('#concept-modal').modal('open');
         };
         $scope.getstarredcards = function (conceptid) {
+            $('#concept-modal').modal('close');
             $location.path("/starredcards/" + conceptid);
         }
 
@@ -1647,10 +1648,56 @@ inqcontroller.controller('appCtrl', ['$scope', 'TemplateService', '$location', '
 
 inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location', 'FileUploader', '$injector',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
+      
+      
+                $scope.title = "StarredCards";
+                $rootScope.fullpageview = true;
+                $scope.template = TemplateService;
+                TemplateService.content = "views/starredcards.html";
+                $scope.conceptid = $routeParams.conceptid;
+                $scope.zindexarray = [];
+                $scope.starredcards = [];
+                $cardindex = -1;
+
+                //      SCOPE FUNCTIONS
+
+       
+            getstarredcardssuccess = function (response) {
+                    console.log(response);
+                    $scope.starredcards = response.data;
+
+                    if ($scope.starredcards.length > 0) {
+                        $scope.cardindex = 0;
+                    }
+                    _.forEach($scope.starredcards, function (value, key) {
+                        console.log($scope.starredcards.length);
+                        if (value.user_id == 0) {
+                            value.conceptdata = $sce.trustAsHtml(value.conceptdata);
+                        }
+
+                        $scope.zindexarray.push($scope.starredcards.length - key);
+
+                    });
+                }
+                getstarredcardserror = function (error) {
+                    console.log(error);
+                }
+
+                /*NAVIGATION SERVICE*/
+
+                NavigationService.getstarredcards($scope.conceptid).then(getstarredcardssuccess, getstarredcardserror);
 
 
-        //INITIAL SERICE CALLS
-        $scope.starredcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+                /* MATH JAX*/
+                $rootScope.$watch(function () {
+                    var math = document.getElementById("starcarddata");
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
+                    return true;
+                });
+
+
+        //INITIAL SERVICE CALLS
+//        $scope.starredcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
 
         $scope.currentcard = 0;
@@ -1702,34 +1749,66 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
         };
 
 
+<<<<<<< HEAD
         $scope.changecard = function (nextprev) {
 
 
             //            console.log($scope.currentcard.length);
 
             //            console.log(".card" + $scope.currentcard);
+=======
+        $scope.changecardreturn = function (nextprev) {
+>>>>>>> dec4f2c2726ecfe754e13bc94df210300c4f3e6f
 
-            $(".card" + $scope.currentcard).addClass("rotateoutanimation");
+
+            //            console.log($scope.currentcard.length);
+
+            //            console.log(".card" + $scope.currentcard);
+
+            var previouscard = $scope.currentcard - 1;
+            console.log($(".card" + $scope.currentcard));
+            $(".card" + $scope.currentcard).removeClass("rotateInDownRight");
+            $(".card" + previouscard).removeClass("rotateoutanimation");
+            $(".card" + previouscard).addClass("rotateInDownRight");
 
             var dofurther = true;
             console.log($scope.starredcards.length);
             console.log($scope.currentcard);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> dec4f2c2726ecfe754e13bc94df210300c4f3e6f
             for (var c = 0; c < $scope.starredcards.length; c++) {
-                if (c > $scope.currentcard) {
+                if (c >= $scope.currentcard) {
                     element = $('.card' + c);
+
+                    //fetch top position
                     var postitiontop = element.css("top");
                     //                    console.log(postitiontop);
+<<<<<<< HEAD
                     var newpositiontop = parseInt(postitiontop);
                     //                    console.log(newpositiontop);
                     newpositiontop -= 40;
+=======
+
+                    var newpositiontop = parseInt(postitiontop);
+                    //                    console.log(newpositiontop);
+                    newpositiontop += 40;
+>>>>>>> dec4f2c2726ecfe754e13bc94df210300c4f3e6f
                     element.css("top", newpositiontop + "px");
 
 
                     var scaleX = parseFloat(element.css("opacity"));
+                    //                    var zind = parseInt(element.css("z-index"));
+                    //                    //                          console.log(zind);
+                    //                    zind += 1;
+                    //                    element.css("z-index", zind);
+                    //                    console.log(zind);
 
                     if (dofurther) {
-                        scaleX += 0.1;
+                        scaleX -= 0.1;
 
                         element.css("transform", "scale(" + scaleX + ")");
                         element.css("opacity", scaleX);

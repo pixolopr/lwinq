@@ -1,13 +1,13 @@
 <div class="">
 
     <div class="textcenter concept-name">
-        <h1 class="truncate">Starred Cards</h1>
+        <h1 class="truncate">{{conceptdata.name}}</h1>
     </div>
     <div class="row card-row">
         <div class="col s12 m2 l2 textcenter">
 
             <div class="starredcard-arrow-desktop">
-                <div class="" ng-click="changeprevcard(-1)" id="nav-prev">
+                <div class="" ng-click="changecardreturn(-1)" id="nav-prev">
                     <i class="material-icons card-arrow-desktop">navigate_before</i>
                 </div>
             </div>
@@ -23,11 +23,23 @@
                             <div class="col s4"></div>
                             <div class="col s4 truncate textcenter">
                                 <h5 class="card-number">
-                                    {{cardindex+1}}/{{conceptcards.length}}
+                                    {{currentcard+1}}/{{starredcards.length}}
                                 </h5>
                             </div>
                             <div class="col s5">
                                 <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scrollbar conceptcontent" id="carddata" ng-bind-html="card.conceptdata" ng-if=" card.user_id==0">
+                    </div>
+                    <div class="custom-card-wrapper" ng-if="card.user_id!=0">
+                        <div class="scrollbar conceptcontent">
+                            <div class="textcenter">
+                                <img ng-if="card.image&&!card.editmode" class="img custom-image" ng-src="{{card.image | imagepath}}">
+                            </div>
+
+                            <div id="carddata" ng-bind="card.conceptdata" ng-if="!card.editmode">
                             </div>
                         </div>
                     </div>
