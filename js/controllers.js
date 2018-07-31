@@ -1662,6 +1662,7 @@ inqcontroller.controller('menuCtrl', ['$scope', 'TemplateService', '$location', 
         };
 
         $scope.logout = function () {
+            $.jStorage.flush();
             $location.path('/login');
         };
 
