@@ -14,11 +14,13 @@ var navigationservice = angular.module('navigationservice', [])
         //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
         //HOME LAPTOP
 
+
         var navigation = [{
             name: "Home",
             classis: "active",
             link: "#/home",
             subnav: []
+
     }, {
             name: "About",
             active: "",
