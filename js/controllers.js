@@ -1691,9 +1691,7 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
         $scope.starredcards = [];
         $cardindex = -1;
 
-        //      SCOPE FUNCTIONS
-
-
+        //SCOPE FUNCTIONS
         getstarredcardssuccess = function (response) {
             console.log(response);
             $scope.starredcards = response.data;
@@ -1716,7 +1714,6 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
         }
 
         /*NAVIGATION SERVICE*/
-
         NavigationService.getstarredcards($scope.conceptid).then(getstarredcardssuccess, getstarredcardserror);
 
 
@@ -1726,58 +1723,36 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
             MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
             return true;
         });
-
-
-        //INITIAL SERVICE CALLS
-        //        $scope.starredcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-
-//
-//        $(window).keydown(function (e) {
-//            
-//            console.log($scope.currentcard)
-//            if (e.keyCode == 37) { // left
-//
-//                $scope.changecardreturn(-1);
-//            } else if (e.keyCode == 39) { // right
-//                $scope.changecard(1);
-//            }
-//            $scope.$apply();
-//        });
-
-        $scope.currentcard = 0;
         
+        $scope.currentcard = 0;
+      
+        /*On Key Press move the card left or right */
         $(window).keydown(function (e) {
-            
-            console.log($scope.currentcard)
-            if (e.keyCode == 37 && $scope.currentcard>=1) { // left
-
+        if (e.keyCode == 37 && $scope.currentcard>=1) 
+            {
                 $scope.changecardreturn(-1);
-            } else if (e.keyCode == 39 && $scope.currentcard<$scope.starredcards.length-1) { // right
+            }
+            
+        else if (e.keyCode == 39 && $scope.currentcard<$scope.starredcards.length-1) 
+        
+            {
                 $scope.changecard(1);
             }
+            
             $scope.$apply();
         });
-
+      
+      
+      
+        /*On Click move the card left or right */
         $scope.changecard = function (nextprev) {
-
-
-            //            console.log($scope.currentcard.length);
-
-            //            console.log(".card" + $scope.currentcard);
-
             $(".card" + $scope.currentcard).addClass("rotateoutanimation");
-
             var dofurther = true;
-            console.log($scope.starredcards.length);
-            console.log($scope.currentcard);
-
             for (var c = 0; c < $scope.starredcards.length; c++) {
                 if (c > $scope.currentcard) {
                     element = $('.card' + c);
                     var postitiontop = element.css("top");
-                    //                    console.log(postitiontop);
                     var newpositiontop = parseInt(postitiontop);
-                    //                    console.log(newpositiontop);
                     newpositiontop -= 40;
                     element.css("top", newpositiontop + "px");
 
@@ -1786,7 +1761,6 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
                     if (dofurther) {
                         scaleX += 0.1;
-
                         element.css("transform", "scale(" + scaleX + ")");
                         element.css("opacity", scaleX);
                     };
@@ -1795,59 +1769,35 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
                         $('.card' + (c + 1)).css('opacity', '0');
                         dofurther = false;
                     };
-
-
                 };
             };
-
             $scope.currentcard += nextprev;
-
         };
 
 
         $scope.changecardreturn = function (nextprev) {
-
-
-            //            console.log($scope.currentcard.length);
-
-            //            console.log(".card" + $scope.currentcard);
-
             var previouscard = $scope.currentcard - 1;
             console.log($(".card" + $scope.currentcard));
             $(".card" + $scope.currentcard).removeClass("rotateInDownRight");
             $(".card" + previouscard).removeClass("rotateoutanimation");
             $(".card" + previouscard).addClass("rotateInDownRight");
-
             var dofurther = true;
             console.log($scope.starredcards.length);
             console.log($scope.currentcard);
 
-
-
             for (var c = 0; c < $scope.starredcards.length; c++) {
                 if (c >= $scope.currentcard) {
                     element = $('.card' + c);
-
                     //fetch top position
                     var postitiontop = element.css("top");
-                    //                    console.log(postitiontop);
-
                     var newpositiontop = parseInt(postitiontop);
-                    //                    console.log(newpositiontop);
                     newpositiontop += 40;
                     element.css("top", newpositiontop + "px");
 
 
                     var scaleX = parseFloat(element.css("opacity"));
-                    //                    var zind = parseInt(element.css("z-index"));
-                    //                    //                          console.log(zind);
-                    //                    zind += 1;
-                    //                    element.css("z-index", zind);
-                    //                    console.log(zind);
-
                     if (dofurther) {
                         scaleX -= 0.1;
-
                         element.css("transform", "scale(" + scaleX + ")");
                         element.css("opacity", scaleX);
                     };
