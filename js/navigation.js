@@ -291,6 +291,17 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 });
             },
+            updateprofile: function (userdata) {
+                //            getprofiledata
+                return $http({
+                    url: adminurl + 'Users/updateprofile',
+                    method: "GET",
+                    params: {
+                        userdata: angular.toJson(userdata)
+
+                    }
+                });
+            },
 
 
 
