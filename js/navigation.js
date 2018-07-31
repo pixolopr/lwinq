@@ -2,7 +2,7 @@ var navigationservice = angular.module('navigationservice', [])
 
     .factory('NavigationService', function ($http) {
         //DESKTOP
-        var adminurl = "http://localhost/rest/index.php/";
+        var adminurl = "http://localhost/rest/rest/index.php/";
 
         //MACBOOK AND HOME LAPTOP
         //    var adminurl = "http://localhost/rest/index.php/";
