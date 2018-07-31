@@ -165,7 +165,8 @@ inqcontroller.controller('practisecardsCtrl', ['$scope', 'TemplateService', 'Nav
             $scope.showanswers[index] = !$scope.showanswers[index];
         }
 
-  }]);
+  }
+]);
 
 inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location', 'FileUploader', '$injector',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
@@ -198,7 +199,7 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
             });
         };
         /*Card change using navigation buttons*/
-        $(document).keyup(function (e)  {
+        $(document).keyup(function (e) {
             if (e.keyCode == 39 && $scope.zindexarray[$scope.conceptcards.length - 1] != $scope.conceptcards.length)
                 $scope.changecardindex(1);
             else if (e.keyCode == 37 && $scope.zindexarray[0] != $scope.conceptcards.length)
@@ -637,7 +638,8 @@ inqcontroller.controller('commontestsCtrl', ['$scope', 'TemplateService', 'Navig
             }
         };
 
-  }]);
+  }
+]);
 inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
         //      INTIALIZATION
@@ -668,7 +670,8 @@ inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'Navigatio
             console.log(error);
         }
         NavigationService.gettestdatabyid().then(gettestdatabyidsuccess, gettestdatabyiderror);
-  }]);
+  }
+]);
 
 inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
@@ -1381,6 +1384,22 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
 
 
 
+        getprofiledatasuccess = function (response) {
+            console.log(response);
+
+
+        }
+        getprofiledataerror = function (error) {
+
+            console.log(error);
+
+        }
+
+
+
+
+
+
         NavigationService.getprofiledata().then(getprofiledatasuccess, getprofiledataerror);
 
         $scope.user.type = usertypes[parseInt($scope.user.access_id) - 3].type;
@@ -1486,7 +1505,7 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
                             datasets: [{
                                 label: 'Test Marks',
                                 data: [10, 20, 30, 40, 10, 30, 40, 20]
-            }, {
+              }, {
                                 label: 'Time Spent',
                                 data: [10, 30, 40, 20, 10, 30, 40, 20],
                                 "fill": false,
@@ -1494,7 +1513,7 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
 
                                 // Changes this dataset to become a line
                                 type: 'line'
-            }],
+              }],
                             labels: ['21-09', '22-09', '23-09', '24-09', '25-09', '26-09', '27-09', '28-09']
                         },
                         options: {
@@ -1503,7 +1522,7 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
                                     ticks: {
                                         beginAtZero: true
                                     }
-              }]
+                }]
                             },
                             fill: 'rgba(1,0,0,1)'
                         }
@@ -1567,7 +1586,7 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
         NavigationService.getchaptersgroupbysubject().then(getchaptersgroupbysubjectsuccess, getchaptersgroupbysubjecterror);
 
 
-}
+  }
 ]);
 
 inqcontroller.controller('leaderboardCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
@@ -1648,56 +1667,56 @@ inqcontroller.controller('appCtrl', ['$scope', 'TemplateService', '$location', '
 
 inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location', 'FileUploader', '$injector',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
-      
-      
-                $scope.title = "StarredCards";
-                $rootScope.fullpageview = true;
-                $scope.template = TemplateService;
-                TemplateService.content = "views/starredcards.html";
-                $scope.conceptid = $routeParams.conceptid;
-                $scope.zindexarray = [];
-                $scope.starredcards = [];
-                $cardindex = -1;
 
-                //      SCOPE FUNCTIONS
 
-       
-            getstarredcardssuccess = function (response) {
-                    console.log(response);
-                    $scope.starredcards = response.data;
+        $scope.title = "StarredCards";
+        $rootScope.fullpageview = true;
+        $scope.template = TemplateService;
+        TemplateService.content = "views/starredcards.html";
+        $scope.conceptid = $routeParams.conceptid;
+        $scope.zindexarray = [];
+        $scope.starredcards = [];
+        $cardindex = -1;
 
-                    if ($scope.starredcards.length > 0) {
-                        $scope.cardindex = 0;
-                    }
-                    _.forEach($scope.starredcards, function (value, key) {
-                        console.log($scope.starredcards.length);
-                        if (value.user_id == 0) {
-                            value.conceptdata = $sce.trustAsHtml(value.conceptdata);
-                        }
+        //      SCOPE FUNCTIONS
 
-                        $scope.zindexarray.push($scope.starredcards.length - key);
 
-                    });
-                }
-                getstarredcardserror = function (error) {
-                    console.log(error);
+        getstarredcardssuccess = function (response) {
+            console.log(response);
+            $scope.starredcards = response.data;
+
+            if ($scope.starredcards.length > 0) {
+                $scope.cardindex = 0;
+            }
+            _.forEach($scope.starredcards, function (value, key) {
+                console.log($scope.starredcards.length);
+                if (value.user_id == 0) {
+                    value.conceptdata = $sce.trustAsHtml(value.conceptdata);
                 }
 
-                /*NAVIGATION SERVICE*/
+                $scope.zindexarray.push($scope.starredcards.length - key);
 
-                NavigationService.getstarredcards($scope.conceptid).then(getstarredcardssuccess, getstarredcardserror);
+            });
+        }
+        getstarredcardserror = function (error) {
+            console.log(error);
+        }
+
+        /*NAVIGATION SERVICE*/
+
+        NavigationService.getstarredcards($scope.conceptid).then(getstarredcardssuccess, getstarredcardserror);
 
 
-                /* MATH JAX*/
-                $rootScope.$watch(function () {
-                    var math = document.getElementById("starcarddata");
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
-                    return true;
-                });
+        /* MATH JAX*/
+        $rootScope.$watch(function () {
+            var math = document.getElementById("starcarddata");
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
+            return true;
+        });
 
 
         //INITIAL SERVICE CALLS
-//        $scope.starredcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+        //        $scope.starredcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
 
         $scope.currentcard = 0;
@@ -1749,16 +1768,7 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
         };
 
 
-<<<<<<< HEAD
-        $scope.changecard = function (nextprev) {
-
-
-            //            console.log($scope.currentcard.length);
-
-            //            console.log(".card" + $scope.currentcard);
-=======
         $scope.changecardreturn = function (nextprev) {
->>>>>>> dec4f2c2726ecfe754e13bc94df210300c4f3e6f
 
 
             //            console.log($scope.currentcard.length);
@@ -1775,11 +1785,8 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
             console.log($scope.starredcards.length);
             console.log($scope.currentcard);
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> dec4f2c2726ecfe754e13bc94df210300c4f3e6f
             for (var c = 0; c < $scope.starredcards.length; c++) {
                 if (c >= $scope.currentcard) {
                     element = $('.card' + c);
@@ -1787,16 +1794,10 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
                     //fetch top position
                     var postitiontop = element.css("top");
                     //                    console.log(postitiontop);
-<<<<<<< HEAD
-                    var newpositiontop = parseInt(postitiontop);
-                    //                    console.log(newpositiontop);
-                    newpositiontop -= 40;
-=======
 
                     var newpositiontop = parseInt(postitiontop);
                     //                    console.log(newpositiontop);
                     newpositiontop += 40;
->>>>>>> dec4f2c2726ecfe754e13bc94df210300c4f3e6f
                     element.css("top", newpositiontop + "px");
 
 
