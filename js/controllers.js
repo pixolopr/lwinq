@@ -1377,7 +1377,12 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         $scope.editmode = false;
         var originaluserdata = {};
-        $scope.user = $.jStorage.get('user');
+        //        $scope.user = $.jStorage.get('user');
+
+
+
+        NavigationService.getprofiledata().then(getprofiledatasuccess, getprofiledataerror);
+
         $scope.user.type = usertypes[parseInt($scope.user.access_id) - 3].type;
 
         getstandardsuccess = function (response) {
@@ -1652,24 +1657,24 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
         $scope.changecard = function (nextprev) {
 
-            
-//            console.log($scope.currentcard.length);
 
-//            console.log(".card" + $scope.currentcard);
+            //            console.log($scope.currentcard.length);
+
+            //            console.log(".card" + $scope.currentcard);
 
             $(".card" + $scope.currentcard).addClass("rotateoutanimation");
 
             var dofurther = true;
             console.log($scope.starredcards.length);
             console.log($scope.currentcard);
-            
+
             for (var c = 0; c < $scope.starredcards.length; c++) {
                 if (c > $scope.currentcard) {
                     element = $('.card' + c);
                     var postitiontop = element.css("top");
-//                    console.log(postitiontop);
+                    //                    console.log(postitiontop);
                     var newpositiontop = parseInt(postitiontop);
-//                    console.log(newpositiontop);
+                    //                    console.log(newpositiontop);
                     newpositiontop -= 40;
                     element.css("top", newpositiontop + "px");
 
@@ -1695,28 +1700,28 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
             $scope.currentcard += nextprev;
 
         };
-      
-      
-       $scope.changecard = function (nextprev) {
 
-            
-//            console.log($scope.currentcard.length);
 
-//            console.log(".card" + $scope.currentcard);
+        $scope.changecard = function (nextprev) {
+
+
+            //            console.log($scope.currentcard.length);
+
+            //            console.log(".card" + $scope.currentcard);
 
             $(".card" + $scope.currentcard).addClass("rotateoutanimation");
 
             var dofurther = true;
             console.log($scope.starredcards.length);
             console.log($scope.currentcard);
-            
+
             for (var c = 0; c < $scope.starredcards.length; c++) {
                 if (c > $scope.currentcard) {
                     element = $('.card' + c);
                     var postitiontop = element.css("top");
-//                    console.log(postitiontop);
+                    //                    console.log(postitiontop);
                     var newpositiontop = parseInt(postitiontop);
-//                    console.log(newpositiontop);
+                    //                    console.log(newpositiontop);
                     newpositiontop -= 40;
                     element.css("top", newpositiontop + "px");
 
@@ -1742,11 +1747,11 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
             $scope.currentcard += nextprev;
 
         };
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
   }
 ]);
