@@ -165,7 +165,8 @@ inqcontroller.controller('practisecardsCtrl', ['$scope', 'TemplateService', 'Nav
             $scope.showanswers[index] = !$scope.showanswers[index];
         }
 
-  }]);
+  }
+]);
 
 inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$routeParams', '$sce', '$location', 'FileUploader', '$injector',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
@@ -637,7 +638,8 @@ inqcontroller.controller('commontestsCtrl', ['$scope', 'TemplateService', 'Navig
             }
         };
 
-  }]);
+  }
+]);
 inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
         //      INTIALIZATION
@@ -668,7 +670,8 @@ inqcontroller.controller('reviewsCtrl', ['$scope', 'TemplateService', 'Navigatio
             console.log(error);
         }
         NavigationService.gettestdatabyid().then(gettestdatabyidsuccess, gettestdatabyiderror);
-  }]);
+  }
+]);
 
 inqcontroller.controller('testsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$interval', '$q', '$location',
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $q, $location) {
@@ -1377,8 +1380,40 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         $scope.editmode = false;
         var originaluserdata = {};
-        $scope.user = $.jStorage.get('user');
-        $scope.user.type = usertypes[parseInt($scope.user.access_id) - 3].type;
+        //        $scope.user = $.jStorage.get('user');
+
+
+
+        getprofiledatasuccess = function (response) {
+            console.log(response);
+            $scope.user = response.data;
+            $scope.user.type = usertypes[parseInt($scope.user.access_id) - 3].type;
+
+        }
+        getprofiledataerror = function (error) {
+
+            console.log(error);
+
+        }
+        updateprofilesuccess = function (response) {
+            console.log(response);
+            if (response.data == "true") {
+                $scope.user.standard_name = $scope.standards[$scope.standards.findIndex((standard) => standard.id == $scope.user.standard_id)].name;
+                $scope.editmode = false;
+            };
+        }
+        updateprofileerror = function (error) {
+            console.log(error);
+        }
+
+
+
+
+
+
+        NavigationService.getprofiledata().then(getprofiledatasuccess, getprofiledataerror);
+
+
 
         getstandardsuccess = function (response) {
             console.log(response.data);
@@ -1406,7 +1441,9 @@ inqcontroller.controller('profileCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         //UPDATE PROFILE
         $scope.updateprofile = function () {
-
+            if ($scope.user.name != "" && $scope.user.contact != "" && $scope.user.email != "") {
+                NavigationService.updateprofile($scope.user).then(updateprofilesuccess, updateprofileerror);
+            }
 
 
         }
@@ -1481,7 +1518,7 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
                             datasets: [{
                                 label: 'Test Marks',
                                 data: [10, 20, 30, 40, 10, 30, 40, 20]
-            }, {
+              }, {
                                 label: 'Time Spent',
                                 data: [10, 30, 40, 20, 10, 30, 40, 20],
                                 "fill": false,
@@ -1489,7 +1526,7 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
 
                                 // Changes this dataset to become a line
                                 type: 'line'
-            }],
+              }],
                             labels: ['21-09', '22-09', '23-09', '24-09', '25-09', '26-09', '27-09', '28-09']
                         },
                         options: {
@@ -1498,7 +1535,7 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
                                     ticks: {
                                         beginAtZero: true
                                     }
-              }]
+                }]
                             },
                             fill: 'rgba(1,0,0,1)'
                         }
@@ -1536,6 +1573,7 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
             $('#concept-modal').modal('open');
         };
         $scope.getstarredcards = function (conceptid) {
+            $('#concept-modal').modal('close');
             $location.path("/starredcards/" + conceptid);
         }
 
@@ -1561,7 +1599,7 @@ inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'Navigatio
         NavigationService.getchaptersgroupbysubject().then(getchaptersgroupbysubjectsuccess, getchaptersgroupbysubjecterror);
 
 
-}
+  }
 ]);
 
 inqcontroller.controller('leaderboardCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
@@ -1644,116 +1682,162 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
   function ($scope, TemplateService, NavigationService, $rootScope, $interval, $routeParams, $sce, $location, FileUploader, $injector) {
 
 
-        $scope.title = "ConceptCards";
+        $scope.title = "StarredCards";
         $rootScope.fullpageview = true;
         $scope.template = TemplateService;
-        TemplateService.content = "views/conceptcards.html";
+        TemplateService.content = "views/starredcards.html";
         $scope.conceptid = $routeParams.conceptid;
         $scope.zindexarray = [];
-        $scope.conceptcards = [];
+        $scope.starredcards = [];
         $cardindex = -1;
 
         //      SCOPE FUNCTIONS
 
-        /*Change Card*/
-        $scope.changecardindex = function (index) {
-            console.log($scope.zindexarray);
-            var cardid, left, rotateVal;
-            if (index == '1') {
-                left = $('.cardspage').width() + 'px';
-                rotateVal = '6deg';
-                cardid = $scope.cardindex;
+
+        getstarredcardssuccess = function (response) {
+            console.log(response);
+            $scope.starredcards = response.data;
+
+            if ($scope.starredcards.length > 0) {
+                $scope.cardindex = 0;
+            }
+            _.forEach($scope.starredcards, function (value, key) {
+                console.log($scope.starredcards.length);
+                if (value.user_id == 0) {
+                    value.conceptdata = $sce.trustAsHtml(value.conceptdata);
+                }
+
+                $scope.zindexarray.push($scope.starredcards.length - key);
+
+            });
+        }
+        getstarredcardserror = function (error) {
+            console.log(error);
+        }
+
+        /*NAVIGATION SERVICE*/
+
+        NavigationService.getstarredcards($scope.conceptid).then(getstarredcardssuccess, getstarredcardserror);
 
 
-            } else {
-                left = '-' + $('.cardspage').width() + 'px';
-                rotateVal = '-6deg';
-                if ($scope.cardindex == 0) {
-                    cardid = $scope.conceptcards.length - 1;
-                } else {
-                    cardid = $scope.cardindex - 1;
+        /* MATH JAX*/
+        $rootScope.$watch(function () {
+            var math = document.getElementById("starcarddata");
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
+            return true;
+        });
+
+
+        //INITIAL SERVICE CALLS
+        //        $scope.starredcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+
+        $scope.currentcard = 0;
+
+        $scope.changecard = function (nextprev) {
+
+
+            //            console.log($scope.currentcard.length);
+
+            //            console.log(".card" + $scope.currentcard);
+
+            $(".card" + $scope.currentcard).addClass("rotateoutanimation");
+
+            var dofurther = true;
+            console.log($scope.starredcards.length);
+            console.log($scope.currentcard);
+
+            for (var c = 0; c < $scope.starredcards.length; c++) {
+                if (c > $scope.currentcard) {
+                    element = $('.card' + c);
+                    var postitiontop = element.css("top");
+                    //                    console.log(postitiontop);
+                    var newpositiontop = parseInt(postitiontop);
+                    //                    console.log(newpositiontop);
+                    newpositiontop -= 40;
+                    element.css("top", newpositiontop + "px");
+
+
+                    var scaleX = parseFloat(element.css("opacity"));
+
+                    if (dofurther) {
+                        scaleX += 0.1;
+
+                        element.css("transform", "scale(" + scaleX + ")");
+                        element.css("opacity", scaleX);
+                    };
+
+                    if (scaleX == 0.1) {
+                        $('.card' + (c + 1)).css('opacity', '0');
+                        dofurther = false;
+                    };
+
+
                 };
             };
 
-            console.log(cardid);
+            $scope.currentcard += nextprev;
 
-            /*Card change using navigation buttons*/
-            $(document).keyup(function (e) {
-                if (e.keyCode == 39 && $scope.zindexarray[$scope.conceptcards.length - 1] != $scope.conceptcards.length)
-                    $scope.changecardindex(1);
-                else if (e.keyCode == 37 && $scope.zindexarray[0] != $scope.conceptcards.length)
-                    $scope.changecardindex(-1);
-
-            });
-            /*Card change using navigation buttons*/
+        };
 
 
+        $scope.changecardreturn = function (nextprev) {
+
+
+            //            console.log($scope.currentcard.length);
+
+            //            console.log(".card" + $scope.currentcard);
+
+            var previouscard = $scope.currentcard - 1;
+            console.log($(".card" + $scope.currentcard));
+            $(".card" + $scope.currentcard).removeClass("rotateInDownRight");
+            $(".card" + previouscard).removeClass("rotateoutanimation");
+            $(".card" + previouscard).addClass("rotateInDownRight");
+
+            var dofurther = true;
+            console.log($scope.starredcards.length);
+            console.log($scope.currentcard);
 
 
 
-            $('#card' + cardid).css({
-                'left': left,
-                'transform': 'rotate(' + rotateVal + ')',
-            });
+            for (var c = 0; c < $scope.starredcards.length; c++) {
+                if (c >= $scope.currentcard) {
+                    element = $('.card' + c);
+
+                    //fetch top position
+                    var postitiontop = element.css("top");
+                    //                    console.log(postitiontop);
+
+                    var newpositiontop = parseInt(postitiontop);
+                    //                    console.log(newpositiontop);
+                    newpositiontop += 40;
+                    element.css("top", newpositiontop + "px");
 
 
+                    var scaleX = parseFloat(element.css("opacity"));
+                    //                    var zind = parseInt(element.css("z-index"));
+                    //                    //                          console.log(zind);
+                    //                    zind += 1;
+                    //                    element.css("z-index", zind);
+                    //                    console.log(zind);
 
+                    if (dofurther) {
+                        scaleX -= 0.1;
 
-            setTimeout(function () {
+                        element.css("transform", "scale(" + scaleX + ")");
+                        element.css("opacity", scaleX);
+                    };
 
-                _.forEach($scope.conceptcards, function (value, key) {
-
-                    if (index == '1') {
-                        if (key == $scope.cardindex) {
-                            $scope.zindexarray[key] = 1;
-                        } else {
-                            $scope.zindexarray[key] += 1;
-                        };
-
-                        $scope.styleCards(key);
-
-                    } else {
-
-                        if ($scope.zindexarray[key] == '1') {
-                            $scope.zindexarray[key] = $scope.conceptcards.length;
-                        } else {
-                            $scope.zindexarray[key] -= 1;
-                        };
-
-                        $scope.styleCards(key);
-
+                    if (scaleX == 0.1) {
+                        $('.card' + (c + 1)).css('opacity', '0');
+                        dofurther = false;
                     };
 
 
-
-                });
-
-                $scope.$apply();
-
-                setTimeout(function () {
-                    $('#card' + cardid).css({
-                        'left': '0px',
-                        'transform': 'rotate(0deg)'
-                    });
-                }, 80);
-
-
-                if ($scope.cardindex == ($scope.conceptcards.length - 1) && index == '1') {
-                    $scope.cardindex = 0;
-                } else {
-                    if ($scope.cardindex == 0 && index == '-1') {
-                        $scope.cardindex = $scope.conceptcards.length - 1;
-                    } else {
-                        $scope.cardindex = $scope.cardindex + index;
-
-                        /* Call Read Card function when NEXT button is clicked */
-                        if (index == '1') {
-                            readcardbyuserid($scope.cardindex);
-                        };
-                    };
                 };
-            }, 260);
+            };
 
+            $scope.currentcard += nextprev;
 
         };
 
@@ -1762,379 +1846,5 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
 
 
-
-
-
-        getstarredcardssuccess = function (response) {
-            console.log(response);
-            $scope.conceptcards = response.data;
-
-            if ($scope.conceptcards.length > 0) {
-                $scope.cardindex = 0;
-            }
-            _.forEach($scope.conceptcards, function (value, key) {
-                console.log($scope.conceptcards.length);
-                if (value.user_id == 0) {
-                    value.conceptdata = $sce.trustAsHtml(value.conceptdata);
-                }
-
-                $scope.zindexarray.push($scope.conceptcards.length - key);
-
-            });
-        }
-        getstarredcardserror = function (error) {
-            console.log(error);
-        }
-
-
-
-
-
-        /*NAVIGATION SERVICE*/
-
-        NavigationService.getstarredcards($scope.conceptid).then(getstarredcardssuccess, getstarredcardserror);
-
-      
-       /* MATH JAX*/
-         $rootScope.$watch(function () {
-                    var math = document.getElementById("carddata");
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
-                    return true;
-                });
-
-
-
-
-
-        //        $scope.uploadfile = function () {
-        //            var formdata = new FormData();
-        //
-        //            formdata.append('file', $scope.conceptcards[$scope.cardindex].image);
-        //
-        //            NavigationService.getimagename(formdata).success(function (response) {
-        //                console.log(response);
-        //                $scope.conceptcards[$scope.cardindex].image = response; //to change image property
-        //                console.log($scope.conceptcards[$scope.cardindex].image);
-        //
-        //            });
-        //        };
-        //        /*Card change using navigation buttons*/
-        //        $(document).keyup(function (e) {
-        //            if (e.keyCode == 39 && $scope.zindexarray[$scope.conceptcards.length - 1] != $scope.conceptcards.length)
-        //                $scope.changecardindex(1);
-        //            else if (e.keyCode == 37 && $scope.zindexarray[0] != $scope.conceptcards.length)
-        //                $scope.changecardindex(-1);
-        //
-        //        });
-        //        //      GET PRACTISE CARDS SUCCESS AND ERROR
-        //
-        //        /*Modal Initialization*/
-        //        $(document).ready(function () {
-        //            $('.modal').modal();
-        //        });
-        //
-        //
-        //        /*FETCHING PRACTICE QUESTIONS*/
-        //        getpractisecardsucess = function (response) {
-        //            console.log($scope.conceptid);
-        //            $scope.cardindex = 0;
-        //            $scope.conceptcards = response.data;
-        //            $scope.conceptcards.push({
-        //                format: 2,
-        //                question: '<div class="carddata" style="text-align: center; display: block !important"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:50%">' + ($scope.nextconcept ? '<div class="row" style="display: block !important;"><a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a><div>' : '') + '<div class="row"  style="display: block !important;"><a onclick="gotoconceptcards()" class="row btn waves-effect waves-light cyan">Go to concepts</a></div></div>'
-        //            });
-        //            console.log($scope.conceptcards);
-        //
-        //            $scope.zindexarray = [];
-        //            _.forEach($scope.conceptcards, function (value, key) {
-        //                console.log(value);
-        //                if (value.format == 2) {
-        //                    value.question = $sce.trustAsHtml(value.question);
-        //                }
-        //                if (value.answerformat == 2) {
-        //                    value.answer = $sce.trustAsHtml(value.answer);
-        //                }
-        //                $scope.zindexarray.push($scope.conceptcards.length - key);
-        //                $scope.styleCards(key);
-        //            });
-        //
-        //            $scope.showpractisecards = $scope.conceptcards.length > 1;
-        //
-        //        };
-        //        getpractisecarderror = function (error) {
-        //            console.log('Internet Error');
-        //        };
-        //
-        //        // CHANGE STAR STATUS OF CARDS
-        //        changestarstatussuccess = function (response) {
-        //            $scope.conceptcards[$scope.cardindex].starred = $scope.conceptcards[$scope.cardindex].starred == 1 ? 0 : 1;
-        //        };
-        //        changestarstatuserror = function (response) {
-        //            console.log('Can not change status !');
-        //        };
-        //        $scope.changestarstatus = function () {
-        //            if ($scope.conceptcards[$scope.cardindex].id) {
-        //                if ($scope.conceptcards[$scope.cardindex].starred == 1)
-        //                    NavigationService.removestar($scope.conceptcards[$scope.cardindex].id, $.jStorage.get("user").id).then(changestarstatussuccess, changestarstatuserror);
-        //                else
-        //                    NavigationService.addstar($scope.conceptcards[$scope.cardindex].id, $.jStorage.get("user").id).then(changestarstatussuccess, changestarstatuserror);
-        //            }
-        //        };
-        //
-        //
-        //        //GET OTHER USERS CARD
-        //        getotheruserscards = function () {
-        //            $scope.otheruserscard = true;
-        //            NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "others").then(getcardsuccess, getcarderror);
-        //        };
-        //        //      GET PRACTISE CARDS
-        //        getpractisecards = function () {
-        //            NavigationService.getpractisecards($scope.conceptid).then(getpractisecardsucess, getpractisecarderror);
-        //        }
-        //
-        //        //CHANGE SHARE STATUS OF CARDS
-        //        $scope.changesharestatus = function (cardid) {
-        //            if (cardid)
-        //                NavigationService.changesharestatus(cardid).success(function (response) {
-        //                    if (response)
-        //                        $scope.conceptcards[$scope.cardindex].shared = $scope.conceptcards[$scope.cardindex].shared == 1 ? 0 : 1;
-        //                    console.log(response);
-        //                });
-        //            else
-        //                $scope.conceptcards[$scope.cardindex].shared = $scope.conceptcards[$scope.cardindex].shared == 1 ? 0 : 1;
-        //
-        //        };
-        //
-        //        $scope.removeimage = function (index) {
-        //            NavigationService.removeimage($scope.conceptcards[index].image).success(function (response) {
-        //                if (response) {
-        //                    $scope.conceptcards[index].image = "";
-        //                }
-        //            });
-        //        };
-        //
-        //        $scope.checklength = function () {
-        //            var content = $scope.conceptcards[$scope.cardindex].conceptdata;
-        //            if (content.length > 500) {
-        //                $scope.conceptcards[$scope.cardindex].conceptdata = content.replace(content.charAt(content.length - 1), "");
-        //            };
-        //        };
-        //
-               
-        //
-                //INITIALIZATIONS
-//                $scope.cardindex = -1; // Initially set the cardindex to -1 so if there are no cards it appeards 0/0 cards
-//                $scope.user = $.jStorage.get("user");
-//        
-//        
-//                /*NAVIGATION SET*/
-//                $rootScope.navigation = $.jStorage.get("navigation");
-//                var getdatabyidsuccess = function (response) {
-//                    console.log(response.data);
-//                    var nav = {
-//                        location: $location.path(),
-//                        title: response.data.name,
-//                        position: 4,
-//                        clickable: false
-//                    };
-//                    $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
-//                        return n.position < nav.position;
-//                    });
-//                    $rootScope.navigation[nav.position] = nav;
-//                    $.jStorage.set("navigation", $rootScope.navigation);
-//                };
-//                var getdatabyiderror = function (response) {
-//                    console.log(response.data);
-//                };
-//                if ($scope.conceptid != 'practice') {
-//                    NavigationService.getdatabyid('concepts', $scope.conceptid).then(getdatabyidsuccess, getdatabyiderror);
-//                } else {
-//                    var nav = {
-//                        location: $location.path(),
-//                        title: "Practice",
-//                        position: 4,
-//                        clickable: false
-//                    };
-//                    $rootScope.navigation = _.remove($rootScope.navigation, function (n) {
-//                        return n.position < nav.position;
-//                    });
-//                    $rootScope.navigation[nav.position] = nav;
-//                    $.jStorage.set("navigation", $rootScope.navigation);
-//                };
-                /*SET NAVIGATION END*/
-        
-        
-//                /* Get cards Data */
-//                var getcardsuccess = function (response) {
-//        
-//                    console.log(response.data);
-//                    $scope.conceptcards = response.data.cards;
-//                    $scope.nextconcept = response.data.next_concept[0];
-//        
-//        
-//                    if (response.data.cards.length > 0 || $scope.otheruserscard) { // if there is atleast 1 conceptcard then set cardindex to 0
-//                        console.log('pushing card');
-//        
-//                        $scope.conceptcards.push({
-//                            user_id: 0,
-//                            conceptdata: '<div style="text-align: center"><img src="' + imageurl + 'completioncelebration.gif" style="font-size: 14px;width:50%"><div class="row"><button onclick="getpractisecards()" class="row btn waves-effect waves-light cyan">Practise Cards</button></div>' + ($scope.nextconcept ? '<div class="row"><a href="#/conceptcards/' + $scope.nextconcept.id + '" class="row btn waves-effect waves-light cyan">Next Concept</a><div>' : '') + '</div>'
-//                        });
-//                        $scope.cardindex = 0;
-//                        readcardbyuserid(0);
-//                        //$scope.changecardindex(1);
-//                    }
-//        
-//                    _.forEach($scope.conceptcards, function (value, key) {
-//                        console.log($scope.conceptcards.length);
-//                        if (value.user_id == 0) {
-//                            value.conceptdata = $sce.trustAsHtml(value.conceptdata);
-//                        }
-//                        $scope.zindexarray.push($scope.conceptcards.length - key);
-//                        $scope.styleCards(key);
-//                    });
-//        
-//        
-//                };
-//        
-//                var getcarderror = function (response) {
-//                    /*INTERNET ERROR*/
-//                    console.log(response.data);
-//                };
-//        
-//                var readcardsuccess = function (response) {
-//                    console.log(response.data);
-//        
-//                };
-//        
-//                var readcarderror = function (response) {
-//                    console.log(cid);
-//                    $scope.conceptcards[$scope.cardindex].cardread = 0;
-//                    console.log(response.data);
-//                };
-//        
-//                /*function*/
-//                if ($scope.conceptid != 'practice') {
-//                    NavigationService.getcardsbyconceptid($scope.conceptid, $.jStorage.get("user").id, "inq").then(getcardsuccess, getcarderror);
-//                } else {
-//                    /* Get Aray of Concepts and convert into usable string for MySQL IN() - Later add Local Storage for Refresh Option */
-//                    $rootScope.practiceConceptIds = JSON.stringify($rootScope.practiceConceptIds).substring(1, JSON.stringify($rootScope.practiceConceptIds).length - 1);
-//                    NavigationService.getpractisecards($rootScope.practiceConceptIds).then(getpractisecardsucess, getpractisecarderror);
-//                };
-//        
-//                var readcardbyuserid = function (cid) {
-//                    console.log('i m in readcard function');
-//                    if ($scope.conceptcards[cid].cardread == 0) {
-//                        $scope.conceptcards[cid].cardread = 1;
-//                        NavigationService.readcardbyuserid($.jStorage.get("user").id, $scope.conceptcards[cid].id).then(readcardsuccess, readcarderror);
-//                        console.log("CALLING STATEMENT");
-//                    }
-//                };
-//        
-//                var getconceptnamesuccess = function (response) {
-//                    console.log(response.data);
-//                    $scope.conceptdata = response.data;
-//                };
-//        
-//                var getconceptnameerror = function (response) {
-//                    console.log(response.data);
-//                };
-//        
-//                NavigationService.getconceptname($scope.conceptid).then(getconceptnamesuccess, getconceptnameerror);
-//        
-//                // routing
-//        
-//        
-//                /* Style cards by rotating*/
-//                $scope.styleCards = function (key) {
-//                    if ($scope.zindexarray[key] == $scope.conceptcards.length) {
-//                        var deg = '0deg';
-//                    } else {
-//                        if ($scope.zindexarray[key] % 2 == 0) {
-//                            //var deg = '-' + $scope.zindexarray[key] % 6 + 'deg';
-//                            var deg = '-3deg';
-//                        } else {
-//                            //var deg = $scope.zindexarray[key] % 6 + 'deg';
-//                            var deg = '3deg';
-//                        }
-//                    };
-//                    $('#card' + key).css('transform', 'rotate(' + deg + ')');
-//                };
-//
-//                var getindex = function (glossary) {
-//                    return glossary.word == text;
-//                }
-//                var text = "";
-//                $scope.getselectedtext = function () {
-//        
-//                    if (window.getSelection) {
-//                        text = window.getSelection().toString();
-//                        var index = $scope.glossary.findIndex(getindex);
-//                    }
-//                };
-//        
-//                $scope.addcustomusercard = function () {
-//                    console.log($scope.cardindex);
-//                    console.log($scope.conceptcards);
-//                    $scope.conceptcards.splice($scope.cardindex + 1, 0, { // add the card such that when we click on + the new card is added next to the current card and the index is same as current card's index
-//                        user_id: $.jStorage.get("user").id,
-//                        cardnumber: $scope.conceptcards[$scope.cardindex].cardnumber,
-//                        conceptdata: "You Can Create You Own Notes Here",
-//                        editmode: true,
-//                        concept_id: $scope.conceptid,
-//                        id: 0,
-//                        shared: 0
-//                    });
-//        
-//                    $scope.zindexarray.splice($scope.cardindex + 1, 0, $("#card" + $scope.cardindex).zIndex());
-//                    $scope.zindexarray[$scope.cardindex] = $scope.conceptcards.length;
-//        
-//                    console.log($("#card" + $scope.cardindex).zIndex() + " " + $("#card" + ($scope.cardindex + 1)).zIndex());
-//                    /*CHANGE CARD INDEX TO +1 */
-//                    $scope.changecardindex(1);
-//                    console.log($scope.cardindex);
-//                };
-//                $scope.cancelcustomcard = function (index) {
-//                    $scope.conceptcards.splice(index, 1);
-//                    $scope.zindexarray.splice(index, 1);
-//                    $scope.zindexarray[index] = $scope.conceptcards.length;
-//                    $scope.changecardindex(-1);
-//                }
-//        
-//                var savecustomcardserror = function (response) {
-//                    console.log(response.data);
-//                };
-//        
-//                /* SAVE CUSTOM CARD */
-//                $scope.savecustomusercard = function () {
-//                    var index = $scope.cardindex;
-//                    //CALLING FUNCTION TO ADD CUSTOM CARD IN DATABASE
-//                    console.log($scope.conceptcards[index]);
-//                    NavigationService.savecustomcards($scope.conceptcards[index]).then(function (response) {
-//                        console.log(response.data);
-//                        console.log($scope.conceptcards[index]);
-//                        if (response.data != "false") {
-//                            $scope.conceptcards[$scope.cardindex].editmode = false;
-//                            if ($scope.conceptcards[index].id == 0) {
-//                                $scope.conceptcards[index].id = response.data;
-//        
-//                            }
-//                        }
-//                    }, function (response) {
-//                        /*INTERNET ERROR*/
-//                        console.log(response.data);
-//                    });
-//                };
-//        
-//                /* EDIT CUSTOMER CARD MODE */
-//                $scope.editcustomusercard = function () {
-//                    $scope.conceptcards[$scope.cardindex].editmode = true;
-//                };
-//        
-//        
-//                $scope.deletecustomusercard = function (ind) {
-//                    /*ASK FOR CONFIRMATION*/
-//                    $scope.conceptcards[$scope.cardindex].editmode = false;
-//                };
-//
-//                }
-//                ]);
+  }
+]);
