@@ -157,7 +157,7 @@
         height: 30px;
         margin-top: 10px;
     }
-<<<<<<< HEAD
+
 
     svg.submit-icon {
         width: 25px;
@@ -195,38 +195,4 @@
         transform: scale(1.0);
         transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
     }
-=======
-svg.submit-icon {
-    width:25px;
-    height:auto;
-    margin: 6px;
-    padding:.25em;
-    border-radius: 50%;
-    fill: white;
-    border: 1px solid white;
-    transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
-}
-svg.submit-icon:hover {
-    fill:$primary-color;
-    background:white;
-    transform: scale(1.5);
-    transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
-}
-svg.cancel-icon{
-    width:25px;
-    height:auto;
-    margin: 6px;
-    border: 1px solid white;
-    padding:.25em;
-    border-radius: 50%;
-    fill: white;
-    transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
-}
 
-svg.cancel-icon:hover {
-    fill:$primary-color;
-    background:white !important;
-    transform: scale(1.5);
-    transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
-}
->>>>>>> 2dfca8b8dfa48e4b2ef7b43e688517407cc59b7f

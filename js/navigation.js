@@ -304,6 +304,20 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 });
             },
+            deletebyid: function (cardid) {
+                return $http({
+                    url: adminurl + 'concepts/deletecardsbyid',
+                    method: "GET",
+                    params: {
+                        cardid: cardid
+
+                    }
+                });
+
+
+
+            },
+
 
 
 

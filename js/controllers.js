@@ -605,6 +605,18 @@ inqcontroller.controller('conceptcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
         $scope.deletecustomusercard = function (ind) {
             /*ASK FOR CONFIRMATION*/
+
+            deletebyidsuccess = function (response) {
+                console.log(response);
+            }
+            deletebyiderror = function (error) {
+                console.log(error);
+            }
+
+
+            /*AFTER CONSFIRMATION */
+            NavigationService.deletebyid($scope.conceptcards[$scope.cardindex].id).then(deletebyidsuccess, deletebyiderror)
+            console.log($scope.conceptcards[$scope.cardindex]);
             $scope.conceptcards[$scope.cardindex].editmode = false;
         };
 
@@ -1724,27 +1736,24 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
             MathJax.Hub.Queue(["Typeset", MathJax.Hub], math);
             return true;
         });
-        
+
         $scope.currentcard = 0;
-      
+
         /*On Key Press move the card left or right */
         $(window).keydown(function (e) {
-        if (e.keyCode == 37 && $scope.currentcard>=1) 
-            {
+            if (e.keyCode == 37 && $scope.currentcard >= 1) {
                 $scope.changecardreturn(-1);
-            }
-            
-        else if (e.keyCode == 39 && $scope.currentcard<$scope.starredcards.length-1) 
-        
+            } else if (e.keyCode == 39 && $scope.currentcard < $scope.starredcards.length - 1)
+
             {
                 $scope.changecard(1);
             }
-            
+
             $scope.$apply();
         });
-      
-      
-      
+
+
+
         /*On Click move the card left or right */
         $scope.changecard = function (nextprev) {
             $(".card" + $scope.currentcard).addClass("rotateoutanimation");
