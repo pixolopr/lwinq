@@ -25,7 +25,7 @@
                                     {{$index+1}}/{{conceptcards.length-1}}
                                 </h5>
                             </div>
-                            <div class="col s5">
+                            <div class="col s5 card-icon">
                                 <i class="material-icons concepticon" ng-if="card.user_id!=0 && !otheruserscard" ng-click="changesharestatus(card.id)">{{card.shared==1?'lock_open':'lock_outline'}}</i>
 <!--                                <i class="material-icons concepticon" ng-click="changestarstatus(card.id)" ng-style="{color:(card.starred==1)?'#ffeb3b ':''}">{{card.starred==1?'star':'star_border'}}</i>-->
                                 <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>
