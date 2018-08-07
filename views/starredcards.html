@@ -7,7 +7,8 @@
         <div class="col s12 m2 l2 textcenter">
 
             <div class="starredcard-arrow-desktop">
-                <div class="" ng-click="changecardreturn(-1)" id="nav-prev" ng-if="(currentcard>=1)">
+
+                <div class="" ng-click="changecardreturn(-1)" id="nav-prev" ng-style="{'visibility':(currentcard>=1)?'visible':'hidden'}">
                     <i class="material-icons card-arrow-desktop">navigate_before</i>
                 </div>
             </div>
@@ -17,8 +18,8 @@
     position: relative;">
 
             <div class="starcardbox card{{$index}} animated" ng-repeat="card in starredcards" style='z-index: {{1000-$index}}; top: {{($index*40)+"px"}};transform: scale({{1-($index*0.1)}}); opacity:{{1-($index*0.1)}} '>
-                    <div id="card{{$index}}" class="cardspage" >                    
-                       <div class="concepthead">
+                <div id="card{{$index}}" class="cardspage">
+                    <div class="concepthead">
                         <div class="row conceptheadcentralize">
                             <div class="col s4"></div>
                             <div class="col s4 truncate textcenter">
@@ -27,7 +28,7 @@
                                 </h5>
                             </div>
                             <div class="col s5">
-<!--                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>-->
+                                <!--                                <i class="material-icons concepticon HeartAnimation" ng-class="{'star-animation': card.starred==1}" ng-click="changestarstatus(card.id)"></i>-->
                             </div>
                         </div>
                     </div>
@@ -45,12 +46,12 @@
                     </div>
                 </div>
             </div>
-          </div>
-        
+        </div>
+
         <div class="col s12 m2 l2 textcenter">
 
-            <div class="starredcard-arrow-desktop" >
-                <div class="" ng-click="changecard(1)" id="nav-next" ng-if="(currentcard<starredcards.length-1)">
+            <div class="starredcard-arrow-desktop">
+                <div class="" ng-click="changecard(1)" ng-style="{'visibility':(currentcard<starredcards.length-1)?'visible':'hidden'}" id="nav-next">
                     <i class="material-icons">navigate_next</i>
                 </div>
             </div>
