@@ -1832,3 +1832,32 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
 
   }
 ]);
+
+
+inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location', '$rootScope', 'NavigationService', '$route',
+  function ($scope, TemplateService, $location, $rootScope, NavigationService, $route) {
+
+        //Hide Menu
+        $rootScope.showmenu = false;
+
+        //Show Modal on click of Sign up button
+        $(document).ready(function () {
+            $('.modal').modal();
+
+//            $('select').formSelect();
+            $('select').material_select();
+
+        });
+
+
+        /* $scope.opendropdown = function () {
+            $('.dropdown-trigger').open();
+        }
+*/
+        // Or with jQuery
+
+
+
+
+  }
+]);

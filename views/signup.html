@@ -1,0 +1,122 @@
+<div class="row mainDiv">
+    <div class="col s12 m3 l3 rocketSection">
+        <img src="/img/rocketsection-design.png" alt="top design" class="rocketSection-TopDesign">
+        <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star1">
+        <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star2">
+        <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star3">
+        <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star4">
+        <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star5">
+        <div class="rocketSection-Rocket"><img src="/img/rocket.png" alt="Rocket Image">
+            <p>ARE YOU READY <br> FOR TAKE OFF</p>
+        </div>
+        <div class="rocketSection-BlueBg"></div>
+
+        <img src="/img/rocketsection-astroman.png" alt="Rocket Section" class="rocketSection-Astroman">
+        <img src="/img/rocketsection-design2.png" alt="top design" class="rocketSection-BottomDesign">
+    </div>
+
+
+
+
+    <div class="col s12 m9 l9 signupSection">
+        <div class="row">
+            <h2 class="signupSection-LoginText">SIGN UP</h2>
+            <form class="col s12">
+                <div class="row">
+                    <div class=" col s12 signupSection-Phone">
+                        <img src="/img/name.svg" alt="">
+                        <input id="name" type="text" class="validate" placeholder="Name">
+                    </div>
+                    <div class=" col s12 signupSection-Phone">
+                        <img src="/img/school.svg" alt="">
+                        <input id="phone" type="text" class="validate" placeholder="School">
+                    </div>
+                    <div class=" col s12 signupSection-SelectDiv">
+                        <!--
+                                <input id="standard" class="validate" placeholder="Standard" list="standards">
+                                <datalist id="standards">
+                                    <option value="8th Standard">
+                                    <option value="9th Standard">
+                                    <option value="10th Standard">
+                                    <option value="11th Standard">
+                                    <option value="12th Standard">
+                                </datalist> 
+                                <input id="board" class="validate"  placeholder="Board" list="boards">
+                                <datalist id="boards">
+                                    <option value="CBSE">
+                                    <option value="MAHARASHTRA">
+                                </datalist> -->
+                                
+                    <div class="input-field col s3 signupSection-SelectInput">
+                        <select>
+                          <option value="" disabled selected>Standard</option>
+                          <option value="1">8th Standard</option>
+                          <option value="2">9th Standard</option>
+                          <option value="3">10th Standard</option>
+                          <option value="4">11th Standard</option>
+                          <option value="5">12th Standard</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s3 signupSection-SelectInput">
+                        <select>
+                          <option value="" disabled selected>Board</option>
+                          <option value="1">CBSE</option>
+                          <option value="2">ICSE</option>
+                          <option value="3">State Board</option>
+                        </select>
+                    </div>
+
+
+                    </div>
+                    
+                             <div class=" col s12 signupSection-Phone">
+                                <img src="/img/mail.svg" alt="">
+                                <input id="phone" type="email" class="validate" placeholder="name@company.com">
+                            </div>
+                            <div class=" col s12 signupSection-Phone">
+                                <img src="/img/phone.svg" alt="">
+                                <input id="phone" type="tel" class="validate" placeholder="Phone Number">
+                            </div>
+                            <div class=" col s12 signupSection-Password">
+<!--                                <img src="/img/lock.svg" alt="">-->
+                                <input id="password" type="password" class="validate" placeholder="Password">
+                                <input id="password" type="password" class="validate" placeholder="Confirm Password">
+                            </div>
+
+                    
+
+                </div>
+
+            </form>
+        </div>
+        <div ng-if="error">
+            Invalid credentials. Please enter valid credentials.
+        </div>
+        <button data-target="modal1" class="btn signupSection-Button modal-trigger" type="submit" name="action" ng-click="dologin()">
+                        Sign Up
+                        <i class="material-icons right">arrow_forward</i>
+                    </button>
+
+
+
+
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal signupSection-Modal">
+            <div class="modal-content signupSection-ModalContent">
+                <p class="signupSection-ModalText1">Just making sure it's really you</p>
+                <p class="signupSection-ModalText2">Sent an OTP at 9967552082</p>
+                <p class="signupSection-ModalText3">Enter your OTP</p>
+                <input type="number" class="input-otp"><input type="number" class="input-otp"><input type="number" class="input-otp"><input type="number" class="input-otp">
+                <p class="signupSection-ModalText4">Resend OTP</p>
+            </div>
+            <div class="signupSection-ModalButtons"><button class="btn signupSection-ModalButton" type="submit" name="action" ng-click="dologin()">Edit Details</button>
+                <button class="btn signupSection-ModalButton" type="submit" name="action" ng-click="dologin()">Validate
+                        <i class="material-icons right">arrow_forward</i></button></div>
+
+        </div>
+
+        <div class="signupSection-SignupLink"><span>Already registered? <a href="#">Login</a></span></div>
+
+    </div>
+</div>

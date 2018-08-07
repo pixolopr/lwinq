@@ -1,0 +1,155 @@
+
+.signupSection {
+    background-color: white;
+    height: 100%;
+    
+    &-LoginText {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    &-Phone {
+        input {
+                    width: 40% !important;
+                    background-color: white !important;
+                    margin: 0 auto !important;
+                    display: block !important;
+                    padding-left: 30px !important;
+        }
+        
+        img {
+            height: 20px;
+            width: 20px;
+            position: relative;
+            left: 29%;
+            top: 31px;
+        }
+    }
+    
+    &-SchoolDetails {
+        text-align: center;
+        margin-top: 10px;
+        input {
+                    width: 18.5%!important;
+                    background-color: #fff!important;
+                    text-align: center;
+                    padding-left: 30px!important;
+            
+        }
+        
+    }
+    
+    &-Password {
+        text-align: center;
+        margin-top: 10px;
+        input {
+                    width: 18.5%!important;
+                    background-color: #fff!important;
+                    text-align: center;
+                    padding-left: 30px!important;
+            
+        }
+        
+         img {
+            height: 20px;
+            width: 20px;
+            position: relative;
+            left: 29%;
+            top: 31px;
+        }
+    }
+    
+    &-Button {
+        border-radius: 20px;
+        margin-left: 53%;
+        width: 170px;
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    }
+    
+      
+    &-SignupLink {
+            text-align: center;
+            margin-top: 100px;
+        span {
+            font-size: 1.3em;
+        }
+    }
+    
+    &-Modal {
+    border-radius: 35px;
+    width: 40%;
+    height: 45%;
+    min-width: 550px;
+    min-height: 360px;
+    
+    
+    }
+    
+     &-ModalContent {
+    text-align: center;
+    
+    }
+    
+    
+    &-ModalText1 {
+    color: #13b1c5;
+    font-size: 1.3em;
+    }
+    
+        &-ModalText2 {
+        color: grey;
+    font-size: .9em;
+    margin-top: -10px;
+    }
+
+    
+        &-ModalText3 {
+        color: #646060;
+    }
+
+    
+        &-ModalText4 {
+            color: #646060;
+    margin-top: 0px;
+    }
+    
+    &-ModalButtons {
+    margin: 0 auto;
+    display: block;
+    width: 400px;
+    text-align: center;
+    }
+    
+        &-ModalButton {
+        border-radius: 20px;
+    margin: 0 15px;
+    }
+    
+    &-SelectInput {
+            width: 22% !important;
+    }
+    
+    &-SelectDiv {
+            margin-left: 27% !important;
+    }
+
+
+        
+}
+
+.input-otp {
+    width: 10%!important;
+    height: 36px !important;
+    background-color: #d3d3d3!important;
+    border: 5px solid #fff!important;
+    text-align: center;
+}
+
+.input-otp::-webkit-inner-spin-button, 
+.input-otp::-webkit-outer-spin-button { 
+    appearance: none;
+    margin: 0; 
+}

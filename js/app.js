@@ -100,6 +100,10 @@ inq.config(['$routeProvider','$locationProvider',
             templateUrl: 'views/starredcards.html',
             controller: 'starredcardsCtrl'
         }).
+         when('/signup', {
+            templateUrl: 'views/signup.html',
+            controller: 'signupCtrl'
+        }).
 
 
         otherwise({
