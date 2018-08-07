@@ -121,6 +121,21 @@
 <script>
     var user = $.jStorage.get("user");
     $(document).ready(function() {
+        var svgimgProto = Object.create(HTMLElement.prototype);
+
+        svgimgProto.createdCallback = function() {
+            var src = this.getAttribute("src");
+            var innertag;
+            $.get(src, (data) => {
+                console.log(data.childNodes);
+                $('svg-img').html(data.childNodes);
+            });
+        };
+
+        var svgimg = document.registerElement('svg-img', {
+            prototype: svgimgProto
+        });
+
         /*if (!user || user == {}) {
             console.log("It shold redirect.");
             window.location = "#/login";

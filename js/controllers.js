@@ -1840,21 +1840,21 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
         //Hide Menu
         $rootScope.showmenu = false;
 
-        //Show Modal on click of Sign up button
+
         $(document).ready(function () {
+            
+//Show Modal on click of Sign up button
             $('.modal').modal();
 
-//            $('select').formSelect();
+//Select dropdown function
             $('select').material_select();
-
+         
         });
+      
+//SVG Custom Tag JS 
+      
 
 
-        /* $scope.opendropdown = function () {
-            $('.dropdown-trigger').open();
-        }
-*/
-        // Or with jQuery
 
 
 

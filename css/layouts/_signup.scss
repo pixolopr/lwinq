@@ -2,10 +2,23 @@
 .signupSection {
     background-color: white;
     height: 100%;
+    overflow: hidden;
     
     &-LoginText {
         text-align: center;
         margin-bottom: 40px;
+    }
+    
+    &-NameImg {
+           
+        svg{
+            height: 20px;
+            width: 20px;
+            position: relative;
+            left: 29%;
+            top: 31px;
+     
+        }
     }
     
     &-Phone {
@@ -143,7 +156,7 @@
 .input-otp {
     width: 10%!important;
     height: 36px !important;
-    background-color: #d3d3d3!important;
+    background-color: #efefef !important;
     border: 5px solid #fff!important;
     text-align: center;
 }
