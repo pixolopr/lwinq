@@ -53,6 +53,7 @@
     
       &-School {
         position: relative;
+            margin-top: 20px;
      
        input {
                     width: 40% !important;
@@ -120,6 +121,7 @@
     &-Phone {
         
         position: relative;
+        margin-top: 20px;
         input {
                     width: 40% !important;
                     background-color: white !important;
@@ -148,28 +150,56 @@
     
     
     &-Password {
-        
+        margin-top: 20px;
+        position: relative;
         text-align: center;
         margin-top: 10px;
         input {
-                    width: 18.5%!important;
+                    width: 14.5%!important;
                     background-color: #fff!important;
-                    text-align: center;
                     padding-left: 30px!important;
+                    margin: 0 38px !important;
             
         }
         
-         svg {
-            height: 20px;
-            width: 20px;
-            position: relative;
-            left: 29%;
-            top: 31px;
-              path {
+           input:focus + svg-img {
+                path {
+                    fill: #26a69a !important;
+                }
+              }
+        
+        
+        
+    }
+    
+    &-PassImg {
+        svg {
+             height: 20px;
+                width: 20px;
+                position: absolute;
+                left: 29%;
+                top: 10px;
+            path {
                 fill: #D4DFEF;
             }
+            }
         }
-    }
+        
+        &-ConfPass {
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                left: 29%;
+                top: 19px;
+            
+             svg {
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                left: 29%;
+                top: 10px;
+            }
+        }
     
     &-Button {
         border-radius: 20px;
