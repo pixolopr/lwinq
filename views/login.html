@@ -1,5 +1,5 @@
  <div class="row mainDiv">
-            <div class="col s12 m3 l3 rocketSection">
+            <div class="col s12 m3 l3 rocketSection img-responsive">
             <img src="/img/rocketsection-design.png" alt="top design" class="rocketSection-TopDesign">
             <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star1">
             <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star2">
@@ -11,7 +11,7 @@
             <div class="rocketSection-BlueBg"></div>
             
             <img src="/img/rocketsection-astroman.png" alt="Rocket Section" class="rocketSection-Astroman">
-            <img src="/img/rocketsection-design2.png" alt="top design" class="rocketSection-BottomDesign">
+            <img src="/img/rocketsection-design2.png" alt="top design" class="rocketSection-BottomDesign img-responsive">
 
             
             </div>
@@ -25,12 +25,14 @@
                     <form class="col s12">
                         <div class="row">
                             <div class=" col s12 loginSection-Phone">
-                                <img src="/img/phone.svg" alt="">
-                                <input id="phone" type="number" class="validate" ng-model="logindata.contact" ng-enter="dologin()" placeholder="Phone Number">
+                                                        
+                                <input id="phone" type="tel" class="validate" ng-model="logindata.contact" ng-enter="dologin()" placeholder="Phone Number">
+                                <svg-img src="../img/phone1.svg"></svg-img>
                             </div>
                             <div class=" col s12 loginSection-Password">
-                                <img src="/img/lock.svg" alt="">
                                 <input id="password" type="password" class="validate" ng-model="logindata.password" ng-enter="dologin()" placeholder="Password">
+                                <svg-img src="../img/lock.svg"></svg-img>
+
                             </div>
                             <div class=" col s12 loginSection-ForgotPassword">
                                 <a href="#">Forgot Password?</a>

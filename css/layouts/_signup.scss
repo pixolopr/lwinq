@@ -7,52 +7,148 @@
     &-LoginText {
         text-align: center;
         margin-bottom: 40px;
+        font-family: ceraBlack;
+        color: #575558;
     }
     
-    &-NameImg {
-           
-        svg{
-            height: 20px;
-            width: 20px;
-            position: relative;
-            left: 29%;
-            top: 31px;
+    &-Name {
+        position: relative;
+     
+       input {
+                    width: 40% !important;
+                    background-color: white !important;
+                    margin: 0 auto !important;
+                    display: block !important;
+                    padding-left: 30px !important;
+         
+        
+            
+
      
         }
+        
+        
+           input:focus + svg-img {
+                path {
+                    fill: #26a69a !important;
+                }
+              }
+           
+        
+      
+        
+        svg {
+            height: 20px;
+            width: 20px;
+            position: absolute;
+            top: 13px;
+            left: 29%;
+            path {
+                fill: #D4DFEF;
+            }
+        }
+        
+        
+    }
+    
+      &-School {
+        position: relative;
+     
+       input {
+                    width: 40% !important;
+                    background-color: white !important;
+                    margin: 0 auto !important;
+                    display: block !important;
+                    padding-left: 30px !important;
+ 
+        }
+        
+        
+           input:focus + svg-img {
+                path {
+                    fill: #26a69a !important;
+                }
+              }
+           
+        
+      
+        
+        svg {
+            height: 20px;
+            width: 20px;
+            position: absolute;
+            top: 13px;
+            left: 29%;
+             path {
+                fill: #D4DFEF;
+            }
+        }
+
+    }
+    
+    
+          &-Email {
+        position: relative;
+     
+       input {
+                    width: 40% !important;
+                    background-color: white !important;
+                    margin: 0 auto !important;
+                    display: block !important;
+                    padding-left: 30px !important;
+
+        }
+        
+        
+           input:focus + svg-img {
+                path {
+                    fill: #26a69a !important;
+                }
+              }
+        svg {
+            height: 20px;
+            width: 20px;
+            position: absolute;
+            top: 13px;
+            left: 29%;
+             path {
+                fill: #D4DFEF;
+            }
+              }
     }
     
     &-Phone {
+        
+        position: relative;
         input {
                     width: 40% !important;
                     background-color: white !important;
                     margin: 0 auto !important;
                     display: block !important;
                     padding-left: 30px !important;
-        }
-        
-        img {
+        }        
+       
+       input:focus + svg-img {
+                path {
+                    fill: #26a69a !important;
+                }
+              }
+          svg {
             height: 20px;
             width: 20px;
-            position: relative;
+            position: absolute;
+            top: 13px;
             left: 29%;
-            top: 31px;
-        }
+               path {
+                fill: #D4DFEF;
+            }
+              }
+   
     }
     
-    &-SchoolDetails {
-        text-align: center;
-        margin-top: 10px;
-        input {
-                    width: 18.5%!important;
-                    background-color: #fff!important;
-                    text-align: center;
-                    padding-left: 30px!important;
-            
-        }
-        
-    }
     
     &-Password {
+        
         text-align: center;
         margin-top: 10px;
         input {
@@ -63,12 +159,15 @@
             
         }
         
-         img {
+         svg {
             height: 20px;
             width: 20px;
             position: relative;
             left: 29%;
             top: 31px;
+              path {
+                fill: #D4DFEF;
+            }
         }
     }
     
@@ -76,6 +175,7 @@
         border-radius: 20px;
         margin-left: 53%;
         width: 170px;
+        background-color: #51d0e1;
         a {
             text-decoration: none;
             color: white;
@@ -88,6 +188,11 @@
             margin-top: 100px;
         span {
             font-size: 1.3em;
+            font-family: ceraM;
+        }
+        
+        a {
+            font-family: ceraBlack;
         }
     }
     
@@ -143,12 +248,15 @@
     
     &-SelectInput {
             width: 22% !important;
+            color: #D4DFEF;
     }
     
     &-SelectDiv {
             margin-left: 27% !important;
+            
     }
-
+    
+    
 
         
 }

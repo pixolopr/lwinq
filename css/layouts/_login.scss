@@ -23,12 +23,13 @@
     background-color: #00BCD4;
     height: 100%;
     padding: 0 !important;
+    position: relative;
     
     &-Star1 {
         height: 21px;
         position: absolute;
         top: 37%;
-        left: 14%;
+        left: 55%;
         z-index: 20;
     }
     
@@ -36,7 +37,7 @@
         height: 30px;
         position: absolute;
         top: 56%;
-        left: 2%;
+        left: 9%;
         z-index: 20;
 
     }
@@ -45,7 +46,7 @@
         height: 40px;
         position: absolute;
         top: 56%;
-        left: 18%;
+        left: 70%;
         z-index: 20;
 
     }
@@ -54,7 +55,7 @@
         height: 42px;
         position: absolute;
         top: 20%;
-        left: 21%;
+        left: 75%;
         z-index: 20;
     }
     
@@ -62,7 +63,7 @@
         height: 24px;
         position: absolute;
         top: 22%;
-        left: 5%;
+        left: 18%;
         z-index: 20;
     }
     
@@ -70,7 +71,7 @@
     height: 200px;
     position: absolute;
     top: 50%;
-    left: 7%;
+    left: 25%;
         z-index: 20;
         p {
             text-align: center;
@@ -82,7 +83,8 @@
         
         img {
             height: 170px;
-            margin-left: 40px;
+            margin: 0 auto;
+            display: block;
         }
 
     
@@ -98,15 +100,15 @@
     
     &-TopDesign {
             margin-left: -10px;
-    height: 113px;
-    opacity: .5;
+        width: 105%;
+        opacity: .5;
         
     }
     
        &-BottomDesign {
            
     position: absolute;
-    height: 183px;
+    width: 100%;
     z-index: 20;
     bottom: 0;
       
@@ -134,9 +136,12 @@
         margin-top: 8%;
         margin-bottom: 8%;
         text-align: center;
+        font-family: ceraBlack;
+        color: #575558;
     }
     
     &-Phone {
+        position: relative;
         input {
                     width: 40% !important;
                     background-color: white !important;
@@ -145,16 +150,27 @@
                     padding-left: 30px !important;
         }
         
-        img {
+         input:focus + svg-img {
+                path {
+                    fill: #26a69a !important;
+                }
+            }
+        
+        svg {
             height: 20px;
             width: 20px;
-            position: relative;
+            position: absolute;
             left: 29%;
-            top: 31px;
+            top: 13px;
+             path {
+                fill: #D4DFEF;
+            }
         }
     }
     
     &-Password {
+        
+        position: relative;
         input {
                     width: 40% !important;
                     background-color: white !important;
@@ -162,12 +178,22 @@
                     display: block !important;
                     padding-left: 30px !important;
         }
-         img {
+        
+        input:focus + svg-img {
+                path {
+                    fill: #26a69a !important;
+                }
+            }
+        
+         svg {
             height: 20px;
             width: 20px;
-            position: relative;
+            position: absolute;
             left: 29%;
-            top: 31px;
+            top: 13px;
+              path {
+                fill: #D4DFEF;
+            }
         }
     }
     
@@ -175,6 +201,7 @@
         border-radius: 20px;
         margin-left: 53%;
         width: 170px;
+        background-color: #51d0e1;
     }
     
     &-ForgotPassword {
@@ -182,10 +209,11 @@
             text-align: center !important;
                    
         a {
-            margin-right: 31% !important;
+            margin-right: 33% !important;
             margin-top: 10px;
             display: block;
             font-size: .8em;
+            color: #575558;
         }
 
         }
@@ -195,6 +223,11 @@
             margin-top: 100px;
         span {
             font-size: 1.3em;
+            font-family: ceraM;
+        }
+        
+        a {
+            font-family: ceraBlack;
         }
     }
     

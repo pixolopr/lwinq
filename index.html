@@ -128,7 +128,7 @@
             var innertag;
             $.get(src, (data) => {
                 console.log(data.childNodes);
-                $('svg-img').html(data.childNodes);
+                $(this).html(data.childNodes);
             });
         };
 

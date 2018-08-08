@@ -30,6 +30,12 @@ $break-large: 1200px;
 }
 
 @font-face {
+    font-family: ceraBlack;
+    src: url("../fonts/Cera GR Black.otf")format("opentype");
+}
+
+
+@font-face {
     font-family: ceraB;
     src: url("../fonts/Cera GR.otf")format("opentype");
 }
