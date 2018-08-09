@@ -21,20 +21,20 @@
     <div class="col s12 m9 l9 signupSection">
         <div class="row">
             <h2 class="signupSection-LoginText">Sign Up</h2>
-            <form class="col s12">
-                <div class="row">
-                    <div class=" col s12 signupSection-Name">
-                          <input id="phone" type="text" class="validate" placeholder="Name">
-                           <svg-img src="../img/name1.svg" class=".nameSvg" ></svg-img>
-                        
-                             
-                    </div>
-                    <div class=" col s12 signupSection-School">
-                        <input id="phone" type="text" class="validate" placeholder="School">
-                        <svg-img src="../img/school1.svg" class="signupSection-NameImg" ></svg-img>
+            <div class="abc">
+                <form class="col s12">
+                    <div class="signupSection-formrow">
+                        <input id="phone" type="text" class="validate" placeholder="Name">
+                        <svg-img src="../img/name1.svg" class=".nameSvg"></svg-img>
+
 
                     </div>
-                    <div class=" col s12 signupSection-SelectDiv">
+                    <div class="signupSection-formrow">
+                        <input id="phone" type="text" class="validate" placeholder="School">
+                        <svg-img src="../img/school1.svg" class="signupSection-NameImg"></svg-img>
+
+                    </div>
+                    <div class="signupSection-formrow">
                         <!--
                                 <input id="standard" class="validate" placeholder="Standard" list="standards">
                                 <datalist id="standards">
@@ -49,9 +49,9 @@
                                     <option value="CBSE">
                                     <option value="MAHARASHTRA">
                                 </datalist> -->
-                                
-                    <div class="input-field col s3 signupSection-SelectInput">
-                        <select>
+
+                        <div class="input-field signupSection-formrow-break">
+                            <select>
                           <option value="" disabled selected >Standard</option>
                           <option value="1">8th Standard</option>
                           <option value="2">9th Standard</option>
@@ -59,52 +59,72 @@
                           <option value="4">11th Standard</option>
                           <option value="5">12th Standard</option>
                         </select>
-                    </div>
-                    <div class="input-field col s3 signupSection-SelectInput">
-                        <select>
+                        </div>
+                        <div class="input-field signupSection-formrow-break">
+                            <select>
                           <option value="" disabled selected>Board</option>
                           <option value="1">CBSE</option>
                           <option value="2">ICSE</option>
                           <option value="3">State Board</option>
                         </select>
-                    </div>
+                        </div>
 
 
                     </div>
-                    
-                            <div class=" col s12 signupSection-Email">
-                                <input id="phone" type="email" class="validate" placeholder="name@company.com">
-                                <svg-img src="../img/mail1.svg" class="signupSection-NameImg" ></svg-img>
-                            </div>
-                            
-                            <div class=" col s12 signupSection-Phone">
-                              <input id="phone" type="tel" class="validate" placeholder="Phone Number">
-                              <svg-img src="../img/phone.svg" class="signupSection-NameImg" ></svg-img>
-                            </div>
-                            
-                            <div class=" col s12 signupSection-Password">
-                               
-                                
-                                <input id="password" type="password" class="validate" placeholder="Password">
+
+                    <div class="signupSection-formrow">
+                        <input id="phone" type="email" class="validate" placeholder="name@company.com">
+                        <svg-img src="../img/mail1.svg" class="signupSection-NameImg"></svg-img>
+                    </div>
+
+                    <div class="signupSection-formrow">
+                        <input id="phone" type="tel" class="validate" placeholder="Phone Number">
+                        <svg-img src="../img/phone.svg" class="signupSection-NameImg"></svg-img>
+                    </div>
+
+
+                    <!--
+                            <div class="row col s12 signupSection-Password">
+                                 <div class=" col s3">
+                                </div>
+                                <div class=" col s3 signupSection-PassDiv">
+                                <input id="password" type="password" class="validate" placeholder="****">
                                 <svg-img src="../img/lock.svg" class="signupSection-PassImg" ></svg-img>
-                                <input id="password" type="password" class="validate" placeholder="Confirm Password">
-<!--                                <svg-img src="../img/phone.svg" class="signupSection-ConfPass" ></svg-img>-->
+                                </div>
+                                <div class=" col s3 signupSection-ConfPassDiv">
+                                <input id="password" type="password" class="validate" placeholder="****">
+                                 <svg-img src="../img/lock.svg" class="signupSection-ConfPass" ></svg-img>
+                                </div>
+                                <div class=" col s3">
+                                </div>
                             </div>
+-->
 
-                    
+                    <div class="signupSection-formrow">
 
-                </div>
+                        <div class="signupSection-formrow-break">
+                            <input id="password" type="password" class="validate break-input" placeholder="Password">
+                            <svg-img src="../img/lock.svg" class="signupSection-PassImg"></svg-img>
+                        </div>
+                        <div class="signupSection-formrow-break">
+                            <input id="password" type="password" class="validate break-input" placeholder="Confirm Password">
+                            <svg-img src="../img/lock.svg" class="signupSection-PassImg"></svg-img>
+                        </div>
 
-            </form>
+                    </div>
+
+
+                </form>
+            </div>
         </div>
         <div ng-if="error">
             Invalid credentials. Please enter valid credentials.
         </div>
-        <button data-target="modal1" class="btn signupSection-Button modal-trigger" type="submit" name="action" ng-click="dologin()">
-                        Sign Up
-                        <i class="material-icons right">arrow_forward</i>
-                    </button>
 
+
+        <div class="signupSection-formrow form-button-wrapper">
+            <button data-target="modal1" class="btn signupSection-button modal-trigger" type="submit" name="action" ng-click="dologin()">Sign Up<i class="material-icons right">arrow_forward</i></button>
+        </div>
 
 
 
@@ -119,8 +139,13 @@
                 <p class="signupSection-ModalText4">Resend OTP</p>
             </div>
             <div class="signupSection-ModalButtons"><button class="btn signupSection-ModalButton" type="submit" name="action" ng-click="dologin()">Edit Details</button>
+
                 <button class="btn signupSection-ModalButton" type="submit" name="action" ng-click="dologin()">Validate
-                        <i class="material-icons right">arrow_forward</i></button></div>
+                        <i class="material-icons right">arrow_forward</i></button>
+
+            </div>
+
+
 
         </div>
 

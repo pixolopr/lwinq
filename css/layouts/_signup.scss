@@ -1,294 +1,408 @@
+.abc {
+    width: 100%;
+}
 
 .signupSection {
     background-color: white;
-    height: 100%;
-    overflow: hidden;
-    
+    height: 100%; //    overflow: hidden;
     &-LoginText {
         text-align: center;
         margin-bottom: 40px;
         font-family: ceraBlack;
         color: #575558;
     }
-    
-    &-Name {
-        position: relative;
-     
-       input {
-                    width: 40% !important;
-                    background-color: white !important;
-                    margin: 0 auto !important;
-                    display: block !important;
-                    padding-left: 30px !important;
-         
-        
-            
 
-     
+    &-formrow {
+        display: flex;
+        margin: 0 auto;
+        position: relative;
+        width: 55% !important;
+        height: 65px;
+        justify-content: space-between;
+        
+        .select-wrapper {
+           color: #d4dfef;
+        } 
+        .select-wrapper span.caret {
+            z-index: 9;
+                color: #9da3ac;
+        } 
+        
+        input {
+            border-bottom: 1.2px solid #c0c0c0 !important;
         }
-        
-        
-           input:focus + svg-img {
-                path {
-                    fill: #26a69a !important;
-                }
-              }
-           
-        
-      
-        
+
+        &-break {
+            position: relative;
+            margin: 0;
+            width: 48%;
+            .select-dropdown {
+                width: 85% !important;
+                margin: 0 !important;
+            }
+            .break-input {
+                width: 85% !important;
+                margin: 0 !important;
+            }
+        }
+
+        input {
+            width: 100% !important;
+            background-color: white !important;
+            margin: 0 auto !important;
+            display: block !important;
+            padding-left: 30px !important;
+        }
+
+
+        input:focus + svg-img {
+            path {
+                fill: #26a69a !important;
+            }
+        }
+
+
+
+
         svg {
             height: 20px;
             width: 20px;
             position: absolute;
             top: 13px;
-            left: 29%;
+            left: 5px;
             path {
                 fill: #D4DFEF;
             }
         }
-        
-        
-    }
-    
-      &-School {
-        position: relative;
-            margin-top: 20px;
-     
-       input {
-                    width: 40% !important;
-                    background-color: white !important;
-                    margin: 0 auto !important;
-                    display: block !important;
-                    padding-left: 30px !important;
- 
-        }
-        
-        
-           input:focus + svg-img {
-                path {
-                    fill: #26a69a !important;
-                }
-              }
-           
-        
-      
-        
-        svg {
-            height: 20px;
-            width: 20px;
-            position: absolute;
-            top: 13px;
-            left: 29%;
-             path {
-                fill: #D4DFEF;
-            }
-        }
 
-    }
-    
-    
-          &-Email {
-        position: relative;
-     
-       input {
-                    width: 40% !important;
-                    background-color: white !important;
-                    margin: 0 auto !important;
-                    display: block !important;
-                    padding-left: 30px !important;
 
-        }
-        
-        
-           input:focus + svg-img {
-                path {
-                    fill: #26a69a !important;
-                }
-              }
-        svg {
-            height: 20px;
-            width: 20px;
-            position: absolute;
-            top: 13px;
-            left: 29%;
-             path {
-                fill: #D4DFEF;
-            }
-              }
+    } //      &-School {
+    //              display: block;
+    //    margin: 0 auto;
+    //      position: relative;
+    //         width: 40% !important;
+    //              margin-top: 20px !important;
+    //          
+    //     
+    //       input {
+    //                    width: 100% !important;
+    //                    background-color: white !important;
+    //                    margin: 0 auto !important;
+    //                    display: block !important;
+    //                    padding-left: 30px !important;
+    // 
+    //        }
+    //        
+    //        
+    //           input:focus + svg-img {
+    //                path {
+    //                    fill: #26a69a !important;
+    //                }
+    //              }
+    //           
+    //        
+    //      
+    //        
+    //        svg {
+    //            height: 20px;
+    //            width: 20px;
+    //            position: absolute;
+    //            top: 13px;
+    //            left: 5px;
+    //            path {
+    //                fill: #D4DFEF;
+    //            }
+    //        }
+    //
+    //    }
+    //    
+    //    
+    //          &-Email {
+    //                  display: block;
+    //    margin: 0 auto;
+    //         position: relative;
+    //         width: 40% !important;
+    //     
+    //       input {
+    //                    width: 100% !important;
+    //                    background-color: white !important;
+    //                    margin: 0 auto !important;
+    //                    display: block !important;
+    //                    padding-left: 30px !important;
+    //
+    //        }
+    //        
+    //        
+    //           input:focus + svg-img {
+    //                path {
+    //                    fill: #26a69a !important;
+    //                }
+    //              }
+    //        svg {
+    //            height: 20px;
+    //            width: 20px;
+    //            position: absolute;
+    //            top: 13px;
+    //            left: 5px;
+    //             path {
+    //                fill: #D4DFEF;
+    //            }
+    //              }
+    //    }
+    //    
+    //    &-Phone {
+    //            display: block;
+    //    margin: 0 auto;
+    //        position: relative;
+    //        width: 40% !important;
+    //        margin-top: 20px;
+    //        input {
+    //                    width: 100% !important;
+    //                    background-color: white !important;
+    //                    margin: 0 auto !important;
+    //                    display: block !important;
+    //                    padding-left: 30px !important;
+    //        }        
+    //       
+    //       input:focus + svg-img {
+    //                path {
+    //                    fill: #26a69a !important;
+    //                }
+    //              }
+    //          svg {
+    //            height: 20px;
+    //            width: 20px;
+    //            position: absolute;
+    //            top: 13px;
+    //            left: 5px;
+    //               path {
+    //                fill: #D4DFEF;
+    //            }
+    //              }
+    //   
+    //    }
+    //    
+    //    
+    //    &-Password {
+    ////        margin-top: 20px;
+    ////        position: relative;
+    ////        text-align: center;
+    ////        margin-left: 13px;
+    //        input {
+    ////                       width: 70.5%!important;
+    ////                        background-color: #fff!important;
+    //                        padding-left: 30px!important;
+    //              }
+    //        
+    //           input:focus + svg-img {
+    //                path {
+    //                    fill: #26a69a !important;
+    //                }
+    //              }
+    //        
+    //        &-PassDiv {
+    //            
+    //            position: relative;
+    //        }
+    //        
+    //         &-ConfPassDiv {
+    //            position: relative;
+    //        }
+    //        
+    //    }
+    //    
+    //        
+    //    &-PassImg {
+    //        svg {
+    //                height: 20px;
+    //                width: 20px;
+    //            
+    //            path {
+    //                fill: #D4DFEF;
+    //            }
+    //            }
+    //        }
+    //        
+    //        &-ConfPass {
+    //               
+    //            
+    //             svg {
+    //                height: 20px;
+    //                width: 20px;
+    //                   path {
+    //                fill: #D4DFEF;
+    //            }
+    //            }
+    //        }
+    //    &-Password {
+    //        margin-top: 20px;
+    //        position: relative;
+    //        text-align: center;
+    //        margin-left: 13px;
+    //        input {
+    //                       width: 70.5%!important;
+    //                        background-color: #fff!important;
+    //                        padding-left: 30px!important;
+    //              }
+    //        
+    //           input:focus + svg-img {
+    //                path {
+    //                    fill: #26a69a !important;
+    //                }
+    //              }
+    //        
+    //        &-PassDiv {
+    //            position: relative;
+    //        }
+    //        
+    //         &-ConfPassDiv {
+    //            position: relative;
+    //        }
+    //        
+    //    }
+    //    
+    //    &-PassImg {
+    //        svg {
+    //                height: 20px;
+    //                width: 20px;
+    //                position: absolute;
+    //                left: 29.4%;
+    //                top: 10px;
+    //            path {
+    //                fill: #D4DFEF;
+    //            }
+    //            }
+    //        }
+    //        
+    //        &-ConfPass {
+    //                height: 20px;
+    //                width: 20px;
+    //                position: absolute;
+    //                left: 54%;
+    //                top: 10px;
+    //            
+    //             svg {
+    //                height: 20px;
+    //                width: 20px;
+    ////                position: absolute;
+    ////                left: 29.4%;
+    ////                top: 10px;
+    //                   path {
+    //                fill: #D4DFEF;
+    //            }
+    //            }
+    //        }
+    .form-button-wrapper {
+        justify-content: flex-end;
     }
-    
-    &-Phone {
-        
+    &-button {
         position: relative;
-        margin-top: 20px;
-        input {
-                    width: 40% !important;
-                    background-color: white !important;
-                    margin: 0 auto !important;
-                    display: block !important;
-                    padding-left: 30px !important;
-        }        
-       
-       input:focus + svg-img {
-                path {
-                    fill: #26a69a !important;
-                }
-              }
-          svg {
-            height: 20px;
-            width: 20px;
-            position: absolute;
-            top: 13px;
-            left: 29%;
-               path {
-                fill: #D4DFEF;
-            }
-              }
-   
-    }
-    
-    
-    &-Password {
-        margin-top: 20px;
-        position: relative;
-        text-align: center;
-        margin-top: 10px;
-        input {
-                    width: 14.5%!important;
-                    background-color: #fff!important;
-                    padding-left: 30px!important;
-                    margin: 0 38px !important;
-            
-        }
-        
-           input:focus + svg-img {
-                path {
-                    fill: #26a69a !important;
-                }
-              }
-        
-        
-        
-    }
-    
-    &-PassImg {
-        svg {
-             height: 20px;
-                width: 20px;
-                position: absolute;
-                left: 29%;
-                top: 10px;
-            path {
-                fill: #D4DFEF;
-            }
-            }
-        }
-        
-        &-ConfPass {
-                height: 20px;
-                width: 20px;
-                position: absolute;
-                left: 29%;
-                top: 19px;
-            
-             svg {
-                height: 20px;
-                width: 20px;
-                position: absolute;
-                left: 29%;
-                top: 10px;
-            }
-        }
-    
-    &-Button {
+        padding-right: 70px;
+        text-transform: capitalize;
+        font-size: 19px;
+        @extend .cerafont;
         border-radius: 20px;
-        margin-left: 53%;
-        width: 170px;
-        background-color: #51d0e1;
+        background: linear-gradient(#51d0e1, #00bcd4);
+        .right {
+            position: absolute;
+            right: 40px;
+            transition: 0.2s right;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &:hover {
+            .right {
+                right: 30px;
+            }
+        }
         a {
             text-decoration: none;
             color: white;
         }
     }
-    
-      
+
+
     &-SignupLink {
-            text-align: center;
-            margin-top: 100px;
+        text-align: center;
+        margin-top: 100px;
         span {
             font-size: 1.3em;
             font-family: ceraM;
         }
-        
+
         a {
             font-family: ceraBlack;
+            color: #00bcd4;
         }
     }
-    
+
     &-Modal {
-    border-radius: 35px;
-    width: 40%;
-    height: 45%;
-    min-width: 550px;
-    min-height: 360px;
-    
-    
-    }
-    
-     &-ModalContent {
-    text-align: center;
-    
-    }
-    
-    
-    &-ModalText1 {
-    color: #13b1c5;
-    font-size: 1.3em;
-    }
-    
-        &-ModalText2 {
-        color: grey;
-    font-size: .9em;
-    margin-top: -10px;
+        border-radius: 35px;
+        width: 40%;
+        height: 45%;
+        min-width: 550px;
+        min-height: 360px;
+
+
     }
 
-    
-        &-ModalText3 {
+    &-ModalContent {
+        text-align: center;
+
+    }
+
+
+    &-ModalText1 {
+        color: #13b1c5;
+        font-size: 1.3em;
+    }
+
+    &-ModalText2 {
+        color: grey;
+        font-size: .9em;
+        margin-top: -10px;
+    }
+
+
+    &-ModalText3 {
         color: #646060;
     }
 
-    
-        &-ModalText4 {
-            color: #646060;
-    margin-top: 0px;
-    }
-    
-    &-ModalButtons {
-    margin: 0 auto;
-    display: block;
-    width: 400px;
-    text-align: center;
-    }
-    
-        &-ModalButton {
-        border-radius: 20px;
-    margin: 0 15px;
-    }
-    
-    &-SelectInput {
-            width: 22% !important;
-            color: #D4DFEF;
-    }
-    
-    &-SelectDiv {
-            margin-left: 27% !important;
-            
-    }
-    
-    
 
-        
+    &-ModalText4 {
+        color: #646060;
+        margin-top: 0px;
+    }
+
+    &-ModalButtons {
+        margin: 0 auto;
+        display: block;
+        width: 400px;
+        text-align: center;
+    }
+
+    &-ModalButton {
+        border-radius: 20px;
+        margin: 0 15px;
+    }
+
+    &-SelectInput {
+        width: 50% !important;
+
+    }
+
+    &-SelectDiv {
+        display: block;
+        margin: 0 auto;
+        position: relative;
+        width: 45%!important;
+        left: 1.5%;
+
+    }
+
+
+
+
 }
 
 .input-otp {
@@ -299,8 +413,8 @@
     text-align: center;
 }
 
-.input-otp::-webkit-inner-spin-button, 
-.input-otp::-webkit-outer-spin-button { 
+.input-otp::-webkit-inner-spin-button,
+.input-otp::-webkit-outer-spin-button {
     appearance: none;
-    margin: 0; 
+    margin: 0;
 }
