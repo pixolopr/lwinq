@@ -24,18 +24,18 @@
                     <h2 class="loginSection-LoginText">LOGIN</h2>
                     <form class="col s12">
                         <div class="row">
-                            <div class=" col s12 loginSection-Phone">
+                            <div class="loginSection-Phone loginSection-loginformrow">
                                                         
-                                <input id="phone" type="tel" class="validate" ng-model="logindata.contact" ng-enter="dologin()" placeholder="Phone Number">
+                                <input id="phone" type="tel" class="validate " ng-model="logindata.contact" ng-enter="dologin()" placeholder="Phone Number">
                                 <svg-img src="../img/phone1.svg"></svg-img>
                             </div>
-                            <div class=" col s12 loginSection-Password">
+                            <div class="loginSection-Password loginSection-loginformrow">
                                 <input id="password" type="password" class="validate" ng-model="logindata.password" ng-enter="dologin()" placeholder="Password">
                                 <svg-img src="../img/lock.svg"></svg-img>
 
                             </div>
-                            <div class=" col s12 loginSection-ForgotPassword">
-                                <a href="#">Forgot Password?</a>
+                            <div class="loginSection-ForgotPassword loginSection-loginformrow">
+                                <a href="#" class="modal-trigger" data-target="modal2">Forgot Password?</a>
                             </div>
                         </div>
 
@@ -44,11 +44,26 @@
                 <div ng-if="error">
                     Invalid credentials. Please enter valid credentials.
                 </div>
+                    <div class="loginSection-loginformrow form-button-wrapper">
                     <button class="btn loginSection-Button" type="submit" name="action" ng-click="dologin()">Login
                         <i class="material-icons right buton-arrow">arrow_forward</i>
                     </button>
+                    </div>            
+                    <div class="loginSection-SignupLink"><span>Not yet registered? <a href="#signup">Sign Up</a></span></div>
                                 
-                    <div class="loginSection-SignupLink"><span>Not yet registered? <a href="#">Sign Up</a></span></div>
+                    <div id="modal2" class="modal signupSection-Modal">
+                    <div class="modal-content signupSection-ModalContent">
+                    <p class="signupSection-ModalText1">Just making sure it's really you</p>
+                    <p class="signupSection-ModalText2">Sent an OTP at 9967552082</p>
+                    <p class="signupSection-ModalText3">Enter your OTP</p>
+                    <input type="number" class="input-otp"><input type="number" class="input-otp"><input type="number" class="input-otp"><input type="number" class="input-otp">
+                    <p class="signupSection-ModalText4"><a href="#">RESEND OTP</a></p>
+                    </div>
+                    <div class="signupSection-ModalButtons">
+                    <button class="btn signupSection-ModalButton1" type="submit" name="action" ng-click="dologin()">Edit Details</button>
+                    <button class="btn signupSection-ModalButton2 signupSection-modal-button-validate" type="submit" name="action" ng-click="dologin()">Validate<i class="material-icons right">arrow_forward</i></button>
+                    </div>
+                    </div>
                                  
             </div>
 </div>

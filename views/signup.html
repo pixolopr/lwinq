@@ -35,23 +35,9 @@
 
                     </div>
                     <div class="signupSection-formrow">
-                        <!--
-                                <input id="standard" class="validate" placeholder="Standard" list="standards">
-                                <datalist id="standards">
-                                    <option value="8th Standard">
-                                    <option value="9th Standard">
-                                    <option value="10th Standard">
-                                    <option value="11th Standard">
-                                    <option value="12th Standard">
-                                </datalist> 
-                                <input id="board" class="validate"  placeholder="Board" list="boards">
-                                <datalist id="boards">
-                                    <option value="CBSE">
-                                    <option value="MAHARASHTRA">
-                                </datalist> -->
 
                         <div class="input-field signupSection-formrow-break">
-                            <select>
+                        <select>
                           <option value="" disabled selected >Standard</option>
                           <option value="1">8th Standard</option>
                           <option value="2">9th Standard</option>
@@ -136,20 +122,15 @@
                 <p class="signupSection-ModalText2">Sent an OTP at 9967552082</p>
                 <p class="signupSection-ModalText3">Enter your OTP</p>
                 <input type="number" class="input-otp"><input type="number" class="input-otp"><input type="number" class="input-otp"><input type="number" class="input-otp">
-                <p class="signupSection-ModalText4">Resend OTP</p>
+                <p class="signupSection-ModalText4"><a href="#">RESEND OTP</a></p>
             </div>
-            <div class="signupSection-ModalButtons"><button class="btn signupSection-ModalButton" type="submit" name="action" ng-click="dologin()">Edit Details</button>
-
-                <button class="btn signupSection-ModalButton" type="submit" name="action" ng-click="dologin()">Validate
-                        <i class="material-icons right">arrow_forward</i></button>
-
+            <div class="signupSection-ModalButtons">
+            <button class="btn signupSection-ModalButton1" type="submit" name="action" ng-click="dologin()">Edit Details</button>
+            <button class="btn signupSection-ModalButton2 signupSection-modal-button-validate" type="submit" name="action" ng-click="dologin()">Validate<i class="material-icons right">arrow_forward</i></button>
             </div>
-
-
-
         </div>
 
-        <div class="signupSection-SignupLink"><span>Already registered? <a href="#">Login</a></span></div>
+        <div class="signupSection-SignupLink"><span>Already registered? <a href="#login">Login</a></span></div>
 
     </div>
 </div>

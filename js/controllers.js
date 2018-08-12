@@ -96,6 +96,13 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
         }
 
         // routing
+        
+        
+        $(document).ready(function () {
+
+                    $('.modal').modal();
+            
+                });
 
   }
 ]);

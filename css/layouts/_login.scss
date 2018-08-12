@@ -130,9 +130,53 @@
 }
 
 .loginSection {
-    background-color: white;
+//    background-color: white;
     height: 100%;
     
+    &-loginformrow {
+        display: flex;
+        margin: 0 auto;
+        position: relative;
+        width: 55% !important;
+        height: 65px;
+        justify-content: space-between;      
+            input {
+                    width: 100% !important;
+                    background-color: transparent !important;
+                    margin: 0 auto !important;
+                    display: block !important;
+                    padding-left: 30px !important;
+                    border-bottom: 1.2px solid #c0c0c0 !important;
+            &:focus {
+                border-bottom: 1px solid $loginblue-color !important;
+                box-shadow: 0 1px 0 0 $loginblue-color !important;
+                
+            }
+        }
+        
+         input:focus + svg-img {
+                path {
+                    fill: $loginblue-color !important;
+                }
+            }
+        
+        svg {
+            height: 20px;
+            width: 20px;
+            position: absolute;
+               top: 13px;
+            left: 5px;
+             path {
+                fill: #D4DFEF;
+            }
+        }
+        
+        
+    }
+    
+  
+    
+   
     &-LoginText {
         margin-top: 8%;
         margin-bottom: 8%;
@@ -141,79 +185,34 @@
         color: #575558;
     }
     
-    &-Phone {
-        position: relative;
-        input {
-                    width: 40% !important;
-                    background-color: white !important;
-                    margin: 0 auto !important;
-                    display: block !important;
-                    padding-left: 30px !important;
-        }
-        
-         input:focus + svg-img {
-                path {
-                    fill: #26a69a !important;
-                }
-            }
-        
-        svg {
-            height: 20px;
-            width: 20px;
-            position: absolute;
-            left: 29%;
-            top: 13px;
-             path {
-                fill: #D4DFEF;
-            }
-        }
-    }
-    
-    &-Password {
-        
-        position: relative;
-        input {
-                    width: 40% !important;
-                    background-color: white !important;
-                    margin: 0 auto !important;
-                    display: block !important;
-                    padding-left: 30px !important;
-        }
-        
-        input:focus + svg-img {
-                path {
-                    fill: #26a69a !important;
-                }
-            }
-        
-         svg {
-            height: 20px;
-            width: 20px;
-            position: absolute;
-            left: 29%;
-            top: 13px;
-              path {
-                fill: #D4DFEF;
-            }
-        }
-    }
-    
+
     &-Button {
+        position: absolute;
+        right: 0px;
         border-radius: 20px;
-        margin-left: 53%;
         width: 170px;
         background: linear-gradient(#51d0e1, #00bcd4 );
+          text-transform: capitalize;
+        font-size: 19px;
+        @extend .cerafont;
+                .right {
+            position: relative;
+            right: 20px;
+            transition: 0.2s right;
+            top: 18px;
+            transform: translateY(-50%);
+        }
+        &:hover {
+            .right {
+                right: 10px;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
     }
     
-      &-Button:hover {
-                  background-color: #51d0e1;
-
-            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2) !important;
-    }
-
-      .buton-arrow:hover {
-    left: 10px;
-    position: relative;    }
     
     &-ForgotPassword {
             position: relative;
@@ -221,12 +220,12 @@
             text-align: center !important;
                    
         a {
-            margin-top: 10px;
+            
             display: block;
             font-size: .8em;
             color: #575558;
             position: absolute;
-            left: 28.8%;
+            left: 0px;
         }
 
         }
