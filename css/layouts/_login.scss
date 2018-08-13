@@ -247,3 +247,64 @@
     
     
 }
+
+.input-phone-number::placeholder {
+    text-align: center;
+}
+
+.input-phone-number {
+    width: 200px !important;
+    text-align: center;
+}
+
+//Remove the arrow in the input type
+.input-phone-number::-webkit-inner-spin-button,
+.input-phone-number::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.modal-2 {
+border-radius: 35px;
+    width: 35%;
+    height: 35%;
+    min-width: 500px;
+    min-height: 290px;
+    
+}
+
+.lock-img {
+        position: relative;
+        width: 100%;
+        
+        svg {
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        margin: 10px auto;
+        display: block;
+        
+        path {
+            fill: #D4DFEF;
+        }
+    }
+    
+    .lock-line{
+            position: absolute;
+            height: 2px;
+            background-color: #d4dfef;
+            width: 100%;
+            top: 66%;
+                z-index: -1;
+        }
+}
+
+
+.modalcontent2 {
+    text-align: center;
+    padding: 0 !important;
+    input {
+            margin-bottom: 40px !important;
+    margin-top: 15px !important;
+    }
+}

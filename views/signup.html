@@ -22,15 +22,15 @@
         <div class="row">
             <h2 class="signupSection-LoginText">Sign Up</h2>
             <div class="abc">
-                <form class="col s12">
+                <form name="myForm" class="col s12">
                     <div class="signupSection-formrow">
-                        <input id="phone" type="text" class="validate" placeholder="Name">
+                        <input id="phone" type="text" class="validate" placeholder="Name" name="fname">
                         <svg-img src="../img/name1.svg" class=".nameSvg"></svg-img>
 
 
                     </div>
                     <div class="signupSection-formrow">
-                        <input id="phone" type="text" class="validate" placeholder="School">
+                        <input id="phone" type="text" class="validate" placeholder="School" name="schoolname">
                         <svg-img src="../img/school1.svg" class="signupSection-NameImg"></svg-img>
 
                     </div>
@@ -59,41 +59,24 @@
                     </div>
 
                     <div class="signupSection-formrow">
-                        <input id="phone" type="email" class="validate" placeholder="name@company.com">
+                        <input id="phone" type="email" class="validate" placeholder="name@company.com" name="emailname">
                         <svg-img src="../img/mail1.svg" class="signupSection-NameImg"></svg-img>
                     </div>
 
                     <div class="signupSection-formrow">
-                        <input id="phone" type="tel" class="validate" placeholder="Phone Number">
+                        <input id="phone" type="tel" class="validate" placeholder="Phone Number" name="phonename" pattern="^\d{4}-\d{3}-\d{4}$" required>
                         <svg-img src="../img/phone.svg" class="signupSection-NameImg"></svg-img>
                     </div>
 
 
-                    <!--
-                            <div class="row col s12 signupSection-Password">
-                                 <div class=" col s3">
-                                </div>
-                                <div class=" col s3 signupSection-PassDiv">
-                                <input id="password" type="password" class="validate" placeholder="****">
-                                <svg-img src="../img/lock.svg" class="signupSection-PassImg" ></svg-img>
-                                </div>
-                                <div class=" col s3 signupSection-ConfPassDiv">
-                                <input id="password" type="password" class="validate" placeholder="****">
-                                 <svg-img src="../img/lock.svg" class="signupSection-ConfPass" ></svg-img>
-                                </div>
-                                <div class=" col s3">
-                                </div>
-                            </div>
--->
-
                     <div class="signupSection-formrow">
 
                         <div class="signupSection-formrow-break">
-                            <input id="password" type="password" class="validate break-input" placeholder="Password">
+                            <input id="password" type="password" class="validate break-input" placeholder="****" name="passwordname">
                             <svg-img src="../img/lock.svg" class="signupSection-PassImg"></svg-img>
                         </div>
                         <div class="signupSection-formrow-break">
-                            <input id="password" type="password" class="validate break-input" placeholder="Confirm Password">
+                            <input id="password" type="password" class="validate break-input" placeholder="****" name="confpasswordname">
                             <svg-img src="../img/lock.svg" class="signupSection-PassImg"></svg-img>
                         </div>
 
@@ -109,7 +92,7 @@
 
 
         <div class="signupSection-formrow form-button-wrapper">
-            <button data-target="modal1" class="btn signupSection-button modal-trigger" type="submit" name="action" ng-click="dologin()">Sign Up<i class="material-icons right">arrow_forward</i></button>
+            <button class="btn signupSection-button" type="submit" name="action" ng-click="doSignUp()">Sign Up<i class="material-icons right">arrow_forward</i></button>
         </div>
 
 
@@ -126,7 +109,7 @@
             </div>
             <div class="signupSection-ModalButtons">
             <button class="btn signupSection-ModalButton1" type="submit" name="action" ng-click="dologin()">Edit Details</button>
-            <button class="btn signupSection-ModalButton2 signupSection-modal-button-validate" type="submit" name="action" ng-click="dologin()">Validate<i class="material-icons right">arrow_forward</i></button>
+            <button class="btn signupSection-ModalButton2 signupSection-modal-button-validate" type="submit" name="action" ng-click="doSignUp()">Validate<i class="material-icons right">arrow_forward</i></button>
             </div>
         </div>
 

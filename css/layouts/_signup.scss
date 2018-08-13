@@ -242,12 +242,12 @@
     border: 5px solid #fff!important;
     text-align: center;
     &:focus {
-         border-bottom: none !important;  
     box-shadow: none !important; 
     }
    
 }
 
+//Remove the arrow in the input type
 .input-otp::-webkit-inner-spin-button,
 .input-otp::-webkit-outer-spin-button {
     appearance: none;

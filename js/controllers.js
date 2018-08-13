@@ -95,8 +95,7 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
             NavigationService.dologin($scope.logindata.contact, $scope.logindata.password).then(loginsuccess); // try login and if success goto loginsuccess function
         }
 
-        // routing
-        
+
         
         $(document).ready(function () {
 
@@ -1858,8 +1857,74 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
          
         });
       
-//SVG Custom Tag JS 
       
+    $scope.doSignUp = function () {
+        
+        //check for empty feilds
+            
+    var fname = document.forms["myForm"]["fname"].value;
+    if (fname == "") {
+        alert("Name must be filled out");
+        return false;
+        }
+    var schoolname = document.forms["myForm"]["schoolname"].value;
+    if (schoolname == "") {
+        alert("School Name must be filled out");
+        return false;
+        }
+    var emailname = document.forms["myForm"]["emailname"].value;
+    if (emailname == "") {
+        alert("Email address must be filled out");
+        return false;
+        }
+    var phonename = document.forms["myForm"]["phonename"].value;
+    if (phonename == "") {
+        alert("Phone Number must be filled out");
+        return false;
+        }
+    var passwordname = document.forms["myForm"]["passwordname"].value;
+    if (passwordname == "") {
+        alert("Password must be filled out");
+        return false;
+        }
+    var confpasswordname = document.forms["myForm"]["confpasswordname"].value;
+    if (confpasswordname == "") {
+        alert("Confirm Password must be filled out");
+        return false;
+        }
+        
+        //check if phone number is a number 
+
+        var numericExpression = /^[0-9]+$/;
+        if(phonename.value.match(numericExpression)){
+            return true;
+        }else{
+            lert("Phone Number entered is invalid");
+            return false;
+        }
+        //check if email is a valid
+        
+        if(emailname.indexOf('@') == -1 || emailname.indexOf('.') == -1) {
+
+           alert("Email address entered is invalid");
+            return false;
+
+            }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+      
+
 
 
 
