@@ -132,6 +132,7 @@
 .loginSection {
 //    background-color: white;
     height: 100%;
+    @extend .cerafont;
     
     &-loginformrow {
         display: flex;

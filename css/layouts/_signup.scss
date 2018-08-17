@@ -3,6 +3,7 @@
 }
 
 .signupSection {
+    @extend .cerafont;
     background-color: white;
     height: 100%; //    overflow: hidden;
     &-LoginText {
@@ -26,7 +27,7 @@
         }
         
         .select-wrapper {
-           color: #d4dfef;
+           color: $loginblue-color;
         } 
         .select-wrapper span.caret {
             z-index: 9;
@@ -95,7 +96,6 @@
         padding-right: 70px;
         text-transform: capitalize;
         font-size: 19px;
-        @extend .cerafont;
         border-radius: 20px;
         background: linear-gradient(#51d0e1, #00bcd4);
         .right {
@@ -119,7 +119,6 @@
 
     &-SignupLink {
         text-align: center;
-        margin-top: 100px;
         span {
             font-size: 1.3em;
             font-family: ceraM;
@@ -230,6 +229,9 @@
 
     }
 
+    #error-message {
+        color: red;
+    }
 
 
 

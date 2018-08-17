@@ -89,6 +89,19 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 })
             },
+            
+             getstandardandboard: function () {
+                return $http.get(adminurl + 'questions/getfulldropdown');
+            },
+            
+            
+            
+             checkcontactexists: function () {
+                return $http.get(adminurl + 'users/checkcontactexists');
+            },
+            
+            
+            
 
             getstandardsbyboardid: function (id) {
                 return $http.get(adminurl + 'standards/getmanyby', {

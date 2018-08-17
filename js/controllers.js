@@ -96,12 +96,12 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
         }
 
 
-        
+
         $(document).ready(function () {
 
-                    $('.modal').modal();
-            
-                });
+            $('.modal').modal();
+
+        });
 
   }
 ]);
@@ -157,6 +157,14 @@ inqcontroller.controller('standardsCtrl', ['$scope', 'TemplateService', 'Navigat
             $rootScope.user.standard_name = name;
             $location.path('/subjects');
         };
+
+
+
+
+
+
+
+
 
   }
 ]);
@@ -1845,88 +1853,120 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
         //Hide Menu
         $rootScope.showmenu = false;
-
-
+        $scope.signupdata = {};
+        $scope.fullDataOfBoards = {};
+        $scope.checkContactResponse = {};
         $(document).ready(function () {
-            
-//Show Modal on click of Sign up button
+
+            //Show Modal on click of Sign up button
             $('.modal').modal();
 
-//Select dropdown function
-            $('select').material_select();
-         
+            //Select dropdown function
+            $('.select-dropdown').material_select();
+
         });
-      
-      
-    $scope.doSignUp = function () {
-        
-        //check for empty feilds
-            
-    var fname = document.forms["myForm"]["fname"].value;
-    if (fname == "") {
-        alert("Name must be filled out");
-        return false;
-        }
-    var schoolname = document.forms["myForm"]["schoolname"].value;
-    if (schoolname == "") {
-        alert("School Name must be filled out");
-        return false;
-        }
-    var emailname = document.forms["myForm"]["emailname"].value;
-    if (emailname == "") {
-        alert("Email address must be filled out");
-        return false;
-        }
-    var phonename = document.forms["myForm"]["phonename"].value;
-    if (phonename == "") {
-        alert("Phone Number must be filled out");
-        return false;
-        }
-    var passwordname = document.forms["myForm"]["passwordname"].value;
-    if (passwordname == "") {
-        alert("Password must be filled out");
-        return false;
-        }
-    var confpasswordname = document.forms["myForm"]["confpasswordname"].value;
-    if (confpasswordname == "") {
-        alert("Confirm Password must be filled out");
-        return false;
-        }
-        
-        //check if phone number is a number 
 
-        var numericExpression = /^[0-9]+$/;
-        if(phonename.value.match(numericExpression)){
-            return true;
-        }else{
-            lert("Phone Number entered is invalid");
-            return false;
-        }
-        //check if email is a valid
-        
-        if(emailname.indexOf('@') == -1 || emailname.indexOf('.') == -1) {
 
-           alert("Email address entered is invalid");
-            return false;
+
+        $scope.doSignUp = function () {
+
+
+
+            if (!$scope.signupdata.fname) {
+
+                $scope.errormsg = "**Name field cannot be empty";
+
+                return false;
+            } else if (($scope.signupdata.fname.length <= 2) || ($scope.signupdata.fname.length > 20)) {
+
+                $scope.errormsg = "**Name field length must be between 2 and 20";
+
+                return false;
+            } else if (!isNaN($scope.signupdata.fname)) {
+
+                $scope.errormsg = "**Name field must only contain characters";
+
+                return false;
+            }
+
+
+
+
+            if (!$scope.signupdata.schoolname) {
+                $scope.errormsg = "**School Name field cannot be empty";
+                return false;
+            }
+
+
+
+            if (!$scope.signupdata.emailname) {
+                $scope.errormsg = "**Email Address field cannot be empty";
+                return false;
+            } else if ($scope.signupdata.emailname.indexOf('@') <= 0) {
+
+                $scope.errormsg = "**Email Address not valid";
+                return false;
+
+            } else if (($scope.signupdata.emailname.charAt($scope.signupdata.emailname.length - 4) != '.') && ($scope.signupdata.emailname.charAt($scope.signupdata.emailname.length - 3) != '.')) {
+
+                $scope.errormsg = "**Email Address not valid";
+                return false;
 
             }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-    
+
+            if (!$scope.signupdata.phonename) {
+                $scope.errormsg = "**Phone Number field cannot be empty";
+                return false;
+            } else if (isNaN($scope.signupdata.phonename)) {
+                $scope.errormsg = "**Phone Number can only contain number";
+                return false;
+            } else if ($scope.signupdata.phonename.length != 10) {
+                $scope.errormsg = "**Phone Number must be 10 digit";
+                return false;
+            }
+
+            if (!$scope.signupdata.passwordname) {
+                $scope.errormsg = "**Password field cannot be empty";
+                return false;
+            } else if (($scope.signupdata.passwordname.length < 5) || ($scope.signupdata.passwordname.length > 20)) {
+
+                $scope.errormsg = "**Password field length must be between 5 and 20";
+
+                return false;
+            } else if ($scope.signupdata.passwordname != $scope.signupdata.confpasswordname) {
+                $scope.errormsg = "**Password and Confirm Password do not match";
+                return false;
+            }
+
+            if (!$scope.signupdata.confpasswordname) {
+                $scope.errormsg = "**Confirm Password field cannot be empty";
+                return false;
+            }
+
+        }
+
+        //Get standard and board dynamically
+
+        getDataSuccess = function (response) {
+            $scope.fullDataOfBoards = response.data;
+
+        };
+        getDataError = function (error) {
+            console.log(error);
+            console.log('Internet Error');
+        };
+        console.log($scope.fullDataOfBoards);
+        NavigationService.getstandardandboard().then(getDataSuccess, getDataError);
       
+      
+      //Check if contact exists
+      
+      checkContactSuccess = function (response) {
+          
+          $scope.checkContactResponse = response.data;
 
-
-
+    };
+      
 
 
 

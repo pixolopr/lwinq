@@ -127,7 +127,7 @@
             var src = this.getAttribute("src");
             var innertag;
             $.get(src, (data) => {
-                console.log(data.childNodes);
+//                console.log(data.childNodes);
                 $(this).html(data.childNodes);
             });
         };
