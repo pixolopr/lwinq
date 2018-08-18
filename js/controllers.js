@@ -1851,6 +1851,9 @@ inqcontroller.controller('starredcardsCtrl', ['$scope', 'TemplateService', 'Navi
 inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location', '$rootScope', 'NavigationService', '$route',
   function ($scope, TemplateService, $location, $rootScope, NavigationService, $route) {
 
+
+       
+      
         //Hide Menu
         $rootScope.showmenu = false;
         $scope.signupdata = {
@@ -1869,7 +1872,9 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
             active: 1,
         };
 
-        $scope.fullDataOfBoards = {};
+        $scope.fulldataofboards = {};
+
+
 
 
 
@@ -1879,6 +1884,8 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
             $scope.standardfilter = {
                 board_id: ''
             };
+
+
 
 
 
@@ -1974,7 +1981,7 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                 //Select dropdown function
                 //if(initialized){
                 console.log("INItIALIZE");
-                $('.select-dropdown').material_select();
+                 $('.boards-select').material_select();
                 //initialized = false;
                 //};
             }, 0);
@@ -2056,6 +2063,15 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
         }
 
+
+        //PAGE FUNCTIONS
+        $scope.boardchanged = function () {
+            console.log("CHANGED");
+        };
+
+        /*setInterval(function(){
+            console.log($scope.standardfilter.board_id);
+        },1000,0);*/
 
 
 

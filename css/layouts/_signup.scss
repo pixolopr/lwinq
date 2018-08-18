@@ -47,14 +47,14 @@
             position: relative;
             margin: 0;
             width: 48%;
-            .select-dropdown {
-                width: 85% !important;
-                margin: 0 !important;
-            }
-            .break-input {
-                width: 85% !important;
-                margin: 0 !important;
-            }
+//            .select-dropdown {
+//                width: 85% !important;
+//                margin: 0 !important;
+//            }
+//            .break-input {
+//                width: 85% !important;
+//                margin: 0 !important;
+//            }
         }
 
         input {
@@ -62,6 +62,7 @@
             margin: 0 auto !important;
             display: block !important;
             padding-left: 30px !important;
+            box-sizing: border-box !important;
         }
 
 
@@ -235,6 +236,11 @@
 
 
 
+}
+
+.password-block {
+        width: 100% !important;
+    box-sizing: border-box;
 }
 
 .input-otp {
