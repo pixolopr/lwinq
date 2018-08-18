@@ -89,20 +89,24 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 })
             },
-            
-             getstandardandboard: function () {
+
+            getstandardandboard: function () {
                 return $http.get(adminurl + 'questions/getfulldropdown');
             },
-            
-            
-            
-             checkcontactexists: function () {
-                return $http.get(adminurl + 'users/checkcontactexists');
-            },
-            
 
-            
-            
+
+
+            checkcontactexists: function (contact_number) {
+                return $http.get(adminurl + 'users/checkcontactexists', {
+                    params: {
+                        contact: contact_number,
+                    }
+                });
+                
+                
+            },
+
+
             
 
             getstandardsbyboardid: function (id) {
