@@ -36,7 +36,7 @@
                     
                     <div class="signupSection-formrow">
                        
-                        <div class="input-field signupSection-formrow-break" id="select-standard">
+                        <div class="signupSection-formrow-break input-select-style">
 <!--
                         <select class="select-dropdown password-block" ng-model="standardfilter.board_id" ng-change="boardchanged()">
                         <option value='' disabled selected>Please Select</option>
@@ -46,16 +46,16 @@
 -->
                        
                        
-                        <div input-field>
-                            <select class="boards-select" ng-model="standardfilter.board_id" material-select watch>
+     
+                        <select class="boards-select browser-default" ng-model="standardfilter.board_id" >
+                                <option value="" selected class="selected-option">Select Board</option>
                                 <option value="{{$index}}" ng-repeat="board in fulldataofboards">{{board.name}}</option>
-                            </select>
-                        </div>
-                        <p>{{standardfilter.board_id}}</p>
+                        </select>
+                      
                         
                         </div>
                         
-                        <div class="input-field signupSection-formrow-break">
+                        <div class="signupSection-formrow-break input-select-style">
 <!--
                         <select class="standard-select-dropdown password-block" ng-model="standardfilter.standard_id">
                         <option value="" disabled selected>Please Select</option>
@@ -63,11 +63,10 @@
                         </select>
                         
 -->
-                        <div input-field>
-                            <select class="" ng-model="selectstandardfilter.standard_id" material-select watch>
+                            <select class="standard-boards-select browser-default" ng-model="selectstandardfilter.standard_id">
+                                   <option value="" selected class="selected-option">Select Standard</option>
                                 <option ng-repeat="standard in fulldataofboards[standardfilter.board_id].standards">{{standard.name}}</option>
                             </select>
-                        </div>
                         
                         </div>
                         
@@ -121,9 +120,10 @@
         <div id="modal1" class="modal signupSection-Modal">
             <div class="modal-content signupSection-ModalContent">
                 <p class="signupSection-ModalText1">Just making sure it's really you</p>
-                <p class="signupSection-ModalText2">Sent an OTP at {{signupdata.phonename}}</p>
+                <p class="signupSection-ModalText2">Sent an OTP at {{signupdata.contact}}</p>
                 <p class="signupSection-ModalText3">Enter your OTP</p>
                 <input type="number" class="input-otp" ng-model="inputotp1"><input type="number" class="input-otp" ng-model="inputotp2"><input type="number" class="input-otp" ng-model="inputotp3"><input type="number" class="input-otp" ng-model="inputotp4">
+<!--                <br>-->
                 <span id="otp-error">{{modalerrormsg}}</span>
                 <p class="signupSection-ModalText4"><a href="#">RESEND OTP</a></p>
             </div>

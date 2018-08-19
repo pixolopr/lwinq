@@ -34,16 +34,18 @@
                                 <svg-img src="../img/lock.svg"></svg-img>
 
                             </div>
+                             
                             <div class="loginSection-ForgotPassword loginSection-loginformrow">
                                 <a href="#" class="modal-trigger" data-target="modal2">Forgot Password?</a>
+                            </div>
+                            <div ng-if="error" class="loginSection-loginformrow login-error">
+                                Invalid credentials. Please enter valid credentials.
                             </div>
                         </div>
 
                     </form>
                 </div>
-                <div ng-if="error">
-                    Invalid credentials. Please enter valid credentials.
-                </div>
+               
                     <div class="loginSection-loginformrow form-button-wrapper">
                     <button class="btn loginSection-Button" type="submit" name="action" ng-click="dologin()">Login
                         <i class="material-icons right buton-arrow">arrow_forward</i>
@@ -60,11 +62,13 @@
 
                     <div class="lock-line"></div>
                     </div>
-                    <input type="number" class="input-phone-number" placeholder="Phone Number">
+                    <input type="tel" class="input-phone-number" placeholder="Phone Number" ng-model="forgotpassword.contactphone">
+                    <br>
+                    <span id="forgotpassword-error">{{forgotpassworderrormsg}}</span>
                     </div>
                     <div class="signupSection-ModalButtons">
                     <button class="btn signupSection-ModalButton1 modal-close" type="submit" name="action">Cancel</button>
-                    <button class="btn signupSection-ModalButton2 signupSection-modal-button-validate" type="submit" name="action" ng-click="dologin()">Submit<i class="material-icons right">arrow_forward</i></button>
+                    <button class="btn signupSection-ModalButton2 signupSection-modal-button-validate" type="submit" name="action" ng-click="doforgotpassword()">Submit<i class="material-icons right">arrow_forward</i></button>
                     </div>
                     </div>
                                  

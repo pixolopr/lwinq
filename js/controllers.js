@@ -66,6 +66,8 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
             contact: "",
             password: ""
         };
+        $scope.forgotpassword = {};
+        
 
         $rootScope.showmenu = false;
 
@@ -94,6 +96,41 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
             console.log($scope.logindata);
             NavigationService.dologin($scope.logindata.contact, $scope.logindata.password).then(loginsuccess); // try login and if success goto loginsuccess function
         }
+
+
+        $scope.doforgotpassword = function () {
+            
+            var validation = true;
+            
+            
+            if (!$scope.forgotpassword.contactphone) {
+
+                $scope.forgotpassworderrormsg = "**Please enter a valid phone number"
+                validation = false;
+
+                return false;
+            }
+            
+            else if (isNaN($scope.forgotpassword.contactphone)) {
+                $scope.forgotpassworderrormsg = "**Phone Number can only contain number";
+                validation = false;
+                return false;
+            } 
+            
+            else if ($scope.forgotpassword.contactphone.length != 10) {
+                $scope.forgotpassworderrormsg = "**Phone Number must be 10 digit";
+               validation = false;
+                return false;
+            }
+            
+            if (validation) {
+                $scope.forgotpassworderrormsg = "";
+            }
+            
+        }
+        
+          
+
 
 
 
@@ -1852,8 +1889,8 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
   function ($scope, TemplateService, $location, $rootScope, NavigationService, $route) {
 
 
-       
-      
+
+
         //Hide Menu
         $rootScope.showmenu = false;
         $scope.signupdata = {
@@ -1889,6 +1926,9 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
 
 
+
+
+
         });
 
 
@@ -1897,21 +1937,22 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
             $scope.signupdata.board_id = $scope.fulldataofboards[$scope.standardfilter.board_id].id;
             $scope.signupdata.standard_id = $scope.fulldataofboards[$scope.standardfilter.board_id].standards.id;
-
+            var validation = true;
             if (!$scope.signupdata.name) {
 
                 $scope.errormsg = "**Name field cannot be empty";
+                validation = false;
 
                 return false;
             } else if (($scope.signupdata.name.length < 2) || ($scope.signupdata.name.length > 20)) {
 
                 $scope.errormsg = "**Name field length must be between 2 and 20";
-
+                validation = false;
                 return false;
             } else if (!isNaN($scope.signupdata.name)) {
 
                 $scope.errormsg = "**Name field must only contain characters";
-
+                validation = false;
                 return false;
             }
 
@@ -1920,6 +1961,7 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
             if (!$scope.signupdata.school) {
                 $scope.errormsg = "**School Name field cannot be empty";
+                validation = false;
                 return false;
             }
 
@@ -1927,49 +1969,101 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
             if (!$scope.signupdata.email) {
                 $scope.errormsg = "**Email Address field cannot be empty";
+                validation = false;
                 return false;
             } else if ($scope.signupdata.email.indexOf('@') <= 0) {
 
                 $scope.errormsg = "**Email Address not valid";
+                validation = false;
                 return false;
 
             } else if (($scope.signupdata.email.charAt($scope.signupdata.email.length - 4) != '.') && ($scope.signupdata.email.charAt($scope.signupdata.email.length - 3) != '.')) {
 
                 $scope.errormsg = "**Email Address not valid";
+                validation = false;
                 return false;
 
             }
 
             if (!$scope.signupdata.contact) {
                 $scope.errormsg = "**Phone Number field cannot be empty";
+                validation = false;
                 return false;
             } else if (isNaN($scope.signupdata.contact)) {
                 $scope.errormsg = "**Phone Number can only contain number";
+                validation = false;
                 return false;
             } else if ($scope.signupdata.contact.length != 10) {
                 $scope.errormsg = "**Phone Number must be 10 digit";
+                validation = false;
                 return false;
             }
 
             if (!$scope.signupdata.password) {
                 $scope.errormsg = "**Password field cannot be empty";
+                validation = false;
                 return false;
             } else if (($scope.signupdata.password.length < 5) || ($scope.signupdata.password.length > 20)) {
 
                 $scope.errormsg = "**Password field length must be between 5 and 20";
-
+                validation = false;
                 return false;
             } else if ($scope.signupdata.password != $scope.signupdata.confpassword) {
                 $scope.errormsg = "**Password and Confirm Password do not match";
+                validation = false;
                 return false;
             }
 
             if (!$scope.signupdata.confpassword) {
                 $scope.errormsg = "**Confirm Password field cannot be empty";
+                validation = false;
                 return false;
             }
+            
+            if(validation){
+                $scope.errormsg = "";
+                
+                //Check if contact exists
+
+
+            checkcontactsuccess = function (response) {
+
+
+                if (response.data == "false") {
+
+
+
+                    //Send OTP to a contact number
+                    registererror = function (data, response) {};
+                    sendsmssuccess = function (response, status) {};
+                    sendsmserror = function (error, status) {};
+
+                    var abc = Math.random();
+                    var xyz = abc * 10000;
+
+                    if (xyz > 1000 && xyz < 10000) {
+                        randomOtpNumber = Math.trunc(xyz);
+                    }
+
+                    message = "Hey, use " + randomOtpNumber + " as the OTP for registering into LWINQ.";
+                    NavigationService.sendsms($scope.signupdata.contact, message).success(sendsmssuccess).error(sendsmserror);
+
+                    //Show Modal on click of Sign up button
+                    $('.modal').modal();
+                } 
+
+                else {
+                    $scope.errormsg = "**Phone number already exists on our database. Please use a different phone number.";
+                }
+            };
+
+
+            NavigationService.checkcontactexists($scope.signupdata.contact).then(checkcontactsuccess, getDataError);
+                
+           }    
 
         }
+        
 
         //Get standard and board dynamically
         //initialized = true;
@@ -1981,10 +2075,19 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                 //Select dropdown function
                 //if(initialized){
                 console.log("INItIALIZE");
-                 $('.boards-select').material_select();
+                $('.boards-select').material_select();
                 //initialized = false;
                 //};
             }, 0);
+            setTimeout(function () {
+                //Select dropdown function
+                //if(initialized){
+                console.log("INItIALIZE");
+                $('.standard-boards-select').material_select();
+                //initialized = false;
+                //};
+            }, 0);
+
 
         };
         getDataError = function (error) {
@@ -1995,40 +2098,6 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
         NavigationService.getstandardandboard().then(getDataSuccess, getDataError);
 
 
-        //Check if contact exists
-
-
-        checkcontactsuccess = function (response) {
-
-
-            if (response.data == "false") {
-
-
-
-                //Send OTP to a contact number
-                registererror = function (data, response) {};
-                sendsmssuccess = function (response, status) {};
-                sendsmserror = function (error, status) {};
-
-                var abc = Math.random();
-                var xyz = abc * 10000;
-
-                if (xyz > 1000 && xyz < 10000) {
-                    randomOtpNumber = Math.trunc(xyz);
-                }
-
-                message = "Hey, use " + randomOtpNumber + " as the OTP for registering into LWINQ.";
-                MyServices.sendsms($rootScope.signupdata.contact, message).success(sendsmssuccess).error(sendsmserror);
-
-                //Show Modal on click of Sign up button
-                $('.modal').modal();
-            } else {
-                $scope.errormsg = "**Phone number already exists on our database. Please use a different phone number.";
-            }
-        };
-
-
-        NavigationService.checkcontactexists($scope.signupdata.contact).then(checkcontactsuccess, getDataError);
 
         //Verify if OTP matches with the entered OTP
 
@@ -2049,13 +2118,11 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
                 }
 
-                MyServices.register($scope.signupdata).success(registersuccess).error(registererror);
+                NavigationService.register($scope.signupdata).success(registersuccess).error(registererror);
 
-
-
-
-
-            } else {
+            } 
+            
+            else {
                 $scope.modalerrormsg = "The OTP you entered is incorrect";
                 return false;
 
@@ -2072,6 +2139,7 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
         /*setInterval(function(){
             console.log($scope.standardfilter.board_id);
         },1000,0);*/
+
 
 
 

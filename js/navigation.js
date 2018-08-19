@@ -101,9 +101,37 @@ var navigationservice = angular.module('navigationservice', [])
                     params: {
                         contact: contact_number,
                     }
+                });  
+            },
+            
+            sendsms: function (contact, message) {
+                return $http.get('http://bulksms.mysmsmantra.com:8080/WebSMS/SMSAPI.jsp', {
+                    params: {
+                        'username': 'INQClasses',
+                        'password': '149097547',
+                        'sendername': 'SUNALI',
+                        'mobileno': '91' + contact,
+                        'message': message
+                    }
                 });
-                
-                
+            },
+            
+            register: function (registerdata) {
+
+                console.log(registerdata);
+                return $http.get(adminurl + "", {
+
+                    params: {
+                        'name': signupdata.name,
+                        'contact': signupdata.contact,
+                        'email': signupdata.email,
+                        'password': signupdata.password,
+                        'standard': signupdata.standard_id,
+                        'board': signupdata.board_id,
+                        'school': signupdata.school,
+                  
+                    }
+                })
             },
 
 
