@@ -101,9 +101,9 @@ var navigationservice = angular.module('navigationservice', [])
                     params: {
                         contact: contact_number,
                     }
-                });  
+                });
             },
-            
+
             sendsms: function (contact, message) {
                 return $http.get('http://bulksms.mysmsmantra.com:8080/WebSMS/SMSAPI.jsp', {
                     params: {
@@ -115,27 +115,35 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 });
             },
-            
+
             register: function (registerdata) {
 
                 console.log(registerdata);
-                return $http.get(adminurl + "", {
+
+                return $http.get(adminurl + "users/insert", {
 
                     params: {
-                        'name': signupdata.name,
-                        'contact': signupdata.contact,
-                        'email': signupdata.email,
-                        'password': signupdata.password,
-                        'standard': signupdata.standard_id,
-                        'board': signupdata.board_id,
-                        'school': signupdata.school,
-                  
+                        data: {
+
+                            'name': registerdata.name,
+                            'contact': registerdata.contact,
+                            'email': registerdata.email,
+                            'password': registerdata.password,
+                            'standard_id': registerdata.standard_id,
+                            'board_id': registerdata.board_id,
+                            'school': registerdata.school,
+                            'access_id': registerdata.access_id,
+                            'verified': registerdata.verified,
+                            'active': registerdata.active
+
+                        }
+
                     }
                 })
             },
 
 
-            
+
 
             getstandardsbyboardid: function (id) {
                 return $http.get(adminurl + 'standards/getmanyby', {

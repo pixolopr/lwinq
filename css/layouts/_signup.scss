@@ -26,14 +26,14 @@
             text-align: center;
         }
         
-        .select-wrapper {
-           color: $loginblue-color;
-        } 
-        .select-wrapper span.caret {
-            z-index: 9;
-                color: #9da3ac;
-        } 
-        
+//        .select-wrapper {
+//           color: $loginblue-color;
+//        } 
+//        .select-wrapper span.caret {
+//            z-index: 9;
+//                color: #9da3ac;
+//        } 
+//        
         input {
             border-bottom: 1.2px solid #c0c0c0 !important;
             &:focus {
@@ -168,6 +168,7 @@
     &-ModalText4 {
         color: #646060;
         margin-top: 0px;
+        cursor: pointer;
     }
 
     &-ModalButtons {
@@ -241,28 +242,25 @@
 
 .input-select-style {
     select {
-            border: none;
-    border-bottom: 1px solid #9e9e9e;
+            border: none !important;
+            border-bottom: 1px solid #9e9e9e !important;
+            outline: none !important;     
         option {
-            span {
-                min-height: 50px;
-            line-height: 1.5rem;
-            width: 200px;
-            text-align: left;        
-            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-            border: none;
-            }
-        }
+                    text-align: left;        
+                    border: none !important;
+                    outline: none !important;    
+                }
         
+        span.caret {
+            z-index: 9;
+                color: #9da3ac;
+        } 
+        
+        }    
 
-    }
-    
     select:focus {
-        outline: none !important;
-                 box-shadow: none !important;
-        border-bottom: none !important;
-    
-    }
+        outline: none !important;             
+        }
 }
 
 .password-block {
@@ -295,6 +293,12 @@
 
 #otp-error {
     color: red;
+    position: relative;
+    top: -12px;
+}
+
+#otp-success {
+    color: green;
     position: relative;
     top: -12px;
 }

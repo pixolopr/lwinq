@@ -67,7 +67,7 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
             password: ""
         };
         $scope.forgotpassword = {};
-        
+
 
         $rootScope.showmenu = false;
 
@@ -99,37 +99,33 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
 
 
         $scope.doforgotpassword = function () {
-            
+
             var validation = true;
-            
-            
+
+
             if (!$scope.forgotpassword.contactphone) {
 
                 $scope.forgotpassworderrormsg = "**Please enter a valid phone number"
                 validation = false;
 
                 return false;
-            }
-            
-            else if (isNaN($scope.forgotpassword.contactphone)) {
+            } else if (isNaN($scope.forgotpassword.contactphone)) {
                 $scope.forgotpassworderrormsg = "**Phone Number can only contain number";
                 validation = false;
                 return false;
-            } 
-            
-            else if ($scope.forgotpassword.contactphone.length != 10) {
+            } else if ($scope.forgotpassword.contactphone.length != 10) {
                 $scope.forgotpassworderrormsg = "**Phone Number must be 10 digit";
-               validation = false;
+                validation = false;
                 return false;
             }
-            
+
             if (validation) {
                 $scope.forgotpassworderrormsg = "";
             }
-            
+
         }
-        
-          
+
+
 
 
 
@@ -1891,17 +1887,25 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
 
 
+
+
+
         //Hide Menu
+        $scope.standardfilter = {
+            board_id: '0',
+            standard_id: '0'
+
+        }
         $rootScope.showmenu = false;
         $scope.signupdata = {
-            id: "",
-            name: "",
+
+            name: "richard",
             standard_id: "",
             board_id: "",
-            school: "",
-            contact: "",
-            email: "",
-            password: "",
+            school: "st.xaviers",
+            contact: "9967552082",
+            email: "abc@abc.com",
+            password: "12345",
             access_id: 4,
             createdate: "",
             editdate: "",
@@ -1909,34 +1913,43 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
             active: 1,
         };
 
-        $scope.fulldataofboards = {};
+        $scope.fulldataofboards = [];
 
 
 
 
 
-
-        $(document).ready(function () {
-
-            $scope.standardfilter = {
-                board_id: ''
-            };
-
-
+        $scope.inputfocus = function(){
+    $('#inputotpone,#inputotptwo,#inputotpthree,#inputotpfour').keyup(function(e){
+    if($(this).val().length==$(this).attr('maxlength'))
+     $(this).next(':input').focus()                                                                                                                                        
+ })
+ }
 
 
 
 
+        $scope.createotp = function () {
+
+            var abc = Math.random();
+            var xyz = abc * 10000;
+
+            if (xyz > 1000 && xyz < 10000) {
+                randomOtpNumber = Math.trunc(xyz);
+            }
+
+            message = "Hey, use " + randomOtpNumber + " as the OTP for registering into LWINQ.";
+            NavigationService.sendsms($scope.signupdata.contact, message).success(sendsmssuccess).error(sendsmserror);
 
 
-        });
+        };
 
 
 
         $scope.doSignUp = function () {
 
             $scope.signupdata.board_id = $scope.fulldataofboards[$scope.standardfilter.board_id].id;
-            $scope.signupdata.standard_id = $scope.fulldataofboards[$scope.standardfilter.board_id].standards.id;
+
             var validation = true;
             if (!$scope.signupdata.name) {
 
@@ -1956,16 +1969,11 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                 return false;
             }
 
-
-
-
             if (!$scope.signupdata.school) {
                 $scope.errormsg = "**School Name field cannot be empty";
                 validation = false;
                 return false;
             }
-
-
 
             if (!$scope.signupdata.email) {
                 $scope.errormsg = "**Email Address field cannot be empty";
@@ -1982,7 +1990,6 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                 $scope.errormsg = "**Email Address not valid";
                 validation = false;
                 return false;
-
             }
 
             if (!$scope.signupdata.contact) {
@@ -2019,51 +2026,63 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                 validation = false;
                 return false;
             }
-            
-            if(validation){
+
+            if (validation) {
                 $scope.errormsg = "";
-                
+
                 //Check if contact exists
 
-
-            checkcontactsuccess = function (response) {
-
-
-                if (response.data == "false") {
+                checkcontactsuccess = function (response) {
 
 
+                    if (response.data == "false") {
 
-                    //Send OTP to a contact number
-                    registererror = function (data, response) {};
-                    sendsmssuccess = function (response, status) {};
-                    sendsmserror = function (error, status) {};
 
-                    var abc = Math.random();
-                    var xyz = abc * 10000;
 
-                    if (xyz > 1000 && xyz < 10000) {
-                        randomOtpNumber = Math.trunc(xyz);
+                        //Send OTP to a contact number
+                        registererror = function (data, response) {};
+                        sendsmssuccess = function (response, status) {};
+                        sendsmserror = function (error, status) {};
+
+                        $scope.createotp();
+
+                        //Show Modal on click of Sign up button
+                        $('.modal').modal();
+                        $('.modal').modal('open');
+                        console.log(randomOtpNumber);
+                        $('.modal-overlay').click(function () {
+                            event.preventDefault();
+                        });
+                        
+                        $scope.inputfocus();
+                        
+                      
+                    } else {
+                        $('.modal').modal('close');
+                        $scope.errormsg = "**Phone number already exists on our database. Please use a different phone number.";
+
                     }
-
-                    message = "Hey, use " + randomOtpNumber + " as the OTP for registering into LWINQ.";
-                    NavigationService.sendsms($scope.signupdata.contact, message).success(sendsmssuccess).error(sendsmserror);
-
-                    //Show Modal on click of Sign up button
-                    $('.modal').modal();
-                } 
-
-                else {
-                    $scope.errormsg = "**Phone number already exists on our database. Please use a different phone number.";
-                }
-            };
+                };
 
 
-            NavigationService.checkcontactexists($scope.signupdata.contact).then(checkcontactsuccess, getDataError);
-                
-           }    
+                NavigationService.checkcontactexists($scope.signupdata.contact).then(checkcontactsuccess, getDataError);
 
-        }
-        
+
+            }
+
+        };
+      
+      
+
+        $scope.closeotpmodal = function () {
+            $('.modal').modal('close');
+
+        };
+
+        $scope.resendsmsdata = function () {
+            $scope.createotp();
+        };
+
 
         //Get standard and board dynamically
         //initialized = true;
@@ -2071,6 +2090,7 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
         getDataSuccess = function (response) {
             console.log(response.data);
             $scope.fulldataofboards = response.data;
+            $scope.signupdata.standard_id = $scope.fulldataofboards[0].standards[0].id;
             setTimeout(function () {
                 //Select dropdown function
                 //if(initialized){
@@ -2102,29 +2122,37 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
         //Verify if OTP matches with the entered OTP
 
         $scope.verifyOtp = function () {
-
-            if (randomOtpNumber == parseInt($scope.inputotp1 + $scope.inputotp2 + $scope.inputotp3 + $scope.inputotp4)) {
+            var userinputdata = parseInt($scope.inputotp1 + "" + $scope.inputotp2 + "" + $scope.inputotp3 + "" + $scope.inputotp4);
+            console.log(userinputdata);
+            console.log(randomOtpNumber);
+            if (randomOtpNumber == userinputdata) {
                 console.log('Correct OTP ! continue the things ');
 
                 registersuccess = function (response) {
-
-                    $scope.modalerrormsg = "Registered Successfully";
+                    console.log(response);
+                    console.log('Registered Successfully');
+                    $scope.modalsuccessmsg = "Registered Successfully";
+                    $scope.modalerrormsg = "";
 
                     setTimeout(function () {
-                        $window.location.href = '/login.html';
+                        console.log('setTimeout');
+                        $scope.closeotpmodal();
+                        $location.path('/login');
 
+                        $scope.$apply();
 
-                    }, 3000);
+                    }, 1000);
 
+                };
+                registererror = function (error) {
+                    console.log('Internet Error');
                 }
 
                 NavigationService.register($scope.signupdata).success(registersuccess).error(registererror);
 
-            } 
-            
-            else {
+            } else {
                 $scope.modalerrormsg = "The OTP you entered is incorrect";
-                return false;
+                $scope.modalsuccessmsg = "";
 
             }
 

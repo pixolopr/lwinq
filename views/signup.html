@@ -21,55 +21,55 @@
     <div class="col s12 m9 l9 signupSection">
         <div class="row">
             <h2 class="signupSection-LoginText">Sign Up</h2>
-                         <div class="abc">
+            <div class="abc">
                 <form name="myForm" class="col s12">
-                   
+
                     <div class="signupSection-formrow">
                         <input id="name" type="text" class="validate" placeholder="Name" ng-model="signupdata.name">
                         <svg-img src="../img/name1.svg" class=".nameSvg"></svg-img>
                     </div>
-                    
+
                     <div class="signupSection-formrow">
                         <input id="school" type="text" class="validate" placeholder="School" ng-model="signupdata.school">
                         <svg-img src="../img/school1.svg" class="signupSection-NameImg"></svg-img>
                     </div>
-                    
+
                     <div class="signupSection-formrow">
-                       
+
                         <div class="signupSection-formrow-break input-select-style">
-<!--
+                            <!--
                         <select class="select-dropdown password-block" ng-model="standardfilter.board_id" ng-change="boardchanged()">
                         <option value='' disabled selected>Please Select</option>
                         <option value="{{$index}}" ng-repeat="board in fulldataofboards">{{board.name}}</option>
                         </select>
                         
 -->
-                       
-                       
-     
-                        <select class="boards-select browser-default" ng-model="standardfilter.board_id" >
-                                <option value="" selected class="selected-option">Select Board</option>
+
+
+
+                            <select class="boards-select browser-default" ng-model="standardfilter.board_id">
+<!--                                <option value="" selected class="selected-option">Select Board</option>-->
                                 <option value="{{$index}}" ng-repeat="board in fulldataofboards">{{board.name}}</option>
                         </select>
-                      
-                        
+
+
                         </div>
-                        
+
                         <div class="signupSection-formrow-break input-select-style">
-<!--
+                            <!--
                         <select class="standard-select-dropdown password-block" ng-model="standardfilter.standard_id">
                         <option value="" disabled selected>Please Select</option>
                         <option  value="{{$index}}" ng-repeat="standard in fulldataofboards[standardfilter.board_id].standards">{{standard.name}}</option>
                         </select>
                         
 -->
-                            <select class="standard-boards-select browser-default" ng-model="selectstandardfilter.standard_id">
-                                   <option value="" selected class="selected-option">Select Standard</option>
-                                <option ng-repeat="standard in fulldataofboards[standardfilter.board_id].standards">{{standard.name}}</option>
+                            <select class="standard-boards-select browser-default" ng-model="signupdata.standard_id">
+<!--                                <option value="" selected class="selected-option">Select Standard</option>-->
+                                <option value={{standard.id}} ng-repeat="standard in fulldataofboards[standardfilter.board_id].standards">{{standard.name}}</option>
                             </select>
-                        
+
                         </div>
-                        
+
                     </div>
 
                     <div class="signupSection-formrow">
@@ -122,13 +122,14 @@
                 <p class="signupSection-ModalText1">Just making sure it's really you</p>
                 <p class="signupSection-ModalText2">Sent an OTP at {{signupdata.contact}}</p>
                 <p class="signupSection-ModalText3">Enter your OTP</p>
-                <input type="number" class="input-otp" ng-model="inputotp1"><input type="number" class="input-otp" ng-model="inputotp2"><input type="number" class="input-otp" ng-model="inputotp3"><input type="number" class="input-otp" ng-model="inputotp4">
-<!--                <br>-->
+                <input maxlength="1" type="text" class="input-otp" ng-model="inputotp1" id="inputotpone"><input maxlength="1" type="text" class="input-otp" ng-model="inputotp2" id="inputotptwo"><input maxlength="1" type="text" class="input-otp" ng-model="inputotp3" id="inputotpthree"><input maxlength="1" type="text" class="input-otp" ng-model="inputotp4" id="inputotpfour">
+                <br>
                 <span id="otp-error">{{modalerrormsg}}</span>
-                <p class="signupSection-ModalText4"><a href="#">RESEND OTP</a></p>
+                <span id="otp-success">{{modalsuccessmsg}}</span>
+                <p class="signupSection-ModalText4" ng-click="resendsmsdata()"><a>RESEND OTP</a></p>
             </div>
             <div class="signupSection-ModalButtons">
-                <button class="btn signupSection-ModalButton1" type="submit" name="action" ng-click="dologin()">Edit Details</button>
+                <button class="btn signupSection-ModalButton1" type="submit" name="action" ng-click="closeotpmodal()">Edit Details</button>
                 <button class="btn signupSection-ModalButton2 signupSection-modal-button-validate" type="submit" name="action" ng-click="verifyOtp()">Validate<i class="material-icons right">arrow_forward</i></button>
             </div>
         </div>
