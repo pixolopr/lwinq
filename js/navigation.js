@@ -118,7 +118,7 @@ var navigationservice = angular.module('navigationservice', [])
 
             register: function (registerdata) {
 
-                console.log(registerdata);
+                //                console.log(registerdata);
 
                 return $http.get(adminurl + "users/insert", {
 
@@ -140,6 +140,16 @@ var navigationservice = angular.module('navigationservice', [])
 
                     }
                 })
+            },
+
+            updatepassword: function (usercontactphone, usernewpassword) {
+                console.log(usercontactphone, usernewpassword);
+                return $http.get(adminurl + 'users/updatepassword', {
+                    params: {
+                        contact: usercontactphone,
+                        newpassword: usernewpassword
+                    }
+                });
             },
 
 

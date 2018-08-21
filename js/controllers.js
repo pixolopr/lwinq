@@ -66,10 +66,26 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
             contact: "",
             password: ""
         };
+
+        $rootScope.showmenu = false;
+
         $scope.forgotpassword = {};
 
 
-        $rootScope.showmenu = false;
+        $scope.createnewpass = function () {
+
+            var abc = Math.random();
+            var xyz = abc * 10000;
+
+            if (xyz > 1000 && xyz < 10000) {
+                $scope.randomOtpNumber = Math.trunc(xyz);
+            }
+//            console.log(randomOtpNumber);
+            message = "Hey, you have sent a password reset request for your LWINQ account. Here's the new password: " + $scope.randomOtpNumber;
+            NavigationService.sendsms($scope.logindata.contact, message).success(sendsmssuccess).error(sendsmserror);
+
+
+        };
 
         var loginsuccess = function (response) {
             if (response.data == 'false') {
@@ -121,6 +137,74 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
 
             if (validation) {
                 $scope.forgotpassworderrormsg = "";
+
+
+                //Check if contact exists
+
+                checkcontactsuccess = function (response) {
+                    console.log(response.data)
+
+                    if (response.data == "true") {
+
+
+
+                        //Send OTP to a contact number
+                        sendsmssuccess = function (response, status) {
+                            console.log('Send SMS Success');
+
+                        };
+                        sendsmserror = function (error, status) {
+
+                            console.log('Send SMS Error');
+                        };
+
+                        $scope.createnewpass();
+
+
+
+                        updatesuccess = function (response) {
+                            console.log(response);
+                            console.log('Registered Successfully');
+                            $scope.forgotpasswordsuccessmsg = "New Password has been sent to the phone number via SMS";
+                            $scope.forgotpassworderrormsg = "";
+
+                            setTimeout(function () {
+                                console.log('setTimeout');
+                                $location.path('/login');
+                                $scope.$apply();
+
+                            }, 1000);
+
+                        };
+                        updateerror = function (error) {
+                            console.log('Internet Error');
+                        }
+
+                        NavigationService.updatepassword($scope.forgotpassword.contactphone, $scope.randomOtpNumber).success(updatesuccess).error(updateerror);
+
+
+
+                    } else {
+                        $scope.forgotpassworderrormsg = "**Phone Number is not registered with us";
+                        validation = false;
+
+                    }
+                };
+
+                getDataError = function (response) {
+                    console.log(response);
+
+                };
+
+
+                NavigationService.checkcontactexists($scope.forgotpassword.contactphone).then(checkcontactsuccess, getDataError);
+
+
+
+
+
+
+
             }
 
         }
@@ -1899,13 +1983,13 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
         $rootScope.showmenu = false;
         $scope.signupdata = {
 
-            name: "richard",
+            name: "",
             standard_id: "",
             board_id: "",
-            school: "st.xaviers",
-            contact: "9967552082",
-            email: "abc@abc.com",
-            password: "12345",
+            school: "",
+            contact: "",
+            email: "",
+            password: "",
             access_id: 4,
             createdate: "",
             editdate: "",
@@ -1917,14 +2001,14 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
 
 
+        //function to change the focus from one input to another
 
-
-        $scope.inputfocus = function(){
-    $('#inputotpone,#inputotptwo,#inputotpthree,#inputotpfour').keyup(function(e){
-    if($(this).val().length==$(this).attr('maxlength'))
-     $(this).next(':input').focus()                                                                                                                                        
- })
- }
+        $scope.inputfocus = function () {
+            $('#inputotpone,#inputotptwo,#inputotpthree,#inputotpfour').keyup(function (e) {
+                if ($(this).val().length == $(this).attr('maxlength'))
+                    $(this).next(':input').focus()
+            })
+        }
 
 
 
@@ -1937,7 +2021,7 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
             if (xyz > 1000 && xyz < 10000) {
                 randomOtpNumber = Math.trunc(xyz);
             }
-
+            console.log (randomOtpNumber);
             message = "Hey, use " + randomOtpNumber + " as the OTP for registering into LWINQ.";
             NavigationService.sendsms($scope.signupdata.contact, message).success(sendsmssuccess).error(sendsmserror);
 
@@ -2010,9 +2094,9 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                 $scope.errormsg = "**Password field cannot be empty";
                 validation = false;
                 return false;
-            } else if (($scope.signupdata.password.length < 5) || ($scope.signupdata.password.length > 20)) {
+            } else if (($scope.signupdata.password.length < 4) || ($scope.signupdata.password.length > 20)) {
 
-                $scope.errormsg = "**Password field length must be between 5 and 20";
+                $scope.errormsg = "**Password field length must be between 4 and 20";
                 validation = false;
                 return false;
             } else if ($scope.signupdata.password != $scope.signupdata.confpassword) {
@@ -2053,10 +2137,10 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                         $('.modal-overlay').click(function () {
                             event.preventDefault();
                         });
-                        
+
                         $scope.inputfocus();
-                        
-                      
+
+
                     } else {
                         $('.modal').modal('close');
                         $scope.errormsg = "**Phone number already exists on our database. Please use a different phone number.";
@@ -2071,8 +2155,8 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
             }
 
         };
-      
-      
+
+
 
         $scope.closeotpmodal = function () {
             $('.modal').modal('close');
