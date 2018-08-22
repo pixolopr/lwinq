@@ -1971,6 +1971,9 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
 
 
+        $('.modal-overlay').click(function () {
+                            event.preventDefault();
+                        });
 
 
 
@@ -2134,10 +2137,7 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                         $('.modal').modal();
                         $('.modal').modal('open');
                         console.log(randomOtpNumber);
-                        $('.modal-overlay').click(function () {
-                            event.preventDefault();
-                        });
-
+                      
                         $scope.inputfocus();
 
 

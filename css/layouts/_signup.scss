@@ -18,7 +18,7 @@
         margin: 0 auto;
         position: relative;
         width: 55% !important;
-        height: 65px;
+        height: 60px;
         justify-content: space-between;
         
         .dropdown-content li>span {
@@ -98,7 +98,7 @@
         position: relative;
         padding-right: 70px;
         text-transform: capitalize;
-        font-size: 19px;
+        font-size: 100%;
         border-radius: 20px;
         background: linear-gradient(#51d0e1, #00bcd4);
         .right {
@@ -123,7 +123,8 @@
     &-SignupLink {
         text-align: center;
         span {
-            font-size: 1.3em;
+            color: #525050;
+            font-size: 120%;
             font-family: ceraM;
         }
 
@@ -306,4 +307,8 @@
     color: green;
     position: relative;
     top: -12px;
+}
+
+#margin-less {
+    margin-bottom: -35px;
 }

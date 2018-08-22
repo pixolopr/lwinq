@@ -139,7 +139,7 @@
         margin: 0 auto;
         position: relative;
         width: 55% !important;
-        height: 65px;
+        height: 60px;
         justify-content: space-between;      
             input {
                     width: 100% !important;
@@ -194,7 +194,7 @@
         width: 170px;
         background: linear-gradient(#51d0e1, #00bcd4 );
           text-transform: capitalize;
-        font-size: 19px;
+        font-size: 100%;
         @extend .cerafont;
                 .right {
             position: relative;
@@ -233,10 +233,11 @@
     
     &-SignupLink {
             text-align: center;
-            margin-top: 100px;
+            margin-top: 50px;
         span {
-            font-size: 1.3em;
+            font-size: 120%;
             font-family: ceraM;
+            color: #525050;
         }
         
         a {
