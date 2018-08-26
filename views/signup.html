@@ -1,4 +1,4 @@
-<div class="row mainDiv">
+<div class="row login-div-wrapper">
     <div class="col s12 m3 l3 rocketSection">
         <img src="/img/rocketsection-design.png" alt="top design" class="rocketSection-TopDesign img-responsive">
         <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star1 img-responsive">
@@ -18,25 +18,25 @@
 
 
 
-    <div class="col s12 m9 l9 signupSection">
+    <div class="col s12 m9 l9 signupSection loginSection">
         <div class="row">
-            <h2 class="signupSection-LoginText">Sign Up</h2>
+            <h2 class="login-signup-title">Sign Up</h2>
             <div class="abc">
                 <form name="myForm" class="col s12">
 
-                    <div class="signupSection-formrow">
+                    <div class="login-signup-formrow">
                         <input id="name" type="text" class="validate" placeholder="Name" ng-model="signupdata.name">
                         <svg-img src="../img/name1.svg" class=".nameSvg"></svg-img>
                     </div>
 
-                    <div class="signupSection-formrow">
+                    <div class="login-signup-formrow">
                         <input id="school" type="text" class="validate" placeholder="School" ng-model="signupdata.school">
                         <svg-img src="../img/school1.svg" class="signupSection-NameImg"></svg-img>
                     </div>
 
-                    <div class="signupSection-formrow">
+                    <div class="login-signup-formrow">
 
-                        <div class="signupSection-formrow-break input-select-style">
+                        <div class="login-signup-formrow-break input-select-style">
                             <!--
                         <select class="select-dropdown password-block" ng-model="standardfilter.board_id" ng-change="boardchanged()">
                         <option value='' disabled selected>Please Select</option>
@@ -55,7 +55,7 @@
 
                         </div>
 
-                        <div class="signupSection-formrow-break input-select-style">
+                        <div class="login-signup-formrow-break input-select-style">
                             <!--
                         <select class="standard-select-dropdown password-block" ng-model="standardfilter.standard_id">
                         <option value="" disabled selected>Please Select</option>
@@ -72,29 +72,29 @@
 
                     </div>
 
-                    <div class="signupSection-formrow">
+                    <div class="login-signup-formrow">
                         <input id="email" type="email" class="validate" placeholder="name@company.com" ng-model="signupdata.email">
                         <svg-img src="../img/mail1.svg" class="signupSection-NameImg"></svg-img>
                     </div>
 
-                    <div class="signupSection-formrow">
+                    <div class="login-signup-formrow">
                         <input id="phone" type="tel" class="validate" placeholder="Phone Number" ng-model="signupdata.contact">
                         <svg-img src="../img/phone.svg" class="signupSection-NameImg"></svg-img>
                     </div>
 
 
-                    <div class="signupSection-formrow">
-                        <div class="signupSection-formrow-break">
+                    <div class="login-signup-formrow">
+                        <div class="login-signup-formrow-break">
                             <input id="password" type="password" class="validate break-input" placeholder="****" ng-model="signupdata.password">
                             <svg-img src="../img/lock.svg" class="signupSection-PassImg"></svg-img>
                         </div>
-                        <div class="signupSection-formrow-break">
+                        <div class="login-signup-formrow-break">
                             <input id="confirmpassword" type="password" class="validate break-input" placeholder="****" ng-model="signupdata.confpassword">
                             <svg-img src="../img/lock.svg" class="signupSection-PassImg"></svg-img>
                         </div>
                     </div>
 
-                    <div class="signupSection-formrow" id="margin-less">
+                    <div class="login-signup-formrow" id="margin-less">
 
                         <span id="error-message">{{errormsg}}</span>
 
@@ -109,7 +109,7 @@
         </div>
 
 
-        <div class="signupSection-formrow form-button-wrapper">
+        <div class="login-signup-formrow form-button-wrapper">
             <button class="btn signupSection-button modal-trigger" data-target="modal1" type="submit" name="action" ng-click="doSignUp()">Sign Up<i class="material-icons right">arrow_forward</i></button>
         </div>
 
@@ -134,7 +134,7 @@
             </div>
         </div>
 
-        <div class="signupSection-SignupLink"><span>Already registered? <a href="#login">Login</a></span></div>
+        <div class="signup-login-link"><span>Already registered? <a href="#login">Login</a></span></div>
 
     </div>
 </div>
