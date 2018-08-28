@@ -1,77 +1,83 @@
- <div class="row mainDiv">
-            <div class="col s12 m3 l3 rocketSection img-responsive">
+<div class="login-signup-wrap">
+
+    <div class="login-div-wrapper mainDiv">
+
+        <div class="rocketSection img-responsive">
             <img src="/img/rocketsection-design.png" alt="top design" class="rocketSection-TopDesign">
             <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star1">
             <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star2">
             <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star3">
             <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star4">
             <img src="/img/star.svg" alt="Star Image" class="rocketSection-Star5">
-            <div class="rocketSection-Rocket"><img src="/img/rocket.png" alt="Rocket Image" >
-            <p>ARE YOU READY <br> FOR TAKE OFF</p></div>
+            <div class="rocketSection-Rocket"><img src="/img/rocket.png" alt="Rocket Image">
+                <p>ARE YOU READY <br> FOR TAKE OFF</p>
+            </div>
             <div class="rocketSection-BlueBg"></div>
-            
+
             <img src="/img/rocketsection-astroman.png" alt="Rocket Section" class="rocketSection-Astroman">
             <img src="/img/rocketsection-design2.png" alt="top design" class="rocketSection-BottomDesign img-responsive">
 
-            
-            </div>
-            
-                       
-                       
-                       
-            <div class="col s12 m9 l9 loginSection">                        
-               <div class="row">
-                    <h2 class="loginSection-LoginText">LOGIN</h2>
-                    <form class="col s12">
-                        <div class="row">
-                            <div class="loginSection-Phone loginSection-loginformrow">
-                                                        
-                                <input id="phone" type="tel" class="validate " ng-model="logindata.contact" ng-enter="dologin()" placeholder="Phone Number">
-                                <svg-img src="../img/phone1.svg"></svg-img>
-                            </div>
-                            <div class="loginSection-Password loginSection-loginformrow">
-                                <input id="password" type="password" class="validate" ng-model="logindata.password" ng-enter="dologin()" placeholder="Password">
-                                <svg-img src="../img/lock.svg"></svg-img>
 
-                            </div>
-                             
-                            <div class="loginSection-ForgotPassword loginSection-loginformrow">
-                                <a href="#" class="modal-trigger" data-target="modal2">Forgot Password?</a>
-                            </div>
-                            <div ng-if="error" class="loginSection-loginformrow login-error">
-                                Invalid credentials. Please enter valid credentials.
-                            </div>
+        </div>
+
+
+
+
+        <div class="loginSection">
+            <div class="row">
+                <h2 class="login-signup-title">LOGIN</h2>
+                <form class="col s12">
+                    <div class="row">
+                        <div class="loginSection-Phone login-signup-formrow">
+
+                            <input id="phone" type="tel" class="validate " ng-model="logindata.contact" ng-enter="dologin()" placeholder="Phone Number">
+                            <svg-img src="../img/phone1.svg"></svg-img>
+                        </div>
+                        <div class="loginSection-Password login-signup-formrow">
+                            <input id="password" type="password" class="validate" ng-model="logindata.password" ng-enter="dologin()" placeholder="Password">
+                            <svg-img src="../img/lock.svg"></svg-img>
+
                         </div>
 
-                    </form>
-                </div>
-               
-                    <div class="loginSection-loginformrow form-button-wrapper">
-                    <button class="btn loginSection-Button" type="submit" name="action" ng-click="dologin()">Login
+                        <div class="loginSection-ForgotPassword login-signup-formrow">
+                            <a href="#" class="modal-trigger" data-target="modal2">Forgot Password?</a>
+                        </div>
+                        <div ng-if="error" class="login-signup-formrow login-error">
+                            Invalid credentials. Please enter valid credentials.
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="login-signup-formrow form-button-wrapper">
+                <button class="btn loginSection-Button" type="submit" name="action" ng-click="dologin()">Login
                         <i class="material-icons right buton-arrow">arrow_forward</i>
                     </button>
-                    </div>            
-                    <div class="loginSection-SignupLink"><span>Not yet registered? <a href="#signup">Sign Up</a></span></div>
-                                
-                    <div id="modal2" class="modal modal-2">
-                    <div class="modal-content modalcontent2">
+            </div>
+            <div class="signup-login-link"><span>Not yet registered? <a href="#signup">Sign Up</a></span></div>
+
+            <div id="modal2" class="modal modal-2">
+                <div class="modal-content modalcontent2">
                     <p class="signupSection-ModalText1">Forgot Password</p>
                     <div class="lock-img">
-                    <svg enable-background="new 193 -193.7 486.7 486.7" version="1.1" viewBox="193 -193.7 486.7 486.7" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><rect x="359" y="71" width="147" height="165.4" fill="#FCFCFC"/><path d="m596.9 2.8h-9.5v-44.4c0-82.1-65.2-150.7-146.6-152.1h-8.9c-81.4 1.5-146.6 70-146.6 152.1v44.4h-9.5c-14.6 0-26.5 15.1-26.5 33.7v222.6c0 18.6 11.9 33.8 26.5 33.8h321c14.6 0 26.5-15.2 26.5-33.8v-222.6c0.1-18.6-11.8-33.7-26.4-33.7zm-130.5 144.8v67.3c0 7.7-6.4 14.2-14.2 14.2h-31.8c-7.7 0-14.2-6.5-14.2-14.2v-67.3c-7.5-7.4-11.8-17.5-11.8-28.8 0-21.3 16.5-39.7 37.5-40.5 2.2-0.1 6.7-0.1 8.9 0 21 0.8 37.5 19.2 37.5 40.5 0 11.3-4.4 21.5-11.9 28.8zm58.5-144.8h-177.1v-44.4c0-48.9 39.7-89.3 88.5-89.3s88.5 40.4 88.5 89.3l0.1 44.4z"/></svg>
+                        <svg enable-background="new 193 -193.7 486.7 486.7" version="1.1" viewBox="193 -193.7 486.7 486.7" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><rect x="359" y="71" width="147" height="165.4" fill="#FCFCFC"/><path d="m596.9 2.8h-9.5v-44.4c0-82.1-65.2-150.7-146.6-152.1h-8.9c-81.4 1.5-146.6 70-146.6 152.1v44.4h-9.5c-14.6 0-26.5 15.1-26.5 33.7v222.6c0 18.6 11.9 33.8 26.5 33.8h321c14.6 0 26.5-15.2 26.5-33.8v-222.6c0.1-18.6-11.8-33.7-26.4-33.7zm-130.5 144.8v67.3c0 7.7-6.4 14.2-14.2 14.2h-31.8c-7.7 0-14.2-6.5-14.2-14.2v-67.3c-7.5-7.4-11.8-17.5-11.8-28.8 0-21.3 16.5-39.7 37.5-40.5 2.2-0.1 6.7-0.1 8.9 0 21 0.8 37.5 19.2 37.5 40.5 0 11.3-4.4 21.5-11.9 28.8zm58.5-144.8h-177.1v-44.4c0-48.9 39.7-89.3 88.5-89.3s88.5 40.4 88.5 89.3l0.1 44.4z"/></svg>
 
 
-                    <div class="lock-line"></div>
+                        <div class="lock-line"></div>
                     </div>
                     <input type="tel" class="input-phone-number" placeholder="Phone Number" ng-model="forgotpassword.contactphone">
                     <br>
                     <span id="forgotpassword-error">{{forgotpassworderrormsg}}</span>
                     <span id="forgotpassword-success">{{forgotpasswordsuccessmsg}}</span>
-                    </div>
-                    <div class="signupSection-ModalButtons">
+                </div>
+                <div class="signupSection-ModalButtons">
                     <button class="btn signupSection-ModalButton1 modal-close" type="submit" name="action">Close</button>
                     <button class="btn signupSection-ModalButton2 signupSection-modal-button-validate" type="submit" name="action" ng-click="doforgotpassword()">Submit<i class="material-icons right">arrow_forward</i></button>
-                    </div>
-                    </div>
-                                 
+                </div>
             </div>
+
+        </div>
+    </div>
+
 </div>

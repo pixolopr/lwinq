@@ -5,92 +5,9 @@
 .signupSection {
     @extend .cerafont;
     background-color: white;
-    height: 100%; //    overflow: hidden;
-    &-LoginText {
-        text-align: center;
-        margin-bottom: 40px;
-        font-family: ceraBlack;
-        color: #575558;
-    }
-
-    &-formrow {
-        display: flex;
-        margin: 0 auto;
-        position: relative;
-        width: 55% !important;
-        height: 60px;
-        justify-content: space-between;
-        
-        .dropdown-content li>span {
-        color: $loginblue-color;
-            text-align: center;
-        }
-        
-//        .select-wrapper {
-//           color: $loginblue-color;
-//        } 
-//        .select-wrapper span.caret {
-//            z-index: 9;
-//                color: #9da3ac;
-//        } 
-//        
-        input {
-            border-bottom: 1.2px solid #c0c0c0 !important;
-            &:focus {
-                border-bottom: 1px solid $loginblue-color !important;
-                box-shadow: 0 1px 0 0 $loginblue-color !important;
-                
-            }
-        }
-
-        &-break {
-            position: relative;
-            margin: 0;
-            width: 48%;
-//            .select-dropdown {
-//                width: 85% !important;
-//                margin: 0 !important;
-//            }
-//            .break-input {
-//                width: 85% !important;
-//                margin: 0 !important;
-//            }
-        }
-
-        input {
-            width: 100% !important;
-            margin: 0 auto !important;
-            display: block !important;
-            padding-left: 30px !important;
-            box-sizing: border-box !important;
-            box-shadow: none !important;
-            
-        }
+    height: 100%;
 
 
-        input:focus + svg-img {
-            path {
-                fill: $loginblue-color !important;
-            }
-        }
-
-
-
-
-        svg {
-            height: 20px;
-            width: 20px;
-            position: absolute;
-            top: 13px;
-            left: 5px;
-            path {
-                fill: #D4DFEF;
-            }
-        }
-
-
-    } 
-    
     .form-button-wrapper {
         justify-content: flex-end;
     }
@@ -116,21 +33,6 @@
         a {
             text-decoration: none;
             color: white;
-        }
-    }
-
-
-    &-SignupLink {
-        text-align: center;
-        span {
-            color: #525050;
-            font-size: 120%;
-            font-family: ceraM;
-        }
-
-        a {
-            font-family: ceraBlack;
-            color: #00bcd4;
         }
     }
 
@@ -171,7 +73,7 @@
         margin-top: 0px;
         cursor: pointer;
         a {
-            text-shadow: 0px 1px 2px rgba(0,0,0,.4);
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, .4);
         }
     }
 
@@ -180,16 +82,16 @@
         display: block;
         width: 400px;
         text-align: center;
-        
+
     }
 
     &-ModalButton1 {
         width: 165px;
         border-radius: 20px;
         margin: 0 15px;
-        background: linear-gradient(#51e19b,#00d450);
-        
-                .right {
+        background: linear-gradient(#51e19b, #00d450);
+
+        .right {
             position: relative;
             right: 10px;
             transition: 0.2s right;
@@ -202,14 +104,14 @@
             }
         }
     }
-    
-        &-ModalButton2 {
+
+    &-ModalButton2 {
         width: 165px;
         border-radius: 20px;
         margin: 0 15px;
-        background: linear-gradient(#51d0e1,#00bcd4); 
-        
-                .right {
+        background: linear-gradient(#51d0e1, #00bcd4);
+
+        .right {
             position: relative;
             right: 10px;
             transition: 0.2s right;
@@ -248,29 +150,29 @@
 
 .input-select-style {
     select {
-            border: none !important;
-            border-bottom: 1px solid #9e9e9e !important;
-            outline: none !important;     
+        border: none !important;
+        border-bottom: 1px solid #9e9e9e !important;
+        outline: none !important;
         option {
-                    text-align: left;        
-                    border: none !important;
-                    outline: none !important;    
-                }
-        
+            text-align: left;
+            border: none !important;
+            outline: none !important;
+        }
+
         span.caret {
             z-index: 9;
-                color: #9da3ac;
-        } 
-        
-        }    
+            color: #9da3ac;
+        }
+
+    }
 
     select:focus {
-        outline: none !important;             
-        }
+        outline: none !important;
+    }
 }
 
 .password-block {
-        width: 100% !important;
+    width: 100% !important;
     box-sizing: border-box;
 }
 
@@ -281,9 +183,9 @@
     border: 5px solid #fff!important;
     text-align: center;
     &:focus {
-    box-shadow: none !important; 
+        box-shadow: none !important;
     }
-   
+
 }
 
 //Remove the arrow in the input type
