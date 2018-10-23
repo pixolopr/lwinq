@@ -2,14 +2,15 @@ var navigationservice = angular.module('navigationservice', [])
 
     .factory('NavigationService', function ($http) {
         //DESKTOP
-      var adminurl = "http://localhost/rest/index.php/";
+        var adminurl = "http://localhost/rest/rest/index.php/";
+        //      var adminurl = "http://localhost/rest/index.php/";
 
         //MACBOOK AND HOME LAPTOP
         //    var adminurl = "http://localhost/rest/index.php/";
         //PC
         //var adminurl = "http://localhost/inqrest/rest/index.php/";
         //SERVER
-         //   var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+        //   var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
         //    SERVER TEST
         //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
         //HOME LAPTOP
