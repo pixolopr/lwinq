@@ -14,23 +14,27 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
         .userprofile-pic {
             border: 1.5px solid $primary-color;
             height: auto !important;
             width: 33% !important;
         }
+
         .username {
             margin-top: 5px;
             margin-bottom: 10px;
             font-size: 18px !important;
             color: white;
         }
+
         .profile-name {
             color: white;
             font-size: 12px;
             margin-bottom: 9px;
             margin-top: -10px;
         }
+
         /*.batch-id {
             color: white;
             font-size: 12px;
@@ -43,8 +47,10 @@
         border-top-right-radius: 5px;
         margin-top: 20px;
         background-color: $primary-color !important;
+
         .email-wrap {
             margin-top: 68px;
+
             .email {
                 margin-top: 6px;
                 font-size: 16px;
@@ -52,9 +58,11 @@
                 color: white !important;
             }
         }
+
         .school-name-wrap {
             margin-top: 30px;
             margin-bottom: 14px;
+
             .school-name {
                 margin-top: 6px;
                 margin-bottom: 28px;
@@ -62,6 +70,7 @@
                 color: white !important;
             }
         }
+
         .phone-wrap {
             .phone-no {
                 font-size: 16px;
@@ -69,6 +78,7 @@
                 color: white !important;
             }
         }
+
         .standard-wrap {
             .standard {
                 font-size: 16px;
@@ -81,21 +91,27 @@
     .questions-box {
         .question-icon {
             background: white;
+
             .question-asked {
                 margin-top: 20px;
             }
+
             .question-text {
                 color: $primary-color;
                 display: inline-block;
             }
+
             .text {
                 .sub-title {}
             }
+
             .leaderboard-wrapper {
                 .leader-btn {}
+
             }
         }
     }
+    
 
     .asked-questions {
         .question-no {
@@ -105,6 +121,7 @@
             font-size: 42px;
             color: $primary-color !important;
         }
+
         .asked-text {
             margin: auto;
             color: $primary-color !important;
@@ -119,22 +136,30 @@
             font-size: 42px;
             color: $primary-color !important;
         }
+
         .ans-text {
             margin: auto;
-            color: $primary-color!important;
+            color: $primary-color !important;
         }
     }
 
     .leaderboard-wrapper {
         height: 50px;
+
         .leader-btn {
             box-shadow: 2px 5px 5px rgba(7, 117, 132, 0.84);
-            font-size: 16px!important;
+            font-size: 16px !important;
             padding: 10px;
             border-radius: 11px;
             color: white;
             background: $primary-color;
+
+            &:hover {
+                background-color: #0a9dc7 !important;
+            }
         }
+
+
     }
 
     .prop-wrapper {
@@ -195,4 +220,3 @@
         transform: scale(1.0);
         transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
     }
-

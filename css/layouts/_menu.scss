@@ -124,6 +124,15 @@ li.search {
             color: white !important;
         }
     }
+    
+    &:active {
+        color: white !important;
+        margin: 3px;
+        background-color: $primary-color !important;
+        .menuicons {
+            color: white !important;
+        }
+    }
 }
 
 .side-nav .subheader {

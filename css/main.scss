@@ -4,7 +4,11 @@
 @import 'modules.scss';
 @import 'layouts.scss';
 
+.test {
 
+    color: black;
+    text-align: center;
+}
 
 pre {
     display: none;
@@ -56,6 +60,7 @@ pre {
 .concepttext {
     font-size: 20px;
     margin-top: 2vh;
+
     @media screen and (max-width: $break-small) {
         font-size: 14px;
     }
@@ -69,6 +74,7 @@ pre {
     margin-top: 2vh;
     font-size: 18px;
     border-radius: 6px;
+
     @media screen and (max-width: $break-small) {
         padding: 6px;
         font-size: 14px;
@@ -306,6 +312,7 @@ pre {
     padding-left: 10px;
     padding-right: 10px;
     @extend .cerafont;
+
     @media screen and (max-width: $break-small) {
         font-size: 14px;
     }
@@ -329,9 +336,11 @@ pre {
         line-height: 3.5em;
         color: white;
         border-top: 1px dotted rgba(255, 255, 255, 0.53);
+
         div {
             height: 3.5em;
             line-height: 3.5em;
+
             p {
                 margin: 0;
             }
@@ -358,6 +367,7 @@ pre {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
