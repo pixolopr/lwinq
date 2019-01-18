@@ -18,6 +18,18 @@ inq.run(function ($rootScope, $location, $route, $interval) {
     });
     $rootScope.$on('$routeChangeSuccess', function () {
 
+        var path = $location.path();
+        if (path.match(/\//g).length == 1) {
+           
+           
+            path=path.substring(1);
+        } else {
+            
+            path = path.substring(1, path.indexOf('/', 1));
+        }
+            console.log(path);
+        $('.menu-item').removeClass('active');
+         $('#'+path).addClass('active');
         //hide loading gif
         /*$interval(function () {
             console.log("APP MADE FALSE");
@@ -35,10 +47,10 @@ inq.run(function ($rootScope, $location, $route, $interval) {
 });
 
 
-inq.config(['$routeProvider','$locationProvider',
-  function ($routeProvider,$locationProvider) {
-    console.log($locationProvider);
-   
+inq.config(['$routeProvider', '$locationProvider',
+  function ($routeProvider, $locationProvider) {
+        console.log($locationProvider);
+
         $routeProvider.
         when('/home', {
             templateUrl: 'views/halfPageTemplate.html',
@@ -96,11 +108,11 @@ inq.config(['$routeProvider','$locationProvider',
             templateUrl: 'views/fullPageTemplate.html',
             controller: 'leaderboardCtrl'
         }).
-           when('/starredcards/:conceptid', {
+        when('/starredcards/:conceptid', {
             templateUrl: 'views/starredcards.html',
             controller: 'starredcardsCtrl'
         }).
-         when('/signup', {
+        when('/signup', {
             templateUrl: 'views/signup.html',
             controller: 'signupCtrl'
         }).
@@ -109,7 +121,7 @@ inq.config(['$routeProvider','$locationProvider',
         otherwise({
             redirectTo: '/login'
         });
-          // $routeProvider.html5Mode(true);
+        // $routeProvider.html5Mode(true);
 
 
   }
