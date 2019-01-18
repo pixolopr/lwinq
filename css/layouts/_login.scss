@@ -12,6 +12,7 @@
 //        height: 17vh;
 //    }
 //}
+
 .login-div-wrapper {
     display: flex;
     width: 100%;
@@ -250,7 +251,7 @@
 
             display: block;
             font-size: .8em;
-            color: #575558;
+            color: #00BCD4;
             position: absolute;
             left: 0px;
         }
@@ -311,7 +312,12 @@
         z-index: -1;
     }
 }
-
+.question-asked {
+	DISPLAY: flex;
+    
+    align-items: center;
+    justify-content: center;
+}
 
 .modalcontent2 {
     text-align: center;

@@ -41,16 +41,16 @@ gulp.task('open', function () {
 
 gulp.task('sass', function (done) {
     console.log('sass called');
-    gulp.src('css/main.scss')
+    gulp.src('./css/main.scss')
         .pipe(sass())
         .on('error', sass.logError)
-        .pipe(gulp.dest('css/'))
+        .pipe(gulp.dest('./css/'))
         .pipe(cleanCss({
             keepSpecialComments: 0
         }))
 
 
-        .pipe(gulp.dest('css/'))
+        .pipe(gulp.dest('./css/'))
         .on('end', done);
 });
 

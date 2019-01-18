@@ -1,72 +1,79 @@
 .chapterlist {
-    background-color: white;
-    height: auto;
-    width: 90%;
-    -webkit-box-shadow: 0px 1px 6px 0px #4f4d4f;
-    -moz-box-shadow: 0px 1px 6px 0px #4f4d4f;
-    box-shadow: 0px 1px 6px 0px #4f4d4f;
+	background-color: white;
+	height: auto;
+	width: 90%;
+	-webkit-box-shadow: 0px 1px 6px 0px #4f4d4f;
+	-moz-box-shadow: 0px 1px 6px 0px #4f4d4f;
+	box-shadow: 0px 1px 6px 0px #4f4d4f;
 }
 
 .chapbox {
-    text-align: -webkit-center;
-    margin-top: 15px;
-    cursor: pointer;
+	text-align: -webkit-center;
+	margin-top: 15px;
+	cursor: pointer;
 }
 
 .chapdivider {
-    height: 1.5px !important;
-    width: 100% !important;
-    margin-left: -11px !important;
+	height: 1.5px !important;
+	width: 100% !important;
+	margin-left: -11px !important;
 }
 
 .chaptext {
-    text-align: -webkit-left !important;
-    font-size: 25px !important;
-    margin-top: 14px !important;
-    margin-bottom: 11px !important;
-    margin-left: 12px;
-    color: #191a19 !important;
-    line-height: 26px;
-    @media screen and (max-width: $break-small) {
-        font-size: 20px !important;
-    }
+	text-align: -webkit-left !important;
+	font-size: 25px !important;
+	margin-top: 14px !important;
+	margin-bottom: 11px !important;
+	margin-left: 12px;
+	color: #191a19 !important;
+	line-height: 26px;
+
+	@media screen and (max-width: $break-small) {
+		font-size: 20px !important;
+	}
 }
 
 .chapconcept {
-    text-align: left !important;
-    margin-top: 7px;
-    font-size: 14px;
-    color: $primary-color;
-    margin-left: 12px;
-    font-weight: 800;
+	text-align: left !important;
+	margin-top: 7px;
+	font-size: 14px;
+	color: $primary-color;
+	margin-left: 12px;
+	font-weight: 800;
 }
 
 .chapicon {
-    color: $grey-text !important;
-    margin-left: 4px;
+	color: $grey-text !important;
+	margin-left: 4px;
 }
 
 .chapicon:hover {
-    color: $primary-color !important;
+	color: $primary-color !important;
 }
 
 .chapbuttons a {
-    color: $grey-text !important;
+	color: $grey-text !important;
 }
 
 .chapbuttons {
-    margin-top: 7px !important;
-    color: $grey-text !important;
-    font-weight: 800;
-    &:hover {
-        color: $primary-color !important;
-        .chapicon {
-            color: $primary-color !important;
-        }
-    }
+	margin-top: 7px !important;
+	color: $grey-text !important;
+	font-weight: 800;
+	display: flex;
+	align-items: center;
+
+	&:hover {
+		color: $primary-color !important;
+
+		.chapicon {
+			color: $primary-color !important;
+		}
+	}
 }
 
 .chapheight {
-    padding-bottom: 1.5% !important;
-    font-size: 14px;
+	display: flex;
+	align-items: center;
+	padding-bottom: 1.5% !important;
+	font-size: 14px;
 }
