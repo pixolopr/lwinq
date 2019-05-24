@@ -100,6 +100,10 @@ inq.config(['$routeProvider', '$locationProvider',
             templateUrl: 'views/fullPageTemplate.html',
             controller: 'dashboardCtrl'
         }).
+            when('/doubts', {
+            templateUrl: 'views/fullPageTemplate.html',
+            controller: 'doubtsCtrl'
+        }).
         when('/starred', {
             templateUrl: 'views/fullPageTemplate.html',
             controller: 'starredCtrl'
