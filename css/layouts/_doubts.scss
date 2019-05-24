@@ -1,0 +1,278 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: inherit;
+}
+
+html, body {
+  height: 100%;
+}
+.doubts {
+    background-color: #256672;
+    height: 300%;
+    width: 100%;
+    padding-top: 2%;
+}
+.doubt-item {
+    display: flex;
+    padding: 10px;
+    background-color: #ffffff;;
+    padding: 15px;
+    margin: 15px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+}
+
+.q-div {
+        margin: 0px 15px;
+        width: 100%;
+}
+.q-div1 {
+        display: flex;
+    justify-content: space-between;
+}
+
+.q-div1 p{
+    font-weight: 600;
+}
+    
+
+.q-div2 p {
+    margin: 10px 10px 10px 0px;
+}
+.q-div3 {
+background-color: #E5E5E5;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+.q-div3 img {
+    width: 50px;
+    margin: 5px;
+}
+
+.q-div3 p {
+    font-size: .8em;
+}
+.q-div4 {
+            display: flex;
+    justify-content: space-between;
+        align-items: center;
+
+}
+
+.filter-tags {
+        font-size: .8em;
+    padding: 8px;
+    background-color: #00BCD4;
+    color: white;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.stats-div {
+        display: flex;
+    align-items: center;
+    border-left: 1px solid;
+}
+
+.alv-div {
+    text-align: center;
+    margin: 5px;
+    background-color: #00BCD4;
+    display: flex;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+.stats-no {
+    font-size: 40px;
+}
+
+.tags-div {
+    display: flex;
+}
+
+.stats-caption {
+        font-size: 10px;}
+
+.profile-div {
+    position: relative;
+}
+
+.profile-div img {
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+.profile-div svg {
+   position: absolute;
+    bottom: -40px;
+    left: -25px;
+}
+
+.doubt-button {
+    width: 130px;
+    margin: 100px auto;
+    padding: 15px;
+    color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 11px;
+    display: block;
+    text-align: center;
+    background-color: #03A9F4;
+}
+
+.askq-wrap {
+    background-color: #F5F1F1;
+    width: 50%;
+    margin: 100px auto;
+    border-radius: 11px;
+}
+.askq-head {
+    background-color: #03A9F4;
+    border-radius: 11px 11px 0px 0px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+.askq-body {
+    margin: 10px;
+    text-align: center;
+    background-color: #FFF;
+    padding: 10px;
+    height: 75px;
+    line-height: 75px;
+    color: #A59F9F;
+}
+
+.svg-icons {
+        margin: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.svg-icons svg {
+        margin: 0px 5px;
+    width: 22px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ans-div {
+    background-color: white;
+    margin: 10px;
+}
+
+.ans-img img {
+        width: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+.answer-wrap {
+    display: flex;
+}
+
+.ans-data div {
+    margin: 5px;
+}
+
+.ans-user-name {
+    font-weight: bold;
+    color: #03A9F4;
+}
+
+.ans-userq {
+    color: #606060;
+}
+
+.ans-user-svg svg {
+    width: 25px;
+}
+
+.user-answer  {
+        background-color: #F5F1F1;
+    border-radius: 100px 100px 0px 0px;
+    padding: 50px;
+    position: relative;
+}
+
+.answer-heading {
+    
+    background-color: #03A9F4;
+    padding: 10px;
+    border-radius: 3px;
+    color: white;
+    display: inline-block;
+    font-size: 2em;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.user-answer-item{
+    
+    background-color: white;
+    border-radius: 11px;
+    padding: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.ua-item-img img {
+        width: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+.user-answer-item {
+    display: flex;
+}
+
+.ua-item-data {
+        margin: 0px 5px;
+}
+
+.ua-item-svg {
+        display: flex;
+    align-items: center;
+}
+
+.user-answer-btns {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.user-answer-button {
+        background-color: #03A9F4;
+    padding: 10px;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
+border-radius: 11px;
+    color: white;
+    margin: 0px 5px;
+   
+}
