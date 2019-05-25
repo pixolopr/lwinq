@@ -75,8 +75,21 @@
 <div class="askq-wrap">
 
     <div class="askq-head">Ask Question</div>
-    <div class="askq-body"><input type="text" value="TYPE YOUR QUESTION HERE"></div>
-    <div class="svg-icons"><svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="askq-body"><input class="input-askq" type="text" onfocus="if(this.value == 'TYPE YOUR QUESTION HERE') { this.value = ''; }" onfocusout="if(this.value == '') { this.value = 'TYPE YOUR QUESTION HERE'; }"value="TYPE YOUR QUESTION HERE"></div>
+    <div class="svg-icons askq-flex">
+    <div>
+        <div class="q-div3">
+                <p>Attached Image</p><img src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg" alt="">
+               
+        </div>
+        <div class="q-div3">
+                <p>Attached Image</p><img src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg" alt="">
+               
+        </div>
+     </div>
+          
+      <div class="askq-submit">
+           <svg class="askq-img-svg" height="24px" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0)">
                 <path d="M36.3621 3.82739H0.637931C0.285793 3.82739 0 4.11255 0 4.46532V32.5343C0 32.8871 0.285793 33.1722 0.637931 33.1722H36.3621C36.7142 33.1722 37 32.8871 37 32.5343V4.46532C37 4.11255 36.7142 3.82739 36.3621 3.82739ZM35.7241 31.8964H1.27586V5.10325H35.7241V31.8964Z" fill="#00BCD4" />
                 <path d="M10.2069 17.95C12.166 17.95 13.7596 16.3565 13.7596 14.398C13.7596 12.4383 12.166 10.8447 10.2069 10.8447C8.24785 10.8447 6.6543 12.4383 6.6543 14.3974C6.6543 16.3565 8.24785 17.95 10.2069 17.95ZM10.2069 12.1206C11.4624 12.1206 12.4837 13.1426 12.4837 14.3974C12.4837 15.6522 11.4624 16.6741 10.2069 16.6741C8.95149 16.6741 7.93016 15.6528 7.93016 14.398C7.93016 13.1432 8.95149 12.1206 10.2069 12.1206Z" fill="#00BCD4" />
@@ -89,8 +102,7 @@
             </defs>
         </svg>
 
-        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.5 0C8.2822 0 0 8.2822 0 18.5C0 28.7178 8.2822 37 18.5 37C28.7178 37 37 28.7166 37 18.5C37 8.28341 28.7178 0 18.5 0ZM18.5 34.6875C9.55984 34.6875 2.3125 27.4402 2.3125 18.5C2.3125 9.55984 9.55984 2.3125 18.5 2.3125C27.4402 2.3125 34.6875 9.55984 34.6875 18.5C34.6875 27.4402 27.4402 34.6875 18.5 34.6875ZM25.4375 17.3438H19.6562V11.5625C19.6562 10.9242 19.1383 10.4062 18.5 10.4062C17.8617 10.4062 17.3438 10.9242 17.3438 11.5625V17.3438H11.5625C10.9242 17.3438 10.4062 17.8617 10.4062 18.5C10.4062 19.1383 10.9242 19.6562 11.5625 19.6562H17.3438V25.4375C17.3438 26.0758 17.8617 26.5938 18.5 26.5938C19.1383 26.5938 19.6562 26.0758 19.6562 25.4375V19.6562H25.4375C26.0758 19.6562 26.5938 19.1383 26.5938 18.5C26.5938 17.8617 26.0758 17.3438 25.4375 17.3438Z" fill="#00BCD4" />
-        </svg>
+        <div class="askbutton">ASK</div>
+     </div>
     </div>
 </div>
