@@ -1,0 +1,28 @@
+//ask modal css
+
+.askq-body input {
+        text-align: center;
+    border-bottom: none !important;
+    margin: 0px !important;
+}
+
+.askq-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.askq-submit {
+        display: flex;
+    align-items: center;
+}
+
+.askbutton {
+    border: 1px solid #00BCD4;
+    color: #00BCD4;
+    font-size: .8em;
+}
+
+.input-askq:hover {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
