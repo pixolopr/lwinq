@@ -1715,6 +1715,24 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
   }
 ]);
 
+inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
+  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
+
+        $scope.template = TemplateService;
+        $rootScope.fullpageview = true;
+        TemplateService.content = "views/answers.html";
+        $scope.navigation = NavigationService.getnav();
+
+
+
+
+
+
+
+
+
+  }
+]);
 
 inqcontroller.controller('starredCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
   function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
