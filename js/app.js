@@ -56,6 +56,10 @@ inq.config(['$routeProvider', '$locationProvider',
             templateUrl: 'views/halfPageTemplate.html',
             controller: 'home'
         }).
+        when('/landing', {
+            templateUrl: 'views/landing.html',
+            controller: 'landingCtrl'
+        }).
         when('/login', {
             templateUrl: 'views/login.html',
             controller: 'loginCtrl'

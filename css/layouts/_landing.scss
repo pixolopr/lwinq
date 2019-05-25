@@ -1,0 +1,101 @@
+.header-div {
+        display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-family: ceraM;
+}
+
+.landing-bg {
+    background-image: url("/img/landing-img.png");
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    z-index: -1;
+    background-position-x: right;
+    background-size: contain;
+    font-family: ceraM;
+}
+
+.landing-login {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    width: 150px;
+    height: 40px;
+    border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00BCD4;
+    font-family: ceraM;
+}
+
+.landing-maintext {
+        font-family: CeraGR-Medium;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 38px;
+    line-height: 58px;
+    width: 451px;
+    color: #606060;
+    font-family: ceraM;
+}
+
+.joinus-input {
+
+    width: 463px;
+    padding: 10px 25px;
+    height: 62px;
+    background: #fbfbfb;
+    border: 1px solid #c6c6c6;
+    box-sizing: border-box;
+    border-radius: 31px;
+    font-family: ceraM;
+    position: relative;
+        margin-top: 18px;
+    
+   
+}
+
+ .join-inputbox {
+    font-family: ceraL;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 153.5%;
+    color: #000000;
+    border-bottom: none !important;
+        margin: 0 !important;
+    }
+    .join-inputbox:hover {
+        border-bottom: none !important;
+    }
+
+.landing-content {
+        display: inline-block;
+    margin-left: 50px;
+    margin-top: 100px;
+    font-family: ceraM;
+}
+
+.join-text {
+    position: absolute;
+    background-color: #00BCD4;
+    width: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    height: 100%;
+    border-radius: 0px 31px 31px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ceraBlack;
+    color: #fff;
+}
+
+.landing-subtext {
+        font-family: ceraL;
+}
+
