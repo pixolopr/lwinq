@@ -68,9 +68,19 @@
 
     <!--TO DETECT DEVICES, REMOVE IF NOT NEEDED-->
     <script src="assets/js/modernizr.custom.79639.js"></script>
+    
+<!--    Bootstrap-->
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
+<!--Ekko Lightbox-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
 
 
 
@@ -107,7 +117,9 @@
 </head>
 
 <body>
+   
     <div ng-controller="appCtrl">
+        
 
         <!--DESKTOP VERSION-->
         <div class="wrapper row margin0" ng-if="showmenu">
@@ -130,6 +142,12 @@
         </div>
 
     </div>
+    <script>
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+    </script>
 
 </body>
 
