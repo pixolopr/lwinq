@@ -52,6 +52,19 @@ $break-large: 1200px;
     src: url("../fonts/MathJax_Main-Regular.woff")format("woff");
     unicode-range: U+30-39;
 }
+@font-face {
+    font-family: roboto-regular;
+    src: url("../fonts/roboto-bold.ttf")format("truetype");
+}
+
+@font-face {
+    font-family: roboto-medium;
+    src: url("../fonts/roboto-medium.ttf")format("truetype");
+}
+@font-face {
+    font-family: roboto-light;
+    src: url("../fonts/roboto-light.ttf")format("truetype");
+}
 
 .cerafont {
     font-family: numberfont, ceraB !important;
