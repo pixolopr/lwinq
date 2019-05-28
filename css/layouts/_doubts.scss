@@ -162,12 +162,22 @@ body {
     text-align: center;
     background-color: #03A9F4;
 }
-
+//.backmain{
+//    width: 100%;
+//    height: 100%;
+//    background-color: rgba(0, 0, 0, 0.4);
+//    display: flex;
+//    align-items: center;
+//    justify-content: center;
+//    position: absolute;
+//    top: 0;
+//}
 .askq-wrap {
     background-color: #F5F1F1;
     width: 50%;
     margin: 100px auto;
     border-radius: 11px;
+    z-index: 11;
 }
 
 .askq-head {
