@@ -62,7 +62,12 @@ inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'Navigatio
         TemplateService.content = "views/landing.html"; 
           $scope.title = "Landing";
       $rootScope.showmenu = false;
-
+      
+        
+       $scope.openlandingmodal = function () {
+           
+           document.getElementById("login-modal").style.display = "block";
+      }
 
   }
 ]);
@@ -1707,6 +1712,26 @@ inqcontroller.controller('dashboardCtrl', ['$scope', 'TemplateService', 'Navigat
 
   }
 ]);
+
+inqcontroller.controller('bookmarkCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
+  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
+
+        $scope.template = TemplateService;
+        $rootScope.fullpageview = true;
+        TemplateService.content = "views/bookmark.html";
+        $scope.navigation = NavigationService.getnav();
+
+
+    
+
+
+
+
+
+
+  }
+]);
+
 
 
 inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
