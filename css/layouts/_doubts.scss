@@ -1,13 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: inherit;
-}
 
-html,
-body {
-    height: 100%;
-}
 
 .doubts {
     background-color: #256672;
@@ -61,8 +52,8 @@ body {
 }
 
 .q-div3 img {
-    width: 30px;
-    margin: 2px;
+    width: 45px;
+    margin: 6px;
 }
 
 .q-div3 p {
@@ -305,7 +296,7 @@ body {
     border: none;
     border-radius: 11px;
     font-size: 14px;
-    padding: 10px 20px;
+    padding: 5px 20px;
     text-transform: uppercase;
     margin: 20px 10px 10px 10px;
     text-align: right;
@@ -329,7 +320,7 @@ body {
     border-radius: 2px;
     color: white;
     display: inline-block;
-    font-size: 24px;
+    font-size: 16px;
     font-family:ceraM;
     margin-bottom: 30px;
 }
@@ -381,10 +372,10 @@ body {
     display: flex;
     align-items: center;
     span{
-            font-size: 40px;
+            font-size: 35px;
             font-family: roboto-regular;
             color:#00bcd4;
-            margin: 10px;
+            margin: 5px;
         }
 }
 
