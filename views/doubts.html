@@ -1,22 +1,22 @@
 <div class="douts-top-sec">
     <div class="filters">
         <div class="subjects-dropdown">
-            <select>
-                <option value="1">subjects</option>
-                <option value="2">physics</option>
-                <option value="3">maths</option>
-                <option value="4">biology</option>
+            <select ng-model="filters.subjects">
+                <option>subjects</option>
+                <option>physics</option>
+                <option>maths</option>
+                <option>biology</option>
             </select>
         </div>
         <div class="boards-dropdown">
-            <select>
+            <select ng-model="filters.boards">
                 <option value="1">boards</option>
                 <option value="2">CBSE</option>
                 <option value="3">HSC</option>
             </select>
         </div>
         <div class="standards-dropdown">
-            <select>
+            <select ng-model="filters.standards">
                 <option value="1">standards</option>
                 <option value="2">8 th</option>
                 <option value="3">9 th</option>
@@ -24,7 +24,7 @@
             </select>
         </div>
     </div>
-    <div class="quest-btn"><button>Ask Question</button></div>
+    <div class="quest-btn"><button ng-click="getquestions()">Ask Question</button></div>
 </div>
 <div class="doubt-item">
     <div class="profile-div"><img src="https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg" alt="">

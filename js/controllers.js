@@ -1716,7 +1716,43 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $rootScope.fullpageview = true;
         TemplateService.content = "views/doubts.html";
         $scope.navigation = NavigationService.getnav();
+        /*GET DOUBTS QUESTIONS FROM FILTERS*/
+      
+      $scope.filters = {
+          subjects : 'subject',
+          boards : 'board',
+          standards : 'standards'
+      };
+      $scope.getquestions = function(){
+          console.log($scope.subjects);
+              
+        var getalldoubtssuccess = function (response) {
+            console.log(response.data);
+            $scope.questionsdata = response.data;
+//            for (var i in $scope.questionsdata) {
+//
+//                $scope.subjects[i].image = $sce.trustAsHtml($scope.subjects[i].image);
+//            }
+            $rootScope.loadingdiv = false;
+        };
 
+        var getalldoubtserror = function (response) {
+            console.log(response.data); 
+        };
+        /*MAKE LOADING TRUE*/
+        $rootScope.loadingdiv = true;
+        var standard = 1;
+        var board = $scope.filters.boards;
+        var subject = $scope.filters.subjects;
+        var start = 0;
+        var count = 10;
+        NavigationService.getalldoubts(standard,board,subject,start,count).then(getalldoubtssuccess, getalldoubtserror);
+        
+        /*END OG FETCHING DOUBTS QUESTIONS*/
+}
+        
+      
+        
 
       //        Lightbox Script
     

@@ -10,10 +10,12 @@ var navigationservice = angular.module('navigationservice', [])
         //PC
         //var adminurl = "http://localhost/inqrest/rest/index.php/";
         //SERVER
-           var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
+//           var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
         //    SERVER TEST
         //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
         //HOME LAPTOP
+        
+        var adminurl = "http://localhost/rest/index.php/";
 
 
         var navigation = [{
@@ -382,6 +384,19 @@ var navigationservice = angular.module('navigationservice', [])
 
 
 
+            },
+            getalldoubts: function(standard,board,subject,start,count){
+                return $http({
+                    url: adminurl + 'questions/getdoubts',
+                    method: "GET",
+                    params:{
+                        standard: standard,
+                        board: board,
+                        subject: subject,
+                        start: start,
+                        count: count
+                    }
+                })
             },
 
 
