@@ -64,6 +64,10 @@ inq.config(['$routeProvider', '$locationProvider',
             templateUrl: 'views/login.html',
             controller: 'loginCtrl'
         }).
+        when('/bookmark', {
+            templateUrl: 'views/bookmark.html',
+            controller: 'bookmarkCtrl'
+        }).
         when('/subjects', {
             templateUrl: 'views/halfPageTemplate.html',
             controller: 'subjectsCtrl'
