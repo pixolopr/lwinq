@@ -18,17 +18,24 @@
     font-family: ceraM;
 }
 
+
 .landing-login {
     background: #FFFFFF;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 8px rgba(0,0,0,.25);
     width: 150px;
     height: 40px;
     border-radius: 28px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #00BCD4;
+    color: #00bcd4;
     font-family: ceraM;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+}
+
+.landing-login:hover {
+    cursor: pointer;
+    box-shadow: 1px 3px 0 0 rgba(0,0,0,.34), 0 1px 0 2px rgba(0,0,0,.12), 0 0 4px 0 rgba(0,0,0,.2);
 }
 
 .landing-maintext {
@@ -43,19 +50,18 @@
 }
 
 .joinus-input {
-
     width: 463px;
     padding: 10px 25px;
-    height: 62px;
+    height: 45px;
     background: #fbfbfb;
     border: 1px solid #c6c6c6;
     box-sizing: border-box;
     border-radius: 31px;
     font-family: ceraM;
     position: relative;
-        margin-top: 18px;
-    
-   
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
 }
 
  .join-inputbox {
@@ -71,6 +77,9 @@
     .join-inputbox:hover {
         border-bottom: none !important;
     }
+ .join-inputbox:focus {
+        box-shadow: none !important;
+    }
 
 .landing-content {
         display: inline-block;
@@ -81,18 +90,24 @@
 
 .join-text {
     position: absolute;
-    background-color: #00BCD4;
+    background-color: #00bcd4;
     width: 100px;
     top: 50%;
     transform: translateY(-50%);
     right: 0;
     height: 100%;
-    border-radius: 0px 31px 31px 0px;
+    border-radius: 0 31px 31px 0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: ceraBlack;
     color: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+}
+
+.join-text:hover {
+    cursor: pointer;
+    box-shadow: 1px 3px 0 0 rgba(0,0,0,.34), 0 1px 0 2px rgba(0,0,0,.12), 0 0 4px 0 rgba(0,0,0,.2);
 }
 
 .landing-subtext {
