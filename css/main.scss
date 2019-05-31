@@ -1,6 +1,6 @@
 @import 'variables.scss';
 @import 'reusables.scss';
-@import 'libraries.scss';
+// @import 'libraries.scss';
 @import 'modules.scss';
 @import 'layouts.scss';
 
@@ -42,11 +42,19 @@ pre {
     font-size: 37px;
     font-weight: 900;
 }
+.test-cls{
+    color:black;
+}
+
+#test{
+    background-color: red;
+}
 
 
 
-
-
+.test-test{
+    color:red;
+}
 
 
 
