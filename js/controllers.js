@@ -67,7 +67,15 @@ inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'Navigatio
        $scope.openlandingmodal = function () {
            
            document.getElementById("login-modal").style.display = "block";
+           document.getElementById("landing-overlay").style.display = "block";
       }
+       
+        $scope.closelandingmodal = function () {
+           
+           document.getElementById("login-modal").style.display = "none";
+           document.getElementById("landing-overlay").style.display = "none";
+      }
+
 
   }
 ]);
