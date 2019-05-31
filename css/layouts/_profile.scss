@@ -1,222 +1,170 @@
-    .linqbgtop {
-        margin-top: 80px;
-    }
+.profile-page {
+    background-color: #256672;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
 
-    .edit-icon {
-        margin-top: 3px;
-        float: right;
-        cursor: pointer;
-    }
+.yoursection-content svg {
+    height: 85px;
+    width: 85px;
+}
 
-    .profile-wrapper {
-        margin-top: 70px;
+.time-practiced svg {
+    height: 30px;
+    width: 30px;
+}
+
+.your-profile {
+    margin: 50px;
+}
+
+.your-section {
+    margin: 50px;
+}
+
+.yourprofile-picture {
+    img {
+        width: 88px;
+    border-radius: 50%;
+    border: 2px solid #00bcd4;
+    }
+}
+
+.yourprofile-content {
+    width: 70%;
+}
+
+.yourprofile-editbtn {
+    border: 1px solid #00BCD4;
+    width: 130px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    color: #00BCD4;
+    align-items: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    width: 166px;
+    height: 46px;
+    border-radius: 50px;
+
+}
+
+.yourprofile-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 30px;
+    margin-top: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.time-practiced {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 10px 10px 0px;
+    padding-right: 30px;
+    border-right: 1px solid;
+}
 
-        .userprofile-pic {
-            border: 1.5px solid $primary-color;
-            height: auto !important;
-            width: 33% !important;
-        }
+.time-practiced-div {
+    display: flex;
+    justify-content: flex-start;
+}
 
-        .username {
-            margin-top: 5px;
-            margin-bottom: 10px;
-            font-size: 18px !important;
-            color: white;
-        }
+.yourprofile-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 26px;
+    color: #fff;
+}
 
-        .profile-name {
-            color: white;
-            font-size: 12px;
-            margin-bottom: 9px;
-            margin-top: -10px;
-        }
+.yourprofile-name {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 26px;
+    color: #606060;
+    margin: 0;
+}
 
-        /*.batch-id {
-            color: white;
-            font-size: 12px;
-            margin-top: -14px;
-        }*/
-    }
+.yourprofile-school {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #606060;
+    margin: 0;
+}
 
-    .profile {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        margin-top: 20px;
-        background-color: $primary-color !important;
+.timepracticed-number {
+        display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
 
-        .email-wrap {
-            margin-top: 68px;
+.tp-hrs {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 20px;
+    color: #606060;
+}
 
-            .email {
-                margin-top: 6px;
-                font-size: 16px;
-                margin-bottom: 28px;
-                color: white !important;
-            }
-        }
-
-        .school-name-wrap {
-            margin-top: 30px;
-            margin-bottom: 14px;
-
-            .school-name {
-                margin-top: 6px;
-                margin-bottom: 28px;
-                font-size: 16px;
-                color: white !important;
-            }
-        }
-
-        .phone-wrap {
-            .phone-no {
-                font-size: 16px;
-                margin-top: 6px;
-                color: white !important;
-            }
-        }
-
-        .standard-wrap {
-            .standard {
-                font-size: 16px;
-                margin-top: 6px;
-                color: white !important;
-            }
-        }
-    }
-
-    .questions-box {
-        .question-icon {
-            background: white;
-
-            .question-asked {
-                margin-top: 20px;
-            }
-
-            .question-text {
-                color: $primary-color;
-                display: inline-block;
-            }
-
-            .text {
-                .sub-title {}
-            }
-
-            .leaderboard-wrapper {
-                .leader-btn {}
-
-            }
-        }
-    }
-    
-
-    .asked-questions {
-        .question-no {
-            margin-top: 12px;
-            margin-bottom: -5px;
-            font-weight: 600;
-            font-size: 42px;
-            color: $primary-color !important;
-        }
-
-        .asked-text {
-            margin: auto;
-            color: $primary-color !important;
-        }
-    }
-
-    .question-answer {
-        .ans-no {
-            margin-top: 12px;
-            margin-bottom: -5px;
-            font-weight: 600;
-            font-size: 42px;
-            color: $primary-color !important;
-        }
-
-        .ans-text {
-            margin: auto;
-            color: $primary-color !important;
-        }
-    }
-
-    .leaderboard-wrapper {
-        height: 50px;
-
-        .leader-btn {
-            box-shadow: 2px 5px 5px rgba(7, 117, 132, 0.84);
-            font-size: 16px !important;
-            padding: 10px;
-            border-radius: 11px;
-            color: white;
-            background: $primary-color;
-
-            &:hover {
-                background-color: #0a9dc7 !important;
-            }
-        }
+.tp-text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 11px;
+    color: #606060;
+}
 
 
-    }
 
-    .prop-wrapper {
-        width: 79%;
-    }
+.yoursection-content {
+    position: relative;
+    display: flex;
+    background: #fff;
+    border-radius: 28px;
+    width: 197px;
+    height: 197px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    margin: 0px 40px 0px 0px;
+}
 
-    .disbaled-input {
-        border-bottom: none !important;
-        margin-top: 6px;
-        text-align: center;
-    }
+.yoursection-content span{
+    position: absolute;
+    bottom: 10%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 20px;
+    color: #606060;
+}
 
-    .title {
-        text-align: center !important;
-    }
+.yoursection-div {
+        display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
 
-    .standard-dropdown {
-        display: block;
-        height: 10pox;
-        height: 30px;
-        margin-top: 10px;
-    }
-
-
-    svg.submit-icon {
-        width: 25px;
-        height: auto;
-        margin: 6px;
-        padding: .25em;
-        border-radius: 50%;
-        fill: white;
-        border: 1px solid white;
-        transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
-    }
-
-    svg.submit-icon:hover {
-        fill: $primary-color;
-        background: white;
-        transform: scale(1.0);
-        transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
-    }
-
-    svg.cancel-icon {
-        width: 25px;
-        height: auto;
-        margin: 6px;
-        border: 1px solid white;
-        padding: .25em;
-        border-radius: 50%;
-        fill: white;
-
-        transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
-    }
-
-    svg.cancel-icon:hover {
-        fill: $primary-color;
-        background: white !important;
-        transform: scale(1.0);
-        transition: background 0.5s, transform 0.5s ease-out, fill 0.5s;
-    }
+.profile-button:hover {
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 4px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+}

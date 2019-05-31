@@ -18,6 +18,16 @@
     font-family: ceraM;
 }
 
+.landing-overlay {
+    position: absolute;
+    background-color: #000000a3;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: none;
+}
+
 
 .landing-login {
     background: #FFFFFF;
@@ -113,10 +123,9 @@
 .landing-subtext {
         font-family: ceraL;
 }
-.login-modal {
+#login-modal {
         width: 50%;
     display: block;
-    border: 1px solid;
     position: absolute;
     top: 10%;
     z-index: 100;
