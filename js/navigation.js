@@ -398,6 +398,18 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 })
             },
+            returnquestionimagename: function (file) {
+                return $http({
+                    url: adminurl + 'images/returnquestionimagename',
+                    method: "POST",
+                    headers: {
+                        'Content-Type': undefined,
+                    },
+                    data: file,
+                    transformRequest: angular.identity
+                });
+            },
+            
 
 
 

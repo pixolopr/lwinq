@@ -1744,20 +1744,20 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         /*GET DOUBTS QUESTIONS FROM FILTERS*/
       
       $scope.filters = {
-          subjects : 'subject',
-          boards : 'board',
-          standards : 'standards'
+          subjects : '',
+          boards : '',
+          standards : ''
       };
+      
+      $scope.img ={
+          img : ''
+      };
+      
       $scope.getquestions = function(){
-          console.log($scope.subjects);
-              
+          
         var getalldoubtssuccess = function (response) {
             console.log(response.data);
-            $scope.questionsdata = response.data;
-//            for (var i in $scope.questionsdata) {
-//
-//                $scope.subjects[i].image = $sce.trustAsHtml($scope.subjects[i].image);
-//            }
+            $scope.questionsalldata = response.data;
             $rootScope.loadingdiv = false;
         };
 
@@ -1765,16 +1765,36 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             console.log(response.data); 
         };
         /*MAKE LOADING TRUE*/
+          
         $rootScope.loadingdiv = true;
-        var standard = 1;
-        var board = $scope.filters.boards;
         var subject = $scope.filters.subjects;
+        var board = $scope.filters.boards;
+        var standard = $scope.filters.standards;        
         var start = 0;
         var count = 10;
         NavigationService.getalldoubts(standard,board,subject,start,count).then(getalldoubtssuccess, getalldoubtserror);
         
         /*END OG FETCHING DOUBTS QUESTIONS*/
 }
+      
+      
+        $scope.addimg = function () {
+            var formdata = new FormData();
+
+            formdata.append('file', $scope.img.img);
+            console.log($scope.img.img);
+            $scope.images = [
+                $scope.img.img
+            ];
+            console.log($scope.images);
+
+            NavigationService.returnquestionimagename(formdata).success(function (response) {
+                console.log(response);
+                $scope.img.img = response; //to change image property
+//                console.log($scope.conceptcards[$scope.cardindex].image);
+
+            });
+        };
         
       
         

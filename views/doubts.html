@@ -10,23 +10,24 @@
         </div>
         <div class="boards-dropdown">
             <select ng-model="filters.boards">
-                <option value="1">boards</option>
-                <option value="2">CBSE</option>
-                <option value="3">HSC</option>
+                <option>Boards</option>
+                <option>CBSE</option>
+                <option>Gujrat</option>
+                <option>ICSE</option>
             </select>
         </div>
         <div class="standards-dropdown">
-            <select ng-model="filters.standards">
-                <option value="1">standards</option>
-                <option value="2">8 th</option>
-                <option value="3">9 th</option>
-                <option value="4">10 th</option>
+            <select ng-model="filters.standards" ng-change="getquestions()">
+                <option>Standards</option>
+                <option>8th</option>
+                <option>9th</option>
+                <option>10th</option>
             </select>
         </div>
     </div>
-    <div class="quest-btn"><button ng-click="getquestions()">Ask Question</button></div>
+    <div class="quest-btn"><button>Ask Question</button></div>
 </div>
-<div class="doubt-item">
+<div class="doubt-item" ng-repeat="questiondata in questionsalldata">
     <div class="profile-div"><img src="https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg" alt="">
         <div class="svg-holder"><svg width="52" height="53" viewBox="0 0 52 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="51.1981" height="53" rx="25.599" fill="#00BCD4" />
@@ -35,123 +36,123 @@
     </div>
     <div class="q-div">
         <div class="q-div1">
-            <p>DEBADITYA HAIT</p><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.7115 0.645183C15.5569 0.404217 15.3486 0.227999 15.0872 0.116213C14.9208 0.0389035 14.7463 0.000180736 14.5639 0.000180736V0H2.10173C1.91943 0 1.74512 0.0387227 1.57861 0.116033C1.31705 0.227728 1.10888 0.404171 0.954318 0.645002C0.799797 0.885833 0.722412 1.15233 0.722412 1.44481V18.0734C0.722412 18.366 0.799797 18.6324 0.954318 18.8734C1.10888 19.1142 1.31705 19.2906 1.57861 19.4023C1.74496 19.4796 1.91943 19.5182 2.10173 19.5182C2.47445 19.5182 2.80328 19.3762 3.08874 19.0927L8.33287 13.6226L13.577 19.0928C13.8545 19.3676 14.1835 19.5052 14.5639 19.5052C14.7621 19.5052 14.9366 19.471 15.0872 19.4022C15.3486 19.2906 15.5568 19.1142 15.7115 18.8731C15.866 18.6323 15.9432 18.3659 15.9432 18.0733V1.44499C15.9433 1.15251 15.8659 0.886014 15.7115 0.645183ZM14.4212 17.6732L9.39123 12.4357L8.33287 11.3394L7.27459 12.4357L2.24463 17.6732V1.65143H14.4212V17.6732Z" fill="#606060" />
+            <p>{{questiondata.name}}</p><svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.9312 0.645183C14.7771 0.404217 14.5697 0.227999 14.3093 0.116213C14.1435 0.0389035 13.9697 0.000180736 13.788 0.000180736V0H1.37398C1.19239 0 1.01876 0.0387227 0.852884 0.116033C0.592335 0.227728 0.384974 0.404171 0.231009 0.645002C0.077086 0.885833 0 1.15233 0 1.44481V18.0734C0 18.366 0.077086 18.6324 0.231009 18.8734C0.384974 19.1142 0.592335 19.2906 0.852884 19.4023C1.01859 19.4796 1.19239 19.5182 1.37398 19.5182C1.74527 19.5182 2.07282 19.3762 2.35718 19.0927L7.58103 13.6226L12.8049 19.0928C13.0813 19.3676 13.409 19.5052 13.788 19.5052C13.9854 19.5052 14.1592 19.471 14.3093 19.4022C14.5697 19.2906 14.7771 19.1142 14.9311 18.8731C15.0851 18.6323 15.162 18.3659 15.162 18.0733V1.44499C15.162 1.15251 15.0849 0.886014 14.9312 0.645183ZM13.6459 17.6732L8.63531 12.4357L7.58103 11.3394L6.52685 12.4357L1.51633 17.6732V1.65143H13.6459V17.6732Z" fill="#00BCD4" />
+                <path d="M1 1.5L0.5 18L1.5 18.5L7.5 12.5L14 18.5V1L1 1.5Z" ng-if="questiondata.bookmark == '0'" fill="none" />
+                <path d="M1 1.5L0.5 18L1.5 18.5L7.5 12.5L14 18.5V1L1 1.5Z" ng-if="questiondata.bookmark == '1'" fill="#00BCD4" />
             </svg>
         </div>
         <div class="q-div2">
-            <p>Name a few elements of the constructive programme of Gandhi. (WITH REFERENCE TO : The Struggle for Independence <1919-1947> )?</p>
+            <p>{{questiondata.question}}</p>
         </div>
-        <div class="q-div3">
-            <p>Attached Image</p><a class="mainq-lightbox" href="http://cdn6.viralscape.com/wp-content/uploads/2014/04/funny-test-answer-7.jpg"><img src="http://cdn6.viralscape.com/wp-content/uploads/2014/04/funny-test-answer-7.jpg" alt=""></a>
+        <div class="q-div3" ng-repeat="image in questiondata.images">
+            <p>Attached Image</p><a class="mainq-lightbox" href="{{image.image | imagepath}}"><img src="{{image.image | imagepath}}" alt=""></a>
         </div>
 
         <div class="q-div4">
             <div class="tags-div">
-                <div class="filter-tags">PHYSICS</div>
-                <div class="filter-tags">UNCATEGORIZED</div>
+                <div class="filter-tags">{{questiondata.subject}}</div>
+                <div class="filter-tags">{{questiondata.chapter}}</div>
             </div>
-            <div class="time-div">Asked 23h ago</div>
+            <div class="time-div">Asked {{questiondata.date | timeago }}</div>
         </div>
 
     </div>
 
     <div class="stats-div">
         <div class="alv-div alv-div-active">
-            <p class="stats-no">05</p>
-            <p class="stats-caption">ANSWER</p>
+            <p class="stats-no">{{questiondata.answercount}}</p>
+            <p class="stats-caption">ANSWERS</p>
         </div>
         <div class="alv-div">
-            <p class="stats-no">02</p>
+            <p class="stats-no">{{questiondata.likes}}</p>
             <p class="stats-caption">LIKES</p>
         </div>
         <div class="alv-div">
-            <p class="stats-no">14</p>
+            <p class="stats-no">{{questiondata.views}}</p>
             <p class="stats-caption">VIEWS</p>
         </div>
     </div>
 </div>
 <div class="backmain">
-<div class="askq-wrap">
+    <div class="askq-wrap">
 
-    <div class="askq-head"><p>Ask Question</p>
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.4394 9.0002L16.8398 2.59977C17.2375 2.20245 17.2375 1.5578 16.8398 1.16048C16.4422 0.762831 15.7982 0.762831 15.4005 1.16048L9.00011 7.56091L2.59934 1.16048C2.20169 0.762831 1.55771 0.762831 1.16006 1.16048C0.762403 1.5578 0.762403 2.20245 1.16006 2.59977L7.56082 9.0002L1.16006 15.4006C0.762403 15.7979 0.762403 16.4426 1.16006 16.8399C1.35888 17.0384 1.61946 17.1378 1.8797 17.1378C2.13993 17.1378 2.40051 17.0384 2.59934 16.8396L9.00011 10.4391L15.4005 16.8396C15.5994 17.0384 15.8599 17.1378 16.1202 17.1378C16.3804 17.1378 16.641 17.0384 16.8398 16.8396C17.2375 16.4423 17.2375 15.7976 16.8398 15.4003L10.4394 9.0002Z" fill="white"/>
-</svg>
-</div>
-    <div class="askq-body"><input class="input-askq" type="text" onfocus="if(this.value == 'TYPE YOUR QUESTION HERE') { this.value = ''; }" onfocusout="if(this.value == '') { this.value = 'TYPE YOUR QUESTION HERE'; }"value="TYPE YOUR QUESTION HERE"></div>
-    <div class="svg-icons askq-flex">
-    <div>
-        <div class="q-div3">
-                <p>Attached Image</p><a class="askq-lightbox" href="http://cdn6.viralscape.com/wp-content/uploads/2014/04/funny-test-answer-7.jpg"><img src="http://cdn6.viralscape.com/wp-content/uploads/2014/04/funny-test-answer-7.jpg" alt=""></a>
-               
+        <div class="askq-head">
+            <p>Ask Question</p>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.4394 9.0002L16.8398 2.59977C17.2375 2.20245 17.2375 1.5578 16.8398 1.16048C16.4422 0.762831 15.7982 0.762831 15.4005 1.16048L9.00011 7.56091L2.59934 1.16048C2.20169 0.762831 1.55771 0.762831 1.16006 1.16048C0.762403 1.5578 0.762403 2.20245 1.16006 2.59977L7.56082 9.0002L1.16006 15.4006C0.762403 15.7979 0.762403 16.4426 1.16006 16.8399C1.35888 17.0384 1.61946 17.1378 1.8797 17.1378C2.13993 17.1378 2.40051 17.0384 2.59934 16.8396L9.00011 10.4391L15.4005 16.8396C15.5994 17.0384 15.8599 17.1378 16.1202 17.1378C16.3804 17.1378 16.641 17.0384 16.8398 16.8396C17.2375 16.4423 17.2375 15.7976 16.8398 15.4003L10.4394 9.0002Z" fill="white" />
+            </svg>
         </div>
-        <div class="q-div3">
-                <p>Attached Image</p><a class="askq-lightbox" href="https://i.ytimg.com/vi/eXxdArK8UEw/hqdefault.jpg"><img src="https://i.ytimg.com/vi/eXxdArK8UEw/hqdefault.jpg" alt=""></a>
-               
-        </div>
-     </div>
-          
-      <div class="askq-submit">
-           <svg class="askq-img-svg" height="24px" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0)">
-                <path d="M36.3621 3.82739H0.637931C0.285793 3.82739 0 4.11255 0 4.46532V32.5343C0 32.8871 0.285793 33.1722 0.637931 33.1722H36.3621C36.7142 33.1722 37 32.8871 37 32.5343V4.46532C37 4.11255 36.7142 3.82739 36.3621 3.82739ZM35.7241 31.8964H1.27586V5.10325H35.7241V31.8964Z" fill="#00BCD4" />
-                <path d="M10.2069 17.95C12.166 17.95 13.7596 16.3565 13.7596 14.398C13.7596 12.4383 12.166 10.8447 10.2069 10.8447C8.24785 10.8447 6.6543 12.4383 6.6543 14.3974C6.6543 16.3565 8.24785 17.95 10.2069 17.95ZM10.2069 12.1206C11.4624 12.1206 12.4837 13.1426 12.4837 14.3974C12.4837 15.6522 11.4624 16.6741 10.2069 16.6741C8.95149 16.6741 7.93016 15.6528 7.93016 14.398C7.93016 13.1432 8.95149 12.1206 10.2069 12.1206Z" fill="#00BCD4" />
-                <path d="M4.46542 29.3445C4.61469 29.3445 4.76524 29.2922 4.88645 29.1857L15.293 20.0237L21.865 26.595C22.1144 26.8444 22.5176 26.8444 22.767 26.595C23.0165 26.3456 23.0165 25.9424 22.767 25.693L19.7005 22.6265L25.5573 16.2127L32.7411 22.7981C33.0007 23.036 33.4045 23.0181 33.6425 22.7585C33.8804 22.4989 33.8632 22.0951 33.6029 21.8571L25.9477 14.8399C25.8227 14.7257 25.6562 14.6689 25.4884 14.6727C25.3194 14.6804 25.1599 14.755 25.0457 14.8801L18.7978 21.7231L15.7721 18.6974C15.5335 18.4595 15.152 18.4474 14.8994 18.6694L4.04374 28.2275C3.779 28.4603 3.75349 28.8635 3.98633 29.1282C4.11264 29.2718 4.28871 29.3445 4.46542 29.3445Z" fill="#00BCD4" />
-            </g>
-            <defs>
-                <clipPath id="clip0">
-                    <rect width="37" height="37" fill="white" />
-                </clipPath>
-            </defs>
-        </svg>
+        <div class="askq-body"><input class="input-askq" type="text" onfocus="if(this.value == 'TYPE YOUR QUESTION HERE') { this.value = ''; }" onfocusout="if(this.value == '') { this.value = 'TYPE YOUR QUESTION HERE'; }" value="TYPE YOUR QUESTION HERE"></div>
+        <div class="svg-icons askq-flex">
+            <div ng-repeat="img in images">
+                <div class="q-div3">
+                    <p>Attached Image</p><a class="askq-lightbox" href="https://i.ytimg.com/vi/eXxdArK8UEw/hqdefault.jpg"><img src="{{img.img}}" alt=""></a>
 
-        <div class="askbutton">ASK</div>
-     </div>
+                </div>
+            </div>
+
+            <div class="askq-submit">
+               <label for="image-input">
+                <svg class="askq-img-svg" height="24px" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0)">
+                        <path d="M36.3621 3.82739H0.637931C0.285793 3.82739 0 4.11255 0 4.46532V32.5343C0 32.8871 0.285793 33.1722 0.637931 33.1722H36.3621C36.7142 33.1722 37 32.8871 37 32.5343V4.46532C37 4.11255 36.7142 3.82739 36.3621 3.82739ZM35.7241 31.8964H1.27586V5.10325H35.7241V31.8964Z" fill="#00BCD4" />
+                        <path d="M10.2069 17.95C12.166 17.95 13.7596 16.3565 13.7596 14.398C13.7596 12.4383 12.166 10.8447 10.2069 10.8447C8.24785 10.8447 6.6543 12.4383 6.6543 14.3974C6.6543 16.3565 8.24785 17.95 10.2069 17.95ZM10.2069 12.1206C11.4624 12.1206 12.4837 13.1426 12.4837 14.3974C12.4837 15.6522 11.4624 16.6741 10.2069 16.6741C8.95149 16.6741 7.93016 15.6528 7.93016 14.398C7.93016 13.1432 8.95149 12.1206 10.2069 12.1206Z" fill="#00BCD4" />
+                        <path d="M4.46542 29.3445C4.61469 29.3445 4.76524 29.2922 4.88645 29.1857L15.293 20.0237L21.865 26.595C22.1144 26.8444 22.5176 26.8444 22.767 26.595C23.0165 26.3456 23.0165 25.9424 22.767 25.693L19.7005 22.6265L25.5573 16.2127L32.7411 22.7981C33.0007 23.036 33.4045 23.0181 33.6425 22.7585C33.8804 22.4989 33.8632 22.0951 33.6029 21.8571L25.9477 14.8399C25.8227 14.7257 25.6562 14.6689 25.4884 14.6727C25.3194 14.6804 25.1599 14.755 25.0457 14.8801L18.7978 21.7231L15.7721 18.6974C15.5335 18.4595 15.152 18.4474 14.8994 18.6694L4.04374 28.2275C3.779 28.4603 3.75349 28.8635 3.98633 29.1282C4.11264 29.2718 4.28871 29.3445 4.46542 29.3445Z" fill="#00BCD4" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0">
+                            <rect width="37" height="37" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg>
+                </label>
+                <input id="image-input" type="file" style="display: none" file-model="img.img" on-change-event="addimg()" />
+
+                <div class="askbutton">ASK</div>
+            </div>
+        </div>
     </div>
 </div>
-</div>
 <div class="askq-wrap">
 
-    <div class="askq-head"><p>Share Question</p>
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.4394 9.0002L16.8398 2.59977C17.2375 2.20245 17.2375 1.5578 16.8398 1.16048C16.4422 0.762831 15.7982 0.762831 15.4005 1.16048L9.00011 7.56091L2.59934 1.16048C2.20169 0.762831 1.55771 0.762831 1.16006 1.16048C0.762403 1.5578 0.762403 2.20245 1.16006 2.59977L7.56082 9.0002L1.16006 15.4006C0.762403 15.7979 0.762403 16.4426 1.16006 16.8399C1.35888 17.0384 1.61946 17.1378 1.8797 17.1378C2.13993 17.1378 2.40051 17.0384 2.59934 16.8396L9.00011 10.4391L15.4005 16.8396C15.5994 17.0384 15.8599 17.1378 16.1202 17.1378C16.3804 17.1378 16.641 17.0384 16.8398 16.8396C17.2375 16.4423 17.2375 15.7976 16.8398 15.4003L10.4394 9.0002Z" fill="white"/>
-</svg>
-</div>
-<div class="social-icon-holder">
-    <svg class="share-social-icons" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     viewBox="0 0 418.135 418.135" style="enable-background:new 0 0 418.135 418.135;" xml:space="preserve">
-<g>
-    <path style="fill:#7AD06D;" d="M198.929,0.242C88.5,5.5,1.356,97.466,1.691,208.02c0.102,33.672,8.231,65.454,22.571,93.536
+    <div class="askq-head">
+        <p>Share Question</p>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.4394 9.0002L16.8398 2.59977C17.2375 2.20245 17.2375 1.5578 16.8398 1.16048C16.4422 0.762831 15.7982 0.762831 15.4005 1.16048L9.00011 7.56091L2.59934 1.16048C2.20169 0.762831 1.55771 0.762831 1.16006 1.16048C0.762403 1.5578 0.762403 2.20245 1.16006 2.59977L7.56082 9.0002L1.16006 15.4006C0.762403 15.7979 0.762403 16.4426 1.16006 16.8399C1.35888 17.0384 1.61946 17.1378 1.8797 17.1378C2.13993 17.1378 2.40051 17.0384 2.59934 16.8396L9.00011 10.4391L15.4005 16.8396C15.5994 17.0384 15.8599 17.1378 16.1202 17.1378C16.3804 17.1378 16.641 17.0384 16.8398 16.8396C17.2375 16.4423 17.2375 15.7976 16.8398 15.4003L10.4394 9.0002Z" fill="white" />
+        </svg>
+    </div>
+    <div class="social-icon-holder">
+        <svg class="share-social-icons" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 418.135 418.135" style="enable-background:new 0 0 418.135 418.135;" xml:space="preserve">
+            <g>
+                <path style="fill:#7AD06D;" d="M198.929,0.242C88.5,5.5,1.356,97.466,1.691,208.02c0.102,33.672,8.231,65.454,22.571,93.536
         L2.245,408.429c-1.191,5.781,4.023,10.843,9.766,9.483l104.723-24.811c26.905,13.402,57.125,21.143,89.108,21.631
         c112.869,1.724,206.982-87.897,210.5-200.724C420.113,93.065,320.295-5.538,198.929,0.242z M323.886,322.197
         c-30.669,30.669-71.446,47.559-114.818,47.559c-25.396,0-49.71-5.698-72.269-16.935l-14.584-7.265l-64.206,15.212l13.515-65.607
         l-7.185-14.07c-11.711-22.935-17.649-47.736-17.649-73.713c0-43.373,16.89-84.149,47.559-114.819
         c30.395-30.395,71.837-47.56,114.822-47.56C252.443,45,293.218,61.89,323.887,92.558c30.669,30.669,47.559,71.445,47.56,114.817
-        C371.446,250.361,354.281,291.803,323.886,322.197z"/>
-    <path style="fill:#7AD06D;" d="M309.712,252.351l-40.169-11.534c-5.281-1.516-10.968-0.018-14.816,3.903l-9.823,10.008
+        C371.446,250.361,354.281,291.803,323.886,322.197z" />
+                <path style="fill:#7AD06D;" d="M309.712,252.351l-40.169-11.534c-5.281-1.516-10.968-0.018-14.816,3.903l-9.823,10.008
         c-4.142,4.22-10.427,5.576-15.909,3.358c-19.002-7.69-58.974-43.23-69.182-61.007c-2.945-5.128-2.458-11.539,1.158-16.218
         l8.576-11.095c3.36-4.347,4.069-10.185,1.847-15.21l-16.9-38.223c-4.048-9.155-15.747-11.82-23.39-5.356
         c-11.211,9.482-24.513,23.891-26.13,39.854c-2.851,28.144,9.219,63.622,54.862,106.222c52.73,49.215,94.956,55.717,122.449,49.057
-        c15.594-3.777,28.056-18.919,35.921-31.317C323.568,266.34,319.334,255.114,309.712,252.351z"/>
-</g>
-</svg>
+        c15.594-3.777,28.056-18.919,35.921-31.317C323.568,266.34,319.334,255.114,309.712,252.351z" />
+            </g>
+        </svg>
 
-    <svg class="share-social-icons"  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     viewBox="0 0 408.788 408.788" style="enable-background:new 0 0 408.788 408.788;" xml:space="preserve">
-<path style="fill:#475993;" d="M353.701,0H55.087C24.665,0,0.002,24.662,0.002,55.085v298.616c0,30.423,24.662,55.085,55.085,55.085
+        <svg class="share-social-icons" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 408.788 408.788" style="enable-background:new 0 0 408.788 408.788;" xml:space="preserve">
+            <path style="fill:#475993;" d="M353.701,0H55.087C24.665,0,0.002,24.662,0.002,55.085v298.616c0,30.423,24.662,55.085,55.085,55.085
     h147.275l0.251-146.078h-37.951c-4.932,0-8.935-3.988-8.954-8.92l-0.182-47.087c-0.019-4.959,3.996-8.989,8.955-8.989h37.882
     v-45.498c0-52.8,32.247-81.55,79.348-81.55h38.65c4.945,0,8.955,4.009,8.955,8.955v39.704c0,4.944-4.007,8.952-8.95,8.955
     l-23.719,0.011c-25.615,0-30.575,12.172-30.575,30.035v39.389h56.285c5.363,0,9.524,4.683,8.892,10.009l-5.581,47.087
     c-0.534,4.506-4.355,7.901-8.892,7.901h-50.453l-0.251,146.078h87.631c30.422,0,55.084-24.662,55.084-55.084V55.085
-    C408.786,24.662,384.124,0,353.701,0z"/>
-<g>
-</g>
-</svg>
+    C408.786,24.662,384.124,0,353.701,0z" />
+            <g>
+            </g>
+        </svg>
 
-    <svg class="share-social-icons" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     viewBox="0 0 410.155 410.155" style="enable-background:new 0 0 410.155 410.155;" xml:space="preserve">
-<path style="fill:#76A9EA;" d="M403.632,74.18c-9.113,4.041-18.573,7.229-28.28,9.537c10.696-10.164,18.738-22.877,23.275-37.067
+        <svg class="share-social-icons" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 410.155 410.155" style="enable-background:new 0 0 410.155 410.155;" xml:space="preserve">
+            <path style="fill:#76A9EA;" d="M403.632,74.18c-9.113,4.041-18.573,7.229-28.28,9.537c10.696-10.164,18.738-22.877,23.275-37.067
     l0,0c1.295-4.051-3.105-7.554-6.763-5.385l0,0c-13.504,8.01-28.05,14.019-43.235,17.862c-0.881,0.223-1.79,0.336-2.702,0.336
     c-2.766,0-5.455-1.027-7.57-2.891c-16.156-14.239-36.935-22.081-58.508-22.081c-9.335,0-18.76,1.455-28.014,4.325
     c-28.672,8.893-50.795,32.544-57.736,61.724c-2.604,10.945-3.309,21.9-2.097,32.56c0.139,1.225-0.44,2.08-0.797,2.481
@@ -163,14 +164,14 @@
     c-3.151,0-5.816,2.054-6.619,5.106c-0.791,3.006,0.666,6.177,3.353,7.74c36.966,21.513,79.131,32.883,121.955,32.883
     c37.485,0,72.549-7.439,104.219-22.109c29.033-13.449,54.689-32.674,76.255-57.141c20.09-22.792,35.8-49.103,46.692-78.201
     c10.383-27.737,15.871-57.333,15.871-85.589v-1.346c-0.001-4.537,2.051-8.806,5.631-11.712c13.585-11.03,25.415-24.014,35.16-38.591
-    l0,0C411.924,77.126,407.866,72.302,403.632,74.18L403.632,74.18z"/>
-<g>
-</g>
-</svg>
+    l0,0C411.924,77.126,407.866,72.302,403.632,74.18L403.632,74.18z" />
+            <g>
+            </g>
+        </svg>
 
-</div>
+    </div>
     <!-- <div class="askq-body">
         
     </div> -->
-    
+
 </div>
