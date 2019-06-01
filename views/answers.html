@@ -1,4 +1,4 @@
-<div class="post-quest"><button class="post-quest-btn">post question</button></div>
+<div class="post-quest"><button class="post-quest-btn">post answer</button></div>
 <div class="ans-div">
 
     <div class="answer-wrap">
@@ -9,32 +9,27 @@
                 <div class="ans-img"><img
                         src="https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg" alt="">
                 </div>
-                <p class="ans-user-name">DEBADITYA HAIT</p>
+                <p class="ans-user-name">{{answerdata.name}}</p>
                 <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M15.7115 0.645183C15.5569 0.404217 15.3486 0.227999 15.0872 0.116213C14.9208 0.0389035 14.7463 0.000180736 14.5639 0.000180736V0H2.10173C1.91943 0 1.74512 0.0387227 1.57861 0.116033C1.31705 0.227728 1.10888 0.404171 0.954318 0.645002C0.799797 0.885833 0.722412 1.15233 0.722412 1.44481V18.0734C0.722412 18.366 0.799797 18.6324 0.954318 18.8734C1.10888 19.1142 1.31705 19.2906 1.57861 19.4023C1.74496 19.4796 1.91943 19.5182 2.10173 19.5182C2.47445 19.5182 2.80328 19.3762 3.08874 19.0927L8.33287 13.6226L13.577 19.0928C13.8545 19.3676 14.1835 19.5052 14.5639 19.5052C14.7621 19.5052 14.9366 19.471 15.0872 19.4022C15.3486 19.2906 15.5568 19.1142 15.7115 18.8731C15.866 18.6323 15.9432 18.3659 15.9432 18.0733V1.44499C15.9433 1.15251 15.8659 0.886014 15.7115 0.645183ZM14.4212 17.6732L9.39123 12.4357L8.33287 11.3394L7.27459 12.4357L2.24463 17.6732V1.65143H14.4212V17.6732Z"
-                        fill="#606060" />
-                </svg>
+                <path d="M14.9312 0.645183C14.7771 0.404217 14.5697 0.227999 14.3093 0.116213C14.1435 0.0389035 13.9697 0.000180736 13.788 0.000180736V0H1.37398C1.19239 0 1.01876 0.0387227 0.852884 0.116033C0.592335 0.227728 0.384974 0.404171 0.231009 0.645002C0.077086 0.885833 0 1.15233 0 1.44481V18.0734C0 18.366 0.077086 18.6324 0.231009 18.8734C0.384974 19.1142 0.592335 19.2906 0.852884 19.4023C1.01859 19.4796 1.19239 19.5182 1.37398 19.5182C1.74527 19.5182 2.07282 19.3762 2.35718 19.0927L7.58103 13.6226L12.8049 19.0928C13.0813 19.3676 13.409 19.5052 13.788 19.5052C13.9854 19.5052 14.1592 19.471 14.3093 19.4022C14.5697 19.2906 14.7771 19.1142 14.9311 18.8731C15.0851 18.6323 15.162 18.3659 15.162 18.0733V1.44499C15.162 1.15251 15.0849 0.886014 14.9312 0.645183ZM13.6459 17.6732L8.63531 12.4357L7.58103 11.3394L6.52685 12.4357L1.51633 17.6732V1.65143H13.6459V17.6732Z" fill="#00BCD4" />
+                <path d="M1 1.5L0.5 18L1.5 18.5L7.5 12.5L14 18.5V1L1 1.5Z" ng-if="answerdata.bookmark == '0'" fill="none" />
+                <path d="M1 1.5L0.5 18L1.5 18.5L7.5 12.5L14 18.5V1L1 1.5Z" ng-if="answerdata.bookmark == '1'" fill="#00BCD4" />
+            </svg>
             </div>
             <div class="questions-wrapper">
-                <div class="ans-userq">Name a few elements of the constructive programme of Gandhi. (WITH REFERENCE TO
-                    The
-                    Struggle for Independence (1919-1947) )?
+                <div class="ans-userq">{{answerdata.question}}
                 </div>
                 <div class="ans-user-img"><img src="images/img4.jpg" alt=""></div>
-                <div class="q-div3">
+                <div class="q-div3" ng-repeat='img in answerdata.images'>
+                   
                     <a class="question-lightbox"
-                        href="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"><img
-                            src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"
-                            alt=""></a>
-                    <a class="question-lightbox"
-                        href="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"><img
-                            src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"
+                        href="{{img.image | imagepath}}" ><img
+                            src="{{img.image | imagepath}}"
                             alt=""></a>
                 </div>
                 <div class="ans-user-svg">
                     <div class="like-share-svg">
-                        <span>02</span>
+                        <span>{{answerdata.likes}}</span>
                         <svg width="26" height="21" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d)">
                                 <path
@@ -85,22 +80,21 @@
         </div>
     </div>
     <div class="ans-btn-holder">
-        <div class="answer-heading">02 Answers</div>
+        <div class="answer-heading">{{answerdata.answercount}} Answers</div>
     </div>
 
     <div class="user-answer">
 
 
-        <div class="user-answer-item">
+        <div class="user-answer-item" ng-repeat="answers in answerdata.answers">
             <div class="ua-item-img"><img
                     src="https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg" alt=""></div>
             <div class="ua-item-data">
-                <p class="ua-item-name">Shweta Singh</p>
-                 <p class="ua-item-time">Added 23m ago</p>
-                <p class="ua-item-answer">Name a few elements of the constructive programme of Gandhi. (WITH REFERENCE
-                    TO : The Struggle for Independence 1919-1947 )?
+                <p class="ua-item-name">{{answers.username}}</p>
+                 <p class="ua-item-time">Added {{answers.date | timeago}}</p>
+                <p class="ua-item-answer">{{answers.answer}}
                 </p>
-                <div class="q-div3">
+                <div class="q-div3" ng-repeat="img in answers.images">
                     <a class="answer-lightbox"
                         href="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"><img
                             src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"
@@ -129,7 +123,7 @@
                     </g>
                 </svg>
 
-                <span>01</span></div>
+                <span>{{answers.likes}}</span></div>
         </div>
         <!-- <div class="user-answer-btns">
         <div class="user-answer-button">POST ANSWER</div>
@@ -149,37 +143,36 @@
 <div class="askq-wrap">
 
     <div class="askq-head">
-        <p>Post Question</p>
+        <p>Post Answer</p>
+        
+        
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M10.4394 9.0002L16.8398 2.59977C17.2375 2.20245 17.2375 1.5578 16.8398 1.16048C16.4422 0.762831 15.7982 0.762831 15.4005 1.16048L9.00011 7.56091L2.59934 1.16048C2.20169 0.762831 1.55771 0.762831 1.16006 1.16048C0.762403 1.5578 0.762403 2.20245 1.16006 2.59977L7.56082 9.0002L1.16006 15.4006C0.762403 15.7979 0.762403 16.4426 1.16006 16.8399C1.35888 17.0384 1.61946 17.1378 1.8797 17.1378C2.13993 17.1378 2.40051 17.0384 2.59934 16.8396L9.00011 10.4391L15.4005 16.8396C15.5994 17.0384 15.8599 17.1378 16.1202 17.1378C16.3804 17.1378 16.641 17.0384 16.8398 16.8396C17.2375 16.4423 17.2375 15.7976 16.8398 15.4003L10.4394 9.0002Z"
                 fill="white" />
         </svg>
+        
     </div>
     <div class="askq-body"><input class="input-askq" type="text"
             onfocus="if(this.value == 'TYPE YOUR QUESTION HERE') { this.value = ''; }"
             onfocusout="if(this.value == '') { this.value = 'TYPE YOUR QUESTION HERE'; }"
-            value="TYPE YOUR QUESTION HERE"></div>
+            value="TYPE YOUR QUESTION HERE" ng-model="answer.ans"></div>
     <div class="svg-icons askq-flex">
+       <input id="image-input0" type="file" style="display: none" file-model="img.img" on-change-event="addimg()" />
+       
         <div>
-            <div class="q-div3">
+            <div class="q-div3" ng-repeat="img in images">
                 <a class="postq-lightbox"
-                    href="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"><img
-                        src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"
+                    href="{{img | imagepath}}"><img
+                        src="{{img | imagepath}}"
                         alt=""></a>
 
             </div>
-            <div class="q-div3">
-
-                <a class="postq-lightbox" href="http://www.pixoloproductions.com/img/pixolo_logo.png"><img
-                        src="http://www.pixoloproductions.com/img/pixolo_logo.png" alt=""></a>
-
-
-
-            </div>
         </div>
+        
 
         <div class="askq-submit">
+           <label for="image-input0">
             <svg class="askq-img-svg" height="24px" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)">
                     <path
@@ -198,7 +191,8 @@
                     </clipPath>
                 </defs>
             </svg>
-            <div class="askbutton">POST</div>
+            </label>
+            <div class="askbutton" ng-click="postanswer();">POST</div>
 
         </div>
     </div>

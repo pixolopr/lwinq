@@ -112,7 +112,7 @@ inq.config(['$routeProvider', '$locationProvider',
             templateUrl: 'views/fullPageTemplate.html',
             controller: 'doubtsCtrl'
         }).
-        when('/answers', {
+        when('/answers/:ques_id', {
             templateUrl: 'views/fullPageTemplate.html',
             controller: 'answersCtrl'
         }).

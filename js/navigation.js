@@ -409,11 +409,53 @@ var navigationservice = angular.module('navigationservice', [])
                     transformRequest: angular.identity
                 });
             },
+            returnanswerimagename: function (file) {
+                return $http({
+                    url: adminurl + 'images/returnanswerimagename',
+                    method: "POST",
+                    headers: {
+                        'Content-Type': undefined,
+                    },
+                    data: file,
+                    transformRequest: angular.identity
+                });
+            },
             
 
-
-
-
-
+            insertnewdoubts: function(question,subject_id,chapter_name,user_id,images){
+                return $http({
+                    url: adminurl + 'questions/insertallquestions',
+                    method: "GET",
+                    params:{
+                        question : question,
+                        subject_id : subject_id,
+                        chapter_name : chapter_name,
+                        user_id : user_id,
+                        images : images
+                    }
+                })
+            },
+            insertnewanswer: function(answer,question_id,user_id,images){
+                return $http({
+                    url: adminurl + 'answers/insertanswers',
+                    method: "GET",
+                    params:{
+                        answer : answer,
+                        question_id : question_id,
+                        user_id : user_id,
+                        images : images
+                    }
+                })
+            },
+            getallanswersfordoubt: function(question_id){
+                return $http({
+                    url: adminurl + 'answers/getanswers',
+                    method: "GET",
+                    params:{
+                        id : question_id                    
+                    }
+                })
+            },
+            
         }
     });

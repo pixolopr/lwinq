@@ -57,24 +57,24 @@ inqcontroller.controller('home', ['$scope', 'TemplateService', 'NavigationServic
 
 inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope',
   function ($scope, TemplateService, NavigationService, $rootScope) {
-            
-      $scope.template = TemplateService; // loading the TemplateService
-        TemplateService.content = "views/landing.html"; 
-          $scope.title = "Landing";
-      $rootScope.showmenu = false;
-      
-        
-       $scope.openlandingmodal = function () {
-           
-           document.getElementById("login-modal").style.display = "block";
-           document.getElementById("landing-overlay").style.display = "block";
-      }
-       
+
+        $scope.template = TemplateService; // loading the TemplateService
+        TemplateService.content = "views/landing.html";
+        $scope.title = "Landing";
+        $rootScope.showmenu = false;
+
+
+        $scope.openlandingmodal = function () {
+
+            document.getElementById("login-modal").style.display = "block";
+            document.getElementById("landing-overlay").style.display = "block";
+        }
+
         $scope.closelandingmodal = function () {
-           
-           document.getElementById("login-modal").style.display = "none";
-           document.getElementById("landing-overlay").style.display = "none";
-      }
+
+            document.getElementById("login-modal").style.display = "none";
+            document.getElementById("landing-overlay").style.display = "none";
+        }
 
 
   }
@@ -106,7 +106,7 @@ inqcontroller.controller('loginCtrl', ['$scope', 'TemplateService', 'NavigationS
             if (xyz > 1000 && xyz < 10000) {
                 $scope.randomOtpNumber = Math.trunc(xyz);
             }
-//            console.log(randomOtpNumber);
+            //            console.log(randomOtpNumber);
             message = "Hey, you have sent a password reset request for your LWINQ account. Here's the new password: " + $scope.randomOtpNumber;
             NavigationService.sendsms($scope.logindata.contact, message).success(sendsmssuccess).error(sendsmserror);
 
@@ -1730,7 +1730,7 @@ inqcontroller.controller('bookmarkCtrl', ['$scope', 'TemplateService', 'Navigati
         $scope.navigation = NavigationService.getnav();
 
 
-    
+
 
 
 
@@ -1750,125 +1750,168 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         TemplateService.content = "views/doubts.html";
         $scope.navigation = NavigationService.getnav();
         /*GET DOUBTS QUESTIONS FROM FILTERS*/
-      
-      $scope.filters = {
-          subjects : '',
-          boards : '',
-          standards : ''
-      };
-      
-      $scope.img ={
-          img : ''
-      };
-      
-      $scope.getquestions = function(){
-          
-        var getalldoubtssuccess = function (response) {
-            console.log(response.data);
-            $scope.questionsalldata = response.data;
-            $rootScope.loadingdiv = false;
-        };
 
-        var getalldoubtserror = function (response) {
-            console.log(response.data); 
+        $scope.filters = {
+            subjects: '0',
+            boards: '0',
+            standards: '0'
         };
-        /*MAKE LOADING TRUE*/
-          
-        $rootScope.loadingdiv = true;
-        var subject = $scope.filters.subjects;
-        var board = $scope.filters.boards;
-        var standard = $scope.filters.standards;        
-        var start = 0;
-        var count = 10;
-        NavigationService.getalldoubts(standard,board,subject,start,count).then(getalldoubtssuccess, getalldoubtserror);
+        $scope.questionsalldata = [];
+        $scope.getquestions = function () {
+            var getalldoubtssuccess = function (response) {
+                angular.forEach(response.data,function(data){
+                    $scope.questionsalldata.push(data);
+                    
+                });
+                $rootScope.loadingdiv = false;
+            };
+
+
+            var getalldoubtserror = function (response) {
+                console.log(response.data);
+            };
+            /*MAKE LOADING TRUE*/
+
+            $rootScope.loadingdiv = true;
+            var subject = $scope.filters.subjects;
+            var board = $scope.filters.boards;
+            var standard = $scope.filters.standards;
+            var start = $scope.questionsalldata.length;
+            var count = 10;
+            NavigationService.getalldoubts(standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
+
+
+            /*END OG FETCHING DOUBTS QUESTIONS*/
+        }
         
-        /*END OG FETCHING DOUBTS QUESTIONS*/
-}
-      
-      
+        
+        $scope.getquestionswithfilter = function(){
+            $scope.questionsalldata = [];
+            $scope.getquestions();
+        }
+        $scope.getquestions();
+        //      to get image for insert in doubts
+        $scope.img = {
+            img: ''
+        };
+        
+//        this is success
+      console.log($scope.questionsalldata);
+
+        $scope.images = [];
+        var getimagessuccess = function (response) {
+            $scope.imgpath = response.data; //to change image property
+            $scope.images.push($scope.imgpath);
+
+        }
         $scope.addimg = function () {
             var formdata = new FormData();
 
             formdata.append('file', $scope.img.img);
-            console.log($scope.img.img);
-            $scope.images = [
-                $scope.img.img
-            ];
-            console.log($scope.images);
 
-            NavigationService.returnquestionimagename(formdata).success(function (response) {
-                console.log(response);
-                $scope.img.img = response; //to change image property
-//                console.log($scope.conceptcards[$scope.cardindex].image);
-
-            });
+            NavigationService.returnquestionimagename(formdata).then(getimagessuccess);
         };
+
+        //      to insert new doubts
+
+        $scope.user = $.jStorage.get('user').id;
+        console.log($scope.user);
+        console.log($scope.images);
+        $scope.questioninsert = {
+            question: '',
+            chapter: ''
+        }
+      $scope.chapterfromsubid = '';
+      $scope.chapterlist = [];
+      $scope.getchapterslist = function(){
+          $scope.chapterfromsubid = $scope.questionsalldata[0].subid;
+          var getalldoubtssuccess = function (response){
+              $scope.chapterlist = response.data;
+          }
+          NavigationService.getchaptersbysubjectid($scope.chapterfromsubid).then(getalldoubtssuccess);
+      }
+      $scope.askquestion = function () {
+            console.log($scope.questioninsert.question);
+            console.log($scope.questioninsert.chapter);
+            console.log($scope.user);
+            console.log($scope.images);
+            console.log($scope.chapterfromsubid);
+            console.log($scope.chapterlist);
+            NavigationService.insertnewdoubts($scope.questioninsert.question,$scope.chapterfromsubid,$scope.questioninsert.chapter,$scope.user,JSON.stringify($scope.images)).then();
+//          
+        }
+      $scope.gotoanswerpage = function(ques_id){
+          $location.path("/answers/"+ques_id);
+      }
         
-      
-        
 
-      //        Lightbox Script
-    
-         $(document).ready(function() {
-             
-                     setTimeout(function(){ 
 
-                     
-                         
-                                $('.askq-lightbox').magnificPopup({
+        //        Lightbox Script
 
-                                    type:'image',
-                                    gallery:{enabled:true},
-                                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-                                    zoom: {
-                                        enabled: true, // By default it's false, so don't forget to enable it
+        $(document).ready(function () {
 
-                                        duration: 300, // duration of the effect, in milliseconds
-                                        easing: 'ease-in-out', // CSS transition easing function
-
-                                        // The "opener" function should return the element from which popup will be zoomed in
-                                        // and to which popup will be scaled down
-                                        // By defailt it looks for an image tag:
-                                        opener: function(openerElement) {
-                                          // openerElement is the element on which popup was initialized, in this case its <a> tag
-                                          // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-                                          return openerElement.is('img') ? openerElement : openerElement.find('img');
-                                        }
-                                      }
+            setTimeout(function () {
 
 
 
-                                });
-                                
-                                 $('.mainq-lightbox').magnificPopup({
+                $('.askq-lightbox').magnificPopup({
 
-                                    type:'image',
-                                    gallery:{enabled:true},
-                                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-                                    zoom: {
-                                        enabled: true, // By default it's false, so don't forget to enable it
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+                    zoom: {
+                        enabled: true, // By default it's false, so don't forget to enable it
 
-                                        duration: 300, // duration of the effect, in milliseconds
-                                        easing: 'ease-in-out', // CSS transition easing function
+                        duration: 300, // duration of the effect, in milliseconds
+                        easing: 'ease-in-out', // CSS transition easing function
 
-                                        // The "opener" function should return the element from which popup will be zoomed in
-                                        // and to which popup will be scaled down
-                                        // By defailt it looks for an image tag:
-                                        opener: function(openerElement) {
-                                          // openerElement is the element on which popup was initialized, in this case its <a> tag
-                                          // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-                                          return openerElement.is('img') ? openerElement : openerElement.find('img');
-                                        }
-                                      }
-
-
-
-                                });
+                        // The "opener" function should return the element from which popup will be zoomed in
+                        // and to which popup will be scaled down
+                        // By defailt it looks for an image tag:
+                        opener: function (openerElement) {
+                            // openerElement is the element on which popup was initialized, in this case its <a> tag
+                            // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+                            return openerElement.is('img') ? openerElement : openerElement.find('img');
+                        }
+                    }
 
 
 
-                            }, 10);     
-           });
+                });
+
+                $('.mainq-lightbox').magnificPopup({
+
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+                    zoom: {
+                        enabled: true, // By default it's false, so don't forget to enable it
+
+                        duration: 300, // duration of the effect, in milliseconds
+                        easing: 'ease-in-out', // CSS transition easing function
+
+                        // The "opener" function should return the element from which popup will be zoomed in
+                        // and to which popup will be scaled down
+                        // By defailt it looks for an image tag:
+                        opener: function (openerElement) {
+                            // openerElement is the element on which popup was initialized, in this case its <a> tag
+                            // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+                            return openerElement.is('img') ? openerElement : openerElement.find('img');
+                        }
+                    }
+
+
+
+                });
+
+
+
+            }, 10);
+        });
 
 
 
@@ -1885,118 +1928,171 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
         $rootScope.fullpageview = true;
         TemplateService.content = "views/answers.html";
         $scope.navigation = NavigationService.getnav();
+        $scope.id = $routeParams.ques_id;
+        console.log($scope.id);
+        
+        $scope.getallanswersfordoubt = function(){
+            getsuccess = function (response) {
+//            console.log(response.data);
+            $scope.answerdata = response.data;
+            
+//            $scope.start= $scope.answerdata;
+        };
+        var count = 10;
+        NavigationService.getallanswersfordoubt($scope.id).then(getsuccess);
+        }
+        $scope.getallanswersfordoubt();
       
-       
-//        Lightbox Script
-    
-         $(document).ready(function() {
-             
-                     setTimeout(function(){ 
+      
+        $scope.img = {
+            img: ''
+        };
+        $scope.images = [];
+        var getimagessuccess = function (response) {
+            $scope.imgpath = response.data; //to change image property
+            $scope.images.push($scope.imgpath);
 
-                           $('.postq-lightbox').magnificPopup({
+        }
+        $scope.addimg = function () {
+            var formdata = new FormData();
 
-                                    type:'image',
-                                    gallery:{enabled:true},
-                                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-                                    zoom: {
-                                        enabled: true, // By default it's false, so don't forget to enable it
+            formdata.append('file', $scope.img.img);
 
-                                        duration: 300, // duration of the effect, in milliseconds
-                                        easing: 'ease-in-out', // CSS transition easing function
+            NavigationService.returnanswerimagename(formdata).then(getimagessuccess);
+        };
+      $scope.answer = {
+            ans: ''
+        };
+      $scope.user = $.jStorage.get('user').id;
+      
+      $scope.postanswer = function () {
+//          console.log($scope.id);
+//          console.log($scope.images);
+//          console.log($scope.answer.ans);
+//          console.log($scope.user);
+            NavigationService.insertnewanswer($scope.answer.ans,$scope.id,$scope.user,JSON.stringify($scope.images)).then();
+          $scope.getallanswersfordoubt();
+          
+        }
+        
 
-                                        // The "opener" function should return the element from which popup will be zoomed in
-                                        // and to which popup will be scaled down
-                                        // By defailt it looks for an image tag:
-                                        opener: function(openerElement) {
-                                          // openerElement is the element on which popup was initialized, in this case its <a> tag
-                                          // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-                                          return openerElement.is('img') ? openerElement : openerElement.find('img');
-                                        }
-                                      }
+        //        Lightbox Script
 
+        $(document).ready(function () {
 
+            setTimeout(function () {
 
-                                });
-                         
-                                $('.answer-lightbox').magnificPopup({
+                $('.postq-lightbox').magnificPopup({
 
-                                    type:'image',
-                                    gallery:{enabled:true},
-                                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-                                    zoom: {
-                                        enabled: true, // By default it's false, so don't forget to enable it
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+                    zoom: {
+                        enabled: true, // By default it's false, so don't forget to enable it
 
-                                        duration: 300, // duration of the effect, in milliseconds
-                                        easing: 'ease-in-out', // CSS transition easing function
+                        duration: 300, // duration of the effect, in milliseconds
+                        easing: 'ease-in-out', // CSS transition easing function
 
-                                        // The "opener" function should return the element from which popup will be zoomed in
-                                        // and to which popup will be scaled down
-                                        // By defailt it looks for an image tag:
-                                        opener: function(openerElement) {
-                                          // openerElement is the element on which popup was initialized, in this case its <a> tag
-                                          // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-                                          return openerElement.is('img') ? openerElement : openerElement.find('img');
-                                        }
-                                      }
-
-
-
-                                });
-                         
-                                  $('.question-lightbox').magnificPopup({
-
-                                    type:'image',
-                                    gallery:{enabled:true},
-                                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-                                    zoom: {
-                                        enabled: true, // By default it's false, so don't forget to enable it
-
-                                        duration: 300, // duration of the effect, in milliseconds
-                                        easing: 'ease-in-out', // CSS transition easing function
-
-                                        // The "opener" function should return the element from which popup will be zoomed in
-                                        // and to which popup will be scaled down
-                                        // By defailt it looks for an image tag:
-                                        opener: function(openerElement) {
-                                          // openerElement is the element on which popup was initialized, in this case its <a> tag
-                                          // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-                                          return openerElement.is('img') ? openerElement : openerElement.find('img');
-                                        }
-                                      }
+                        // The "opener" function should return the element from which popup will be zoomed in
+                        // and to which popup will be scaled down
+                        // By defailt it looks for an image tag:
+                        opener: function (openerElement) {
+                            // openerElement is the element on which popup was initialized, in this case its <a> tag
+                            // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+                            return openerElement.is('img') ? openerElement : openerElement.find('img');
+                        }
+                    }
 
 
 
-                                });
-                         
-                                $('.askq-lightbox').magnificPopup({
+                });
 
-                                    type:'image',
-                                    gallery:{enabled:true},
-                                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-                                    zoom: {
-                                        enabled: true, // By default it's false, so don't forget to enable it
+                $('.answer-lightbox').magnificPopup({
 
-                                        duration: 300, // duration of the effect, in milliseconds
-                                        easing: 'ease-in-out', // CSS transition easing function
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+                    zoom: {
+                        enabled: true, // By default it's false, so don't forget to enable it
 
-                                        // The "opener" function should return the element from which popup will be zoomed in
-                                        // and to which popup will be scaled down
-                                        // By defailt it looks for an image tag:
-                                        opener: function(openerElement) {
-                                          // openerElement is the element on which popup was initialized, in this case its <a> tag
-                                          // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-                                          return openerElement.is('img') ? openerElement : openerElement.find('img');
-                                        }
-                                      }
+                        duration: 300, // duration of the effect, in milliseconds
+                        easing: 'ease-in-out', // CSS transition easing function
 
-
-
-                                });
+                        // The "opener" function should return the element from which popup will be zoomed in
+                        // and to which popup will be scaled down
+                        // By defailt it looks for an image tag:
+                        opener: function (openerElement) {
+                            // openerElement is the element on which popup was initialized, in this case its <a> tag
+                            // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+                            return openerElement.is('img') ? openerElement : openerElement.find('img');
+                        }
+                    }
 
 
-                            }, 10);     
-           });
-    
+
+                });
+
+                $('.question-lightbox').magnificPopup({
+
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+                    zoom: {
+                        enabled: true, // By default it's false, so don't forget to enable it
+
+                        duration: 300, // duration of the effect, in milliseconds
+                        easing: 'ease-in-out', // CSS transition easing function
+
+                        // The "opener" function should return the element from which popup will be zoomed in
+                        // and to which popup will be scaled down
+                        // By defailt it looks for an image tag:
+                        opener: function (openerElement) {
+                            // openerElement is the element on which popup was initialized, in this case its <a> tag
+                            // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+                            return openerElement.is('img') ? openerElement : openerElement.find('img');
+                        }
+                    }
+
+
+
+                });
+
+                $('.askq-lightbox').magnificPopup({
+
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+                    zoom: {
+                        enabled: true, // By default it's false, so don't forget to enable it
+
+                        duration: 300, // duration of the effect, in milliseconds
+                        easing: 'ease-in-out', // CSS transition easing function
+
+                        // The "opener" function should return the element from which popup will be zoomed in
+                        // and to which popup will be scaled down
+                        // By defailt it looks for an image tag:
+                        opener: function (openerElement) {
+                            // openerElement is the element on which popup was initialized, in this case its <a> tag
+                            // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+                            return openerElement.is('img') ? openerElement : openerElement.find('img');
+                        }
+                    }
+
+
+
+                });
+
+
+            }, 10);
+        });
 
 
 
@@ -2286,8 +2382,8 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
 
 
         $('.modal-overlay').click(function () {
-                            event.preventDefault();
-                        });
+            event.preventDefault();
+        });
 
 
 
@@ -2338,7 +2434,7 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
             if (xyz > 1000 && xyz < 10000) {
                 randomOtpNumber = Math.trunc(xyz);
             }
-            console.log (randomOtpNumber);
+            console.log(randomOtpNumber);
             message = "Hey, use " + randomOtpNumber + " as the OTP for registering into LWINQ.";
             NavigationService.sendsms($scope.signupdata.contact, message).success(sendsmssuccess).error(sendsmserror);
 
@@ -2451,7 +2547,7 @@ inqcontroller.controller('signupCtrl', ['$scope', 'TemplateService', '$location'
                         $('.modal').modal();
                         $('.modal').modal('open');
                         console.log(randomOtpNumber);
-                      
+
                         $scope.inputfocus();
 
 
