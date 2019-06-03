@@ -465,6 +465,26 @@ var navigationservice = angular.module('navigationservice', [])
                         user_id : user_id
                     }
                 })
+            },
+            likedoubtbyquestionid: function(question_id,user_id){
+                return $http({
+                    url: adminurl + 'questions/getlikebyquestionid',
+                    method: "GET",
+                    params:{
+                        question_id : question_id,  
+                        user_id : user_id
+                    }
+                })
+            },
+            likeanswersbyanswerid: function(answer_id,user_id){
+                return $http({
+                    url: adminurl + 'answers/getlikebyanswerid',
+                    method: "GET",
+                    params:{
+                        answer_id : answer_id,  
+                        user_id : user_id
+                    }
+                })
             }
             
         }

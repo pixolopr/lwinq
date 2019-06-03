@@ -66,8 +66,8 @@
             <p class="stats-caption">ANSWERS</p>
         </div>
         <div class="alv-div">
-            <p class="stats-no">{{questiondata.likes}}</p>
-            <p class="stats-caption">LIKES</p>
+            <p class="stats-no" id="liked{{questiondata.id}}">{{questiondata.likes}}</p>
+            <p class="stats-caption" ng-click="likequestion(questiondata);">LIKES</p>
         </div>
         <div class="alv-div">
             <p class="stats-no">{{questiondata.views}}</p>
