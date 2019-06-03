@@ -456,6 +456,16 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 })
             },
+            bookmarkdoubtbyquestionid: function(question_id,user_id){
+                return $http({
+                    url: adminurl + 'questions/bookmarkdoubtbyquestionid',
+                    method: "GET",
+                    params:{
+                        question_id : question_id,  
+                        user_id : user_id
+                    }
+                })
+            }
             
         }
     });

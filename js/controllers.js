@@ -1749,8 +1749,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $rootScope.fullpageview = true;
         TemplateService.content = "views/doubts.html";
         $scope.navigation = NavigationService.getnav();
+      
         /*GET DOUBTS QUESTIONS FROM FILTERS*/
-
         $scope.filters = {
             subjects: '0',
             boards: '0',
@@ -1781,8 +1781,11 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             NavigationService.getalldoubts(standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
 
 
-            /*END OG FETCHING DOUBTS QUESTIONS*/
+            
         }
+        /*END OG FETCHING DOUBTS QUESTIONS*/
+        
+//        ADD IMAGE IN MODAL
         
         
         $scope.getquestionswithfilter = function(){
@@ -1794,10 +1797,36 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.img = {
             img: ''
         };
+//      END OF ADD IMAGE
+      
+//       FOR BOOKMARK AND UNDO
+      
+      console.log($scope.user);
+          
+      $scope.bookmarkdoubt = function(id){
+          var getbookmarksuccess = function(response){
+              console.log(response.data);
+              if(response.data == "enteredtrue"){
+                  console.log("bookmark insert");
+                  document.getElementById("marked"+id).style.fill = "#00BCD4";
+              }
+              else{
+                  console.log("bookmark delete");
+                  document.getElementById("marked"+id).style.fill = "none";
+              }
+          }
+          NavigationService.bookmarkdoubtbyquestionid(id,$scope.user).then(getbookmarksuccess);
+          
+      }
+//      END OF ADD BOOKMARK
+      
+      //FOR LIKE
+      
+      
         
-//        this is success
       console.log($scope.questionsalldata);
-
+        
+      
         $scope.images = [];
         var getimagessuccess = function (response) {
             $scope.imgpath = response.data; //to change image property
@@ -1824,11 +1853,15 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
       $scope.chapterfromsubid = '';
       $scope.chapterlist = [];
       $scope.getchapterslist = function(){
+          document.getElementsByClassName("backmain")[0].style.display = "block";
           $scope.chapterfromsubid = $scope.questionsalldata[0].subid;
           var getalldoubtssuccess = function (response){
               $scope.chapterlist = response.data;
           }
           NavigationService.getchaptersbysubjectid($scope.chapterfromsubid).then(getalldoubtssuccess);
+      }
+      $scope.closeaskquestion = function(){
+          document.getElementsByClassName("backmain")[0].style.display = "none";
       }
       $scope.askquestion = function () {
             console.log($scope.questioninsert.question);
@@ -1965,6 +1998,13 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
         };
       $scope.user = $.jStorage.get('user').id;
       
+      $scope.postansweropen = function(){
+          document.getElementsByClassName("backmain")[0].style.display = "block";
+      }
+      
+      $scope.closepostanswer = function(){
+          document.getElementsByClassName("backmain")[0].style.display = "none";
+      }
       $scope.postanswer = function () {
 //          console.log($scope.id);
 //          console.log($scope.images);
