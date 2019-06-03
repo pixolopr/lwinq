@@ -1779,9 +1779,6 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             var start = $scope.questionsalldata.length;
             var count = 10;
             NavigationService.getalldoubts(standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
-
-
-            
         }
         /*END OG FETCHING DOUBTS QUESTIONS*/
         
@@ -1815,12 +1812,27 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                   document.getElementById("marked"+id).style.fill = "none";
               }
           }
-          NavigationService.bookmarkdoubtbyquestionid(id,$scope.user).then(getbookmarksuccess);
-          
+          NavigationService.bookmarkdoubtbyquestionid(id,$scope.user).then(getbookmarksuccess);   
       }
 //      END OF ADD BOOKMARK
       
       //FOR LIKE
+      $scope.likequestion = function(question){
+           var getlikesuccess = function(response){
+              console.log(response.data);
+              if(response.data == "enteredtrue"){
+                  question.likes++;
+                  
+              }
+              else{
+                  question.likes--;
+              }
+          }
+        NavigationService.likedoubtbyquestionid(question.id,$scope.user).then(getlikesuccess);
+        console.log("added");
+      }
+      
+      //END LIKE
       
       
         
@@ -1831,8 +1843,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         var getimagessuccess = function (response) {
             $scope.imgpath = response.data; //to change image property
             $scope.images.push($scope.imgpath);
-
         }
+        
         $scope.addimg = function () {
             var formdata = new FormData();
 
@@ -2014,6 +2026,27 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
           $scope.getallanswersfordoubt();
           
         }
+      
+      //FOR LIKE
+      $scope.likeanswers = function(answers){
+           var getlikesuccess = function(response){
+              console.log(response.data);
+              if(response.data == "enteredtrue"){
+                  console.log(answers.id);
+                  document.getElementById("ansliked"+answers.id).style.fill = "#00BCD4";
+                  answers.likes++;
+                  
+              }
+              else{
+                  answers.likes--;
+                  console.log(answers.id);
+                  document.getElementById("ansliked"+answers.id).style.fill = "red";
+              }
+          }
+        NavigationService.likeanswersbyanswerid(answers.id,$scope.user).then(getlikesuccess);
+      }
+      
+      //END LIKE
         
 
         //        Lightbox Script
