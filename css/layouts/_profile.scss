@@ -34,8 +34,12 @@
 .yourprofile-content {
     width: 70%;
 }
+.yourprofile-edit{
+    margin: 12px 0 0 0;
+}
 
 .yourprofile-editbtn {
+   
     border: 1px solid #00BCD4;
     width: 130px;
     height: 30px;
@@ -84,7 +88,8 @@
     font-weight: bold;
     font-size: 22px;
     line-height: 26px;
-    color: #fff;
+    color: rgba(255, 255, 255, 0.72);
+
 }
 
 .yourprofile-name {
@@ -92,7 +97,7 @@
     font-style: normal;
     font-weight: normal;
     font-size: 22px;
-    line-height: 26px;
+    line-height: 28px;
     color: #606060;
     margin: 0;
 }
@@ -123,7 +128,7 @@
 }
 
 .tp-text {
-    font-family: Roboto;
+    font-family:roboto-regular;
     font-style: normal;
     font-weight: bold;
     font-size: 9px;
