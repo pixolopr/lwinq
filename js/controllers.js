@@ -1749,7 +1749,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $rootScope.fullpageview = true;
         TemplateService.content = "views/doubts.html";
         $scope.navigation = NavigationService.getnav();
-      
+        $scope.user = $.jStorage.get('user').id;
+
         /*GET DOUBTS QUESTIONS FROM FILTERS*/
         $scope.filters = {
             subjects: '0',
@@ -1759,9 +1760,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.questionsalldata = [];
         $scope.getquestions = function () {
             var getalldoubtssuccess = function (response) {
-                angular.forEach(response.data,function(data){
+                angular.forEach(response.data, function (data) {
                     $scope.questionsalldata.push(data);
-                    
                 });
                 $rootScope.loadingdiv = false;
             };
@@ -1777,15 +1777,16 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             var board = $scope.filters.boards;
             var standard = $scope.filters.standards;
             var start = $scope.questionsalldata.length;
+            
             var count = 10;
-            NavigationService.getalldoubts(standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
+            NavigationService.getalldoubts($scope.user,standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
         }
         /*END OG FETCHING DOUBTS QUESTIONS*/
-        
-//        ADD IMAGE IN MODAL
-        
-        
-        $scope.getquestionswithfilter = function(){
+
+        //        ADD IMAGE IN MODAL
+
+
+        $scope.getquestionswithfilter = function () {
             $scope.questionsalldata = [];
             $scope.getquestions();
         }
@@ -1794,57 +1795,71 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.img = {
             img: ''
         };
-//      END OF ADD IMAGE
-      
-//       FOR BOOKMARK AND UNDO
-      
-      console.log($scope.user);
-          
-      $scope.bookmarkdoubt = function(id){
-          var getbookmarksuccess = function(response){
-              console.log(response.data);
-              if(response.data == "enteredtrue"){
-                  console.log("bookmark insert");
-                  document.getElementById("marked"+id).style.fill = "#00BCD4";
-              }
-              else{
-                  console.log("bookmark delete");
-                  document.getElementById("marked"+id).style.fill = "none";
-              }
-          }
-          NavigationService.bookmarkdoubtbyquestionid(id,$scope.user).then(getbookmarksuccess);   
-      }
-//      END OF ADD BOOKMARK
-      
-      //FOR LIKE
-      $scope.likequestion = function(question){
-           var getlikesuccess = function(response){
-              console.log(response.data);
-              if(response.data == "enteredtrue"){
-                  question.likes++;
-                  
-              }
-              else{
-                  question.likes--;
-              }
-          }
-        NavigationService.likedoubtbyquestionid(question.id,$scope.user).then(getlikesuccess);
-        console.log("added");
-      }
-      
-      //END LIKE
-      
-      
-        
-      console.log($scope.questionsalldata);
-        
-      
+        //      END OF ADD IMAGE
+
+        //       FOR BOOKMARK AND UNDO
+
+        console.log($scope.user);
+
+        $scope.bookmarkdoubt = function (id) {
+            var getbookmarksuccess = function (response) {
+                console.log(response.data);
+                if (response.data == "enteredtrue") {
+                    console.log("bookmark insert");
+                    document.getElementById("marked" + id).style.fill = "#00BCD4";
+                } else {
+                    console.log("bookmark delete");
+                    document.getElementById("marked" + id).style.fill = "none";
+                }
+            }
+            NavigationService.bookmarkdoubtbyquestionid(id, $scope.user).then(getbookmarksuccess);
+        }
+        //      END OF ADD BOOKMARK
+
+        //FOR LIKE
+        $scope.likequestion = function (question) {
+            var getlikesuccess = function (response) {
+                console.log(response.data);
+                if (response.data == "enteredtrue") {
+                    question.likes++;
+                    console.log(question.id);
+                    document.getElementById("liked"+question.id).style.background = "#00bcd4";
+                    document.getElementById("liked"+question.id).style.color = "white";
+                    console.log("added");
+
+                } else {
+                    question.likes--;
+                    document.getElementById("liked"+question.id).style.color = "#606060";
+                    document.getElementById("liked"+question.id).style.background = "white";
+                }
+            }
+            NavigationService.likedoubtbyquestionid(question.id, $scope.user).then(getlikesuccess);
+        }
+
+        //END LIKE
+
+
+
+        console.log($scope.questionsalldata);
+       $scope.addactiveclass = function(answersexits){
+           if(answersexits > 0){
+               return "alv-div-active";
+           }
+       }
+       
+       $scope.addactiveclasslike = function(likesexits){
+           if(likesexits > 0){
+               return "alv-div-active";
+           }
+       }
+
+
         $scope.images = [];
         var getimagessuccess = function (response) {
             $scope.imgpath = response.data; //to change image property
             $scope.images.push($scope.imgpath);
         }
-        
+
         $scope.addimg = function () {
             var formdata = new FormData();
 
@@ -1862,33 +1877,42 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             question: '',
             chapter: ''
         }
-      $scope.chapterfromsubid = '';
-      $scope.chapterlist = [];
-      $scope.getchapterslist = function(){
-          document.getElementsByClassName("backmain")[0].style.display = "block";
-          $scope.chapterfromsubid = $scope.questionsalldata[0].subid;
-          var getalldoubtssuccess = function (response){
-              $scope.chapterlist = response.data;
-          }
-          NavigationService.getchaptersbysubjectid($scope.chapterfromsubid).then(getalldoubtssuccess);
-      }
-      $scope.closeaskquestion = function(){
-          document.getElementsByClassName("backmain")[0].style.display = "none";
-      }
-      $scope.askquestion = function () {
+        $scope.chapterfromsubid = '';
+        $scope.chapterlist = [];
+        $scope.getchapterslist = function () {
+            document.getElementsByClassName("backmain")[0].style.display = "block";
+            $scope.chapterfromsubid = $scope.questionsalldata[0].subid;
+            var getalldoubtssuccess = function (response) {
+                $scope.chapterlist = response.data;
+            }
+            NavigationService.getchaptersbysubjectid($scope.chapterfromsubid).then(getalldoubtssuccess);
+        }
+        $scope.closeaskquestion = function () {
+            document.getElementsByClassName("backmain")[0].style.display = "none";
+            $scope.questioninsert.question = '';
+            $scope.images = '';
+            $scope.chapterlist = '';
+        }
+        $scope.askquestion = function () {
             console.log($scope.questioninsert.question);
             console.log($scope.questioninsert.chapter);
             console.log($scope.user);
             console.log($scope.images);
             console.log($scope.chapterfromsubid);
             console.log($scope.chapterlist);
-            NavigationService.insertnewdoubts($scope.questioninsert.question,$scope.chapterfromsubid,$scope.questioninsert.chapter,$scope.user,JSON.stringify($scope.images)).then();
-//          
+
+            if ($scope.questioninsert.question != '' && $scope.chapterfromsubid != '' && $scope.questioninsert.chapter != '') {
+                NavigationService.insertnewdoubts($scope.questioninsert.question, $scope.chapterfromsubid, $scope.questioninsert.chapter, $scope.user, JSON.stringify($scope.images)).then();
+                $scope.questioninsert.question = '';
+                $scope.images = '';
+            }
+
+            //          
         }
-      $scope.gotoanswerpage = function(ques_id){
-          $location.path("/answers/"+ques_id);
-      }
-        
+        $scope.gotoanswerpage = function (ques_id) {
+            $location.path("/answers/" + ques_id);
+        }
+
 
 
         //        Lightbox Script
@@ -1975,20 +1999,20 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
         $scope.navigation = NavigationService.getnav();
         $scope.id = $routeParams.ques_id;
         console.log($scope.id);
-        
-        $scope.getallanswersfordoubt = function(){
+
+        $scope.getallanswersfordoubt = function () {
             getsuccess = function (response) {
-//            console.log(response.data);
-            $scope.answerdata = response.data;
-            
-//            $scope.start= $scope.answerdata;
-        };
-        var count = 10;
-        NavigationService.getallanswersfordoubt($scope.id).then(getsuccess);
+                //            console.log(response.data);
+                $scope.answerdata = response.data;
+
+                //            $scope.start= $scope.answerdata;
+            };
+            var count = 10;
+            NavigationService.getallanswersfordoubt($scope.id).then(getsuccess);
         }
         $scope.getallanswersfordoubt();
-      
-      
+
+
         $scope.img = {
             img: ''
         };
@@ -2005,49 +2029,55 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
 
             NavigationService.returnanswerimagename(formdata).then(getimagessuccess);
         };
-      $scope.answer = {
+        $scope.answer = {
             ans: ''
         };
-      $scope.user = $.jStorage.get('user').id;
-      
-      $scope.postansweropen = function(){
-          document.getElementsByClassName("backmain")[0].style.display = "block";
-      }
-      
-      $scope.closepostanswer = function(){
-          document.getElementsByClassName("backmain")[0].style.display = "none";
-      }
-      $scope.postanswer = function () {
-//          console.log($scope.id);
-//          console.log($scope.images);
-//          console.log($scope.answer.ans);
-//          console.log($scope.user);
-            NavigationService.insertnewanswer($scope.answer.ans,$scope.id,$scope.user,JSON.stringify($scope.images)).then();
-          $scope.getallanswersfordoubt();
-          
+        $scope.user = $.jStorage.get('user').id;
+
+        $scope.postansweropen = function () {
+            document.getElementsByClassName("backmain")[0].style.display = "block";
         }
-      
-      //FOR LIKE
-      $scope.likeanswers = function(answers){
-           var getlikesuccess = function(response){
-              console.log(response.data);
-              if(response.data == "enteredtrue"){
-                  console.log(answers.id);
-                  document.getElementById("ansliked"+answers.id).style.fill = "#00BCD4";
-                  answers.likes++;
-                  
-              }
-              else{
-                  answers.likes--;
-                  console.log(answers.id);
-                  document.getElementById("ansliked"+answers.id).style.fill = "red";
-              }
-          }
-        NavigationService.likeanswersbyanswerid(answers.id,$scope.user).then(getlikesuccess);
-      }
-      
-      //END LIKE
-        
+
+        $scope.closepostanswer = function () {
+            document.getElementsByClassName("backmain")[0].style.display = "none";
+             $scope.answer.ans = '';
+             $scope.images = '';
+        }
+        $scope.postanswer = function () {
+            //          console.log($scope.id);
+            //          console.log($scope.images);
+            //          console.log($scope.answer.ans);
+            //          console.log($scope.user);
+            if ($scope.answer.ans != '' && $scope.id != '', $scope.user != '') {
+
+                NavigationService.insertnewanswer($scope.answer.ans, $scope.id, $scope.user, JSON.stringify($scope.images)).then();
+                $scope.getallanswersfordoubt();
+                $scope.answer.ans = '';
+                $scope.images = '';
+            }
+
+        }
+
+        //FOR LIKE
+        $scope.likeanswers = function (answers) {
+            var getlikesuccess = function (response) {
+                console.log(response.data);
+                if (response.data == "enteredtrue") {
+                    console.log(answers.id);
+                    document.getElementById("ansliked" + answers.id).style.fill = "#00BCD4";
+                    answers.likes++;
+
+                } else {
+                    answers.likes--;
+                    console.log(answers.id);
+                    document.getElementById("ansliked" + answers.id).style.fill = "red";
+                }
+            }
+            NavigationService.likeanswersbyanswerid(answers.id, $scope.user).then(getlikesuccess);
+        }
+
+        //END LIKE
+
 
         //        Lightbox Script
 

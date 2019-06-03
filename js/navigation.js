@@ -385,11 +385,12 @@ var navigationservice = angular.module('navigationservice', [])
 
 
             },
-            getalldoubts: function(standard,board,subject,start,count){
+            getalldoubts: function(user_id,standard,board,subject,start,count){
                 return $http({
                     url: adminurl + 'questions/getdoubts',
                     method: "GET",
                     params:{
+                        user_id : user_id,
                         standard: standard,
                         board: board,
                         subject: subject,
