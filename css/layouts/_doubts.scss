@@ -1,4 +1,3 @@
-
 .doubts {
   background-color: #256672;
   height: 300%;
@@ -148,14 +147,14 @@
   text-align: center;
   background-color: #03a9f4;
 }
-.backmain{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-    display: none;
+.backmain {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  display: none;
 }
 .askq-wrap {
   background-color: #f5f1f1;
@@ -229,22 +228,22 @@
 }
 
 .answer-wrap {
+  position: relative;
   display: flex;
 }
 
 .ans-data div {
   margin: 5px;
 }
-.questions-wrapper {
-  padding: 0 0 0 70px;
-}
+
 .ans-user-name {
   flex-basis: 90%;
-  margin: 10px 0px;
+  margin: 0 !important;
   font-weight: 600;
   color: #00bcd4;
   font-size: 18px;
   font-family: ceraBlack;
+  text-transform: capitalize;
 }
 .ans-name-div {
   display: flex;
@@ -253,6 +252,7 @@
 }
 
 .ans-userq {
+  margin: 0 0 20px 0;
   color: #606060;
   font-size: 18px;
   font-family: ceraM;
@@ -336,6 +336,7 @@
     font-family: ceraBlack;
     font-size: 14px;
     color: #00bcd4;
+    text-transform: capitalize;
   }
   .ua-item-answer {
     font-family: ceraM;
