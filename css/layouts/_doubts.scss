@@ -252,10 +252,11 @@
 }
 
 .ans-userq {
-  margin: 0 0 20px 0;
+  margin: -7px 0 0px 0 !important;
   color: #606060;
   font-size: 18px;
   font-family: ceraM;
+  padding-left: 5px;
   line-height: 22px;
 }
 .ans-user-svg {
@@ -313,9 +314,12 @@
 }
 
 .user-answer-item {
+  position: relative;
   background-color: white;
   border-radius: 11px;
   padding: 10px;
+  margin: 0 0 23px 0;
+  display: flex;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -326,13 +330,12 @@
   display: block;
 }
 
-.user-answer-item {
-  display: flex;
-}
+
 
 .ua-item-data {
   margin: 0px 5px;
   .ua-item-name {
+    
     font-family: ceraBlack;
     font-size: 14px;
     color: #00bcd4;
@@ -342,21 +345,25 @@
     font-family: ceraM;
     font-size: 12px;
     color: #606060;
-    margin: 5px 0px 10px 0;
+    margin: -13px 0px 10px 0;
     line-height: 15px;
   }
   .ua-item-time {
     font-family: ceraM;
     font-size: 10px;
     color: #00bcd4;
+    margin: 0;
   }
 }
 
 .ua-item-svg {
   display: flex;
+  position: absolute;
+  margin: -10px 0 0 0;
+  right: 15px;
   align-items: center;
   span {
-    font-size: 20px;
+    font-size: 30px;
     font-family: roboto-regular;
     color: #00bcd4;
     margin: 5px;
