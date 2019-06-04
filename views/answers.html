@@ -17,13 +17,7 @@
 
             </div>
 
-            <div class="ans-userq">{{answerdata.question}} Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-                more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </div>
+            <div class="ans-userq">{{answerdata.question}}</div>
             <div class="ans-user-img"><img src="images/img4.jpg" alt=""></div>
             <div class="q-div3" ng-repeat='img in answerdata.images'>
 
@@ -107,19 +101,13 @@
                 <p class="ua-item-answer">{{answers.answer}}
                 </p>
 
-                <div class="q-div3" ng-repeat="img in answers.images">
+                <div class="q-div3" >
+                   <div ng-repeat="img in answers.images">
                     <a class="answer-lightbox"
-                        href="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"><img
-                            src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"
+                        href="{{img.image | imagepath}}"><img
+                            src="{{img.image | imagepath}}"
                             alt=""></a>
-                            <a class="answer-lightbox"
-                        href="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"><img
-                            src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"
-                            alt=""></a>
-                            <a class="answer-lightbox"
-                        href="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"><img
-                            src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"
-                            alt=""></a>
+                    </div>
                 </div>
                 
                 <p class="ua-item-time">Added {{answers.date | timeago}}</p>

@@ -1831,6 +1831,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                     question.likes--;
                     document.getElementById("liked"+question.id).style.color = "#606060";
                     document.getElementById("liked"+question.id).style.background = "white";
+                    console.log("remove");
                 }
             }
             NavigationService.likedoubtbyquestionid(question.id, $scope.user).then(getlikesuccess);
@@ -1839,7 +1840,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         //END LIKE
 
 
-
+//        TO KNOW ANSWER AND LIKE BY OR NOT
+        
         console.log($scope.questionsalldata);
        $scope.addactiveclass = function(answersexits){
            if(answersexits > 0){
@@ -1852,6 +1854,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                return "alv-div-active";
            }
        }
+       
+       
 
 
         $scope.images = [];
@@ -2002,7 +2006,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         $scope.getallanswersfordoubt = function () {
             getsuccess = function (response) {
-                //            console.log(response.data);
+                            console.log(response.data);
                 $scope.answerdata = response.data;
 
                 //            $scope.start= $scope.answerdata;
