@@ -1760,6 +1760,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.questionsalldata = [];
         $scope.getquestions = function () {
             var getalldoubtssuccess = function (response) {
+                console.log(response.data);
                 angular.forEach(response.data, function (data) {
                     $scope.questionsalldata.push(data);
                 });
@@ -1855,6 +1856,15 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
            }
        }
        
+//       USE LATER FOR VIEWS IN DOUBTS
+       
+//       TO KNOW VIEW BY ME OR NOT
+       
+//       $scope.addactivetoview = function(viewsexits){
+//           if(viewsexits > 0 || viewsexits == true){
+//               return "alv-div-active";
+//           }
+//       }
        
 
 
@@ -2006,7 +2016,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         $scope.getallanswersfordoubt = function () {
             getsuccess = function (response) {
-                            console.log(response.data);
+                console.log(response.data.id);
                 $scope.answerdata = response.data;
 
                 //            $scope.start= $scope.answerdata;
