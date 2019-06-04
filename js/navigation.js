@@ -448,12 +448,14 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 })
             },
-            getallanswersfordoubt: function(question_id){
+            getallanswersfordoubt: function(question_id,start,count){
                 return $http({
                     url: adminurl + 'answers/getanswers',
                     method: "GET",
                     params:{
-                        id : question_id                    
+                        id : question_id,
+                        start : start,
+                        count : count
                     }
                 })
             },

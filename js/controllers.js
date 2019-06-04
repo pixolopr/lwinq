@@ -1778,9 +1778,9 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             var board = $scope.filters.boards;
             var standard = $scope.filters.standards;
             var start = $scope.questionsalldata.length;
-            
+
             var count = 10;
-            NavigationService.getalldoubts($scope.user,standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
+            NavigationService.getalldoubts($scope.user, standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
         }
         /*END OG FETCHING DOUBTS QUESTIONS*/
 
@@ -1824,14 +1824,14 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                 if (response.data == "enteredtrue") {
                     question.likes++;
                     console.log(question.id);
-                    document.getElementById("liked"+question.id).style.background = "#00bcd4";
-                    document.getElementById("liked"+question.id).style.color = "white";
+                    document.getElementById("liked" + question.id).style.background = "#00bcd4";
+                    document.getElementById("liked" + question.id).style.color = "white";
                     console.log("added");
 
                 } else {
                     question.likes--;
-                    document.getElementById("liked"+question.id).style.color = "#606060";
-                    document.getElementById("liked"+question.id).style.background = "white";
+                    document.getElementById("liked" + question.id).style.color = "#606060";
+                    document.getElementById("liked" + question.id).style.background = "white";
                     console.log("remove");
                 }
             }
@@ -1841,31 +1841,31 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         //END LIKE
 
 
-//        TO KNOW ANSWER AND LIKE BY OR NOT
-        
+        //        TO KNOW ANSWER AND LIKE BY OR NOT
+
         console.log($scope.questionsalldata);
-       $scope.addactiveclass = function(answersexits){
-           if(answersexits > 0){
-               return "alv-div-active";
-           }
-       }
-       
-       $scope.addactiveclasslike = function(likesexits){
-           if(likesexits > 0){
-               return "alv-div-active";
-           }
-       }
-       
-//       USE LATER FOR VIEWS IN DOUBTS
-       
-//       TO KNOW VIEW BY ME OR NOT
-       
-//       $scope.addactivetoview = function(viewsexits){
-//           if(viewsexits > 0 || viewsexits == true){
-//               return "alv-div-active";
-//           }
-//       }
-       
+        $scope.addactiveclass = function (answersexits) {
+            if (answersexits > 0) {
+                return "alv-div-active";
+            }
+        }
+
+        $scope.addactiveclasslike = function (likesexits) {
+            if (likesexits > 0) {
+                return "alv-div-active";
+            }
+        }
+
+        //       USE LATER FOR VIEWS IN DOUBTS
+
+        //       TO KNOW VIEW BY ME OR NOT
+
+        //       $scope.addactivetoview = function(viewsexits){
+        //           if(viewsexits > 0 || viewsexits == true){
+        //               return "alv-div-active";
+        //           }
+        //       }
+
 
 
         $scope.images = [];
@@ -2013,16 +2013,27 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
         $scope.navigation = NavigationService.getnav();
         $scope.id = $routeParams.ques_id;
         console.log($scope.id);
-
+        $scope.answerdata = {};
+        $scope.answerdata.answers = [];
+        var count = 10;
         $scope.getallanswersfordoubt = function () {
             getsuccess = function (response) {
-                console.log(response.data.id);
-                $scope.answerdata = response.data;
+                console.log(response.data);
+                angular.forEach(response.data.answers, function (data) {
+                    $scope.answerdata.answers.push(data);
+                });
 
-                //            $scope.start= $scope.answerdata;
+                console.log($scope.answerdata.constructor === Object);
+                if (!$scope.answerdata.id) {
+
+                    console.log('inside assigning if');
+                    $scope.answerdata = response.data;
+                }
+                console.log($scope.answerdata);
             };
-            var count = 10;
-            NavigationService.getallanswersfordoubt($scope.id).then(getsuccess);
+            var start = $scope.answerdata.answers.length;
+            console.log(start);
+            NavigationService.getallanswersfordoubt($scope.id, start, count).then(getsuccess);
         }
         $scope.getallanswersfordoubt();
 
@@ -2054,8 +2065,8 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         $scope.closepostanswer = function () {
             document.getElementsByClassName("backmain")[0].style.display = "none";
-             $scope.answer.ans = '';
-             $scope.images = '';
+            $scope.answer.ans = '';
+            $scope.images = '';
         }
         $scope.postanswer = function () {
             //          console.log($scope.id);
