@@ -29,6 +29,8 @@
   font-weight: 600;
   color: #00bcd4;
   font-size: 14px;
+  margin: 0;
+  text-transform: capitalize;
   font-family: ceraBlack;
 }
 
@@ -36,15 +38,20 @@
   margin: 5px 10px 5px 0px;
   font-size: 13px;
   font-family: ceraM;
+  color: #606060;
 }
 
 .q-div3 {
   background-color: #e5e5e5;
-  padding: 2px 5px;
+  // padding: 2px 5px;
   display: inline-flex;
   align-items: center;
   margin-bottom: 10px;
-  border-radius: 3px;
+ 
+}
+.select-sub-board-std{
+  outline: none !important;
+  
 }
 
 .q-div3 img {
@@ -64,7 +71,8 @@
 }
 
 .filter-tags {
-  font-size: 7px;
+  font-size: 9px;
+  text-transform: capitalize;
   padding: 2px 10px;
   background-color: #fff;
   color: #00bcd4;
@@ -103,7 +111,8 @@
 }
 
 .stats-no {
-  font-size: 40px;
+  margin: 0 !important;
+  font-size: 48px;
   font-family: roboto-regular;
 }
 
@@ -113,7 +122,8 @@
 
 .stats-caption {
   font-size: 12px;
-  font-family: roboto-light;
+  margin: 0 !important;
+  font-family: roboto-regular;
 }
 
 .profile-div {
@@ -174,6 +184,7 @@
   text-transform: uppercase;
   font-family: ceraM;
   svg {
+    cursor: pointer;
     position: absolute;
     top: 0;
     right: 0;
@@ -190,6 +201,7 @@
     width: 51px;
     height: 51px;
     margin: 30px 0;
+    cursor: pointer;
   }
 }
 .askq-body {
@@ -357,6 +369,7 @@
 }
 
 .ua-item-svg {
+  cursor: pointer;
   display: flex;
   position: absolute;
   margin: -10px 0 0 0;
