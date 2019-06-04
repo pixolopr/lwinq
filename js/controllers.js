@@ -1824,14 +1824,12 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                 if (response.data == "enteredtrue") {
                     question.likes++;
                     console.log(question.id);
-                    document.getElementById("liked" + question.id).style.background = "#00bcd4";
-                    document.getElementById("liked" + question.id).style.color = "white";
+                    document.getElementById("liked" + question.id).classList.add("alv-div-active");
                     console.log("added");
 
                 } else {
                     question.likes--;
-                    document.getElementById("liked" + question.id).style.color = "#606060";
-                    document.getElementById("liked" + question.id).style.background = "white";
+                    document.getElementById("liked" + question.id).classList.remove("alv-div-active");
                     console.log("remove");
                 }
             }
@@ -1858,13 +1856,13 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
 
         //       USE LATER FOR VIEWS IN DOUBTS
 
-        //       TO KNOW VIEW BY ME OR NOT
+//               TO KNOW VIEW BY ME OR NOT
 
-        //       $scope.addactivetoview = function(viewsexits){
-        //           if(viewsexits > 0 || viewsexits == true){
-        //               return "alv-div-active";
-        //           }
-        //       }
+//               $scope.addactivetoview = function(viewsexits){
+//                   if(viewsexits > 0 || viewsexits == true){
+//                       return "alv-div-active";
+//                   }
+//               }
 
 
 
@@ -2014,6 +2012,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
         $scope.id = $routeParams.ques_id;
         console.log($scope.id);
         $scope.answerdata = {};
+        $scope.user = $.jStorage.get('user').id;
         $scope.answerdata.answers = [];
         var count = 10;
         $scope.getallanswersfordoubt = function () {
@@ -2033,7 +2032,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             };
             var start = $scope.answerdata.answers.length;
             console.log(start);
-            NavigationService.getallanswersfordoubt($scope.id, start, count).then(getsuccess);
+            NavigationService.getallanswersfordoubt($scope.id, start, count,$scope.user).then(getsuccess);  
         }
         $scope.getallanswersfordoubt();
 
@@ -2057,7 +2056,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
         $scope.answer = {
             ans: ''
         };
-        $scope.user = $.jStorage.get('user').id;
+        
 
         $scope.postansweropen = function () {
             document.getElementsByClassName("backmain")[0].style.display = "block";
@@ -2086,7 +2085,8 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
         //FOR LIKE
         $scope.likeanswers = function (answers) {
             var getlikesuccess = function (response) {
-                console.log(response.data);
+                $scope.likesanswer = response.data;
+                console.log($scope.likesanswer);
                 if (response.data == "enteredtrue") {
                     console.log(answers.id);
                     document.getElementById("ansliked" + answers.id).style.fill = "#00BCD4";
@@ -2095,7 +2095,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
                 } else {
                     answers.likes--;
                     console.log(answers.id);
-                    document.getElementById("ansliked" + answers.id).style.fill = "red";
+                    document.getElementById("ansliked" + answers.id).style.fill = "white";
                 }
             }
             NavigationService.likeanswersbyanswerid(answers.id, $scope.user).then(getlikesuccess);

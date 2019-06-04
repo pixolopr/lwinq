@@ -6,7 +6,7 @@ var navigationservice = angular.module('navigationservice', [])
         //      var adminurl = "http://localhost/rest/index.php/";
 
         //MACBOOK AND HOME LAPTOP
-            // var adminurl = "http://localhost/rest/index.php/";
+             var adminurl = "http://localhost/rest/index.php/";
         //PC
         //var adminurl = "http://localhost/inqrest/rest/index.php/";
         //SERVER
@@ -15,7 +15,7 @@ var navigationservice = angular.module('navigationservice', [])
         //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
         //HOME LAPTOP
         
-       var adminurl = "http://sunalisclasses.com/stgapi/rest/index.php/";
+//       var adminurl = "http://sunalisclasses.com/stgapi/rest/index.php/";
 
 
         var navigation = [{
@@ -448,14 +448,15 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 })
             },
-            getallanswersfordoubt: function(question_id,start,count){
+            getallanswersfordoubt: function(question_id,start,count,user){
                 return $http({
                     url: adminurl + 'answers/getanswers',
                     method: "GET",
                     params:{
                         id : question_id,
                         start : start,
-                        count : count
+                        count : count,
+                        user: user  
                     }
                 })
             },
