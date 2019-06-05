@@ -35,7 +35,7 @@
 }
 
 .q-div2 p {
-  margin: 5px 10px 5px 0px;
+  margin: 0px 10px 5px 0px;
   font-size: 13px;
   font-family: ceraM;
   color: #606060;
@@ -118,8 +118,10 @@
 }
 
 .stats-no {
+  line-height: 53px;
   margin: 0 !important;
   font-size: 48px;
+
   font-family: roboto-regular;
 }
 
@@ -130,6 +132,7 @@
 .stats-caption {
   font-size: 12px;
   margin: 0 !important;
+  line-height: 10px;
   font-family: roboto-regular;
 }
 
