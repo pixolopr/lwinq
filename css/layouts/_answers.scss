@@ -1,43 +1,59 @@
 //ask modal css
 
 .askq-body input {
-        text-align: center;
-    border-bottom: none !important;
-    margin: 0px !important;
+  text-align: center;
+  border-bottom: none !important;
+  margin: 0px !important;
 }
 
 .askq-flex {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .askq-submit {
-        display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-.ua-time-name{
-    line-height: 17px;
+.ua-time-name {
+  line-height: 17px;
 }
-
+.askq-img-svg {
+  cursor: pointer;
+}
 .askbutton {
-    border: 1px solid #00BCD4;
-    color: #00BCD4;
-    font-size: 12px;
-    padding: 0 5px;
-    height: 18px;
-    font-family: ceraM;
+  border: 1px solid #00bcd4;
+  color: #00bcd4;
+  font-size: 12px;
+  padding: 0 5px;
+  height: 18px;
+  font-family: ceraM;
+}
+.post-wrapper {
+  background: #00bcd4;
+  border-radius: 5px;
+  padding: 1px 8px;
 }
 
+.post-name {
+  display: inline-flex;
+  align-items: center;
+  /* justify-content: center; */
+  margin: 0;
+  height: 30px;
+  color: white;
+  font-size: 13px;
+}
 .input-askq:hover {
-    border-bottom: none !important;
-    box-shadow: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
-.like-share-svg{
-   cursor: pointer;
-    align-items: center;
-    display: flex;
+.like-share-svg {
+  cursor: pointer;
+  align-items: center;
+  display: flex;
 }
-.bookmrk-svg{
-    position: absolute;
-    right: 15px;
+.bookmrk-svg {
+  position: absolute;
+  right: 15px;
 }

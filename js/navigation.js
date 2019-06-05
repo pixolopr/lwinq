@@ -6,7 +6,7 @@ var navigationservice = angular.module('navigationservice', [])
         //      var adminurl = "http://localhost/rest/index.php/";
 
         //MACBOOK AND HOME LAPTOP
-             var adminurl = "http://localhost/rest/index.php/";
+            //  var adminurl = "http://localhost/rest/index.php/";
         //PC
         //var adminurl = "http://localhost/inqrest/rest/index.php/";
         //SERVER
@@ -15,7 +15,7 @@ var navigationservice = angular.module('navigationservice', [])
         //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
         //HOME LAPTOP
         
-//       var adminurl = "http://sunalisclasses.com/stgapi/rest/index.php/";
+      var adminurl = "http://sunalisclasses.com/stgapi/rest/index.php/";
 
 
         var navigation = [{
