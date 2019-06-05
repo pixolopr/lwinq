@@ -1750,13 +1750,38 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         TemplateService.content = "views/doubts.html";
         $scope.navigation = NavigationService.getnav();
         $scope.user = $.jStorage.get('user').id;
-
-        /*GET DOUBTS QUESTIONS FROM FILTERS*/
         $scope.filters = {
-            subjects: '0',
-            boards: '0',
-            standards: '0'
+            subjects: 0,
+            boards: 0,
+            standards: 0
         };
+        $scope.board = [];
+        
+        var getDataSuccess = function(response){
+            console.log(response.data);
+            $scope.board = response.data;  
+        }
+//        var indexboard = '';
+        $scope.getstandardsbyboard = function(){
+            var indexboard = $scope.filters.boards;
+            $scope.standard = $scope.board[$scope.filters.boards].standards;
+            
+        }
+        $scope.getsubjectsbystandard = function(){
+            var indexstandard = $scope.filters.standards;
+            console.log($scope.standard[$scope.filters.standards].subjects);
+            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
+        }
+        
+        
+        var getDataError = function(response){
+            console.log(response.data);
+        }
+        
+        NavigationService.getstandardandboard().then(getDataSuccess, getDataError);
+        /*GET DOUBTS QUESTIONS FROM FILTERS*/
+        
+        
         $scope.questionsalldata = [];
         $scope.getquestions = function () {
             var getalldoubtssuccess = function (response) {
@@ -1774,18 +1799,34 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             /*MAKE LOADING TRUE*/
 
             $rootScope.loadingdiv = true;
-            var subject = $scope.filters.subjects;
-            var board = $scope.filters.boards;
-            var standard = $scope.filters.standards;
+        if($scope.board.length != 0){
+                
+            
+            var subject = $scope.subject[$scope.filters.subjects].id;
+            var board = $scope.board[$scope.filters.boards].id;
+            var standard = $scope.standard[$scope.filters.standards].id;
             var start = $scope.questionsalldata.length;
-
+        }
+            else {
+                var subject = 0;
+                var board = 0;
+                var standar = 0;
+                var start = $scope.questionsalldata.length;
+            }
             var count = 10;
-            NavigationService.getalldoubts($scope.user, standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
+                NavigationService.getalldoubts($scope.user, standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
+//            }
+            
         }
         /*END OG FETCHING DOUBTS QUESTIONS*/
 
         //        ADD IMAGE IN MODAL
-
+//        $scope.filters = {
+//            subjects: $scope.board,
+//            boards: $scope.standard,
+//            standards: $scope.subject
+//        };
+//        
 
         $scope.getquestionswithfilter = function () {
             $scope.questionsalldata = [];

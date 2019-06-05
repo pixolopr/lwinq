@@ -2,30 +2,23 @@
     style="position: absolute; bottom: 0; right: 0; position: fixed;" ng-click='getquestions();'>loadmore</button>
 <div class="douts-top-sec">
     <div class="filters">
-        <div class="subjects-dropdown">
-            <select class="select-sub-board-std" ng-model="filters.subjects">
-                <option>subjects</option>
-                <option>physics</option>
-                <option>maths</option>
-                <option>biology</option>
+       <div class="boards-dropdown">
+            <select class="select-sub-board-std" ng-model="filters.boards" ng-change="getstandardsbyboard()">
+                <option value="{{$index}}" ng-repeat="x in board">{{x.name}}</option>
             </select>
         </div>
-        <div class="boards-dropdown">
-            <select class="select-sub-board-std" ng-model="filters.boards">
-                <option>Boards</option>
-                <option>CBSE</option>
-                <option>Gujrat</option>
-                <option>ICSE</option>
-            </select>
-        </div>
+        
         <div class="standards-dropdown">
-            <select class="select-sub-board-std" ng-model="filters.standards" ng-change="getquestionswithfilter()">
-                <option>Standards</option>
-                <option>8th</option>
-                <option>9th</option>
-                <option>10th</option>
+            <select class="select-sub-board-std" ng-model="filters.standards" ng-change="getsubjectsbystandard()">
+                <option value="{{$index}}" ng-repeat="y in standard">{{y.name}}</option>
             </select>
         </div>
+        <div class="subjects-dropdown">
+            <select class="select-sub-board-std" ng-model="filters.subjects" ng-change="getquestionswithfilter()">
+                <option value="{{$index}}" ng-repeat="z in subject">{{z.name}}</option>
+            </select>
+        </div>
+        
     </div>
     <div class="quest-btn"><button id="ask-q-btn" ng-click="getchapterslist()">Ask Question</button></div>
 </div>

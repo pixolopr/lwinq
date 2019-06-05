@@ -3,7 +3,7 @@ var navigationservice = angular.module('navigationservice', [])
     .factory('NavigationService', function ($http) {
         //DESKTOP
 //        var adminurl = "http://localhost/rest/rest/index.php/";
-        //      var adminurl = "http://localhost/rest/index.php/";
+              var adminurl = "http://localhost/rest/index.php/";
 
         //MACBOOK AND HOME LAPTOP
             //  var adminurl = "http://localhost/rest/index.php/";
@@ -15,7 +15,7 @@ var navigationservice = angular.module('navigationservice', [])
         //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
         //HOME LAPTOP
         
-      var adminurl = "http://sunalisclasses.com/stgapi/rest/index.php/";
+//      var adminurl = "http://sunalisclasses.com/stgapi/rest/index.php/";
 
 
         var navigation = [{
