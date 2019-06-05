@@ -183,6 +183,9 @@
   border-radius: 11px;
   z-index: 11;
 }
+#ask-q-btn{
+
+}
 
 .askq-head {
   position: relative;
@@ -407,10 +410,16 @@
   color: white;
   margin: 0px 5px;
 }
-
+.askq-submit{
+  width: 100%;
+}
+.ask-inputq{
+  flex-basis: 80% !important;
+}
 .douts-top-sec {
   display: flex;
   width: 100%;
+  align-items: center !important;
   padding: 15px;
 
   .filters {
@@ -484,14 +493,17 @@
     text-align: right;
 
     button {
-      font-size: 14px;
-      border: none;
-      background-color: #00bcd4;
-      color: white;
-      font-family: ceraL;
-      padding: 10px 12px;
-      border-radius: 11px;
-      text-transform: uppercase;
+      font-family: ceraM;
+    color: #fff;
+    background-color: #00bcd4;
+    border: none;
+    border-radius: 11px;
+    font-size: 14px;
+    padding: 5px 20px;
+    text-transform: uppercase;
+    margin: 20px 10px 10px 10px;
+    text-align: right;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.5);
     }
   }
 }
