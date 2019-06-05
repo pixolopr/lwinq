@@ -1756,7 +1756,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             standards: 0
         };
         $scope.board = [];
-        
+        $scope.standard = [];
+        $scope.subject = [];
         var getDataSuccess = function(response){
             console.log(response.data);
             $scope.board = response.data;  
@@ -1765,12 +1766,18 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.getstandardsbyboard = function(){
             var indexboard = $scope.filters.boards;
             $scope.standard = $scope.board[$scope.filters.boards].standards;
+            console.log("boardselected")
+            $scope.questionsalldata = [];
+            $scope.getquestions();
             
         }
         $scope.getsubjectsbystandard = function(){
             var indexstandard = $scope.filters.standards;
             console.log($scope.standard[$scope.filters.standards].subjects);
+            console.log("standardselected");
             $scope.subject = $scope.standard[$scope.filters.standards].subjects;
+            $scope.questionsalldata = [];
+            $scope.getquestions();
         }
         
         
@@ -1799,20 +1806,29 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             /*MAKE LOADING TRUE*/
 
             $rootScope.loadingdiv = true;
-        if($scope.board.length != 0){
+        if($scope.board.length != 0 && $scope.standard.length == 0 && $scope.subject.length == 0){
+                var board = $scope.board[$scope.filters.boards].id;
+                var subject = 0;
+                var standard = 0;
                 
-            
-            var subject = $scope.subject[$scope.filters.subjects].id;
-            var board = $scope.board[$scope.filters.boards].id;
-            var standard = $scope.standard[$scope.filters.standards].id;
-            var start = $scope.questionsalldata.length;
+        }
+            else if($scope.board.length != 0 && $scope.standard.length != 0 && $scope.subject.length == 0){
+                var board = $scope.board[$scope.filters.boards].id;
+                var standard = $scope.standard[$scope.filters.standards].id;
+                var subject = 0;
+        }
+            else if($scope.board.length != 0 && $scope.standard.length != 0 && $scope.subject.length != 0){
+                var board = $scope.board[$scope.filters.boards].id;
+                var standard = $scope.standard[$scope.filters.standards].id;
+                var subject = $scope.subject[$scope.filters.subjects].id;
         }
             else {
                 var subject = 0;
                 var board = 0;
-                var standar = 0;
-                var start = $scope.questionsalldata.length;
+                var standard = 0;
+                
             }
+            var start = $scope.questionsalldata.length;
             var count = 10;
                 NavigationService.getalldoubts($scope.user, standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
 //            }
