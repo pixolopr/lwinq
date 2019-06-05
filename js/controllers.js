@@ -1853,6 +1853,11 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                 return "alv-div-active";
             }
         }
+        $scope.addactiveclassviews = function (viewssexits) {
+            if (viewssexits > 0) {
+                return "alv-div-active";
+            }
+        }
 
         //       USE LATER FOR VIEWS IN DOUBTS
 
@@ -1923,6 +1928,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         }
         $scope.gotoanswerpage = function (ques_id) {
             $location.path("/answers/" + ques_id);
+            NavigationService.viewsofquestionid(ques_id,$scope.user).then();
         }
 
 
