@@ -9,6 +9,7 @@
 .askq-flex {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 .askq-submit {
@@ -36,13 +37,11 @@
 }
 
 .post-name {
-  display: inline-flex;
-  align-items: center;
-  /* justify-content: center; */
+  
   margin: 0;
-  height: 30px;
+  
   color: white;
-  font-size: 13px;
+  font-size: 12px;
 }
 .input-askq:hover {
   border-bottom: none !important;
@@ -56,4 +55,25 @@
 .bookmrk-svg {
   position: absolute;
   right: 15px;
+}
+.div-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    display: -webkit-box;
+}
+.p-svg-wrapped{
+    padding: 2px 5px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background:#00bcd4;
+    
+    
+}
+.postans-txt{
+    margin: 10px;
+}
+.gallery-svg{
+    width: 25px !important;
 }
