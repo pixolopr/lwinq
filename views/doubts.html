@@ -117,7 +117,7 @@
             <p class="stats-no">{{questiondata.likes}}</p>
             <p class="stats-caption" ng-click="likequestion(questiondata);">LIKES</p>
         </div>
-        <div class="alv-div">
+        <div class="alv-div" ng-class="addactiveclassviews(questiondata.viewsexists);">
             <p class="stats-no">{{questiondata.views}}</p>
             <p class="stats-caption">VIEWS</p>
         </div>

@@ -489,6 +489,16 @@ var navigationservice = angular.module('navigationservice', [])
                         user_id : user_id
                     }
                 })
+            },
+            viewsofquestionid: function(question_id,user_id){
+                return $http({
+                    url: adminurl + 'questions/getviewsbyquestionid',
+                    method: "GET",
+                    params:{
+                        question_id : question_id,  
+                        user_id : user_id
+                    }
+                })
             }
             
         }
