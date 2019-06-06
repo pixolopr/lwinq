@@ -1751,33 +1751,34 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.navigation = NavigationService.getnav();
         $scope.user = $.jStorage.get('user').id;
         $scope.filters = {
-            subjects: 0,
-            boards: 0,
-            standards: 0
+            subjects: '',
+            boards: '',
+            standards: ''
         };
         $scope.board = [];
         $scope.standard = [];
         $scope.subject = [];
         var getDataSuccess = function(response){
             console.log(response.data);
-            $scope.board = response.data;  
+            $scope.board = response.data;
         }
-//        var indexboard = '';
         $scope.getstandardsbyboard = function(){
             var indexboard = $scope.filters.boards;
-            $scope.standard = $scope.board[$scope.filters.boards].standards;
-            console.log("boardselected")
+            
+            console.log("boardselected");
             $scope.questionsalldata = [];
             $scope.getquestions();
+            $scope.standard = $scope.board[$scope.filters.boards].standards;
             
         }
         $scope.getsubjectsbystandard = function(){
             var indexstandard = $scope.filters.standards;
-            console.log($scope.standard[$scope.filters.standards].subjects);
+//            console.log($scope.standard[$scope.filters.standards].subjects);
             console.log("standardselected");
-            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
+            
             $scope.questionsalldata = [];
             $scope.getquestions();
+            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
         }
         
         
@@ -1836,14 +1837,6 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         }
         /*END OG FETCHING DOUBTS QUESTIONS*/
 
-        //        ADD IMAGE IN MODAL
-//        $scope.filters = {
-//            subjects: $scope.board,
-//            boards: $scope.standard,
-//            standards: $scope.subject
-//        };
-//        
-
         $scope.getquestionswithfilter = function () {
             $scope.questionsalldata = [];
             $scope.getquestions();
@@ -1882,11 +1875,13 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                     question.likes++;
                     console.log(question.id);
                     document.getElementById("liked" + question.id).classList.add("alv-div-active");
+                    document.getElementById("queliked" + question.id).style.fill = "#00BCD4";
                     console.log("added");
 
                 } else {
                     question.likes--;
                     document.getElementById("liked" + question.id).classList.remove("alv-div-active");
+                    document.getElementById("queliked" + question.id).style.fill = "none";
                     console.log("remove");
                 }
             }
@@ -2131,10 +2126,6 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             $scope.images = '';
         }
         $scope.postanswer = function () {
-            //          console.log($scope.id);
-            //          console.log($scope.images);
-            //          console.log($scope.answer.ans);
-            //          console.log($scope.user);
             if ($scope.answer.ans != '' && $scope.id != '', $scope.user != '') {
 
                 NavigationService.insertnewanswer($scope.answer.ans, $scope.id, $scope.user, JSON.stringify($scope.images)).then();
