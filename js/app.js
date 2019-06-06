@@ -228,8 +228,8 @@ inq.filter('thousandSuffix', function () {
 inq.filter('imagepath', function () {
     return function (input) {
 
-         return "http://localhost/rest/uploads/" + input;
-//        return "http://learnwithinq.com/rest/uploads/" + input;
+//         return "http://localhost/rest/uploads/" + input;
+        return "http://learnwithinq.com/rest/uploads/" + input;
 
     };
 
