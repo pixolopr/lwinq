@@ -1762,25 +1762,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             console.log(response.data);
             $scope.board = response.data;
         }
-        $scope.getstandardsbyboard = function(){
-            var indexboard = $scope.filters.boards;
-            
-            console.log("boardselected");
-            $scope.questionsalldata = [];
-            $scope.getquestions();
-            $scope.standard = $scope.board[$scope.filters.boards].standards;
-            
-        }
-        $scope.getsubjectsbystandard = function(){
-            var indexstandard = $scope.filters.standards;
-//            console.log($scope.standard[$scope.filters.standards].subjects);
-            console.log("standardselected");
-            
-            $scope.questionsalldata = [];
-            $scope.getquestions();
-            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
-        }
-        
+       
         
         var getDataError = function(response){
             console.log(response.data);
@@ -1836,11 +1818,36 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             
         }
         /*END OG FETCHING DOUBTS QUESTIONS*/
-
-        $scope.getquestionswithfilter = function () {
+         $scope.getstandardsbyboard = function(){
+//            var indexboard = $scope.filters.boards;
+            
+            console.log("boardselected");
             $scope.questionsalldata = [];
             $scope.getquestions();
+             if($scope.board[$scope.filters.boards].standards != ''){
+                 $scope.standard = $scope.board[$scope.filters.boards].standards;
+                 console.log($scope.standard,"change standard");
+             }
+             if($scope.standard[$scope.filters.standards].subjects != ''){
+                 $scope.subject = $scope.standard[$scope.filters.standards].subjects;
+                 console.log($scope.subject,"change subject");
+             }            
+            
         }
+//        $scope.getsubjectsbystandard = function(){
+//            var indexstandard = $scope.filters.standards;
+////            console.log($scope.standard[$scope.filters.standards].subjects);
+//            console.log("standardselected");
+//            
+//            $scope.questionsalldata = [];
+//            $scope.getquestions();
+////            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
+//        }
+        
+//        $scope.getquestionswithfilter = function () {
+//            $scope.questionsalldata = [];
+//            $scope.getquestions();
+//        }
         $scope.getquestions();
         //      to get image for insert in doubts
         $scope.img = {
@@ -1852,7 +1859,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
 
         console.log($scope.user);
 
-        $scope.bookmarkdoubt = function (id) {
+        $scope.bookmarkdoubt = function (id,event) {
+            event.cancelBubble = true;
             var getbookmarksuccess = function (response) {
                 console.log(response.data);
                 if (response.data == "enteredtrue") {
@@ -1868,7 +1876,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         //      END OF ADD BOOKMARK
 
         //FOR LIKE
-        $scope.likequestion = function (question) {
+        $scope.likequestion = function (question,event) {
+            event.cancelBubble = true;
             var getlikesuccess = function (response) {
                 console.log(response.data);
                 if (response.data == "enteredtrue") {

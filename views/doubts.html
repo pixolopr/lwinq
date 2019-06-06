@@ -2,7 +2,7 @@
 <button href="https://cdn.dribbble.com/users/789995/screenshots/2573686/page-loader.gif"
     >
 -->
-    <svg ng-click='getquestions();' style="position: absolute; bottom: 0; right: 0; position: fixed; margin: 20px; z-index: 11;"  version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <svg ng-click='getquestions();' style="position: absolute; bottom: 0; right: 0; position: fixed; margin: 20px; z-index: 111;"  version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="60px" height="60px" viewBox="0 0 438.533 438.533" style="enable-background:new 0 0 438.533 438.533;"
 	 xml:space="preserve">
 <g>
@@ -30,13 +30,13 @@
         </div>
         
         <div class="standards-dropdown">
-            <select class="select-sub-board-std" ng-model="filters.standards" ng-change="getsubjectsbystandard()">
+            <select class="select-sub-board-std" ng-model="filters.standards" ng-change="getstandardsbyboard()">
                <option value="">Standards</option>
                 <option value="{{$index}}" ng-repeat="y in standard">{{y.name}}</option>
             </select>
         </div>
         <div class="subjects-dropdown">
-            <select class="select-sub-board-std" ng-model="filters.subjects" ng-change="getquestionswithfilter()">
+            <select class="select-sub-board-std" ng-model="filters.subjects" ng-change="getstandardsbyboard()">
                <option value="">Subjects</option>
                 <option value="{{$index}}" ng-repeat="z in subject">{{z.name}}</option>
             </select>
@@ -58,10 +58,10 @@
             </svg></div>
 -->
     </div>
-    <div class="q-div">
+    <div class="q-div" ng-click="gotoanswerpage(questiondata.id);">
         <div class="q-div1">
             <p>{{questiondata.name}}</p><svg width="16" height="20" viewBox="0 0 16 20" fill="none"
-                xmlns="http://www.w3.org/2000/svg" ng-click="bookmarkdoubt(questiondata.id);">
+                xmlns="http://www.w3.org/2000/svg" ng-click="bookmarkdoubt(questiondata.id,$event);">
                 <path
                     d="M14.9312 0.645183C14.7771 0.404217 14.5697 0.227999 14.3093 0.116213C14.1435 0.0389035 13.9697 0.000180736 13.788 0.000180736V0H1.37398C1.19239 0 1.01876 0.0387227 0.852884 0.116033C0.592335 0.227728 0.384974 0.404171 0.231009 0.645002C0.077086 0.885833 0 1.15233 0 1.44481V18.0734C0 18.366 0.077086 18.6324 0.231009 18.8734C0.384974 19.1142 0.592335 19.2906 0.852884 19.4023C1.01859 19.4796 1.19239 19.5182 1.37398 19.5182C1.74527 19.5182 2.07282 19.3762 2.35718 19.0927L7.58103 13.6226L12.8049 19.0928C13.0813 19.3676 13.409 19.5052 13.788 19.5052C13.9854 19.5052 14.1592 19.471 14.3093 19.4022C14.5697 19.2906 14.7771 19.1142 14.9311 18.8731C15.0851 18.6323 15.162 18.3659 15.162 18.0733V1.44499C15.162 1.15251 15.0849 0.886014 14.9312 0.645183ZM13.6459 17.6732L8.63531 12.4357L7.58103 11.3394L6.52685 12.4357L1.51633 17.6732V1.65143H13.6459V17.6732Z"
                     fill="#00BCD4" />
@@ -71,12 +71,12 @@
                     ng-if="questiondata.bookmark == '1'" fill="#00BCD4" />
             </svg>
         </div>
-        <div class="q-div2" ng-click="gotoanswerpage(questiondata.id);">
+        <div class="q-div2" >
             <p>{{questiondata.question}} </p>
         </div>
         <div class="q-div3" ng-repeat="image in questiondata.images">
-            <a class="mainq-lightbox" href=" {{image.image | imagepath}}"><img
-                    src="https://media.wired.com/photos/5b3baf1ece9419115f46bb15/master/pass/mac_screenshot-02.jpg"
+            <a class="mainq-lightbox" href="{{image.image | imagepath}}"><img
+                    src="{{image.image | imagepath}}"
                     alt=""></a>
         </div>
 
@@ -91,7 +91,7 @@
                 <div class="like-share-svg">
 <!--                    <span class="ng-binding doubts-like-count">011</span>-->
 
-                    <svg ng-click="likequestion(questiondata);" width="35" height="35" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3508 4961">
+                    <svg ng-click="likequestion(questiondata,$event);" width="35" height="35" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3508 4961">
                         <path ng-if="questiondata.likeexits == '1'" id="queliked{{questiondata.id}}" class="cls-1" stroke-width="140px" fill="#00bcd4" stroke="#00bcd4" stroke-linecap="round"
                             stroke-linejoin="round" fill-rule="evenodd"
                             d="M394,1960c-4,75.95-35.689-113.62,108-117s602,0,602,0,188.61,18.45,195,171c81.35-6.42,117-21,117-21l312-624-33-474s117.25-287.828,357-192c185.78,164.814,393.25,180.484,321,912,272.55,17.66,748.83-38.59,842,168,39.2,254.58-24.18,276.47,30,369,35.98,47.99,107.74,322.55,9,431-35.78,66.45-102.26,200.64-102,363-62.7,105.37-168.58,488.71-369,498s-1160,0-1160,0-293-172-273-168-54-2-54-2-100-59.65-160,224c-80,55.79-560,87.97-740,40C331.829,3410.08,398,1884.05,394,1960Z">
@@ -134,15 +134,15 @@
 
     <div class="stats-div">
         <div class="alv-div" ng-class="addactiveclass(questiondata.answersexits);">
-            <p class="stats-no">{{questiondata.answercount}}</p>
+            <p class="stats-no">{{questiondata.answercount | thousandSuffix:1}}</p>
             <p class="stats-caption">ANSWERS</p>
         </div>
         <div class="alv-div" id="liked{{questiondata.id}}" ng-class="addactiveclasslike(questiondata.likeexits);">
-            <p class="stats-no">{{questiondata.likes}}</p>
+            <p class="stats-no">{{questiondata.likes | thousandSuffix:1}}</p>
             <p class="stats-caption" >LIKES</p>
         </div>
         <div class="alv-div" ng-class="addactiveclassviews(questiondata.viewsexists);">
-            <p class="stats-no">{{questiondata.views}}</p>
+            <p class="stats-no">{{questiondata.views | thousandSuffix:1}}</p>
             <p class="stats-caption">VIEWS</p>
         </div>
     </div>
