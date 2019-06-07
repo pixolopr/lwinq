@@ -14,10 +14,6 @@
   padding-bottom: 10px;
 }
 
-.askq-submit {
-  display: flex;
-  align-items: center;
-}
 .ua-time-name {
   line-height: 17px;
 }
@@ -71,6 +67,7 @@
     display: flex;
     background:#00bcd4;
     cursor: pointer;
+    margin:5px;
     
     
 }
@@ -80,4 +77,5 @@
 .gallery-svg{
     cursor: pointer;
     width: 25px !important;
+    margin: 5px;
 }

@@ -182,6 +182,7 @@
   margin: 100px auto;
   border-radius: 11px;
   z-index: 11;
+    padding-bottom: 10px;
 }
 #ask-q-btn{
 
@@ -411,10 +412,14 @@
   margin: 0px 5px;
 }
 .askq-submit{
-  width: 100%;
+  margin: 5px;
+      display: flex;
+  align-items: center;
+    justify-content: space-between;
 }
 .ask-inputq{
-  flex-basis: 80% !important;
+  flex-basis: 40% !important;
+    border-radius: 5px;
 }
 .douts-top-sec {
   display: flex;
