@@ -15,7 +15,7 @@ var navigationservice = angular.module('navigationservice', [])
         //    var adminurl = "http://learnwithinq.com/adminpanel/testrest/index.php/";
         //HOME LAPTOP
         
-      var adminurl = "http://sunalisclasses.com/stgapi/rest/index.php/";
+      var adminurl = "https://stgapi.learnwithinq.com/rest/index.php/";
 
 
         var navigation = [{
@@ -399,6 +399,9 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 })
             },
+            getdropdown: function () {
+                return $http.get(adminurl + 'questions/getfulldropdown');
+            },
             returnquestionimagename: function (file) {
                 return $http({
                     url: adminurl + 'images/returnquestionimagename',
@@ -423,14 +426,14 @@ var navigationservice = angular.module('navigationservice', [])
             },
             
 
-            insertnewdoubts: function(question,subject_id,chapter_name,user_id,images){
+            insertnewdoubts: function(question,subject_id,chapter_id,user_id,images){
                 return $http({
                     url: adminurl + 'questions/insertallquestions',
                     method: "GET",
                     params:{
                         question : question,
                         subject_id : subject_id,
-                        chapter_name : chapter_name,
+                        chapter_id : chapter_id,
                         user_id : user_id,
                         images : images
                     }
@@ -448,6 +451,28 @@ var navigationservice = angular.module('navigationservice', [])
                     }
                 })
             },
+            bookmarkquestionbyquestionid: function(question_id,user_id){
+                return $http({
+                    url: adminurl + 'answers/bookmarkquestion',
+                    method: "GET",
+                    params:{
+                        id : question_id,
+                        user: user_id  
+                    }
+                })
+            },
+            likequestionbyme: function(question_id,user_id){
+                return $http({
+                    url: adminurl + 'answers/likeunlikequestionbyid',
+                    method: "GET",
+                    params:{
+                        id : question_id,
+                        user: user_id  
+                    }
+                })
+            },
+            
+            
             getallanswersfordoubt: function(question_id,start,count,user){
                 return $http({
                     url: adminurl + 'answers/getanswers',
@@ -472,7 +497,7 @@ var navigationservice = angular.module('navigationservice', [])
             },
             likedoubtbyquestionid: function(question_id,user_id){
                 return $http({
-                    url: adminurl + 'questions/getlikebyquestionid',
+                    url: adminurl + 'questions/likeunlikequestionbyid',
                     method: "GET",
                     params:{
                         question_id : question_id,  
@@ -482,7 +507,7 @@ var navigationservice = angular.module('navigationservice', [])
             },
             likeanswersbyanswerid: function(answer_id,user_id){
                 return $http({
-                    url: adminurl + 'answers/getlikebyanswerid',
+                    url: adminurl + 'answers/likeunlikeanswerbyid',
                     method: "GET",
                     params:{
                         answer_id : answer_id,  
