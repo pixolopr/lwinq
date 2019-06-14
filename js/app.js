@@ -229,7 +229,7 @@ inq.filter('imagepath', function () {
     return function (input) {
 
 //         return "http://localhost/rest/uploads/" + input;
-        return "http://learnwithinq.com/rest/uploads/" + input;
+        return "https://stgapi.learnwithinq.com/rest/uploads/" + input;
 
     };
 
