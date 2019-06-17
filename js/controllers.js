@@ -90,6 +90,30 @@ inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'Navigatio
             document.getElementById("landing-overlay").style.display = "none";
         }
 
+      
+          $scope.opensignupbox = function () {
+              document.getElementById("login-modal").style.display = "none";
+                 document.getElementById("signup-modal").style.display = "block";
+            document.getElementById("landing-overlay").style.display = "block";
+
+        }
+          
+            $scope.closesignupbox = function () {
+              
+              document.getElementById("signup-modal").style.display = "none";
+            document.getElementById("landing-overlay").style.display = "none";
+
+        }
+            
+        $scope.openloginmodal = function () {
+            document.getElementById("signup-modal").style.display = "none";
+            document.getElementById("login-modal").style.display = "block";
+            document.getElementById("landing-overlay").style.display = "block";
+        }
+            
+            
+          
+          
         $scope.createnewpass = function () {
 
             var abc = Math.random();
