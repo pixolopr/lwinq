@@ -42,10 +42,10 @@
 }
 
 .q-div3 {
-    background-color: #e5e5e5; // padding: 2px 5px;
+//    background-color: #e5e5e5; // padding: 2px 5px;
     display: inline-flex;
     align-items: center;
-    margin-bottom: 10px;
+//    margin-bottom: 10px;
 
 }
 
@@ -55,8 +55,8 @@
 }
 
 .q-div3 img {
-    width: 50px;
-    margin: 6px;
+    height: 40px;
+    margin: 2px;
 }
 
 .q-div3 p {
@@ -181,25 +181,31 @@
 }
 
 .askq-wrap {
-    background-color: #f5f1f1;
-    width: 50%;
+    background-color: #fff;
+    width: 60%;
     margin: 100px auto;
     border-radius: 11px;
     z-index: 11;
-    padding-bottom: 10px;
+    padding:0 10px 10px 10px;
 }
 
 #ask-q-btn {}
 
 .askq-head {
     position: relative;
-    background-color: #00BCD4;
+    background-color: #fff;
     border-radius: 11px 11px 0px 0px;
     padding: 2px;
     text-align: center;
-    color: white;
+    color: #00bcd4;
     text-transform: uppercase;
     font-family: ceraM;
+    p{
+        margin: 0;
+        font-size: 15px;
+        padding: 8px 0;
+        font-weight: bold;
+    }
     svg {
         cursor: pointer;
         position: absolute;
@@ -222,15 +228,34 @@
         cursor: pointer;
     }
 }
-
-.askq-body {
-    margin: 10px;
-    text-align: center;
-    background-color: #fff;
+.ask-body-div{
+    margin: 0 10px;
+    background: #F3F3F3;
     padding: 10px;
-    height: 75px;
-    line-height: 75px;
+}
+.askq-body {
+//    margin: 10px;
+    text-align: center;
+//    background-color: #fff;
+//    padding: 10px;
+//    height: 75px;
+//    line-height: 75px;
     color: #a59f9f;
+}
+.askq-imgholder{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    
+}
+#uploadimagebtn{
+    width: 10%;
+    svg{
+        width: 34px !important; 
+        height: 34px !important;
+    }
 }
 
 .svg-icons {
@@ -426,15 +451,34 @@
 .askq-submit {
     margin: 10px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
 }
 
 .ask-inputq {
-    flex-basis: 40% !important;
-    border-radius: 5px;
+//    flex-basis: 40% !important;
+//    border-radius: 5px;
+    width: 160px;
+    height: 23px;
+    background: #F5F5F5;
+    font-size: 10px;
+}
+.dropdown-main-div{
+    width: 45%;
 }
 
+.dropdownn-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    .dropdown-label{
+        font-size: 10px;
+        font-family: ceraB;
+        color: #000;
+        font-weight: bold;
+    }
+}
 .douts-top-sec {
     display: flex;
     justify-content: center;
@@ -766,4 +810,16 @@
     margin: 0px 12px;
     display: flex;
     align-items: center;
+}
+.loadmorebtn{
+    font-size: 14px;
+    font-family: ceraB;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #00bcd4;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px 0;
 }
