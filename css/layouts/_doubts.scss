@@ -838,6 +838,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .question-details-div3 {
@@ -881,7 +882,7 @@
     display: flex;
 }
 .answer-divs {
-    border-bottom: 1px solid #606060;
+    border-top: 1px solid #606060;
 }
 
 .other-answer-block {
