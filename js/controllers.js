@@ -261,7 +261,283 @@ inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'Navigatio
             $('.modal').modal();
 
         });
+      
+      
+      
+      
+      
+      
+      
+ //Hide Menu
+        $scope.standardfilter = {
+            board_id: '0',
+            standard_id: '0'
 
+        }
+        $rootScope.showmenu = false;
+        $scope.signupdata = {
+
+            name: "",
+            standard_id: "",
+            board_id: "",
+            school: "",
+            contact: "",
+            email: "",
+            password: "",
+            access_id: 4,
+            createdate: "",
+            editdate: "",
+            verified: 1,
+            active: 1,
+        };
+
+        $scope.fulldataofboards = [];
+
+
+
+        //function to change the focus from one input to another
+
+        $scope.inputfocus = function () {
+            $('#inputotpone,#inputotptwo,#inputotpthree,#inputotpfour').keyup(function (e) {
+                if ($(this).val().length == $(this).attr('maxlength'))
+                    $(this).next(':input').focus()
+            })
+        }
+
+
+
+
+        $scope.createotp = function () {
+
+            var abc = Math.random();
+            var xyz = abc * 10000;
+
+            if (xyz > 1000 && xyz < 10000) {
+                randomOtpNumber = Math.trunc(xyz);
+            }
+            console.log(randomOtpNumber);
+            message = "Hey, use " + randomOtpNumber + " as the OTP for registering into LWINQ.";
+            NavigationService.sendsms($scope.signupdata.contact, message).success(sendsmssuccess).error(sendsmserror);
+
+
+        };
+
+
+
+        $scope.doSignUp = function () {
+
+            $scope.signupdata.board_id = $scope.fulldataofboards[$scope.standardfilter.board_id].id;
+
+            var validation = true;
+            if (!$scope.signupdata.name) {
+
+                $scope.errormsg = "**Name field cannot be empty";
+                validation = false;
+
+                return false;
+            } else if (($scope.signupdata.name.length < 2) || ($scope.signupdata.name.length > 20)) {
+
+                $scope.errormsg = "**Name field length must be between 2 and 20";
+                validation = false;
+                return false;
+            } else if (!isNaN($scope.signupdata.name)) {
+
+                $scope.errormsg = "**Name field must only contain characters";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.school) {
+                $scope.errormsg = "**School Name field cannot be empty";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.email) {
+                $scope.errormsg = "**Email Address field cannot be empty";
+                validation = false;
+                return false;
+            } else if ($scope.signupdata.email.indexOf('@') <= 0) {
+
+                $scope.errormsg = "**Email Address not valid";
+                validation = false;
+                return false;
+
+            } else if (($scope.signupdata.email.charAt($scope.signupdata.email.length - 4) != '.') && ($scope.signupdata.email.charAt($scope.signupdata.email.length - 3) != '.')) {
+
+                $scope.errormsg = "**Email Address not valid";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.contact) {
+                $scope.errormsg = "**Phone Number field cannot be empty";
+                validation = false;
+                return false;
+            } else if (isNaN($scope.signupdata.contact)) {
+                $scope.errormsg = "**Phone Number can only contain number";
+                validation = false;
+                return false;
+            } else if ($scope.signupdata.contact.length != 10) {
+                $scope.errormsg = "**Phone Number must be 10 digit";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.password) {
+                $scope.errormsg = "**Password field cannot be empty";
+                validation = false;
+                return false;
+            } else if (($scope.signupdata.password.length < 4) || ($scope.signupdata.password.length > 20)) {
+
+                $scope.errormsg = "**Password field length must be between 4 and 20";
+                validation = false;
+                return false;
+            } else if ($scope.signupdata.password != $scope.signupdata.confpassword) {
+                $scope.errormsg = "**Password and Confirm Password do not match";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.confpassword) {
+                $scope.errormsg = "**Confirm Password field cannot be empty";
+                validation = false;
+                return false;
+            }
+
+            if (validation) {
+                $scope.errormsg = "";
+
+                //Check if contact exists
+
+                checkcontactsuccess = function (response) {
+
+
+                    if (response.data == "false") {
+
+
+
+                        //Send OTP to a contact number
+                        registererror = function (data, response) {};
+                        sendsmssuccess = function (response, status) {};
+                        sendsmserror = function (error, status) {};
+
+                        $scope.createotp();
+
+                        //Show Modal on click of Sign up button
+                        $('.modal').modal();
+                        $('.modal').modal('open');
+                        console.log(randomOtpNumber);
+
+                        $scope.inputfocus();
+
+
+                    } else {
+                        $('.modal').modal('close');
+                        $scope.errormsg = "**Phone number already exists on our database. Please use a different phone number.";
+
+                    }
+                };
+
+
+                NavigationService.checkcontactexists($scope.signupdata.contact).then(checkcontactsuccess, getDataError);
+
+
+            }
+
+        };
+
+
+
+        $scope.closeotpmodal = function () {
+            $('.modal').modal('close');
+
+        };
+
+        $scope.resendsmsdata = function () {
+            $scope.createotp();
+        };
+
+
+        //Get standard and board dynamically
+        //initialized = true;
+
+        getDataSuccess = function (response) {
+            console.log(response.data);
+            $scope.fulldataofboards = response.data;
+            $scope.signupdata.standard_id = $scope.fulldataofboards[0].standards[0].id;
+            setTimeout(function () {
+                //Select dropdown function
+                //if(initialized){
+                console.log("INItIALIZE");
+                $('.boards-select').material_select();
+                //initialized = false;
+                //};
+            }, 0);
+            setTimeout(function () {
+                //Select dropdown function
+                //if(initialized){
+                console.log("INItIALIZE");
+                $('.standard-boards-select').material_select();
+                //initialized = false;
+                //};
+            }, 0);
+
+
+        };
+        getDataError = function (error) {
+            console.log(error);
+            console.log('Internet Error');
+        };
+        console.log($scope.fulldataofboards);
+        NavigationService.getstandardandboard().then(getDataSuccess, getDataError);
+
+
+
+        //Verify if OTP matches with the entered OTP
+
+        $scope.verifyOtp = function () {
+            var userinputdata = parseInt($scope.inputotp1 + "" + $scope.inputotp2 + "" + $scope.inputotp3 + "" + $scope.inputotp4);
+            console.log(userinputdata);
+            console.log(randomOtpNumber);
+            if (randomOtpNumber == userinputdata) {
+                console.log('Correct OTP ! continue the things ');
+
+                registersuccess = function (response) {
+                    console.log(response);
+                    console.log('Registered Successfully');
+                    $scope.modalsuccessmsg = "Registered Successfully";
+                    $scope.modalerrormsg = "";
+
+                    setTimeout(function () {
+                        console.log('setTimeout');
+                        $scope.closeotpmodal();
+                        $location.path('/login');
+
+                        $scope.$apply();
+
+                    }, 1000);
+
+                };
+                registererror = function (error) {
+                    console.log('Internet Error');
+                }
+
+                NavigationService.register($scope.signupdata).success(registersuccess).error(registererror);
+
+            } else {
+                $scope.modalerrormsg = "The OTP you entered is incorrect";
+                $scope.modalsuccessmsg = "";
+
+            }
+
+        }
+
+
+        //PAGE FUNCTIONS
+        $scope.boardchanged = function () {
+            console.log("CHANGED");
+        };
 
   }
 ]);

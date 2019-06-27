@@ -560,12 +560,12 @@
             color: #fff;
             background-color: #00bcd4;
             border: none;
-            border-radius: 11px;
+            border-radius: 4px;
             font-size: 14px;
             padding: 5px 20px;
             text-transform: uppercase;
             margin: 20px 10px 10px 10px;
-            text-align: right;
+            text-align: center;
             box-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
         }
     }
@@ -582,9 +582,8 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    margin: 40px 90px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 2px;
+    margin: 6px 90px;
+    border-radius: 6px;
 }
 
 
@@ -595,7 +594,7 @@
 }
 
 .bottom-social-details {
-    padding: 9px 15px;
+    padding: 5px;
     border-top: 0.5px solid #C6C6C6;
     display: flex;
 }
@@ -606,6 +605,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
 }
 
 .question-details-div {
@@ -631,7 +631,6 @@
 
 .q-details-numbers {
     display: flex;
-    margin-right: 30px;
 }
 
 .timeposted {
@@ -672,7 +671,7 @@
     font-style: normal;
     font-weight: bold;
     font-size: 23px;
-    line-height: 133%;
+    line-height: 100%;
     text-align: center;
     color: #000000;
 }
@@ -699,7 +698,7 @@
 
 .q-attachment {
     font-family: ceral;
-    font-size: 7px;
+    font-size: 10px;
     color: #606060;
 }
 
@@ -711,7 +710,7 @@
 
 .question-tags {
     color: #00BCD4;
-        text-transform: capitalize;
+        text-transform: uppercase;
 }
 
 .questions-asked {
@@ -763,7 +762,7 @@
 }
 
 .socialmedia-div {
-    padding: 5px;
+    padding: 0px 5px;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -802,14 +801,13 @@
 .sharewith::after {
     content: "";
     background-color: #C6C6C6;
-    width: .5px;
-    height: 60px;
+    width: .6px;
+    height: 42px;
     position: absolute;
-    right: -4px;
+    right: 5px;
 }
 
 .icons-svg {
-    margin: 0px 12px;
     display: flex;
     align-items: center;
 }
