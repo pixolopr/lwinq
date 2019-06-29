@@ -2331,10 +2331,12 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                 console.log(response.data);
                 if (response.data == 1) {
                     console.log("bookmark insert");
+                    document.getElementById("marked1" + id).style.fill = "#00BCD4";
                     document.getElementById("marked" + id).style.fill = "#00BCD4";
                 } else {
                     console.log("bookmark delete");
-                    document.getElementById("marked" + id).style.fill = "none";
+                    document.getElementById("marked1" + id).style.fill = "#606060";
+                    document.getElementById("marked" + id).style.fill = "#606060";
                 }
             }
             NavigationService.bookmarkdoubtbyquestionid(id, $scope.user).then(getbookmarksuccess);
@@ -2356,7 +2358,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                 } else {
                     question.likes--;
                     document.getElementById("liked" + question.id).classList.remove("alv-div-active");
-                    document.getElementById("queliked" + question.id).style.fill = "none";
+                    document.getElementById("queliked" + question.id).style.fill = "#606060";
                     console.log("remove");
                 }
             }
@@ -2400,6 +2402,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
 
         $scope.images = [];
         var getimagessuccess = function (response) {
+            console.log(response);
             $scope.imgpath = response.data; //to change image property
             $scope.images.push($scope.imgpath);
         }
@@ -2600,7 +2603,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
                     document.getElementById("bookmarked").style.fill = "#00BCD4";
                 } else {
                     console.log("bookmark delete");
-                    document.getElementById("bookmarked").style.fill = "none";
+                    document.getElementById("bookmarked").style.fill = "#606060";
                 }
             }
             NavigationService.bookmarkquestionbyquestionid($scope.id, $scope.user).then(getbookmarksuccess);
@@ -2611,14 +2614,14 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             var getlikesuccess = function (response) {
                 if (response.data == 1) {
                     document.getElementById("questionliked").style.fill = "#00BCD4";
-                    document.getElementById("questionlikedsvg").style.fill = "white";
+//                    document.getElementById("questionlikedsvg").style.fill = "#606060";
                     $scope.answerdata.likes++;
                     console.log("like added");
 
                 } else {
                     $scope.answerdata.likes--;
-                    document.getElementById("questionliked").style.fill = "white";
-                    document.getElementById("questionlikedsvg").style.fill = "#00BCD4";
+                    document.getElementById("questionliked").style.fill = "#606060";
+//                    document.getElementById("questionlikedsvg").style.fill = "#00BCD4";
                     console.log("like remove");
                 }
             }
@@ -2675,14 +2678,14 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
                 $scope.likesanswer = response.data;
                 console.log($scope.likesanswer);
                 if (response.data == 1) {
-                    console.log(answers.id);
+                    console.log(answers);
                     document.getElementById("ansliked" + answers.id).style.fill = "#00BCD4";
                     answers.likes++;
 
                 } else {
                     answers.likes--;
-                    console.log(answers.id);
-                    document.getElementById("ansliked" + answers.id).style.fill = "white";
+                    console.log(answers);
+                    document.getElementById("ansliked" + answers.id).style.fill = "#606060";
                 }
             }
             NavigationService.likeanswersbyanswerid(answers.id, $scope.user).then(getlikesuccess);

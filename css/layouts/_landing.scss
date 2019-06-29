@@ -39,8 +39,11 @@
     justify-content: center;
     align-items: center;
     color: #00bcd4;
+    text-transform: uppercase;
+    margin-right: 20px;
     font-family: ceraM;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+    font-size: 16px;
+//    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
 }
 
 .landing-login:hover {
@@ -76,10 +79,10 @@
 }
 
  .join-inputbox {
-    font-family: ceraL;
+    font-family: ceraThin;
     font-style: normal;
     font-weight: 100;
-    font-size: 20px;
+    font-size: 18px !important;
     line-height: 153.5%;
     color: #000000;
     border-bottom: none !important;
@@ -113,7 +116,7 @@
     justify-content: center;
     font-family: ceraBlack;
     color: #fff;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+//    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
 }
 
 .join-text:hover {
@@ -123,9 +126,10 @@
 }
 
 .landing-subtext {
-        font-family: ceraL;
+        font-family: ceraThin;
         font-size: 20px;
         color: #606060;
+        padding-bottom: 10px;
 }
 #login-modal {
     width: 70%;

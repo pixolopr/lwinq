@@ -187,6 +187,7 @@
     border-radius: 11px;
     z-index: 11;
     padding:0 10px 10px 10px;
+    position: relative;
 }
 
 #ask-q-btn {}
@@ -488,6 +489,7 @@
     .filters {
         display: flex;
         width: 50%;
+        padding: 10px;
 
         .subjects-dropdown {
             margin-right: 12px;
@@ -725,6 +727,7 @@
     img {
         margin-right: 7px;
         border: .6px solid #606060;
+        height: 40px;
     }
 }
 
@@ -754,6 +757,7 @@
         margin-left: 5px;
         width: 16px;
         height: 16px;
+        cursor: pointer;
     }
 }
 
@@ -872,6 +876,9 @@
 .total-like-count {
     display: flex;
     align-items: center;
+    svg{
+        cursor: pointer;
+    }
     
 }
 .bestanswer-likes {

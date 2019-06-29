@@ -135,7 +135,7 @@ inq.config(['$routeProvider', '$locationProvider',
 
 
         otherwise({
-            redirectTo: '/login'
+            redirectTo: '/landing'
         });
         // $routeProvider.html5Mode(true);
 
@@ -205,6 +205,8 @@ inq.filter("timeago", function () {
 				return (time <= local) ? span + ' ago' : 'in ' + span;
 		}
 });
+
+
 inq.filter('thousandSuffix', function () {
     return function (input, decimals) {
       var exp, rounded,
