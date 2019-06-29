@@ -1,3 +1,12 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
 
-*.zip
+*~
+
+.vscode/
+npm-debug.log*
+
+.sourcemaps/
+.sass-cache/
+.tmp/
 node_modules/
