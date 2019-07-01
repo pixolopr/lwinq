@@ -48,7 +48,7 @@
                 <div class="question-tag-div">IN <span class="question-tags">{{questiondata.chapter}} , {{questiondata.subject}}</span></div>
                 <div class="questions-asked">{{questiondata.question}}</div>
                 <!--            <div class="questions-asked">How many carbon itoms are present in Cholorofyl, when the chlorofyl is mixed with water and is used for Carbon Cloning?</div>-->
-                <div class="attachment-div">
+                <div  ng-if="questiondata.images.length > 0" class="attachment-div">
                     <div class="q-attachment">Attatchments:</div>
                     <div class="attachment-imgs"><a href="{{image.image | imagepath}}" ng-repeat="image in questiondata.images"><img src="{{image.image | imagepath}}" alt=""></a></div>
                 </div>
@@ -122,7 +122,7 @@
                 </svg>
             </div>
             <div class="ask-body-div">
-                <div class="askq-body"><input class="input-askq" type="text"  value="TYPE YOUR QUESTION HERE" ng-model="questioninsert.question"></div>
+                <div class="askq-body"><input class="input-askq" type="text"  value="TYPE YOUR QUESTION HERE" ng-model="questioninsert.question" autofocus></div>
 
                 <div class="svg-icons askq-flex">
                     <div class="askq-imgholder">

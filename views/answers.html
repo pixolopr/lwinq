@@ -121,7 +121,7 @@
 
         </div>
         <div class="ask-body-div">
-            <div class="askq-body"><input class="input-askq" type="text" value="TYPE YOUR QUESTION HERE" ng-model="answer.ans"></div>
+            <div class="askq-body"><input class="input-askq" type="text" value="TYPE YOUR QUESTION HERE" ng-model="answer.ans" autofocus></div>
             <!--            <div class="askq-body"><input class="input-askq" type="text" onfocus="if(this.value == 'TYPE YOUR QUESTION HERE') { this.value = ''; }" onfocusout="if(this.value == '') { this.value = 'TYPE YOUR QUESTION HERE'; }" value="TYPE YOUR QUESTION HERE" ng-model="answer.ans"></div>-->
             <div class="svg-icons askq-flex">
                 <input id="image-input0" type="file" style="display: none" file-model="img.img" on-change-event="addimg()" />
@@ -255,7 +255,7 @@
                 <div class="question-tag-div">IN <span class="question-tags">{{answerdata.chapter}} , {{answerdata.subject}}</span></div>
                 <div class="questions-asked">{{answerdata.question}}</div>
                 <!--            <div class="questions-asked">How many carbon itoms are present in Cholorofyl, when the chlorofyl is mixed with water and is used for Carbon Cloning?</div>-->
-                <div class="attachment-div">
+                <div class="attachment-div" ng-if="questiondata.images.length > 0">
                     <div class="q-attachment">Attatchments:</div>
                     <div class="attachment-imgs"><a href="{{image.image | imagepath}}" ng-repeat="image in questiondata.images"><img src="/img/attachment-default.png" alt=""></a></div>
                 </div>
@@ -320,6 +320,7 @@
 
 
 </div>
+<!--
 <div class="doubt-item-block" >
    <div class="topbar-title">Best Answer</div>
     <div class="top-question-details">
@@ -339,16 +340,13 @@
 
             </div>
             <div class="question-details-div2">
-<!--                <div class="question-tag-div">IN <span class="question-tags">test , test</span></div>-->
                 <div class="questions-asked">This is my test answer</div>
-                <!--            <div class="questions-asked">How many carbon itoms are present in Cholorofyl, when the chlorofyl is mixed with water and is used for Carbon Cloning?</div>-->
                 <div class="attachment-div">
                     <div class="q-attachment">Attatchments:</div>
                     <div class="attachment-imgs"><a href="{{image.image | imagepath}}" ng-repeat="image in questiondata.images"><img src="{{image.image | imagepath}}" alt=""></a></div>
                 </div>
             </div>
             <div class="question-details-div3">
-<!--                <div class="answer-this">ANSWER THIS</div>-->
             </div>
         </div>
 
@@ -379,6 +377,7 @@
 
 
 </div>
+-->
 <div class="doubt-item-block other-answer-block" >
    <div class="topbar-title-other">Other Answers</div>
     <div class="answer-divs" ng-repeat="answers in answerdata.answers track by answers.id">
@@ -402,7 +401,7 @@
 <!--                <div class="question-tag-div">IN <span class="question-tags">{{answerdata.chapter}} , {{answerdata.subject}}</span></div>-->
                 <div class="questions-asked">{{answers.answer}}</div>
                 <!--            <div class="questions-asked">How many carbon itoms are present in Cholorofyl, when the chlorofyl is mixed with water and is used for Carbon Cloning?</div>-->
-                <div class="attachment-div">
+                <div class="attachment-div" ng-if="answers.images.length > 0">
                     <div class="q-attachment">Attatchments:</div>
                     <div class="attachment-imgs"><a href="{{img.image | imagepath}}" ng-repeat='img in answers.images'><img src="{{img.image | imagepath}}" alt=""></a></div>
                 </div>

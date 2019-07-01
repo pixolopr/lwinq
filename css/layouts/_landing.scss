@@ -1,5 +1,5 @@
 .header-div {
-        display: flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
@@ -31,7 +31,7 @@
 
 .landing-login {
     background: #FFFFFF;
-    box-shadow: 0 0 8px rgba(0,0,0,.25);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .25);
     width: 150px;
     height: 40px;
     border-radius: 28px;
@@ -43,16 +43,16 @@
     margin-right: 20px;
     font-family: ceraM;
     font-size: 16px;
-//    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+    //    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
 }
 
 .landing-login:hover {
     cursor: pointer;
-    box-shadow: 0 3px 3px 0 rgba(0,0,0,.14), 0 4px 2px -3px rgba(0,0,0,.12), 0 0px 10px 0 rgba(0,0,0,.2); 
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .14), 0 4px 2px -3px rgba(0, 0, 0, .12), 0 0px 10px 0 rgba(0, 0, 0, .2);
 }
 
 .landing-maintext {
-        font-family: CeraGR-Medium;
+    font-family: CeraGR-Medium;
     font-style: normal;
     font-weight: normal;
     font-size: 38px;
@@ -78,7 +78,7 @@
     align-items: center;
 }
 
- .join-inputbox {
+.join-inputbox {
     font-family: ceraThin;
     font-style: normal;
     font-weight: 100;
@@ -86,17 +86,20 @@
     line-height: 153.5%;
     color: #000000;
     border-bottom: none !important;
-        margin: 0 !important;
-    }
-    .join-inputbox:hover {
-        border-bottom: none !important;
-    }
- .join-inputbox:focus {
-        box-shadow: none !important;
-    }
+    margin: 0 !important;
+    height: 18px !important;
+}
+
+.join-inputbox:hover {
+    border-bottom: none !important;
+}
+
+.join-inputbox:focus {
+    box-shadow: none !important;
+}
 
 .landing-content {
-        display: inline-block;
+    display: inline-block;
     margin-left: 50px;
     margin-top: 100px;
     font-family: ceraM;
@@ -116,33 +119,34 @@
     justify-content: center;
     font-family: ceraBlack;
     color: #fff;
-//    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+    //    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
 }
 
 .join-text:hover {
     cursor: pointer;
-//    box-shadow: 1px 3px 0 0 rgba(0,0,0,.34), 0 1px 0 2px rgba(0,0,0,.12), 0 0 4px 0 rgba(0,0,0,.2);
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,.34), 0px 0px 0px 1px rgba(0,0,0,.12), 0px 0px 5px 2px rgba(0,0,0,.2);
+    //    box-shadow: 1px 3px 0 0 rgba(0,0,0,.34), 0 1px 0 2px rgba(0,0,0,.12), 0 0 4px 0 rgba(0,0,0,.2);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, .34), 0px 0px 0px 1px rgba(0, 0, 0, .12), 0px 0px 5px 2px rgba(0, 0, 0, .2);
 }
 
 .landing-subtext {
-        font-family: ceraThin;
-        font-size: 20px;
-        color: #606060;
-        padding-bottom: 10px;
+    font-family: ceraThin;
+    font-size: 20px;
+    color: #606060;
+    padding-bottom: 10px;
 }
+
 #login-modal {
     width: 70%;
     display: block;
     position: absolute;
-    top: 10%;
+    top: 25%;
     z-index: 100;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
 }
 
-.loginmodal-x  {
+.loginmodal-x {
     svg {
         height: 15px;
         width: 15px;
@@ -150,40 +154,44 @@
         top: 10px;
         z-index: 10;
         right: 10px;
+
         path {
             fill: #00bcd4;
         }
     }
+
     svg:hover {
         cursor: pointer;
     }
 }
 
 #signup-modal {
-      width: 70%;
-//        height: 75%;
+    width: 70%;
+    //        height: 75%;
     display: block;
     position: absolute;
     top: 10%;
     z-index: 100;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
 }
 
 
 .signupmodal-x {
-      svg {
+    svg {
         height: 15px;
         width: 15px;
         position: absolute;
         top: 10px;
         z-index: 10;
         right: 10px;
+
         path {
             fill: #00bcd4;
         }
     }
+
     svg:hover {
         cursor: pointer;
     }
@@ -194,7 +202,7 @@
 }
 
 .loginSection-ForgotPassword {
-        margin-top: 10px;
+    margin-top: 10px;
 }
 
 
@@ -209,6 +217,3 @@
 
 
 }
-
-
-
