@@ -157,7 +157,7 @@ inq.filter("timeago", function () {
         var convertedtime = utctime + " UTC";
         
         var time = new Date(convertedtime);
-        console.log(time);
+
         if (!time) return "never";
 
         if (!local) {

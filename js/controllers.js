@@ -90,30 +90,30 @@ inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'Navigatio
             document.getElementById("landing-overlay").style.display = "none";
         }
 
-      
-          $scope.opensignupbox = function () {
-              document.getElementById("login-modal").style.display = "none";
-                 document.getElementById("signup-modal").style.display = "block";
+
+        $scope.opensignupbox = function () {
+            document.getElementById("login-modal").style.display = "none";
+            document.getElementById("signup-modal").style.display = "block";
             document.getElementById("landing-overlay").style.display = "block";
 
         }
-          
-            $scope.closesignupbox = function () {
-              
-              document.getElementById("signup-modal").style.display = "none";
+
+        $scope.closesignupbox = function () {
+
+            document.getElementById("signup-modal").style.display = "none";
             document.getElementById("landing-overlay").style.display = "none";
 
         }
-            
+
         $scope.openloginmodal = function () {
             document.getElementById("signup-modal").style.display = "none";
             document.getElementById("login-modal").style.display = "block";
             document.getElementById("landing-overlay").style.display = "block";
         }
-            
-            
-          
-          
+
+
+
+
         $scope.createnewpass = function () {
 
             var abc = Math.random();
@@ -261,14 +261,14 @@ inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'Navigatio
             $('.modal').modal();
 
         });
-      
-      
-      
-      
-      
-      
-      
- //Hide Menu
+
+
+
+
+
+
+
+        //Hide Menu
         $scope.standardfilter = {
             board_id: '0',
             standard_id: '0'
@@ -2239,7 +2239,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             var getalldoubtssuccess = function (response) {
                 console.log(response.data);
                 angular.forEach(response.data, function (data) {
-                    $scope.questionsalldata.push(data);
+                    $scope.questionsalldata.push(data); // for load more question
                 });
                 $rootScope.loadingdiv = false;
             };
@@ -2249,31 +2249,37 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                 console.log(response.data);
             };
             /*MAKE LOADING TRUE*/
+            console.log($scope.board);
 
             $rootScope.loadingdiv = true;
-            if ($scope.board.length != 0 && $scope.standard.length == 0 && $scope.subject.length == 0) {
-//                var board = $scope.board[$scope.filters.boards].id;
+            if ($scope.filters.boards != '' && $scope.filters.standards == '' && $scope.filters.subjects == '') {
+                console.log("condition one");
+                var board = $scope.board[$scope.filters.boards].id;
+                var standard = 0;
+                var subject = 0;
+
+
+            } else if ($scope.filters.boards != '' && $scope.filters.standards != '' && $scope.filters.subjects == '') {
+                console.log("condition second");
+                var board = $scope.board[$scope.filters.boards].id;
+                var standard = $scope.standard[$scope.filters.standards].id;
+                var subject = 0;
+
+            } else if ($scope.filters.boards != '' && $scope.filters.standards != '' && $scope.filters.subjects != '') {
+                console.log("condition third");
+                var board = $scope.board[$scope.filters.boards].id;
+                var standard = $scope.standard[$scope.filters.standards].id;
+                var subject = $scope.subject[$scope.filters.subjects].id;
+
+            } else {
+                console.log("condition fourth");
                 var board = 0;
                 var standard = 0;
                 var subject = 0;
 
-            } else if ($scope.board.length != 0 && $scope.standard.length != 0 && $scope.subject.length == 0) {
-                var board = $scope.board[$scope.filters.boards].id;
-//                var standard = $scope.standard[$scope.filters.standards].id;
-                var standard = 0;
-                var subject = 0;
-            } else if ($scope.board.length != 0 && $scope.standard.length != 0 && $scope.subject.length != 0) {
-                var board = $scope.board[$scope.filters.boards].id;
-                var standard = $scope.standard[$scope.filters.standards].id;
-//                var subject = $scope.subject[$scope.filters.subjects].id;
-                var subject = 0;
-            } else {
-//                var board = 0;
-//                var standard = 0;
-//                var subject = 0;
-//                var board = $scope.board[$scope.filters.boards].id;
-//                var standard = $scope.standard[$scope.filters.standards].id;
-//                var subject = $scope.subject[$scope.filters.subjects].id;
+                //                var board = $scope.board[$scope.filters.boards].id;
+                //                var standard = $scope.standard[$scope.filters.standards].id;
+                //                var subject = $scope.subject[$scope.filters.subjects].id;
             }
             var start = $scope.questionsalldata.length;
             var count = 10;
@@ -2282,20 +2288,34 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
 
         }
         /*END OG FETCHING DOUBTS QUESTIONS*/
-        $scope.getstandardsbyboard = function () {
+        $scope.getstandardsbyboard = function (input) {
             //            var indexboard = $scope.filters.boards;
 
             console.log("boardselected");
             $scope.questionsalldata = [];
+
+            console.log($scope.board);
+            $scope.standard = $scope.board[$scope.filters.boards].standards;
+            if (input == 1) {
+                $scope.filters.standards = '';
+                $scope.filters.subjects = '';
+                console.log("1");
+            } else if (input == 2) {
+                console.log("2");
+                $scope.filters.subjects = '';
+            } else {
+                console.log("3");
+            }
+
+
+            console.log($scope.standard, "change standard");
             $scope.getquestions();
-            if ($scope.board[$scope.filters.boards].standards != '') {
-                $scope.standard = $scope.board[$scope.filters.boards].standards;
-                console.log($scope.standard, "change standard");
-            }
-            if ($scope.standard[$scope.filters.standards].subjects != '') {
-                $scope.subject = $scope.standard[$scope.filters.standards].subjects;
-                console.log($scope.subject, "change subject");
-            }
+
+            //            if ($scope.standard[$scope.filters.standards].subjects != '') {
+            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
+
+            //                console.log($scope.subject, "change subject");
+            //            }
 
         }
 
@@ -2614,14 +2634,14 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             var getlikesuccess = function (response) {
                 if (response.data == 1) {
                     document.getElementById("questionliked").style.fill = "#00BCD4";
-//                    document.getElementById("questionlikedsvg").style.fill = "#606060";
+                    //                    document.getElementById("questionlikedsvg").style.fill = "#606060";
                     $scope.answerdata.likes++;
                     console.log("like added");
 
                 } else {
                     $scope.answerdata.likes--;
                     document.getElementById("questionliked").style.fill = "#606060";
-//                    document.getElementById("questionlikedsvg").style.fill = "#00BCD4";
+                    //                    document.getElementById("questionlikedsvg").style.fill = "#00BCD4";
                     console.log("like remove");
                 }
             }

@@ -1,20 +1,20 @@
 <div class="douts-top-sec">
     <div class="filters">
         <div class="boards-dropdown">
-            <select class="select-sub-board-std" ng-model="filters.boards" ng-change="getstandardsbyboard()">
+            <select class="select-sub-board-std" ng-model="filters.boards" ng-change="getstandardsbyboard(1)">
                 <option value="">Boards</option>
                 <option value="{{$index}}" ng-repeat="x in board">{{x.name}}</option>
             </select>
         </div>
 
         <div class="standards-dropdown">
-            <select class="select-sub-board-std" ng-model="filters.standards" ng-change="getstandardsbyboard()">
+            <select class="select-sub-board-std" ng-model="filters.standards" ng-change="getstandardsbyboard(2)">
                 <option value="">Standards</option>
                 <option value="{{$index}}" ng-repeat="y in standard">{{y.name}}</option>
             </select>
         </div>
         <div class="subjects-dropdown">
-            <select class="select-sub-board-std" ng-model="filters.subjects" ng-change="getstandardsbyboard()">
+            <select class="select-sub-board-std" ng-model="filters.subjects" ng-change="getstandardsbyboard(3)">
                 <option value="">Subjects</option>
                 <option value="{{$index}}" ng-repeat="z in subject">{{z.name}}</option>
             </select>
