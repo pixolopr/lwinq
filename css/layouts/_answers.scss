@@ -3,9 +3,10 @@
     flex-basis: 100% !important;
 }
 .askq-body input {
-  text-align: center;
+//  text-align: center;
   border-bottom: none !important;
   margin: 0px !important;
+
 }
 
 .askq-flex {
@@ -40,6 +41,11 @@
   
   color: white;
   font-size: 12px;
+}
+.input-askq{
+    border: none;
+    outline: none;
+    font-size: 20px;
 }
 .input-askq:hover {
   border-bottom: none !important;

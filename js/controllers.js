@@ -2308,7 +2308,6 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             }
 
 
-            console.log($scope.standard, "change standard");
             $scope.getquestions();
 
             //            if ($scope.standard[$scope.filters.standards].subjects != '') {
@@ -2710,6 +2709,22 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             }
             NavigationService.likeanswersbyanswerid(answers.id, $scope.user).then(getlikesuccess);
         }
+        
+        $scope.bestlikeans = function (answerslike) {
+            var getlikesuccess = function (response) {
+                console.log(response);
+                if (response.data == '1') {
+                    document.getElementById("bestanswer").style.fill = "#00BCD4";
+                    answerslike.likes++;
+
+                } else {
+                    answerslike.likes--;
+                    document.getElementById("bestanswer").style.fill = "#606060";
+                }
+            }
+            NavigationService.likeanswersbyanswerid(answerslike.id, $scope.user).then(getlikesuccess);
+        }
+        
 
         //END LIKE
 

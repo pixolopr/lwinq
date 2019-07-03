@@ -57,6 +57,7 @@
 .q-div3 img {
     height: 40px;
     margin: 2px;
+    box-shadow: 0 0 8px rgba(0,0,0,.25);
 }
 
 .q-div3 p {
@@ -142,9 +143,9 @@
 }
 
 .profile-div img {
-    width: 50px;
+    width: 38px;
     border-radius: 50%;
-    margin: 0 auto;
+    margin: 10px auto;
     display: block;
         border: 1px solid #EFEFEF;
 }
@@ -178,6 +179,7 @@
     top: 0;
     overflow: hidden;
     display: none;
+    z-index: 111;
 }
 
 .askq-wrap {
@@ -186,7 +188,7 @@
     margin: 100px auto;
     border-radius: 11px;
     z-index: 11;
-    padding:0 10px 10px 10px;
+    padding:0 10px 1px 10px;
     position: relative;
 }
 
@@ -241,7 +243,7 @@
 //    padding: 10px;
 //    height: 75px;
 //    line-height: 75px;
-    color: #a59f9f;
+    color: #7d7d7d;
 }
 .askq-imgholder{
     width: 90%;
@@ -256,6 +258,7 @@
     svg{
         width: 34px !important; 
         height: 34px !important;
+        cursor: pointer;
     }
 }
 
@@ -586,6 +589,7 @@
     background-color: #ffffff;
     margin: 6px 90px;
     border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0,0,0,.25);
 }
 
 
@@ -627,7 +631,7 @@
     font-weight: normal;
     font-size: 13px;
     line-height: 16px;
-    text-align: center;
+//    text-align: center;
     color: #3C3C3C;
 }
 
@@ -659,6 +663,9 @@
     display: flex;
     flex-direction: column;
     padding: 0px 15px;
+}
+.question-lva:last-of-type{
+    padding-right: 0;
 }
 
 .question-likes {
@@ -720,13 +727,13 @@
     font-family: ceram;
     font-size: 14px;
     color: #000000;
-        line-height: 24px;
+        line-height: 18px;
 }
 
 .attachment-imgs {
     img {
         margin-right: 7px;
-        border: .6px solid #606060;
+        border: .5px solid #ababab;
         height: 40px;
     }
 }
@@ -815,6 +822,9 @@
     display: flex;
     align-items: center;
 }
+.icons-svg svg{
+    cursor: pointer;
+}
 .loadmorebtn{
     font-size: 14px;
     font-family: ceraB;
@@ -841,6 +851,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    font-weight: bolder;
 }
 
 .question-details-div3 {
