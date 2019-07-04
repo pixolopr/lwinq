@@ -852,6 +852,7 @@
     align-items: center;
     cursor: pointer;
     font-weight: bolder;
+    letter-spacing: 0.2px;
 }
 
 .question-details-div3 {
@@ -896,9 +897,13 @@
     padding: 9px 15px;
     border: 0.5px solid #E5E5E5;
     display: flex;
+    border-radius: 2px;
 }
 .answer-divs {
     border-top: 1px solid #606060;
+}
+.answer-divs:last-of-type{
+    border-bottom: 1px solid #606060;
 }
 
 .other-answer-block {

@@ -2574,8 +2574,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
   }
 ]);
 
-inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
-  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
+inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams','$route', '$location', '$interval',
+  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams,$route, $location, $interval) {
 
         $scope.template = TemplateService;
         $rootScope.fullpageview = true;
@@ -2680,6 +2680,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             $scope.images = '';
         }
         $scope.postanswer = function () {
+            
             if ($scope.answer.ans != '' && $scope.id != '', $scope.user != '') {
 
                 NavigationService.insertnewanswer($scope.answer.ans, $scope.id, $scope.user, JSON.stringify($scope.images)).then();
@@ -2687,6 +2688,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
                 $scope.answer.ans = '';
                 $scope.images = '';
                 $scope.closepostanswer();
+                $route.reload();
             }
 
         }
