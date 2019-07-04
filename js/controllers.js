@@ -2,8 +2,8 @@ var inqcontroller = angular.module('inqcontroller', ['templateservicemod', 'navi
 
 // var adminurl = "http://localhost/rest/rest/index.php/";
 // var imageurl = "http://localhost/rest/rest/uploads/";
-var adminurl = "http://learnwithinq.com/adminpanel/rest/index.php/";
-var imageurl = "http://learnwithinq.com/adminpanel/rest/uploads/";
+var adminurl = "https://stgapi.learnwithinq.com/rest/index.php/";
+var imageurl = "https://stgapi.learnwithinq.com/rest/uploads/";
 
 var usertypes = [{
         id: 1,
@@ -55,13 +55,27 @@ inqcontroller.controller('home', ['$scope', 'TemplateService', 'NavigationServic
   }
 ]);
 
-inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope',
-  function ($scope, TemplateService, NavigationService, $rootScope) {
+inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$location',
+  function ($scope, TemplateService, NavigationService, $rootScope, $location) {
 
         $scope.template = TemplateService; // loading the TemplateService
         TemplateService.content = "views/landing.html";
         $scope.title = "Landing";
         $rootScope.showmenu = false;
+
+        $scope.title = "Login";
+
+        //INITIALIZATIONS
+        $scope.error = false;
+        $scope.logindata = {
+            contact: "",
+            password: ""
+        };
+
+        $rootScope.showmenu = false;
+
+        $scope.forgotpassword = {};
+
 
 
         $scope.openlandingmodal = function () {
@@ -76,6 +90,454 @@ inqcontroller.controller('landingCtrl', ['$scope', 'TemplateService', 'Navigatio
             document.getElementById("landing-overlay").style.display = "none";
         }
 
+
+        $scope.opensignupbox = function () {
+            document.getElementById("login-modal").style.display = "none";
+            document.getElementById("signup-modal").style.display = "block";
+            document.getElementById("landing-overlay").style.display = "block";
+
+        }
+
+        $scope.closesignupbox = function () {
+
+            document.getElementById("signup-modal").style.display = "none";
+            document.getElementById("landing-overlay").style.display = "none";
+
+        }
+
+        $scope.openloginmodal = function () {
+            document.getElementById("signup-modal").style.display = "none";
+            document.getElementById("login-modal").style.display = "block";
+            document.getElementById("landing-overlay").style.display = "block";
+        }
+
+
+
+
+        $scope.createnewpass = function () {
+
+            var abc = Math.random();
+            var xyz = abc * 10000;
+
+            if (xyz > 1000 && xyz < 10000) {
+                $scope.randomOtpNumber = Math.trunc(xyz);
+            }
+            //            console.log(randomOtpNumber);
+            message = "Hey, you have sent a password reset request for your LWINQ account. Here's the new password: " + $scope.randomOtpNumber;
+            NavigationService.sendsms($scope.logindata.contact, message).success(sendsmssuccess).error(sendsmserror);
+
+
+        };
+
+        var loginsuccess = function (response) {
+            if (response.data == 'false') {
+                // if login fails i.e. no data received
+                console.log('Login error');
+                $scope.error = true;
+            } else {
+                $scope.error = false;
+                console.log(response.data);
+                $.jStorage.set('user', response.data);
+                $rootScope.showmenu = true;
+                if ($.jStorage.get('user').access_id != 3) {
+                    // if teacher or in-house stud
+                    $location.path('/subjects');
+                } else { // if non in-house person
+                    $location.path('/standards');
+                }
+            }
+        };
+
+        /*function*/
+        $scope.dologin = function () {
+            $scope.error = false;
+            console.log($scope.logindata);
+            NavigationService.dologin($scope.logindata.contact, $scope.logindata.password).then(loginsuccess); // try login and if success goto loginsuccess function
+        }
+
+
+        $scope.doforgotpassword = function () {
+
+            var validation = true;
+
+
+            if (!$scope.forgotpassword.contactphone) {
+
+                $scope.forgotpassworderrormsg = "**Please enter a valid phone number"
+                validation = false;
+
+                return false;
+            } else if (isNaN($scope.forgotpassword.contactphone)) {
+                $scope.forgotpassworderrormsg = "**Phone Number can only contain number";
+                validation = false;
+                return false;
+            } else if ($scope.forgotpassword.contactphone.length != 10) {
+                $scope.forgotpassworderrormsg = "**Phone Number must be 10 digit";
+                validation = false;
+                return false;
+            }
+
+            if (validation) {
+                $scope.forgotpassworderrormsg = "";
+
+
+                //Check if contact exists
+
+                checkcontactsuccess = function (response) {
+                    console.log(response.data)
+
+                    if (response.data == "true") {
+
+
+
+                        //Send OTP to a contact number
+                        sendsmssuccess = function (response, status) {
+                            console.log('Send SMS Success');
+
+                        };
+                        sendsmserror = function (error, status) {
+
+                            console.log('Send SMS Error');
+                        };
+
+                        $scope.createnewpass();
+
+
+
+                        updatesuccess = function (response) {
+                            console.log(response);
+                            console.log('Registered Successfully');
+                            $scope.forgotpasswordsuccessmsg = "New Password has been sent to the phone number via SMS";
+                            $scope.forgotpassworderrormsg = "";
+
+                            setTimeout(function () {
+                                console.log('setTimeout');
+                                $location.path('/login');
+                                $scope.$apply();
+
+                            }, 1000);
+
+                        };
+                        updateerror = function (error) {
+                            console.log('Internet Error');
+                        }
+
+                        NavigationService.updatepassword($scope.forgotpassword.contactphone, $scope.randomOtpNumber).success(updatesuccess).error(updateerror);
+
+
+
+                    } else {
+                        $scope.forgotpassworderrormsg = "**Phone Number is not registered with us";
+                        validation = false;
+
+                    }
+                };
+
+                getDataError = function (response) {
+                    console.log(response);
+
+                };
+
+
+                NavigationService.checkcontactexists($scope.forgotpassword.contactphone).then(checkcontactsuccess, getDataError);
+
+
+
+
+
+
+
+            }
+
+        }
+
+
+
+
+
+
+        $(document).ready(function () {
+
+            $('.modal').modal();
+
+        });
+
+
+
+
+
+
+
+        //Hide Menu
+        $scope.standardfilter = {
+            board_id: '0',
+            standard_id: '0'
+
+        }
+        $rootScope.showmenu = false;
+        $scope.signupdata = {
+
+            name: "",
+            standard_id: "",
+            board_id: "",
+            school: "",
+            contact: "",
+            email: "",
+            password: "",
+            access_id: 4,
+            createdate: "",
+            editdate: "",
+            verified: 1,
+            active: 1,
+        };
+
+        $scope.fulldataofboards = [];
+
+
+
+        //function to change the focus from one input to another
+
+        $scope.inputfocus = function () {
+            $('#inputotpone,#inputotptwo,#inputotpthree,#inputotpfour').keyup(function (e) {
+                if ($(this).val().length == $(this).attr('maxlength'))
+                    $(this).next(':input').focus()
+            })
+        }
+
+
+
+
+        $scope.createotp = function () {
+
+            var abc = Math.random();
+            var xyz = abc * 10000;
+
+            if (xyz > 1000 && xyz < 10000) {
+                randomOtpNumber = Math.trunc(xyz);
+            }
+            console.log(randomOtpNumber);
+            message = "Hey, use " + randomOtpNumber + " as the OTP for registering into LWINQ.";
+            NavigationService.sendsms($scope.signupdata.contact, message).success(sendsmssuccess).error(sendsmserror);
+
+
+        };
+
+
+
+        $scope.doSignUp = function () {
+
+            $scope.signupdata.board_id = $scope.fulldataofboards[$scope.standardfilter.board_id].id;
+
+            var validation = true;
+            if (!$scope.signupdata.name) {
+
+                $scope.errormsg = "**Name field cannot be empty";
+                validation = false;
+
+                return false;
+            } else if (($scope.signupdata.name.length < 2) || ($scope.signupdata.name.length > 20)) {
+
+                $scope.errormsg = "**Name field length must be between 2 and 20";
+                validation = false;
+                return false;
+            } else if (!isNaN($scope.signupdata.name)) {
+
+                $scope.errormsg = "**Name field must only contain characters";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.school) {
+                $scope.errormsg = "**School Name field cannot be empty";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.email) {
+                $scope.errormsg = "**Email Address field cannot be empty";
+                validation = false;
+                return false;
+            } else if ($scope.signupdata.email.indexOf('@') <= 0) {
+
+                $scope.errormsg = "**Email Address not valid";
+                validation = false;
+                return false;
+
+            } else if (($scope.signupdata.email.charAt($scope.signupdata.email.length - 4) != '.') && ($scope.signupdata.email.charAt($scope.signupdata.email.length - 3) != '.')) {
+
+                $scope.errormsg = "**Email Address not valid";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.contact) {
+                $scope.errormsg = "**Phone Number field cannot be empty";
+                validation = false;
+                return false;
+            } else if (isNaN($scope.signupdata.contact)) {
+                $scope.errormsg = "**Phone Number can only contain number";
+                validation = false;
+                return false;
+            } else if ($scope.signupdata.contact.length != 10) {
+                $scope.errormsg = "**Phone Number must be 10 digit";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.password) {
+                $scope.errormsg = "**Password field cannot be empty";
+                validation = false;
+                return false;
+            } else if (($scope.signupdata.password.length < 4) || ($scope.signupdata.password.length > 20)) {
+
+                $scope.errormsg = "**Password field length must be between 4 and 20";
+                validation = false;
+                return false;
+            } else if ($scope.signupdata.password != $scope.signupdata.confpassword) {
+                $scope.errormsg = "**Password and Confirm Password do not match";
+                validation = false;
+                return false;
+            }
+
+            if (!$scope.signupdata.confpassword) {
+                $scope.errormsg = "**Confirm Password field cannot be empty";
+                validation = false;
+                return false;
+            }
+
+            if (validation) {
+                $scope.errormsg = "";
+
+                //Check if contact exists
+
+                checkcontactsuccess = function (response) {
+
+
+                    if (response.data == "false") {
+
+
+
+                        //Send OTP to a contact number
+                        registererror = function (data, response) {};
+                        sendsmssuccess = function (response, status) {};
+                        sendsmserror = function (error, status) {};
+
+                        $scope.createotp();
+
+                        //Show Modal on click of Sign up button
+                        $('.modal').modal();
+                        $('.modal').modal('open');
+                        console.log(randomOtpNumber);
+
+                        $scope.inputfocus();
+
+
+                    } else {
+                        $('.modal').modal('close');
+                        $scope.errormsg = "**Phone number already exists on our database. Please use a different phone number.";
+
+                    }
+                };
+
+
+                NavigationService.checkcontactexists($scope.signupdata.contact).then(checkcontactsuccess, getDataError);
+
+
+            }
+
+        };
+
+
+
+        $scope.closeotpmodal = function () {
+            $('.modal').modal('close');
+
+        };
+
+        $scope.resendsmsdata = function () {
+            $scope.createotp();
+        };
+
+
+        //Get standard and board dynamically
+        //initialized = true;
+
+        getDataSuccess = function (response) {
+            console.log(response.data);
+            $scope.fulldataofboards = response.data;
+            $scope.signupdata.standard_id = $scope.fulldataofboards[0].standards[0].id;
+            setTimeout(function () {
+                //Select dropdown function
+                //if(initialized){
+                console.log("INItIALIZE");
+                $('.boards-select').material_select();
+                //initialized = false;
+                //};
+            }, 0);
+            setTimeout(function () {
+                //Select dropdown function
+                //if(initialized){
+                console.log("INItIALIZE");
+                $('.standard-boards-select').material_select();
+                //initialized = false;
+                //};
+            }, 0);
+
+
+        };
+        getDataError = function (error) {
+            console.log(error);
+            console.log('Internet Error');
+        };
+        console.log($scope.fulldataofboards);
+        NavigationService.getstandardandboard().then(getDataSuccess, getDataError);
+
+
+
+        //Verify if OTP matches with the entered OTP
+
+        $scope.verifyOtp = function () {
+            var userinputdata = parseInt($scope.inputotp1 + "" + $scope.inputotp2 + "" + $scope.inputotp3 + "" + $scope.inputotp4);
+            console.log(userinputdata);
+            console.log(randomOtpNumber);
+            if (randomOtpNumber == userinputdata) {
+                console.log('Correct OTP ! continue the things ');
+
+                registersuccess = function (response) {
+                    console.log(response);
+                    console.log('Registered Successfully');
+                    $scope.modalsuccessmsg = "Registered Successfully";
+                    $scope.modalerrormsg = "";
+
+                    setTimeout(function () {
+                        console.log('setTimeout');
+                        $scope.closeotpmodal();
+                        $location.path('/login');
+
+                        $scope.$apply();
+
+                    }, 1000);
+
+                };
+                registererror = function (error) {
+                    console.log('Internet Error');
+                }
+
+                NavigationService.register($scope.signupdata).success(registersuccess).error(registererror);
+
+            } else {
+                $scope.modalerrormsg = "The OTP you entered is incorrect";
+                $scope.modalsuccessmsg = "";
+
+            }
+
+        }
+
+
+        //PAGE FUNCTIONS
+        $scope.boardchanged = function () {
+            console.log("CHANGED");
+        };
 
   }
 ]);
@@ -1758,26 +2220,26 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.board = [];
         $scope.standard = [];
         $scope.subject = [];
-        var getDataSuccess = function(response){
+        var getDataSuccess = function (response) {
             console.log(response.data);
             $scope.board = response.data;
         }
-       
-        
-        var getDataError = function(response){
+
+
+        var getDataError = function (response) {
             console.log(response.data);
         }
-        
+
         NavigationService.getstandardandboard().then(getDataSuccess, getDataError);
         /*GET DOUBTS QUESTIONS FROM FILTERS*/
-        
-        
+
+
         $scope.questionsalldata = [];
         $scope.getquestions = function () {
             var getalldoubtssuccess = function (response) {
                 console.log(response.data);
                 angular.forEach(response.data, function (data) {
-                    $scope.questionsalldata.push(data);
+                    $scope.questionsalldata.push(data); // for load more question
                 });
                 $rootScope.loadingdiv = false;
             };
@@ -1787,67 +2249,90 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                 console.log(response.data);
             };
             /*MAKE LOADING TRUE*/
+            console.log($scope.board);
 
             $rootScope.loadingdiv = true;
-        if($scope.board.length != 0 && $scope.standard.length == 0 && $scope.subject.length == 0){
+            if ($scope.filters.boards != '' && $scope.filters.standards == '' && $scope.filters.subjects == '') {
+                console.log("condition one");
                 var board = $scope.board[$scope.filters.boards].id;
-                var subject = 0;
                 var standard = 0;
-                
-        }
-            else if($scope.board.length != 0 && $scope.standard.length != 0 && $scope.subject.length == 0){
+                var subject = 0;
+
+
+            } else if ($scope.filters.boards != '' && $scope.filters.standards != '' && $scope.filters.subjects == '') {
+                console.log("condition second");
                 var board = $scope.board[$scope.filters.boards].id;
                 var standard = $scope.standard[$scope.filters.standards].id;
                 var subject = 0;
-        }
-            else if($scope.board.length != 0 && $scope.standard.length != 0 && $scope.subject.length != 0){
+
+            } else if ($scope.filters.boards != '' && $scope.filters.standards != '' && $scope.filters.subjects != '') {
+                console.log("condition third");
                 var board = $scope.board[$scope.filters.boards].id;
                 var standard = $scope.standard[$scope.filters.standards].id;
                 var subject = $scope.subject[$scope.filters.subjects].id;
-        }
-            else {
-                var subject = 0;
+
+            } else {
+                console.log("condition fourth");
                 var board = 0;
                 var standard = 0;
-                
+                var subject = 0;
+
+                //                var board = $scope.board[$scope.filters.boards].id;
+                //                var standard = $scope.standard[$scope.filters.standards].id;
+                //                var subject = $scope.subject[$scope.filters.subjects].id;
             }
             var start = $scope.questionsalldata.length;
             var count = 10;
-                NavigationService.getalldoubts($scope.user, standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
-//            }
-            
+            NavigationService.getalldoubts($scope.user, standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
+            //            }
+
         }
         /*END OG FETCHING DOUBTS QUESTIONS*/
-         $scope.getstandardsbyboard = function(){
-//            var indexboard = $scope.filters.boards;
-            
+        $scope.getstandardsbyboard = function (input) {
+            //            var indexboard = $scope.filters.boards;
+
             console.log("boardselected");
             $scope.questionsalldata = [];
+
+            console.log($scope.board);
+            $scope.standard = $scope.board[$scope.filters.boards].standards;
+            if (input == 1) {
+                $scope.filters.standards = '';
+                $scope.filters.subjects = '';
+                console.log("1");
+            } else if (input == 2) {
+                console.log("2");
+                $scope.filters.subjects = '';
+            } else {
+                console.log("3");
+            }
+
+
             $scope.getquestions();
-             if($scope.board[$scope.filters.boards].standards != ''){
-                 $scope.standard = $scope.board[$scope.filters.boards].standards;
-                 console.log($scope.standard,"change standard");
-             }
-             if($scope.standard[$scope.filters.standards].subjects != ''){
-                 $scope.subject = $scope.standard[$scope.filters.standards].subjects;
-                 console.log($scope.subject,"change subject");
-             }            
-            
+
+            //            if ($scope.standard[$scope.filters.standards].subjects != '') {
+            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
+
+            //                console.log($scope.subject, "change subject");
+            //            }
+
         }
-//        $scope.getsubjectsbystandard = function(){
-//            var indexstandard = $scope.filters.standards;
-////            console.log($scope.standard[$scope.filters.standards].subjects);
-//            console.log("standardselected");
-//            
-//            $scope.questionsalldata = [];
-//            $scope.getquestions();
-////            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
-//        }
-        
-//        $scope.getquestionswithfilter = function () {
-//            $scope.questionsalldata = [];
-//            $scope.getquestions();
-//        }
+
+
+        //        $scope.getsubjectsbystandard = function(){
+        //            var indexstandard = $scope.filters.standards;
+        ////            console.log($scope.standard[$scope.filters.standards].subjects);
+        //            console.log("standardselected");
+        //            
+        //            $scope.questionsalldata = [];
+        //            $scope.getquestions();
+        ////            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
+        //        }
+
+        //        $scope.getquestionswithfilter = function () {
+        //            $scope.questionsalldata = [];
+        //            $scope.getquestions();
+        //        }
         $scope.getquestions();
         //      to get image for insert in doubts
         $scope.img = {
@@ -1859,16 +2344,18 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
 
         console.log($scope.user);
 
-        $scope.bookmarkdoubt = function (id,event) {
+        $scope.bookmarkdoubt = function (id, event) {
             event.cancelBubble = true;
             var getbookmarksuccess = function (response) {
                 console.log(response.data);
-                if (response.data == "enteredtrue") {
+                if (response.data == 1) {
                     console.log("bookmark insert");
+                    document.getElementById("marked1" + id).style.fill = "#00BCD4";
                     document.getElementById("marked" + id).style.fill = "#00BCD4";
                 } else {
                     console.log("bookmark delete");
-                    document.getElementById("marked" + id).style.fill = "none";
+                    document.getElementById("marked1" + id).style.fill = "#606060";
+                    document.getElementById("marked" + id).style.fill = "#606060";
                 }
             }
             NavigationService.bookmarkdoubtbyquestionid(id, $scope.user).then(getbookmarksuccess);
@@ -1876,11 +2363,11 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         //      END OF ADD BOOKMARK
 
         //FOR LIKE
-        $scope.likequestion = function (question,event) {
+        $scope.likequestion = function (question, event) {
             event.cancelBubble = true;
             var getlikesuccess = function (response) {
                 console.log(response.data);
-                if (response.data == "enteredtrue") {
+                if (response.data == 1) {
                     question.likes++;
                     console.log(question.id);
                     document.getElementById("liked" + question.id).classList.add("alv-div-active");
@@ -1890,7 +2377,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                 } else {
                     question.likes--;
                     document.getElementById("liked" + question.id).classList.remove("alv-div-active");
-                    document.getElementById("queliked" + question.id).style.fill = "none";
+                    document.getElementById("queliked" + question.id).style.fill = "#606060";
                     console.log("remove");
                 }
             }
@@ -1903,37 +2390,38 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         //        TO KNOW ANSWER AND LIKE BY OR NOT
 
         console.log($scope.questionsalldata);
-        $scope.addactiveclass = function (answersexits) {
-            if (answersexits > 0) {
+        $scope.addactiveclass = function (isanswerdbyme) {
+            if (isanswerdbyme > 0) {
                 return "alv-div-active";
             }
         }
 
-        $scope.addactiveclasslike = function (likesexits) {
-            if (likesexits > 0) {
+        $scope.addactiveclasslike = function (islikedbyme) {
+            if (islikedbyme > 0) {
                 return "alv-div-active";
             }
         }
-        $scope.addactiveclassviews = function (viewssexits) {
-            if (viewssexits > 0) {
+        $scope.addactiveclassviews = function (isviewedbyme) {
+            if (isviewedbyme > 0) {
                 return "alv-div-active";
             }
         }
 
         //       USE LATER FOR VIEWS IN DOUBTS
 
-//               TO KNOW VIEW BY ME OR NOT
+        //               TO KNOW VIEW BY ME OR NOT
 
-//               $scope.addactivetoview = function(viewsexits){
-//                   if(viewsexits > 0 || viewsexits == true){
-//                       return "alv-div-active";
-//                   }
-//               }
+        //               $scope.addactivetoview = function(viewsexits){
+        //                   if(viewsexits > 0 || viewsexits == true){
+        //                       return "alv-div-active";
+        //                   }
+        //               }
 
 
 
         $scope.images = [];
         var getimagessuccess = function (response) {
+            console.log(response);
             $scope.imgpath = response.data; //to change image property
             $scope.images.push($scope.imgpath);
         }
@@ -1955,41 +2443,58 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             question: '',
             chapter: ''
         }
-        $scope.chapterfromsubid = '';
-        $scope.chapterlist = [];
+        //        $scope.chapterfromsubid = '';
+        //        $scope.chapterlist = [];
+        $scope.optionslist = {
+            board: '',
+            standard: '',
+            subject: '',
+            chapter: ''
+        }
+
+        $scope.optionschange = function () {
+            console.log($scope.optionslist.board);
+            $scope.standardoption = $scope.board[$scope.optionslist.board].standards;
+            console.log($scope.standardoption);
+            $scope.subjectoption = $scope.standardoption[$scope.optionslist.standard].subjects;
+            console.log($scope.subjectoption);
+            $scope.chapteroption = $scope.subjectoption[$scope.optionslist.subject].chapters;
+
+            console.log($scope.subjectoption[$scope.optionslist.subject].id);
+            console.log($scope.chapteroption[$scope.optionslist.chapter].id);
+
+        };
         $scope.getchapterslist = function () {
+
+
+
             document.getElementsByClassName("backmain")[0].style.display = "block";
-            $scope.chapterfromsubid = $scope.questionsalldata[0].subid;
-            var getalldoubtssuccess = function (response) {
-                $scope.chapterlist = response.data;
-            }
-            NavigationService.getchaptersbysubjectid($scope.chapterfromsubid).then(getalldoubtssuccess);
+
+            //            $scope.chapterfromsubid = $scope.questionsalldata[0].subid;
+            //            var getalldoubtssuccess = function (response) {
+            //                $scope.chapterlist = response.data;
+            //            }
+            //            NavigationService.getchaptersbysubjectid($scope.chapterfromsubid).then(getalldoubtssuccess);
         }
         $scope.closeaskquestion = function () {
             document.getElementsByClassName("backmain")[0].style.display = "none";
             $scope.questioninsert.question = '';
             $scope.images = '';
-            $scope.chapterlist = '';
         }
         $scope.askquestion = function () {
-            console.log($scope.questioninsert.question);
-            console.log($scope.questioninsert.chapter);
-            console.log($scope.user);
-            console.log($scope.images);
-            console.log($scope.chapterfromsubid);
-            console.log($scope.chapterlist);
 
-            if ($scope.questioninsert.question != '' && $scope.chapterfromsubid != '' && $scope.questioninsert.chapter != '') {
-                NavigationService.insertnewdoubts($scope.questioninsert.question, $scope.chapterfromsubid, $scope.questioninsert.chapter, $scope.user, JSON.stringify($scope.images)).then();
+            if ($scope.questioninsert.question != '' && $scope.subjectoption[$scope.optionslist.subject].id != '' && $scope.chapteroption[$scope.optionslist.chapter].id != '') {
+                NavigationService.insertnewdoubts($scope.questioninsert.question, $scope.subjectoption[$scope.optionslist.subject].id, $scope.chapteroption[$scope.optionslist.chapter].id, $scope.user, JSON.stringify($scope.images)).then();
                 $scope.questioninsert.question = '';
                 $scope.images = '';
             }
+            $scope.closeaskquestion();
 
             //          
         }
         $scope.gotoanswerpage = function (ques_id) {
             $location.path("/answers/" + ques_id);
-            NavigationService.viewsofquestionid(ques_id,$scope.user).then();
+            NavigationService.viewsofquestionid(ques_id, $scope.user).then();
         }
 
 
@@ -2069,8 +2574,8 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
   }
 ]);
 
-inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
-  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
+inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams','$route', '$location', '$interval',
+  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams,$route, $location, $interval) {
 
         $scope.template = TemplateService;
         $rootScope.fullpageview = true;
@@ -2099,9 +2604,49 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             };
             var start = $scope.answerdata.answers.length;
             console.log(start);
-            NavigationService.getallanswersfordoubt($scope.id, start, count,$scope.user).then(getsuccess);  
+            NavigationService.getallanswersfordoubt($scope.id, start, count, $scope.user).then(getsuccess);
         }
         $scope.getallanswersfordoubt();
+
+
+
+        //       FOR BOOKMARK AND UNDO
+
+        console.log($scope.user);
+
+        $scope.bookmarkquestion = function () {
+            var getbookmarksuccess = function (response) {
+                console.log(response.data);
+                if (response.data == 1) {
+                    console.log("bookmark insert");
+                    document.getElementById("bookmarked").style.fill = "#00BCD4";
+                } else {
+                    console.log("bookmark delete");
+                    document.getElementById("bookmarked").style.fill = "#606060";
+                }
+            }
+            NavigationService.bookmarkquestionbyquestionid($scope.id, $scope.user).then(getbookmarksuccess);
+        }
+        //      END OF ADD BOOKMARK
+
+        $scope.likequestion = function () {
+            var getlikesuccess = function (response) {
+                if (response.data == 1) {
+                    document.getElementById("questionliked").style.fill = "#00BCD4";
+                    //                    document.getElementById("questionlikedsvg").style.fill = "#606060";
+                    $scope.answerdata.likes++;
+                    console.log("like added");
+
+                } else {
+                    $scope.answerdata.likes--;
+                    document.getElementById("questionliked").style.fill = "#606060";
+                    //                    document.getElementById("questionlikedsvg").style.fill = "#00BCD4";
+                    console.log("like remove");
+                }
+            }
+            NavigationService.likequestionbyme($scope.id, $scope.user).then(getlikesuccess);
+        }
+
 
 
         $scope.img = {
@@ -2123,7 +2668,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
         $scope.answer = {
             ans: ''
         };
-        
+
 
         $scope.postansweropen = function () {
             document.getElementsByClassName("backmain")[0].style.display = "block";
@@ -2135,12 +2680,15 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             $scope.images = '';
         }
         $scope.postanswer = function () {
+            
             if ($scope.answer.ans != '' && $scope.id != '', $scope.user != '') {
 
                 NavigationService.insertnewanswer($scope.answer.ans, $scope.id, $scope.user, JSON.stringify($scope.images)).then();
                 $scope.getallanswersfordoubt();
                 $scope.answer.ans = '';
                 $scope.images = '';
+                $scope.closepostanswer();
+                $route.reload();
             }
 
         }
@@ -2150,19 +2698,35 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             var getlikesuccess = function (response) {
                 $scope.likesanswer = response.data;
                 console.log($scope.likesanswer);
-                if (response.data == "enteredtrue") {
-                    console.log(answers.id);
+                if (response.data == 1) {
+                    console.log(answers);
                     document.getElementById("ansliked" + answers.id).style.fill = "#00BCD4";
                     answers.likes++;
 
                 } else {
                     answers.likes--;
-                    console.log(answers.id);
-                    document.getElementById("ansliked" + answers.id).style.fill = "white";
+                    console.log(answers);
+                    document.getElementById("ansliked" + answers.id).style.fill = "#606060";
                 }
             }
             NavigationService.likeanswersbyanswerid(answers.id, $scope.user).then(getlikesuccess);
         }
+        
+        $scope.bestlikeans = function (answerslike) {
+            var getlikesuccess = function (response) {
+                console.log(response);
+                if (response.data == '1') {
+                    document.getElementById("bestanswer").style.fill = "#00BCD4";
+                    answerslike.likes++;
+
+                } else {
+                    answerslike.likes--;
+                    document.getElementById("bestanswer").style.fill = "#606060";
+                }
+            }
+            NavigationService.likeanswersbyanswerid(answerslike.id, $scope.user).then(getlikesuccess);
+        }
+        
 
         //END LIKE
 

@@ -27,6 +27,11 @@ $break-large: 1200px;
 }
 
 @font-face {
+    font-family: ceraThin;
+    src: url("../fonts/Cera_GR_Thin.otf")format("opentype");
+}
+
+@font-face {
     font-family: ceraM;
     src: url("../fonts/Cera_GR_Medium.otf")format("opentype");
 }

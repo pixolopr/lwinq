@@ -3,15 +3,16 @@
     flex-basis: 100% !important;
 }
 .askq-body input {
-  text-align: center;
+//  text-align: center;
   border-bottom: none !important;
   margin: 0px !important;
+
 }
 
 .askq-flex {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 10px;
+  margin: 0 !important;
 }
 
 .ua-time-name {
@@ -41,6 +42,11 @@
   color: white;
   font-size: 12px;
 }
+.input-askq{
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
 .input-askq:hover {
   border-bottom: none !important;
   box-shadow: none !important;
@@ -54,20 +60,17 @@
   position: absolute;
   right: 15px;
 }
-.div-wrapper{
-    display: flex;
-    justify-content: flex-end;
-    display: -webkit-box;
-}
 .p-svg-wrapped{
-    padding: 2px 5px;
+    padding: 5px 0;
+    font-size: 15px;
+    text-align: center;
     border-radius: 5px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
     background:#00bcd4;
     cursor: pointer;
-    margin:5px;
+    font-family: ceraB;
+    font-weight: bold;
+    width: 200px;
+//    margin:5px;
     
     
 }
