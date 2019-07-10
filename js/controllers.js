@@ -2204,8 +2204,9 @@ inqcontroller.controller('bookmarkCtrl', ['$scope', 'TemplateService', 'Navigati
 
 
 
-inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$location', '$interval',
-  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $location, $interval) {
+inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams','$route', '$location', '$interval',
+  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $route, $location, $interval) {
+
 
         $scope.template = TemplateService;
         $rootScope.fullpageview = true;
@@ -2238,16 +2239,26 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.getquestions = function () {
             var getalldoubtssuccess = function (response) {
                 console.log(response.data);
+
                 angular.forEach(response.data, function (data) {
                     $scope.questionsalldata.push(data); // for load more question
                 });
                 $rootScope.loadingdiv = false;
+                
+                $('.askq-lightbox').magnificPopup({
+                    type: 'image',
+                });
+
+
+
             };
 
 
             var getalldoubtserror = function (response) {
                 console.log(response.data);
             };
+
+
             /*MAKE LOADING TRUE*/
             console.log($scope.board);
 
@@ -2284,6 +2295,7 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
             var start = $scope.questionsalldata.length;
             var count = 10;
             NavigationService.getalldoubts($scope.user, standard, board, subject, start, count).then(getalldoubtssuccess, getalldoubtserror);
+
             //            }
 
         }
@@ -2319,21 +2331,10 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         }
 
 
-        //        $scope.getsubjectsbystandard = function(){
-        //            var indexstandard = $scope.filters.standards;
-        ////            console.log($scope.standard[$scope.filters.standards].subjects);
-        //            console.log("standardselected");
-        //            
-        //            $scope.questionsalldata = [];
-        //            $scope.getquestions();
-        ////            $scope.subject = $scope.standard[$scope.filters.standards].subjects;
-        //        }
-
-        //        $scope.getquestionswithfilter = function () {
-        //            $scope.questionsalldata = [];
-        //            $scope.getquestions();
-        //        }
         $scope.getquestions();
+
+
+
         //      to get image for insert in doubts
         $scope.img = {
             img: ''
@@ -2393,29 +2394,23 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
         $scope.addactiveclass = function (isanswerdbyme) {
             if (isanswerdbyme > 0) {
                 return "alv-div-active";
+                console.log("isanswerdbyme");
             }
         }
 
         $scope.addactiveclasslike = function (islikedbyme) {
             if (islikedbyme > 0) {
                 return "alv-div-active";
+                console.log("islikedbyme");
             }
         }
         $scope.addactiveclassviews = function (isviewedbyme) {
             if (isviewedbyme > 0) {
                 return "alv-div-active";
+                console.log("isviewedbyme");
             }
         }
 
-        //       USE LATER FOR VIEWS IN DOUBTS
-
-        //               TO KNOW VIEW BY ME OR NOT
-
-        //               $scope.addactivetoview = function(viewsexits){
-        //                   if(viewsexits > 0 || viewsexits == true){
-        //                       return "alv-div-active";
-        //                   }
-        //               }
 
 
 
@@ -2469,26 +2464,40 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
 
 
             document.getElementsByClassName("backmain")[0].style.display = "block";
+            console.log("open modal");
+            $('.ask-body-div').click(function () {
+                $('.input-askq').focus();
+                console.log("focusing");
+            });
 
-            //            $scope.chapterfromsubid = $scope.questionsalldata[0].subid;
-            //            var getalldoubtssuccess = function (response) {
-            //                $scope.chapterlist = response.data;
-            //            }
-            //            NavigationService.getchaptersbysubjectid($scope.chapterfromsubid).then(getalldoubtssuccess);
         }
         $scope.closeaskquestion = function () {
             document.getElementsByClassName("backmain")[0].style.display = "none";
             $scope.questioninsert.question = '';
             $scope.images = '';
+            $scope.optionslist = {
+                board: '',
+                standard: '',
+                subject: '',
+                chapter: ''
+            }
         }
+        
         $scope.askquestion = function () {
+
 
             if ($scope.questioninsert.question != '' && $scope.subjectoption[$scope.optionslist.subject].id != '' && $scope.chapteroption[$scope.optionslist.chapter].id != '') {
                 NavigationService.insertnewdoubts($scope.questioninsert.question, $scope.subjectoption[$scope.optionslist.subject].id, $scope.chapteroption[$scope.optionslist.chapter].id, $scope.user, JSON.stringify($scope.images)).then();
                 $scope.questioninsert.question = '';
                 $scope.images = '';
+                
             }
+            
             $scope.closeaskquestion();
+            $route.reload();
+            
+            
+
 
             //          
         }
@@ -2501,14 +2510,11 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
 
         //        Lightbox Script
 
+
+
         $(document).ready(function () {
-
             setTimeout(function () {
-
-
-
                 $('.askq-lightbox').magnificPopup({
-
                     type: 'image',
                     gallery: {
                         enabled: true
@@ -2529,13 +2535,9 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                             return openerElement.is('img') ? openerElement : openerElement.find('img');
                         }
                     }
-
-
-
                 });
 
                 $('.mainq-lightbox').magnificPopup({
-
                     type: 'image',
                     gallery: {
                         enabled: true
@@ -2556,26 +2558,16 @@ inqcontroller.controller('doubtsCtrl', ['$scope', 'TemplateService', 'Navigation
                             return openerElement.is('img') ? openerElement : openerElement.find('img');
                         }
                     }
-
-
-
                 });
-
-
-
             }, 10);
         });
-
-
-
-
 
 
   }
 ]);
 
-inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams','$route', '$location', '$interval',
-  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams,$route, $location, $interval) {
+inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'NavigationService', '$rootScope', '$routeParams', '$route', '$location', '$interval',
+  function ($scope, TemplateService, NavigationService, $rootScope, $routeParams, $route, $location, $interval) {
 
         $scope.template = TemplateService;
         $rootScope.fullpageview = true;
@@ -2633,6 +2625,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             var getlikesuccess = function (response) {
                 if (response.data == 1) {
                     document.getElementById("questionliked").style.fill = "#00BCD4";
+                    document.getElementsByClassName("q-like")[0].classList.add("alv-div-active");
                     //                    document.getElementById("questionlikedsvg").style.fill = "#606060";
                     $scope.answerdata.likes++;
                     console.log("like added");
@@ -2640,6 +2633,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
                 } else {
                     $scope.answerdata.likes--;
                     document.getElementById("questionliked").style.fill = "#606060";
+                    document.getElementsByClassName("q-like")[0].classList.remove("alv-div-active");
                     //                    document.getElementById("questionlikedsvg").style.fill = "#00BCD4";
                     console.log("like remove");
                 }
@@ -2672,17 +2666,23 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
 
         $scope.postansweropen = function () {
             document.getElementsByClassName("backmain")[0].style.display = "block";
+            document.getElementsByClassName("doubt-item-parent")[0].style.position = "fixed";
+            console.log("open modal");
+            $('.ask-body-div').click(function () {
+                $('.input-askq').focus();
+                console.log("focusing");
+            });
         }
 
         $scope.closepostanswer = function () {
             document.getElementsByClassName("backmain")[0].style.display = "none";
+            document.getElementsByClassName("doubt-item-parent")[0].style.position = "static";
             $scope.answer.ans = '';
             $scope.images = '';
         }
         $scope.postanswer = function () {
-            
-            if ($scope.answer.ans != '' && $scope.id != '', $scope.user != '') {
 
+            if ($scope.answer.ans != '') {
                 NavigationService.insertnewanswer($scope.answer.ans, $scope.id, $scope.user, JSON.stringify($scope.images)).then();
                 $scope.getallanswersfordoubt();
                 $scope.answer.ans = '';
@@ -2711,7 +2711,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             }
             NavigationService.likeanswersbyanswerid(answers.id, $scope.user).then(getlikesuccess);
         }
-        
+
         $scope.bestlikeans = function (answerslike) {
             var getlikesuccess = function (response) {
                 console.log(response);
@@ -2726,7 +2726,7 @@ inqcontroller.controller('answersCtrl', ['$scope', 'TemplateService', 'Navigatio
             }
             NavigationService.likeanswersbyanswerid(answerslike.id, $scope.user).then(getlikesuccess);
         }
-        
+
 
         //END LIKE
 

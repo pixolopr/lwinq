@@ -42,10 +42,10 @@
 }
 
 .q-div3 {
-//    background-color: #e5e5e5; // padding: 2px 5px;
+    //    background-color: #e5e5e5; // padding: 2px 5px;
     display: inline-flex;
     align-items: center;
-//    margin-bottom: 10px;
+    //    margin-bottom: 10px;
 
 }
 
@@ -57,7 +57,7 @@
 .q-div3 img {
     height: 40px;
     margin: 2px;
-    box-shadow: 0 0 8px rgba(0,0,0,.25);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .25);
 }
 
 .q-div3 p {
@@ -147,7 +147,8 @@
     border-radius: 50%;
     margin: 10px auto;
     display: block;
-        border: 1px solid #EFEFEF;
+    border: 1px solid #EFEFEF;
+    padding: 5px;
 }
 
 .profile-div .svg-holder {
@@ -188,7 +189,7 @@
     margin: 100px auto;
     border-radius: 11px;
     z-index: 11;
-    padding:0 10px 1px 10px;
+    padding: 0 10px 1px 10px;
     position: relative;
 }
 
@@ -203,12 +204,14 @@
     color: #00bcd4;
     text-transform: uppercase;
     font-family: ceraM;
-    p{
+
+    p {
         margin: 0;
         font-size: 15px;
         padding: 8px 0;
         font-weight: bold;
     }
+
     svg {
         cursor: pointer;
         position: absolute;
@@ -224,6 +227,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+
     .share-social-icons {
         width: 51px;
         height: 51px;
@@ -231,32 +235,37 @@
         cursor: pointer;
     }
 }
-.ask-body-div{
+
+.ask-body-div {
     margin: 0 10px;
     background: #F3F3F3;
     padding: 10px;
 }
+
 .askq-body {
-//    margin: 10px;
+    //    margin: 10px;
     text-align: center;
-//    background-color: #fff;
-//    padding: 10px;
-//    height: 75px;
-//    line-height: 75px;
+    //    background-color: #fff;
+    //    padding: 10px;
+    //    height: 75px;
+    //    line-height: 75px;
     color: #7d7d7d;
 }
-.askq-imgholder{
+
+.askq-imgholder {
     width: 90%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     flex-wrap: wrap;
-    
+
 }
-#uploadimagebtn{
+
+#uploadimagebtn {
     width: 10%;
-    svg{
-        width: 34px !important; 
+
+    svg {
+        width: 34px !important;
         height: 34px !important;
         cursor: pointer;
     }
@@ -324,8 +333,10 @@
 .ans-user-svg {
     display: flex;
     align-items: center;
+
     div {
         margin-right: 20px;
+
         span {
             font-size: 27px;
             color: #00bcd4;
@@ -341,6 +352,7 @@
 .post-quest {
     width: 100%;
     text-align: right;
+
     .post-quest-btn {
         font-family: ceraM;
         color: #fff;
@@ -366,6 +378,7 @@
 .ans-btn-holder {
     width: 100%;
     text-align: center;
+
     .answer-heading {
         border: none;
         background-color: #00bcd4;
@@ -400,6 +413,7 @@
 
 .ua-item-data {
     margin: 0px 5px;
+
     .ua-item-name {
 
         font-family: ceraBlack;
@@ -407,6 +421,7 @@
         color: #00bcd4;
         text-transform: capitalize;
     }
+
     .ua-item-answer {
         font-family: ceraM;
         font-size: 12px;
@@ -414,6 +429,7 @@
         margin: -13px 0px 10px 0;
         line-height: 15px;
     }
+
     .ua-item-time {
         font-family: ceraM;
         font-size: 10px;
@@ -429,6 +445,7 @@
     margin: -10px 0 0 0;
     right: 15px;
     align-items: center;
+
     span {
         font-size: 30px;
         font-family: roboto-regular;
@@ -460,29 +477,38 @@
 }
 
 .ask-inputq {
-//    flex-basis: 40% !important;
-//    border-radius: 5px;
+    //    flex-basis: 40% !important;
+    //    border-radius: 5px;
     width: 160px;
     height: 23px;
     background: #F5F5F5;
     font-size: 10px;
 }
-.dropdown-main-div{
+
+.dropdown-main-div {
     width: 45%;
 }
 
-.dropdownn-div{
+.dropdownn-div {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 5px 0;
-    .dropdown-label{
+
+    .dropdown-label {
         font-size: 10px;
         font-family: ceraB;
         color: #000;
         font-weight: bold;
     }
 }
+
+.doubts-div {
+    height: 85vh;
+    overflow-y: scroll;
+
+}
+
 .douts-top-sec {
     display: flex;
     justify-content: center;
@@ -517,6 +543,7 @@
 
         .boards-dropdown {
             margin-right: 12px;
+
             select {
                 display: block;
                 color: #00bcd4;
@@ -537,6 +564,7 @@
 
         .standards-dropdown {
             margin-right: 12px;
+
             select {
                 display: block;
                 color: #00bcd4;
@@ -577,19 +605,13 @@
 }
 
 
-
-
-
-
-
-
 .doubt-item-block {
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
     margin: 6px 90px;
     border-radius: 6px;
-    box-shadow: 0 0 8px rgba(0,0,0,.25);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .25);
 }
 
 
@@ -597,6 +619,7 @@
     display: flex;
     width: 100%;
     padding: 4px 15px 0px 15px;
+    cursor: pointer;
 }
 
 .bottom-social-details {
@@ -632,7 +655,7 @@
     font-weight: normal;
     font-size: 13px;
     line-height: 16px;
-//    text-align: center;
+    //    text-align: center;
     color: #3C3C3C;
 }
 
@@ -648,6 +671,7 @@
         height: 10px;
         width: 10px;
     }
+
     span {
         margin-left: 3px;
         font-family: Roboto;
@@ -665,12 +689,13 @@
     flex-direction: column;
     padding: 0px 15px;
 }
-.question-lva:last-of-type{
+
+.question-lva:last-of-type {
     padding-right: 0;
 }
 
 .question-likes {
-       border-right: 1px solid #606060;
+    border-right: 1px solid #606060;
     border-left: 1px solid #606060;
 }
 
@@ -720,7 +745,7 @@
 
 .question-tags {
     color: #00BCD4;
-        text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 .questions-asked {
@@ -728,7 +753,7 @@
     font-family: ceram;
     font-size: 14px;
     color: #000000;
-        line-height: 18px;
+    line-height: 18px;
 }
 
 .attachment-imgs {
@@ -753,6 +778,7 @@
 
     display: flex;
     align-items: center;
+
     span {
         font-family: ceral;
         font-size: 12px;
@@ -791,8 +817,8 @@
     svg {
         height: 19px;
         width: 19px;
-            margin: 0px 10px;
-        
+        margin: 0px 10px;
+
     }
 }
 
@@ -801,7 +827,7 @@
 }
 
 .sharewith {
-     padding: 7px 20px;
+    padding: 7px 20px;
     font-family: ceral;
     font-size: 12px;
     color: #a59f9f;
@@ -823,10 +849,12 @@
     display: flex;
     align-items: center;
 }
-.icons-svg svg{
+
+.icons-svg svg {
     cursor: pointer;
 }
-.loadmorebtn{
+
+.loadmorebtn {
     font-size: 14px;
     font-family: ceraB;
     font-weight: bold;
@@ -857,12 +885,12 @@
 }
 
 .question-details-div3 {
-    
-        margin: 10px 0px;
+
+    margin: 10px 0px;
 }
 
 .topbar-title {
-        background-color: #7AD06D;
+    background-color: #7AD06D;
     color: white;
     padding: 5px;
     border-radius: 2px 2px 0px 0px;
@@ -889,24 +917,44 @@
 .total-like-count {
     display: flex;
     align-items: center;
-    svg{
+
+    svg {
         cursor: pointer;
     }
-    
+
 }
+
 .bestanswer-likes {
     padding: 9px 15px;
     border: 0.5px solid #E5E5E5;
     display: flex;
     border-radius: 2px;
 }
+
 .answer-divs {
     border-top: 1px solid #606060;
 }
-.answer-divs:last-of-type{
+
+.answer-divs:last-of-type {
     border-bottom: 1px solid #606060;
 }
 
 .other-answer-block {
     padding-bottom: 30px;
+}
+
+#ask-q-btn:hover {
+    background: #00b1c7;
+}
+
+.p-svg-wrapped:hover {
+    background: #00b1c7;
+}
+
+.no-q-title {
+    text-align: center;
+    font-weight: bold;
+    color: #00bcd4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }

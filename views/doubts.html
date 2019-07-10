@@ -23,9 +23,10 @@
     </div>
     <div class="quest-btn"><button id="ask-q-btn" ng-click="getchapterslist()">Ask A Question</button></div>
 </div>
+<div class="doubts-div">
 <div class="doubt-item-block" ng-repeat="questiondata in questionsalldata">
     <div class="top-question-details">
-        <div class="profile-div"><img src="https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg" alt="">
+        <div class="profile-div"><img src="img/user-profile.png" alt="">
         </div>
         <div class="question-details-div" ng-click="gotoanswerpage(questiondata.id);">
             <div class="question-details-div1">
@@ -38,9 +39,9 @@
 
                 </div>
                 <div class="q-details-numbers">
-                    <div class="question-views question-lva"><span class="question-details-number">{{questiondata.views | thousandSuffix:1}}</span><span class="question-details-name">VIEWS</span></div>
-                    <div class="question-likes question-lva"><span class="question-details-number" id="liked{{questiondata.id}}">{{questiondata.likes | thousandSuffix:1}}</span><span class="question-details-name">LIKES</span></div>
-                    <div class="question-answers question-lva"><span class="question-details-number">{{questiondata.answercount | thousandSuffix:1}}</span><span class="question-details-name">ANSWERS</span></div>
+                    <div class="question-views question-lva"><span ng-class="{'alv-div-active': questiondata.isviewedbyme == '1'}" class="question-details-number">{{questiondata.views | thousandSuffix:1}}</span><span class="question-details-name">VIEWS</span></div>
+                    <div class="question-likes question-lva"><span ng-class="{'alv-div-active': questiondata.islikedbyme == '1'}" class="question-details-number" id="liked{{questiondata.id}}">{{questiondata.likes | thousandSuffix:1}}</span><span class="question-details-name">LIKES</span></div>
+                    <div class="question-answers question-lva"><span ng-class="{'alv-div-active': questiondata.isanswerdbyme != '0'}" class="question-details-number">{{questiondata.answercount | thousandSuffix:1}}</span><span class="question-details-name">ANSWERS</span></div>
                 </div>
 
             </div>
@@ -48,9 +49,13 @@
                 <div class="question-tag-div">IN <span class="question-tags">{{questiondata.chapter}} , {{questiondata.subject}}</span></div>
                 <div class="questions-asked">{{questiondata.question}}</div>
                 <!--            <div class="questions-asked">How many carbon itoms are present in Cholorofyl, when the chlorofyl is mixed with water and is used for Carbon Cloning?</div>-->
-                <div  ng-if="questiondata.images.length > 0" class="attachment-div">
+                <div ng-if="questiondata.images.length > 0" class="attachment-div">
                     <div class="q-attachment">Attatchments:</div>
-                    <div class="attachment-imgs"><a href="{{image.image | imagepath}}" ng-repeat="image in questiondata.images"><img src="{{image.image | imagepath}}" alt=""></a></div>
+                    <div class="attachment-imgs">
+                    <span  ng-repeat="image in questiondata.images">
+                    <a class="askq-lightbox" href="{{image.image | imagepath}}"><img src="{{image.image | imagepath}}" alt=""></a>
+                    </span>
+                    </div>
                 </div>
             </div>
             <div class="question-details-div3"></div>
@@ -68,8 +73,8 @@
                     </svg>
                 </div>
                 <div class="bookmark-question lb-quest"><span ng-click="bookmarkdoubt(questiondata.id,$event);">BOOKMARK QUESTION</span><svg viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg" ng-click="bookmarkdoubt(questiondata.id,$event);">
-                        <path id="marked{{questiondata.id}}" ng-if="questiondata.bookmark == '0'" fill="#606060" d="M14.9312 0.645183C14.7771 0.404217 14.5697 0.227999 14.3093 0.116213C14.1435 0.0389035 13.9697 0.000180736 13.788 0.000180736V0H1.37398C1.19239 0 1.01876 0.0387227 0.852884 0.116033C0.592335 0.227728 0.384974 0.404171 0.231009 0.645002C0.077086 0.885833 0 1.15233 0 1.44481V18.0734C0 18.366 0.077086 18.6324 0.231009 18.8734C0.384974 19.1142 0.592335 19.2906 0.852884 19.4023C1.01859 19.4796 1.19239 19.5182 1.37398 19.5182C1.74527 19.5182 2.07282 19.3762 2.35718 19.0927L7.58103 13.6226L12.8049 19.0928C13.0813 19.3676 13.409 19.5052 13.788 19.5052C13.9854 19.5052 14.1592 19.471 14.3093 19.4022C14.5697 19.2906 14.7771 19.1142 14.9311 18.8731C15.0851 18.6323 15.162 18.3659 15.162 18.0733V1.44499C15.162 1.15251 15.0849 0.886014 14.9312 0.645183ZM13.6459 17.6732L8.63531 12.4357L7.58103 11.3394L6.52685 12.4357L1.51633 17.6732V1.65143H13.6459V17.6732Z"/>
-                         <path id="marked{{questiondata.id}}" ng-if="questiondata.bookmark == '1'" fill="#00BCD4" d="M14.9312 0.645183C14.7771 0.404217 14.5697 0.227999 14.3093 0.116213C14.1435 0.0389035 13.9697 0.000180736 13.788 0.000180736V0H1.37398C1.19239 0 1.01876 0.0387227 0.852884 0.116033C0.592335 0.227728 0.384974 0.404171 0.231009 0.645002C0.077086 0.885833 0 1.15233 0 1.44481V18.0734C0 18.366 0.077086 18.6324 0.231009 18.8734C0.384974 19.1142 0.592335 19.2906 0.852884 19.4023C1.01859 19.4796 1.19239 19.5182 1.37398 19.5182C1.74527 19.5182 2.07282 19.3762 2.35718 19.0927L7.58103 13.6226L12.8049 19.0928C13.0813 19.3676 13.409 19.5052 13.788 19.5052C13.9854 19.5052 14.1592 19.471 14.3093 19.4022C14.5697 19.2906 14.7771 19.1142 14.9311 18.8731C15.0851 18.6323 15.162 18.3659 15.162 18.0733V1.44499C15.162 1.15251 15.0849 0.886014 14.9312 0.645183ZM13.6459 17.6732L8.63531 12.4357L7.58103 11.3394L6.52685 12.4357L1.51633 17.6732V1.65143H13.6459V17.6732Z" />
+                        <path id="marked{{questiondata.id}}" ng-if="questiondata.bookmark == '0'" fill="#606060" d="M14.9312 0.645183C14.7771 0.404217 14.5697 0.227999 14.3093 0.116213C14.1435 0.0389035 13.9697 0.000180736 13.788 0.000180736V0H1.37398C1.19239 0 1.01876 0.0387227 0.852884 0.116033C0.592335 0.227728 0.384974 0.404171 0.231009 0.645002C0.077086 0.885833 0 1.15233 0 1.44481V18.0734C0 18.366 0.077086 18.6324 0.231009 18.8734C0.384974 19.1142 0.592335 19.2906 0.852884 19.4023C1.01859 19.4796 1.19239 19.5182 1.37398 19.5182C1.74527 19.5182 2.07282 19.3762 2.35718 19.0927L7.58103 13.6226L12.8049 19.0928C13.0813 19.3676 13.409 19.5052 13.788 19.5052C13.9854 19.5052 14.1592 19.471 14.3093 19.4022C14.5697 19.2906 14.7771 19.1142 14.9311 18.8731C15.0851 18.6323 15.162 18.3659 15.162 18.0733V1.44499C15.162 1.15251 15.0849 0.886014 14.9312 0.645183ZM13.6459 17.6732L8.63531 12.4357L7.58103 11.3394L6.52685 12.4357L1.51633 17.6732V1.65143H13.6459V17.6732Z" />
+                        <path id="marked{{questiondata.id}}" ng-if="questiondata.bookmark == '1'" fill="#00BCD4" d="M14.9312 0.645183C14.7771 0.404217 14.5697 0.227999 14.3093 0.116213C14.1435 0.0389035 13.9697 0.000180736 13.788 0.000180736V0H1.37398C1.19239 0 1.01876 0.0387227 0.852884 0.116033C0.592335 0.227728 0.384974 0.404171 0.231009 0.645002C0.077086 0.885833 0 1.15233 0 1.44481V18.0734C0 18.366 0.077086 18.6324 0.231009 18.8734C0.384974 19.1142 0.592335 19.2906 0.852884 19.4023C1.01859 19.4796 1.19239 19.5182 1.37398 19.5182C1.74527 19.5182 2.07282 19.3762 2.35718 19.0927L7.58103 13.6226L12.8049 19.0928C13.0813 19.3676 13.409 19.5052 13.788 19.5052C13.9854 19.5052 14.1592 19.471 14.3093 19.4022C14.5697 19.2906 14.7771 19.1142 14.9311 18.8731C15.0851 18.6323 15.162 18.3659 15.162 18.0733V1.44499C15.162 1.15251 15.0849 0.886014 14.9312 0.645183ZM13.6459 17.6732L8.63531 12.4357L7.58103 11.3394L6.52685 12.4357L1.51633 17.6732V1.65143H13.6459V17.6732Z" />
                         <path id="marked1{{questiondata.id}}" d="M1 1.5L0.5 18L1.5 18.5L7.5 12.5L14 18.5V1L1 1.5Z" ng-if="questiondata.bookmark == '0'" fill="#606060" />
                         <path id="marked1{{questiondata.id}}" d="M1 1.5L0.5 18L1.5 18.5L7.5 12.5L14 18.5V1L1 1.5Z" ng-if="questiondata.bookmark == '1'" fill="#00BCD4" />
                     </svg>
@@ -109,6 +114,10 @@
 <div class="doubt-item-block" ng-if="questionsalldata.length >=10">
     <button class="loadmorebtn" ng-click="getquestions();">Show More</button>
 </div>
+<div class="doubt-item-block" ng-if="questionsalldata.length ==0">
+    <p class="no-q-title">There Are No Question To Show</p>
+</div>
+</div>
 
 
 <div class="backmain">
@@ -122,7 +131,7 @@
                 </svg>
             </div>
             <div class="ask-body-div">
-                <div class="askq-body"><textarea class="input-askq" type="text"  value="TYPE YOUR QUESTION HERE" ng-model="questioninsert.question" autofocus></textarea></div>
+                <div class="askq-body"><textarea class="input-askq" type="text" value="TYPE YOUR QUESTION HERE" ng-model="questioninsert.question" autofocus></textarea></div>
 
                 <div class="svg-icons askq-flex">
                     <div class="askq-imgholder">
@@ -167,34 +176,35 @@
 
             </div>
             <div class="askq-submit">
-               <div class="dropdown-main-div">
-               <div class="dropdownn-div">
-               <label class="dropdown-label">SELECT BOARD</label>
-                <select ng-model="optionslist.board" class="ask-inputq" ng-change="optionschange()">
-                    <option value="{{$index}}" ng-repeat='board in board'>{{board.name}}</option>
-                </select>
-                </div>
-                <div class="dropdownn-div">
-                <label class="dropdown-label">SELECT STANDARD</label>
-                <select ng-model="optionslist.standard" class="ask-inputq" ng-change="optionschange()">
-                    <option value="{{$index}}" ng-repeat='standard in standardoption'>{{standard.name}}</option>
-                </select>
-                </div>
-                <div class="dropdownn-div">
-                <label class="dropdown-label">SELECT SUBJECT</label>
-                <select ng-model="optionslist.subject" class="ask-inputq" ng-change="optionschange()">
-                    <option value="{{$index}}" ng-repeat='subject in subjectoption'>{{subject.name}}</option>
-                </select>
-                </div>
-                <div class="dropdownn-div">
-                <label class="dropdown-label">SELECT CHAPTER</label>
-                <select ng-model="optionslist.chapter" class="ask-inputq" ng-change="optionschange()">
-                    <option value="{{$index}}" ng-repeat='chapter in chapteroption'>{{chapter.name}}</option>
-                </select>
-                </div>
+                <div class="dropdown-main-div">
+                    <div class="dropdownn-div">
+                        <label class="dropdown-label">SELECT BOARD</label>
+                        <select ng-model="optionslist.board" class="ask-inputq" ng-change="optionschange()">
+                            <option value="{{$index}}" ng-repeat='board in board'>{{board.name}}</option>
+                        </select>
+                    </div>
+                    <div class="dropdownn-div">
+                        <label class="dropdown-label">SELECT STANDARD</label>
+                        <select ng-model="optionslist.standard" class="ask-inputq" ng-change="optionschange()">
+                            <option value="{{$index}}" ng-repeat='standard in standardoption'>{{standard.name}}</option>
+                        </select>
+                    </div>
+                    <div class="dropdownn-div">
+                        <label class="dropdown-label">SELECT SUBJECT</label>
+                        <select ng-model="optionslist.subject" class="ask-inputq" ng-change="optionschange()">
+                            <option value="{{$index}}" ng-repeat='subject in subjectoption'>{{subject.name}}</option>
+                        </select>
+                    </div>
+                    <div class="dropdownn-div">
+                        <label class="dropdown-label">SELECT CHAPTER</label>
+                        <select ng-model="optionslist.chapter" class="ask-inputq" ng-change="optionschange()">
+                            <option value="{{$index}}" ng-repeat='chapter in chapteroption'>{{chapter.name}}</option>
+                        </select>
+                    </div>
                 </div>
                 <p class="p-svg-wrapped post-name" ng-click="askquestion();">POST QUESTION</p>
             </div>
         </div>
     </div>
 </div>
+

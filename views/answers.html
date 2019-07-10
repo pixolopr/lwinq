@@ -225,12 +225,12 @@
 
 
 
-
+<div class="doubt-item-parent">
 <div class="doubt-item-block">
 
     <!--<div class="doubt-item-block" ng-repeat="questiondata in questionsalldata">-->
     <div class="top-question-details">
-        <div class="profile-div"><img src="https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg" alt="">
+        <div class="profile-div"><img src="img/user-profile.png" alt="">
         </div>
         <div class="question-details-div" ng-click="gotoanswerpage(questiondata.id);">
             <div class="question-details-div1">
@@ -244,9 +244,9 @@
                 </div>
 
                 <div class="q-details-numbers">
-                    <div class="question-views question-lva"><span class="question-details-number">{{answerdata.views | thousandSuffix:1}}</span><span class="question-details-name">VIEWS</span></div>
-                    <div class="question-likes question-lva"><span class="question-details-number" id="liked{{questiondata.id}}">{{answerdata.likes | thousandSuffix:1}}</span><span class="question-details-name">LIKES</span></div>
-                    <div class="question-answers question-lva"><span class="question-details-number">{{answerdata.answercount | thousandSuffix:1}}</span><span class="question-details-name">ANSWERS</span></div>
+                    <div class="question-views question-lva"><span ng-class="{'alv-div-active': answerdata.isviewbyme == '1'}" class="question-details-number">{{answerdata.views | thousandSuffix:1}}</span><span class="question-details-name">VIEWS</span></div>
+                    <div class="question-likes question-lva"><span ng-class="{'alv-div-active': answerdata.islikebyme == '1'}" class="question-details-number q-like" id="liked{{questiondata.id}}">{{answerdata.likes | thousandSuffix:1}}</span><span class="question-details-name ">LIKES</span></div>
+                    <div class="question-answers question-lva"><span ng-class="{'alv-div-active': answerdata.isanswerbyme != '0'}" class="question-details-number">{{answerdata.answercount | thousandSuffix:1}}</span><span class="question-details-name">ANSWERS</span></div>
                 </div>
 
             </div>
@@ -323,7 +323,7 @@
     <div class="doubt-item-block" ng-if="bestans.answers.answer != null">
         <div class="topbar-title">Best Answer</div>
         <div class="top-question-details">
-            <div class="profile-div"><img src="https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg" alt="">
+            <div class="profile-div"><img src="img/user-profile.png" alt="">
             </div>
             <div class="question-details-div">
                 <div class="question-details-div1">
@@ -379,7 +379,7 @@
     <div class="topbar-title-other">Other Answers</div>
     <div class="answer-divs" ng-repeat="answers in answerdata.answers track by answers.id">
         <div class="top-question-details">
-            <div class="profile-div"><img src="https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg" alt="">
+            <div class="profile-div"><img src="img/user-profile.png" alt="">
             </div>
             <div class="question-details-div" ng-click="gotoanswerpage(questiondata.id);">
                 <div class="question-details-div1">
@@ -504,4 +504,5 @@
 
 <div class="doubt-item-block" ng-if="answerdata.answers.length >= 10">
     <button class="loadmorebtn" ng-click="getallanswersfordoubt();">Show More</button>
+</div>
 </div>

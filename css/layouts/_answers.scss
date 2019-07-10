@@ -1,84 +1,100 @@
 //ask modal css
+
 .ans-user-name {
     flex-basis: 100% !important;
 }
+
 .askq-body input {
-//  text-align: center;
-  border-bottom: none !important;
-  margin: 0px !important;
+    //  text-align: center;
+    border-bottom: none !important;
+    margin: 0px !important;
 
 }
 
 .askq-flex {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 !important;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 !important;
 }
 
 .ua-time-name {
-  line-height: 17px;
+    line-height: 17px;
 }
+
 .askq-img-svg {
-  cursor: pointer;
+    cursor: pointer;
 }
+
 .askbutton {
-  border: 1px solid #00bcd4;
-  color: #00bcd4;
-  font-size: 12px;
-  padding: 0 5px;
-  height: 18px;
-  font-family: ceraM;
+    border: 1px solid #00bcd4;
+    color: #00bcd4;
+    font-size: 12px;
+    padding: 0 5px;
+    height: 18px;
+    font-family: ceraM;
 }
+
 .post-wrapper {
-  background: #00bcd4;
-  border-radius: 5px;
-  padding: 1px 8px;
+    background: #00bcd4;
+    border-radius: 5px;
+    padding: 1px 8px;
 }
 
 .post-name {
-  
-  margin: 0;
-  
-  color: white;
-  font-size: 12px;
+
+    margin: 0;
+
+    color: white;
+    font-size: 12px;
 }
-.input-askq{
+
+.input-askq {
     border: none;
     outline: none;
     font-size: 20px;
 }
+
 .input-askq:hover {
-  border-bottom: none !important;
-  box-shadow: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
 }
+
 .like-share-svg {
-  cursor: pointer;
-  align-items: center;
-  display: flex;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
 }
+
 .bookmrk-svg {
-  position: absolute;
-  right: 15px;
+    position: absolute;
+    right: 15px;
 }
-.p-svg-wrapped{
+
+.p-svg-wrapped {
     padding: 5px 0;
     font-size: 15px;
     text-align: center;
     border-radius: 5px;
-    background:#00bcd4;
+    background: #00bcd4;
     cursor: pointer;
     font-family: ceraB;
     font-weight: bold;
     width: 200px;
-//    margin:5px;
-    
-    
+    //    margin:5px;
+
+
 }
-.postans-txt{
+
+.postans-txt {
     margin: 10px;
 }
-.gallery-svg{
+
+.gallery-svg {
     cursor: pointer;
     width: 25px !important;
     margin: 5px;
+}
+
+.answer-this:hover {
+    background: #00b1c7;
 }
