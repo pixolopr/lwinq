@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "lwinq-5293c"
+  },
+  "targets": {
+    "lwinq-5293c": {
+      "hosting": {
+        "test": [
+          "lwinq-test"
+        ],
+        "live": [
+          "lwinq-5293c"
+        ]
+      }
+    }
   }
 }
