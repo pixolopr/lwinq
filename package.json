@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "angular-file-upload": "^2.5.0",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.10",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-base64": "^0.1.3",
